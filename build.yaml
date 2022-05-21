@@ -1,0 +1,12 @@
+targets:
+  $default:
+    builders:
+      artemis:
+        options:
+          generate_helpers: true
+          schema_mapping:
+            - schema: lib/api/schema.graphql
+              output: lib/api/api.graphql.dart
+              queries_glob: lib/api/queries/**.graphql
+              naming_scheme: pathedWithTypes
+              type_name_field: __typename

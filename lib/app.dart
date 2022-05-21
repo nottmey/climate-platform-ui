@@ -1,4 +1,8 @@
+import 'package:artemis/artemis.dart';
+import 'package:climate_platform_ui/api/api.graphql.dart';
 import 'package:flutter/material.dart';
+
+final client = ArtemisClient('http://localhost:8888/api');
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -43,6 +47,22 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            StreamBuilder<GraphQLResponse<EntityById$Query>>(
+              stream: client.stream(
+                EntityByIdQuery(variables: EntityByIdArguments(id: '1')),
+              ),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text('${snapshot.data?.data?.kw$get?.db_?.ident}');
+                } else if (snapshot.hasError) {
+                  return Text(
+                    'error ${snapshot.error} ${snapshot.stackTrace}',
+                  );
+                } else {
+                  return const Text('loading');
+                }
+              },
+            ),
             const Text(
               'You have pushed the button this many times:',
             ),

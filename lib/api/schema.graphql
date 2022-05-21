@@ -1,0 +1,44 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+}
+
+"Nested data of field 'db' on type 'Entity'"
+type DbContext {
+    "Documentation string for an entity."
+    doc: String
+    "Attribute used to uniquely identify an entity, managed by Datomic."
+    id: ID
+    "Attribute used to uniquely name an entity."
+    ident: String
+}
+
+"An entity of this application"
+type Entity {
+    "Nested db data"
+    db_: DbContext
+}
+
+type Query {
+    "Access any entity by its unique id, if it exists."
+    get(id: ID): Entity
+    "Access any entity by matching fields."
+    match(template: EntityRequest): [Entity]
+}
+
+"Nested data of field 'db' on type 'Entity'"
+input DbContextRequest {
+    "Documentation string for an entity."
+    doc: String
+    "Attribute used to uniquely identify an entity, managed by Datomic."
+    id: ID
+    "Attribute used to uniquely name an entity."
+    ident: String
+}
+
+"An entity of this application"
+input EntityRequest {
+    "Nested db data"
+    db_: DbContextRequest
+}
