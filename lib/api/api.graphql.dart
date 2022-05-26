@@ -20,10 +20,8 @@ class EntityById$Query$Entity$DbContext extends JsonSerializable
 
   String? ident;
 
-  String? doc;
-
   @override
-  List<Object?> get props => [id, ident, doc];
+  List<Object?> get props => [id, ident];
   @override
   Map<String, dynamic> toJson() =>
       _$EntityById$Query$Entity$DbContextToJson(this);
@@ -114,12 +112,6 @@ final ENTITY_BY_ID_QUERY_DOCUMENT = DocumentNode(definitions: [
                         selectionSet: null),
                     FieldNode(
                         name: NameNode(value: 'ident'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null),
-                    FieldNode(
-                        name: NameNode(value: 'doc'),
                         alias: null,
                         arguments: [],
                         directives: [],

@@ -11,15 +11,13 @@ EntityById$Query$Entity$DbContext _$EntityById$Query$Entity$DbContextFromJson(
         Map<String, dynamic> json) =>
     EntityById$Query$Entity$DbContext()
       ..id = json['id'] as String?
-      ..ident = json['ident'] as String?
-      ..doc = json['doc'] as String?;
+      ..ident = json['ident'] as String?;
 
 Map<String, dynamic> _$EntityById$Query$Entity$DbContextToJson(
         EntityById$Query$Entity$DbContext instance) =>
     <String, dynamic>{
       'id': instance.id,
       'ident': instance.ident,
-      'doc': instance.doc,
     };
 
 EntityById$Query$Entity _$EntityById$Query$EntityFromJson(

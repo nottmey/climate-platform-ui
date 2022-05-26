@@ -4,10 +4,16 @@ schema {
     query: Query
 }
 
+"Nested data of field 'dataset' on type 'Entity'"
+type DatasetContext {
+    "Reference to dataset base period (custom time slot)"
+    basePeriod: Entity
+    "Identifying dataset name"
+    name: String
+}
+
 "Nested data of field 'db' on type 'Entity'"
 type DbContext {
-    "Documentation string for an entity."
-    doc: String
     "Attribute used to uniquely identify an entity, managed by Datomic."
     id: ID
     "Attribute used to uniquely name an entity."
@@ -16,8 +22,18 @@ type DbContext {
 
 "An entity of this application"
 type Entity {
+    "Nested dataset data"
+    dataset_: DatasetContext
     "Nested db data"
     db_: DbContext
+    "Nested referencedBy data"
+    referencedBy_: ReferencedByContext
+    "Nested source data"
+    source_: SourceContext
+    "Nested time data"
+    time_: TimeContext
+    "Nested value data"
+    value_: ValueContext
 }
 
 type Query {
@@ -27,10 +43,150 @@ type Query {
     match(template: EntityRequest): [Entity]
 }
 
+"Nested data of field 'referencedBy' on type 'Entity'"
+type ReferencedByContext {
+    "Nested dataset data"
+    dataset_: ReferencedByDatasetContext
+    "Nested source data"
+    source_: ReferencedBySourceContext
+    "Nested time data"
+    time_: ReferencedByTimeContext
+    "Nested value data"
+    value_: ReferencedByValueContext
+}
+
+"Nested data of field 'dataset' on type 'ReferencedByContext'"
+type ReferencedByDatasetContext {
+    "Attribute for entities which are referenced via :dataset/base-period by another entity"
+    basePeriod: [Entity]
+}
+
+"Nested data of field 'source' on type 'ReferencedByContext'"
+type ReferencedBySourceContext {
+    "Attribute for entities which are referenced via :source/direct by another entity"
+    direct: [Entity]
+    "Attribute for entities which are referenced via :source/underlying by another entity"
+    underlying: [Entity]
+}
+
+"Nested data of field 'time' on type 'ReferencedByContext'"
+type ReferencedByTimeContext {
+    "Nested slot data"
+    slot_: ReferencedByTimeSlotContext
+}
+
+"Nested data of field 'slot' on type 'ReferencedByTimeContext'"
+type ReferencedByTimeSlotContext {
+    "Attribute for entities which are referenced via :time.slot/custom by another entity"
+    custom: [Entity]
+}
+
+"Nested data of field 'aggregation' on type 'ReferencedByValueContext'"
+type ReferencedByValueAggregationContext {
+    "Attribute for entities which are referenced via :value.aggregation/method by another entity"
+    method: [Entity]
+}
+
+"Nested data of field 'value' on type 'ReferencedByContext'"
+type ReferencedByValueContext {
+    "Nested aggregation data"
+    aggregation_: ReferencedByValueAggregationContext
+    "Attribute for entities which are referenced via :value/context by another entity"
+    context: [Entity]
+    "Attribute for entities which are referenced via :value/dataset by another entity"
+    dataset: [Entity]
+    "Nested generation data"
+    generation_: ReferencedByValueGenerationContext
+    "Attribute for entities which are referenced via :value/unit by another entity"
+    unit: [Entity]
+}
+
+"Nested data of field 'generation' on type 'ReferencedByValueContext'"
+type ReferencedByValueGenerationContext {
+    "Attribute for entities which are referenced via :value.generation/method by another entity"
+    method: [Entity]
+}
+
+"Nested data of field 'source' on type 'Entity'"
+type SourceContext {
+    "Description of source"
+    description: String
+    "References to direct sources"
+    direct: [Entity]
+    "Homepage of source"
+    homepage: String
+    "Identifying long name of source"
+    longName: String
+    "Identifying short name of source"
+    shortName: String
+    "References to underlying sources"
+    underlying: [Entity]
+}
+
+"Nested data of field 'time' on type 'Entity'"
+type TimeContext {
+    "Nested slot data"
+    slot_: TimeSlotContext
+}
+
+"Nested data of field 'slot' on type 'TimeContext'"
+type TimeSlotContext {
+    "Reference to a custom time slot"
+    custom: Entity
+    "Nested custom data"
+    custom_: TimeSlotCustomContext
+    "Month (1-12)"
+    month: Int
+    "Year (e.g. 1991)"
+    year: Int
+}
+
+"Nested data of field 'custom' on type 'TimeSlotContext'"
+type TimeSlotCustomContext {
+    "Custom (generic) time slot in consecutive months (e.g. 'JJA' for June-July-August)"
+    consecutiveMonths: String
+    "Custom time slot in consecutive years (e.g. '2018-2022')"
+    consecutiveYears: String
+}
+
+"Nested data of field 'aggregation' on type 'ValueContext'"
+type ValueAggregationContext {
+    "Reference to aggregation method of value"
+    method: Entity
+}
+
+"Nested data of field 'value' on type 'Entity'"
+type ValueContext {
+    "Nested aggregation data"
+    aggregation_: ValueAggregationContext
+    "Reference to contextual detail of value"
+    context: Entity
+    "Reference to dataset of value"
+    dataset: Entity
+    "Nested generation data"
+    generation_: ValueGenerationContext
+    "Temperature value"
+    temperature: Float
+    "Reference to unit of value"
+    unit: Entity
+}
+
+"Nested data of field 'generation' on type 'ValueContext'"
+type ValueGenerationContext {
+    "Reference to generation method of value"
+    method: Entity
+}
+
+"Nested data of field 'dataset' on type 'Entity'"
+input DatasetContextRequest {
+    "Reference to dataset base period (custom time slot)"
+    basePeriod: EntityRequest
+    "Identifying dataset name"
+    name: String
+}
+
 "Nested data of field 'db' on type 'Entity'"
 input DbContextRequest {
-    "Documentation string for an entity."
-    doc: String
     "Attribute used to uniquely identify an entity, managed by Datomic."
     id: ID
     "Attribute used to uniquely name an entity."
@@ -39,6 +195,150 @@ input DbContextRequest {
 
 "An entity of this application"
 input EntityRequest {
+    "Nested dataset data"
+    dataset_: DatasetContextRequest
     "Nested db data"
     db_: DbContextRequest
+    "Nested referencedBy data"
+    referencedBy_: ReferencedByContextRequest
+    "Nested source data"
+    source_: SourceContextRequest
+    "Nested time data"
+    time_: TimeContextRequest
+    "Nested value data"
+    value_: ValueContextRequest
+}
+
+"Nested data of field 'referencedBy' on type 'Entity'"
+input ReferencedByContextRequest {
+    "Nested dataset data"
+    dataset_: ReferencedByDatasetContextRequest
+    "Nested source data"
+    source_: ReferencedBySourceContextRequest
+    "Nested time data"
+    time_: ReferencedByTimeContextRequest
+    "Nested value data"
+    value_: ReferencedByValueContextRequest
+}
+
+"Nested data of field 'dataset' on type 'ReferencedByContext'"
+input ReferencedByDatasetContextRequest {
+    "Attribute for entities which are referenced via :dataset/base-period by another entity"
+    basePeriod: [EntityRequest]
+}
+
+"Nested data of field 'source' on type 'ReferencedByContext'"
+input ReferencedBySourceContextRequest {
+    "Attribute for entities which are referenced via :source/direct by another entity"
+    direct: [EntityRequest]
+    "Attribute for entities which are referenced via :source/underlying by another entity"
+    underlying: [EntityRequest]
+}
+
+"Nested data of field 'time' on type 'ReferencedByContext'"
+input ReferencedByTimeContextRequest {
+    "Nested slot data"
+    slot_: ReferencedByTimeSlotContextRequest
+}
+
+"Nested data of field 'slot' on type 'ReferencedByTimeContext'"
+input ReferencedByTimeSlotContextRequest {
+    "Attribute for entities which are referenced via :time.slot/custom by another entity"
+    custom: [EntityRequest]
+}
+
+"Nested data of field 'aggregation' on type 'ReferencedByValueContext'"
+input ReferencedByValueAggregationContextRequest {
+    "Attribute for entities which are referenced via :value.aggregation/method by another entity"
+    method: [EntityRequest]
+}
+
+"Nested data of field 'value' on type 'ReferencedByContext'"
+input ReferencedByValueContextRequest {
+    "Nested aggregation data"
+    aggregation_: ReferencedByValueAggregationContextRequest
+    "Attribute for entities which are referenced via :value/context by another entity"
+    context: [EntityRequest]
+    "Attribute for entities which are referenced via :value/dataset by another entity"
+    dataset: [EntityRequest]
+    "Nested generation data"
+    generation_: ReferencedByValueGenerationContextRequest
+    "Attribute for entities which are referenced via :value/unit by another entity"
+    unit: [EntityRequest]
+}
+
+"Nested data of field 'generation' on type 'ReferencedByValueContext'"
+input ReferencedByValueGenerationContextRequest {
+    "Attribute for entities which are referenced via :value.generation/method by another entity"
+    method: [EntityRequest]
+}
+
+"Nested data of field 'source' on type 'Entity'"
+input SourceContextRequest {
+    "Description of source"
+    description: String
+    "References to direct sources"
+    direct: [EntityRequest]
+    "Homepage of source"
+    homepage: String
+    "Identifying long name of source"
+    longName: String
+    "Identifying short name of source"
+    shortName: String
+    "References to underlying sources"
+    underlying: [EntityRequest]
+}
+
+"Nested data of field 'time' on type 'Entity'"
+input TimeContextRequest {
+    "Nested slot data"
+    slot_: TimeSlotContextRequest
+}
+
+"Nested data of field 'slot' on type 'TimeContext'"
+input TimeSlotContextRequest {
+    "Reference to a custom time slot"
+    custom: EntityRequest
+    "Nested custom data"
+    custom_: TimeSlotCustomContextRequest
+    "Month (1-12)"
+    month: Int
+    "Year (e.g. 1991)"
+    year: Int
+}
+
+"Nested data of field 'custom' on type 'TimeSlotContext'"
+input TimeSlotCustomContextRequest {
+    "Custom (generic) time slot in consecutive months (e.g. 'JJA' for June-July-August)"
+    consecutiveMonths: String
+    "Custom time slot in consecutive years (e.g. '2018-2022')"
+    consecutiveYears: String
+}
+
+"Nested data of field 'aggregation' on type 'ValueContext'"
+input ValueAggregationContextRequest {
+    "Reference to aggregation method of value"
+    method: EntityRequest
+}
+
+"Nested data of field 'value' on type 'Entity'"
+input ValueContextRequest {
+    "Nested aggregation data"
+    aggregation_: ValueAggregationContextRequest
+    "Reference to contextual detail of value"
+    context: EntityRequest
+    "Reference to dataset of value"
+    dataset: EntityRequest
+    "Nested generation data"
+    generation_: ValueGenerationContextRequest
+    "Temperature value"
+    temperature: Float
+    "Reference to unit of value"
+    unit: EntityRequest
+}
+
+"Nested data of field 'generation' on type 'ValueContext'"
+input ValueGenerationContextRequest {
+    "Reference to generation method of value"
+    method: EntityRequest
 }

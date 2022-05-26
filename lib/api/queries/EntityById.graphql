@@ -3,7 +3,6 @@ query EntityById($id: ID) {
         db_ {
             id
             ident
-            doc
         }
     }
 }
