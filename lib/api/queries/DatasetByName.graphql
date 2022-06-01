@@ -1,0 +1,31 @@
+query DatasetByName($name: String!) {
+    match(template: {dataset_: {name: $name}}) {
+        dataset_ {
+            name
+            basePeriod {
+                time_ {
+                    slot_ {
+                        custom_ {
+                            consecutiveYears
+                        }
+                    }
+                }
+            }
+        }
+        referencedBy_ {
+            value_ {
+                dataset {
+                    time_ {
+                        slot_ {
+                            month
+                            year
+                        }
+                    }
+                    value_ {
+                        temperature
+                    }
+                }
+            }
+        }
+    }
+}
