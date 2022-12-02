@@ -1,8 +1,11 @@
-import 'package:artemis/artemis.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:artemis/artemis.dart' as artemis;
+import 'package:climate_platform_ui/amplifyconfiguration.dart';
 import 'package:climate_platform_ui/api/api.graphql.dart';
 import 'package:flutter/material.dart';
 
-final client = ArtemisClient('http://localhost:8888/api');
+final client = artemis.ArtemisClient('http://localhost:8888/api');
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -31,6 +34,31 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    _configureAmplify();
+  }
+
+  Future<void> _configureAmplify() async {
+    // Add any Amplify plugins you want to use
+    // final authPlugin = AmplifyAuthCognito();
+    // await Amplify.addPlugin(authPlugin);
+
+    // You can use addPlugins if you are going to be adding multiple plugins
+    // await Amplify.addPlugins([authPlugin, analyticsPlugin]);
+
+    // Once Plugins are added, configure Amplify
+    // Note: Amplify can only be configured once.
+    try {
+      await Amplify.configure(amplifyconfig);
+    } on AmplifyAlreadyConfiguredException {
+      safePrint(
+        'Tried to reconfigure Amplify; this can occur when your app restarts on Android.',
+      );
+    }
+  }
+
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -47,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            StreamBuilder<GraphQLResponse<EntityById$Query>>(
+            StreamBuilder<artemis.GraphQLResponse<EntityById$Query>>(
               stream: client.stream(
                 EntityByIdQuery(variables: EntityByIdArguments(id: '1')),
               ),
@@ -56,16 +84,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   return Text('${snapshot.data?.data?.kw$get?.db_?.ident}');
                 } else if (snapshot.hasError) {
                   return Text(
-                    'error ${snapshot.error} ${snapshot.stackTrace}',
+                    'error ${snapshot.error}',
                   );
                 } else {
                   return const Text('loading');
                 }
               },
             ),
-            const Text(
-              'You have pushed the button this many times:',
-            ),
+            const Text('You have pushed the button this many times:'),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
