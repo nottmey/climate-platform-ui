@@ -1,8 +1,10 @@
+import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:artemis/artemis.dart' as artemis;
 import 'package:climate_platform_ui/amplifyconfiguration.dart';
 import 'package:climate_platform_ui/api/api.graphql.dart';
+import 'package:climate_platform_ui/models/ModelProvider.dart';
 import 'package:flutter/material.dart';
 
 final client = artemis.ArtemisClient('http://localhost:8888/api');
@@ -44,9 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
     // Add any Amplify plugins you want to use
     // final authPlugin = AmplifyAuthCognito();
     // await Amplify.addPlugin(authPlugin);
-
-    // You can use addPlugins if you are going to be adding multiple plugins
-    // await Amplify.addPlugins([authPlugin, analyticsPlugin]);
+    final api = AmplifyAPI(modelProvider: ModelProvider.instance);
+    await Amplify.addPlugin(api);
 
     // Once Plugins are added, configure Amplify
     // Note: Amplify can only be configured once.
@@ -95,6 +96,45 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
+            ),
+            TextButton(
+              onPressed: () async {
+                try {
+                  final blog = Blog(name: 'my second todo');
+                  final request = ModelMutations.create(blog);
+                  final response =
+                      await Amplify.API.mutate(request: request).response;
+
+                  final createdBlog = response.data;
+                  if (createdBlog == null) {
+                    safePrint('errors: ${response.errors}');
+                    return;
+                  }
+                  safePrint('Mutation result: ${createdBlog.name}');
+                } on ApiException catch (e) {
+                  safePrint('Mutation failed: $e');
+                }
+              },
+              child: const Text('create blog'),
+            ),
+            TextButton(
+              onPressed: () async {
+                final response = await Amplify.API
+                    .query(
+                      request: ModelQueries.list(
+                        Blog.classType,
+                        where: Blog.NAME.contains('todo'),
+                      ),
+                    )
+                    .response;
+                final blogs = response.data;
+                if (blogs == null) {
+                  safePrint('errors: ${response.errors}');
+                  return;
+                }
+                safePrint('Query result: ${blogs.items}');
+              },
+              child: const Text('fetch blogs'),
             ),
           ],
         ),

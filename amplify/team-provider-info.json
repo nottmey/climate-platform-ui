@@ -10,6 +10,11 @@
       "StackName": "amplify-climateideas-dev-181843",
       "StackId": "arn:aws:cloudformation:eu-central-1:118776085668:stack/amplify-climateideas-dev-181843/5f879da0-7265-11ed-b3fa-0acc6ab379da",
       "AmplifyAppId": "dug0jznzp7m34"
+    },
+    "categories": {
+      "api": {
+        "climateideas": {}
+      }
     }
   }
 }
