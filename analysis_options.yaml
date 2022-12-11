@@ -1,11 +1,12 @@
 include: package:lint/analysis_options.yaml
 
 analyzer:
-  exclude:
-    lib/models/**
   language:
     strict-inference: true
     strict-raw-types: true
+  exclude:
+    - lib/api/api.graphql.dart
+    - lib/api/api.graphql.g.dart
 
 linter:
   rules:

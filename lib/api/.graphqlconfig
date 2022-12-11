@@ -3,8 +3,11 @@
   "schemaPath": "schema.graphql",
   "extensions": {
     "endpoints": {
-      "Default GraphQL Endpoint": {
-        "url": "http://localhost:8888/api",
+      "AppSync": {
+        "url": "${env:APP_SYNC_API_URL}",
+        "headers": {
+          "x-api-key": "${env:APP_SYNC_API_KEY}"
+        },
         "introspect": true
       }
     }

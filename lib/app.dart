@@ -1,8 +1,7 @@
-import 'package:artemis/artemis.dart' as artemis;
+import 'package:artemis/artemis.dart';
 import 'package:climate_platform_ui/api/api.graphql.dart';
+import 'package:climate_platform_ui/get_it.dart';
 import 'package:flutter/material.dart';
-
-final client = artemis.ArtemisClient('http://localhost:8888/api');
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -14,7 +13,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Climate Platform UI'),
     );
   }
 }
@@ -29,36 +28,24 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
   @override
   void initState() {
     super.initState();
   }
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: AppBar(title: Text(widget.title)),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            StreamBuilder<artemis.GraphQLResponse<EntityById$Query>>(
-              stream: client.stream(
-                EntityByIdQuery(variables: EntityByIdArguments(id: '1')),
-              ),
+            StreamBuilder<GraphQLResponse<Databases$Query>>(
+              stream: getIt<ArtemisClient>().stream(DatabasesQuery()),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return Text('${snapshot.data?.data?.kw$get?.db_?.ident}');
+                  return Text('${snapshot.data?.data?.databases?.join(',')}');
                 } else if (snapshot.hasError) {
                   return Text(
                     'error ${snapshot.error}',
@@ -68,18 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 }
               },
             ),
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }

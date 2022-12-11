@@ -8,12 +8,20 @@ version: 1.0.0+1
 environment:
   sdk: '>=2.16.2 <3.0.0'
 
+assets:
+  - .env.local
+
 dependencies:
   artemis: ^7.7.0-beta
   equatable: ^2.0.3
   flutter:
     sdk: flutter
+  flutter_dotenv: ^5.0.2
+  get_it: ^7.2.0
   gql: ^0.13.1
+  gql_dedupe_link: ^2.0.3-alpha+1659715356233
+  gql_http_link: ^0.4.3-alpha+1659715356170
+  gql_link: ^0.4.3-alpha+1659715356132
   json_annotation: ^4.5.0
   meta: ^1.7.0
 
@@ -26,3 +34,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - .env.local

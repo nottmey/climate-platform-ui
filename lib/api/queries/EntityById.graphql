@@ -1,8 +1,0 @@
-query EntityById($id: ID) {
-    get(id: $id) {
-        db_ {
-            id
-            ident
-        }
-    }
-}
