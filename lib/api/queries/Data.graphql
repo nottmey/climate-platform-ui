@@ -1,0 +1,6 @@
+query Data($database: ID!) {
+    list(database: $database) {
+        id
+        data
+    }
+}

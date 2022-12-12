@@ -38,24 +38,57 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            StreamBuilder<GraphQLResponse<Databases$Query>>(
-              stream: getIt<ArtemisClient>().stream(DatabasesQuery()),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Text('${snapshot.data?.data?.databases?.join(',')}');
-                } else if (snapshot.hasError) {
-                  return Text(
-                    'error ${snapshot.error}',
-                  );
-                } else {
-                  return const Text('loading');
-                }
-              },
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              StreamBuilder<GraphQLResponse<Databases$Query>>(
+                stream: getIt<ArtemisClient>().stream(DatabasesQuery()),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Text('${snapshot.data?.data?.databases?.join(',')}');
+                  } else if (snapshot.hasError) {
+                    return Text(
+                      'error ${snapshot.error}',
+                    );
+                  } else {
+                    return const Text('loading');
+                  }
+                },
+              ),
+              StreamBuilder<GraphQLResponse<Data$Query>>(
+                stream: getIt<ArtemisClient>().stream(
+                  DataQuery(
+                    variables: DataArguments(database: 'datomic-docs-tutorial'),
+                  ),
+                ),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: snapshot.data?.data?.list
+                              ?.map(
+                                (e) => Text(
+                                  e?.data ?? '',
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: false,
+                                ),
+                              )
+                              .toList() ??
+                          [],
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text(
+                      'error ${snapshot.error}',
+                    );
+                  } else {
+                    return const Text('loading');
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
