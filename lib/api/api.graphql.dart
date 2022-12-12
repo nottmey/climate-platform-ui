@@ -14,7 +14,7 @@ class Databases$Query extends JsonSerializable with EquatableMixin {
   factory Databases$Query.fromJson(Map<String, dynamic> json) =>
       _$Databases$QueryFromJson(json);
 
-  List<String?>? databases;
+  List<String>? databases;
 
   @override
   List<Object?> get props => [databases];
@@ -46,7 +46,7 @@ class Data$Query extends JsonSerializable with EquatableMixin {
   factory Data$Query.fromJson(Map<String, dynamic> json) =>
       _$Data$QueryFromJson(json);
 
-  List<Data$Query$Entity?>? list;
+  List<Data$Query$Entity>? list;
 
   @override
   List<Object?> get props => [list];

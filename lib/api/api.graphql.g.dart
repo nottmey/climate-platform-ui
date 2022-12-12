@@ -10,7 +10,7 @@ part of 'api.graphql.dart';
 Databases$Query _$Databases$QueryFromJson(Map<String, dynamic> json) =>
     Databases$Query()
       ..databases = (json['databases'] as List<dynamic>?)
-          ?.map((e) => e as String?)
+          ?.map((e) => e as String)
           .toList();
 
 Map<String, dynamic> _$Databases$QueryToJson(Databases$Query instance) =>
@@ -31,14 +31,12 @@ Map<String, dynamic> _$Data$Query$EntityToJson(Data$Query$Entity instance) =>
 
 Data$Query _$Data$QueryFromJson(Map<String, dynamic> json) => Data$Query()
   ..list = (json['list'] as List<dynamic>?)
-      ?.map((e) => e == null
-          ? null
-          : Data$Query$Entity.fromJson(e as Map<String, dynamic>))
+      ?.map((e) => Data$Query$Entity.fromJson(e as Map<String, dynamic>))
       .toList();
 
 Map<String, dynamic> _$Data$QueryToJson(Data$Query instance) =>
     <String, dynamic>{
-      'list': instance.list?.map((e) => e?.toJson()).toList(),
+      'list': instance.list?.map((e) => e.toJson()).toList(),
     };
 
 DataArguments _$DataArgumentsFromJson(Map<String, dynamic> json) =>

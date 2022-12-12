@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: snapshot.data?.data?.list
                               ?.map(
                                 (e) => Text(
-                                  e?.data ?? '',
+                                  e.data ?? '',
                                   overflow: TextOverflow.ellipsis,
                                   softWrap: false,
                                 ),
