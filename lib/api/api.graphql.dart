@@ -29,7 +29,7 @@ class Data$Query$Entity extends JsonSerializable with EquatableMixin {
   factory Data$Query$Entity.fromJson(Map<String, dynamic> json) =>
       _$Data$Query$EntityFromJson(json);
 
-  String? id;
+  late String id;
 
   String? data;
 

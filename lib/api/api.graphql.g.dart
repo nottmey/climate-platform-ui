@@ -20,7 +20,7 @@ Map<String, dynamic> _$Databases$QueryToJson(Databases$Query instance) =>
 
 Data$Query$Entity _$Data$Query$EntityFromJson(Map<String, dynamic> json) =>
     Data$Query$Entity()
-      ..id = json['id'] as String?
+      ..id = json['id'] as String
       ..data = json['data'] as String?;
 
 Map<String, dynamic> _$Data$Query$EntityToJson(Data$Query$Entity instance) =>
