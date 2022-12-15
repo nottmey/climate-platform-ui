@@ -6,14 +6,16 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.16.2 <3.0.0'
+  sdk: '>=2.18.5 <3.0.0'
+  flutter: '>=3.3.9'
 
 assets:
   - .env.local
 
 dependencies:
-  artemis: ^7.7.0-beta
-  equatable: ^2.0.3
+  artemis: ^7.9.0-beta
+  collection: ^1.16.0
+  equatable: ^2.0.5
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.0.2
@@ -22,15 +24,15 @@ dependencies:
   gql_dedupe_link: ^2.0.3-alpha+1659715356233
   gql_http_link: ^0.4.3-alpha+1659715356170
   gql_link: ^0.4.3-alpha+1659715356132
-  json_annotation: ^4.5.0
-  meta: ^1.7.0
+  json_annotation: ^4.7.0
+  meta: ^1.8.0
 
 dev_dependencies:
-  build_runner: ^2.1.11
+  build_runner:
   flutter_test:
     sdk: flutter
-  json_serializable: ^6.2.0
-  lint: ^1.8.2
+  json_serializable: ^6.5.4
+  lint: ^2.0.1
 
 flutter:
   uses-material-design: true

@@ -7,17 +7,6 @@ part of 'api.graphql.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Databases$Query _$Databases$QueryFromJson(Map<String, dynamic> json) =>
-    Databases$Query()
-      ..databases = (json['databases'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList();
-
-Map<String, dynamic> _$Databases$QueryToJson(Databases$Query instance) =>
-    <String, dynamic>{
-      'databases': instance.databases,
-    };
-
 Data$Query$Entity _$Data$Query$EntityFromJson(Map<String, dynamic> json) =>
     Data$Query$Entity()
       ..id = json['id'] as String
@@ -37,6 +26,17 @@ Data$Query _$Data$QueryFromJson(Map<String, dynamic> json) => Data$Query()
 Map<String, dynamic> _$Data$QueryToJson(Data$Query instance) =>
     <String, dynamic>{
       'list': instance.list?.map((e) => e.toJson()).toList(),
+    };
+
+Databases$Query _$Databases$QueryFromJson(Map<String, dynamic> json) =>
+    Databases$Query()
+      ..databases = (json['databases'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList();
+
+Map<String, dynamic> _$Databases$QueryToJson(Databases$Query instance) =>
+    <String, dynamic>{
+      'databases': instance.databases,
     };
 
 DataArguments _$DataArgumentsFromJson(Map<String, dynamic> json) =>

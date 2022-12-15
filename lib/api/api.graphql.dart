@@ -8,21 +8,6 @@ import 'package:gql/ast.dart';
 part 'api.graphql.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class Databases$Query extends JsonSerializable with EquatableMixin {
-  Databases$Query();
-
-  factory Databases$Query.fromJson(Map<String, dynamic> json) =>
-      _$Databases$QueryFromJson(json);
-
-  List<String>? databases;
-
-  @override
-  List<Object?> get props => [databases];
-  @override
-  Map<String, dynamic> toJson() => _$Databases$QueryToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
 class Data$Query$Entity extends JsonSerializable with EquatableMixin {
   Data$Query$Entity();
 
@@ -54,37 +39,19 @@ class Data$Query extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$Data$QueryToJson(this);
 }
 
-final DATABASES_QUERY_DOCUMENT_OPERATION_NAME = 'Databases';
-final DATABASES_QUERY_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-      type: OperationType.query,
-      name: NameNode(value: 'Databases'),
-      variableDefinitions: [],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FieldNode(
-            name: NameNode(value: 'databases'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null)
-      ]))
-]);
+@JsonSerializable(explicitToJson: true)
+class Databases$Query extends JsonSerializable with EquatableMixin {
+  Databases$Query();
 
-class DatabasesQuery extends GraphQLQuery<Databases$Query, JsonSerializable> {
-  DatabasesQuery();
+  factory Databases$Query.fromJson(Map<String, dynamic> json) =>
+      _$Databases$QueryFromJson(json);
+
+  List<String>? databases;
 
   @override
-  final DocumentNode document = DATABASES_QUERY_DOCUMENT;
-
+  List<Object?> get props => [databases];
   @override
-  final String operationName = DATABASES_QUERY_DOCUMENT_OPERATION_NAME;
-
-  @override
-  List<Object?> get props => [document, operationName];
-  @override
-  Databases$Query parse(Map<String, dynamic> json) =>
-      Databases$Query.fromJson(json);
+  Map<String, dynamic> toJson() => _$Databases$QueryToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -106,41 +73,50 @@ class DataArguments extends JsonSerializable with EquatableMixin {
 final DATA_QUERY_DOCUMENT_OPERATION_NAME = 'Data';
 final DATA_QUERY_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
-      type: OperationType.query,
-      name: NameNode(value: 'Data'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'database')),
-            type: NamedTypeNode(name: NameNode(value: 'ID'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FieldNode(
-            name: NameNode(value: 'list'),
+    type: OperationType.query,
+    name: NameNode(value: 'Data'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'database')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'list'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'database'),
+            value: VariableNode(name: NameNode(value: 'database')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
             alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'database'),
-                  value: VariableNode(name: NameNode(value: 'database')))
-            ],
+            arguments: [],
             directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'id'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null),
-              FieldNode(
-                  name: NameNode(value: 'data'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null)
-            ]))
-      ]))
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'data'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      )
+    ]),
+  )
 ]);
 
 class DataQuery extends GraphQLQuery<Data$Query, DataArguments> {
@@ -159,4 +135,39 @@ class DataQuery extends GraphQLQuery<Data$Query, DataArguments> {
   List<Object?> get props => [document, operationName, variables];
   @override
   Data$Query parse(Map<String, dynamic> json) => Data$Query.fromJson(json);
+}
+
+final DATABASES_QUERY_DOCUMENT_OPERATION_NAME = 'Databases';
+final DATABASES_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'Databases'),
+    variableDefinitions: [],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'databases'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      )
+    ]),
+  )
+]);
+
+class DatabasesQuery extends GraphQLQuery<Databases$Query, JsonSerializable> {
+  DatabasesQuery();
+
+  @override
+  final DocumentNode document = DATABASES_QUERY_DOCUMENT;
+
+  @override
+  final String operationName = DATABASES_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  List<Object?> get props => [document, operationName];
+  @override
+  Databases$Query parse(Map<String, dynamic> json) =>
+      Databases$Query.fromJson(json);
 }
