@@ -3,6 +3,7 @@ import 'package:climate_platform_ui/api/api.graphql.dart';
 import 'package:climate_platform_ui/common/providers/databases_provider.dart';
 import 'package:climate_platform_ui/common/providers/entities_provider_family.dart';
 import 'package:climate_platform_ui/common/widgets/app_page.dart';
+import 'package:climate_platform_ui/common/widgets/app_text.dart';
 import 'package:climate_platform_ui/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -21,14 +22,14 @@ class OverviewPage extends ConsumerWidget {
                       .map(
                         (e) => ListTile(
                           leading: const Icon(Icons.info_outline),
-                          title: Text(e),
+                          title: AppText(e),
                           dense: true,
                         ),
                       )
                       .toList(),
                 ),
-                error: (e, s) => Text('error: $e'),
-                loading: () => const Text('loading...'),
+                error: (e, s) => AppText('error: $e'),
+                loading: () => const AppText('loading...'),
               ),
         ),
         SliverToBoxAdapter(
@@ -41,15 +42,15 @@ class OverviewPage extends ConsumerWidget {
                         children: data
                             .map(
                               (e) => ListTile(
-                                title: Text(e.data ?? ''),
+                                title: AppText(e.data ?? ''),
                                 dense: true,
                               ),
                             )
                             .toList(),
                       );
                     },
-                    error: (e, s) => Text('error: $e'),
-                    loading: () => const Text('loading...'),
+                    error: (e, s) => AppText('error: $e'),
+                    loading: () => const AppText('loading...'),
                   ),
         ),
       ],
