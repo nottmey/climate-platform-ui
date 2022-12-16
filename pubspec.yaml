@@ -26,6 +26,8 @@ dependencies:
   gql_http_link: ^0.4.3-alpha+1659715356170
   gql_link: ^0.4.3-alpha+1659715356132
   hooks_riverpod: ^2.1.1
+  http: ^0.13.5
+  infinite_scroll_pagination: ^3.2.0
   json_annotation: ^4.7.0
   meta: ^1.8.0
 
