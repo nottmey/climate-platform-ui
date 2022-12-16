@@ -15,6 +15,7 @@ class OverviewPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AppPage(
       slivers: [
+        // add theme viewer
         SliverToBoxAdapter(
           child: ref.watch(databasesProvider).when(
                 data: (data) => Column(

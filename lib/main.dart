@@ -11,6 +11,8 @@ import 'package:http/http.dart';
 import 'package:http/retry.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await dotenv.load(fileName: '.env.local');
 
   getIt.registerSingleton(
