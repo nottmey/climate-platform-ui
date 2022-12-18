@@ -21,6 +21,7 @@ dependencies:
   flutter_dotenv: ^5.0.2
   get_it: ^7.2.0
   go_router: ^5.2.4
+  google_fonts: ^3.0.1
   gql: ^0.13.1
   gql_dedupe_link: ^2.0.3-alpha+1659715356233
   gql_http_link: ^0.4.3-alpha+1659715356170

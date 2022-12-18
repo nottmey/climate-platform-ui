@@ -1,5 +1,5 @@
+import 'package:climate_platform_ui/features/theming/themes/default_theme.dart';
 import 'package:climate_platform_ui/router.dart';
-import 'package:climate_platform_ui/themes/default_theme.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -8,7 +8,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      theme: defaultTheme,
+      theme: defaultTheme(),
       debugShowCheckedModeBanner: false,
       routerConfig: router,
     );

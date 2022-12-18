@@ -5,7 +5,9 @@ import 'package:climate_platform_ui/common/providers/entities_provider_family.da
 import 'package:climate_platform_ui/common/widgets/app_page.dart';
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
 import 'package:climate_platform_ui/get_it.dart';
+import 'package:climate_platform_ui/router.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class OverviewPage extends ConsumerWidget {
@@ -15,6 +17,12 @@ class OverviewPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AppPage(
       slivers: [
+        SliverToBoxAdapter(
+          child: TextButton(
+            onPressed: () => context.go(showcasePath),
+            child: const AppText(value: 'go to showcase'),
+          ),
+        ),
         // add theme viewer
         SliverToBoxAdapter(
           child: ref.watch(databasesProvider).when(
@@ -23,14 +31,14 @@ class OverviewPage extends ConsumerWidget {
                       .map(
                         (e) => ListTile(
                           leading: const Icon(Icons.info_outline),
-                          title: AppText(e),
+                          title: AppText(value: e),
                           dense: true,
                         ),
                       )
                       .toList(),
                 ),
-                error: (e, s) => AppText('error: $e'),
-                loading: () => const AppText('loading...'),
+                error: (e, s) => AppText(value: 'error: $e'),
+                loading: () => const AppText(value: 'loading...'),
               ),
         ),
         SliverToBoxAdapter(
@@ -43,15 +51,15 @@ class OverviewPage extends ConsumerWidget {
                         children: data
                             .map(
                               (e) => ListTile(
-                                title: AppText(e.data ?? ''),
+                                title: AppText(value: e.data ?? ''),
                                 dense: true,
                               ),
                             )
                             .toList(),
                       );
                     },
-                    error: (e, s) => AppText('error: $e'),
-                    loading: () => const AppText('loading...'),
+                    error: (e, s) => AppText(value: 'error: $e'),
+                    loading: () => const AppText(value: 'loading...'),
                   ),
         ),
       ],
