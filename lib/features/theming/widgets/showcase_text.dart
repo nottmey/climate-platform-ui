@@ -28,7 +28,10 @@ class ShowcaseText extends StatelessWidget {
           DecoratedBox(
             decoration: BoxDecoration(
               border: Border.symmetric(
-                horizontal: BorderSide(color: theme.colorScheme.onBackground),
+                horizontal: BorderSide(
+                  color: theme.colorScheme.onBackground,
+                  width: 0,
+                ),
               ),
             ),
             child: AppText(

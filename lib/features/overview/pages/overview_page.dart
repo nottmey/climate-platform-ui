@@ -1,10 +1,6 @@
-import 'package:artemis/artemis.dart';
-import 'package:climate_platform_ui/api/api.graphql.dart';
 import 'package:climate_platform_ui/common/providers/databases_provider.dart';
 import 'package:climate_platform_ui/common/providers/entities_provider_family.dart';
-import 'package:climate_platform_ui/common/widgets/app_page.dart';
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
-import 'package:climate_platform_ui/get_it.dart';
 import 'package:climate_platform_ui/router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -15,7 +11,7 @@ class OverviewPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return AppPage(
+    return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
           child: TextButton(

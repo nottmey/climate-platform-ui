@@ -1,4 +1,3 @@
-import 'package:climate_platform_ui/common/widgets/app_page.dart';
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
 import 'package:climate_platform_ui/features/theming/models/text_style_preset.dart';
 import 'package:climate_platform_ui/features/theming/utils/context_theme_extension.dart';
@@ -13,7 +12,7 @@ class ShowcasePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.theme;
     final colorScheme = theme.colorScheme;
-    return AppPage(
+    return CustomScrollView(
       slivers: [
         const SliverAppBar(
           pinned: true,

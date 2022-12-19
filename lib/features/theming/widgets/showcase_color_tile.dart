@@ -18,11 +18,9 @@ class ShowcaseColorTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    final backgroundColor = showcaseColor;
-    final textColor = this.textColor ?? Colors.black;
     return Expanded(
       child: ColoredBox(
-        color: backgroundColor,
+        color: showcaseColor,
         child: Column(
           children: [
             Align(
@@ -46,7 +44,7 @@ class ShowcaseColorTile extends StatelessWidget {
                 all: 1,
                 child: AppText(
                   value:
-                      '#${backgroundColor.value.toRadixString(16).toUpperCase()}',
+                      '#${showcaseColor.value.toRadixString(16).toUpperCase()}',
                   overrideColor: textColor,
                 ),
               ),
