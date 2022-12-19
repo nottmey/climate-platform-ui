@@ -1,3 +1,4 @@
+import 'package:climate_platform_ui/features/dev/pages/dev_menu_page.dart';
 import 'package:climate_platform_ui/features/navigation/models/app_navigation_item.dart';
 import 'package:climate_platform_ui/features/navigation/pages/root_scaffold_page.dart';
 import 'package:climate_platform_ui/features/navigation/pages/tab_transition_page.dart';
@@ -7,9 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 const _overviewSegment = 'overview';
+const _devMenuSegment = 'dev';
 const _showcaseSegment = 'showcase';
 
 const overviewPath = '/$_overviewSegment';
+const devMenuPath = '/$_devMenuSegment';
 const showcasePath = '/$_showcaseSegment';
 
 const initialPath = overviewPath;
@@ -25,6 +28,18 @@ GoRouter newRouter({required ThemeData theme}) {
           key: const ValueKey(overviewPath),
           barrierColor: theme.backgroundColor,
           child: const OverviewPage(),
+        ),
+      ),
+    ),
+    AppNavigationItem(
+      label: 'Dev Menu',
+      iconData: Icons.developer_mode,
+      route: GoRoute(
+        path: devMenuPath,
+        pageBuilder: (context, state) => TabTransitionPage(
+          key: const ValueKey(devMenuPath),
+          barrierColor: theme.backgroundColor,
+          child: const DevMenuPage(),
         ),
       ),
     ),
