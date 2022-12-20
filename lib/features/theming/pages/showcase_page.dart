@@ -1,4 +1,4 @@
-import 'package:climate_platform_ui/common/widgets/app_text.dart';
+import 'package:climate_platform_ui/features/navigation/widgets/main_top_bar.dart';
 import 'package:climate_platform_ui/features/theming/models/text_style_preset.dart';
 import 'package:climate_platform_ui/features/theming/utils/context_theme_extension.dart';
 import 'package:climate_platform_ui/features/theming/widgets/showcase_color_tile.dart';
@@ -14,13 +14,7 @@ class ShowcasePage extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     return CustomScrollView(
       slivers: [
-        const SliverAppBar(
-          pinned: true,
-          title: AppText(
-            value: 'App Theme Showcase',
-            preset: TextStylePreset.titleLarge,
-          ),
-        ),
+        const MainTopBar(title: 'Theme Showcase'),
         SliverToBoxAdapter(
           child: SelectionArea(
             child: Row(

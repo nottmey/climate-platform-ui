@@ -8,6 +8,7 @@ class AppText extends StatelessWidget {
   final int? minLines;
   final int? maxLines;
   final bool? softWrap;
+  final TextOverflow? overflow;
 
   final Color? overrideColor;
 
@@ -20,6 +21,7 @@ class AppText extends StatelessWidget {
     this.maxLines,
     this.overrideColor,
     this.softWrap,
+    this.overflow,
   });
 
   TextStyle? _textStyle(BuildContext context) {
@@ -46,7 +48,7 @@ class AppText extends StatelessWidget {
       style: _textStyle(context),
       maxLines: maxLines ?? minLines,
       softWrap: softWrap,
-      overflow: TextOverflow.fade,
+      overflow: overflow ?? TextOverflow.fade,
     );
   }
 }

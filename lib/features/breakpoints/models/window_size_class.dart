@@ -21,10 +21,12 @@ enum WindowSize {
       // portrait & landscape phones
       return WindowSize.compact;
     } else if (viewSize.width < 840) {
-      // foldable small tablets
+      // foldable or small tablets
+      // e.g. iPad Pro 11" in portrait mode
       return WindowSize.medium;
     } else {
       // large tablets & laptops etc.
+      // e.g. iPad Pro 11" in landscape mode, or iPad Pro 12.9" in portrait
       return WindowSize.expanded;
     }
   }
