@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class AppText extends StatelessWidget {
   final String value;
-  final TextStylePreset preset;
+  final TextStylePreset? preset;
   final TextAlign? textAlign;
   final int? minLines;
   final int? maxLines;
@@ -14,7 +14,7 @@ class AppText extends StatelessWidget {
   const AppText({
     super.key,
     required this.value,
-    this.preset = TextStylePreset.bodyMedium,
+    this.preset,
     this.textAlign,
     this.minLines,
     this.maxLines,
@@ -24,7 +24,7 @@ class AppText extends StatelessWidget {
 
   TextStyle? _textStyle(BuildContext context) {
     final theme = Theme.of(context);
-    final style = preset.of(theme);
+    final style = preset?.of(theme);
     if (overrideColor != null) {
       if (style != null) {
         return style.copyWith(color: overrideColor);

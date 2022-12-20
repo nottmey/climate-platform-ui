@@ -1,5 +1,8 @@
+import 'package:climate_platform_ui/features/breakpoints/utils/context_window_size_extension.dart';
 import 'package:climate_platform_ui/features/navigation/models/app_navigation_item.dart';
 import 'package:climate_platform_ui/features/navigation/widgets/app_bottom_navigation_bar.dart';
+import 'package:climate_platform_ui/features/navigation/widgets/app_navigation_drawer.dart';
+import 'package:climate_platform_ui/features/navigation/widgets/app_navigation_rail.dart';
 import 'package:flutter/material.dart';
 
 class RootScaffoldPage extends StatelessWidget {
@@ -16,17 +19,35 @@ class RootScaffoldPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO implement breakpoints with different action bars
-    // https://github.com/fluttercommunity/breakpoint/blob/master/lib/breakpoint.dart
-    // https://m3.material.io/foundations/adaptive-design/large-screens/component-adaptation#5b32d2bf-8c93-4461-a4ac-a6cb4f8547d1
+    final windowSize = context.queryWindowSize();
+
     return Scaffold(
       body: SafeArea(
-        child: child,
+        child: windowSize.isMedium() || windowSize.isExpanded()
+            ? Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (windowSize.isMedium())
+                    AppNavigationRail(
+                      selectedIndex: selectedIndex,
+                      items: navigationItems,
+                    ),
+                  if (windowSize.isExpanded())
+                    AppNavigationDrawer(
+                      selectedIndex: selectedIndex,
+                      items: navigationItems,
+                    ),
+                  Expanded(child: child)
+                ],
+              )
+            : child,
       ),
-      bottomNavigationBar: AppBottomNavigationBar(
-        selectedIndex: selectedIndex,
-        items: navigationItems,
-      ),
+      bottomNavigationBar: windowSize.isCompact()
+          ? AppBottomNavigationBar(
+              selectedIndex: selectedIndex,
+              items: navigationItems,
+            )
+          : null,
     );
   }
 }
