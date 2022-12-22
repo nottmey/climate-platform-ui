@@ -19,7 +19,7 @@ extension SpacingUtilsExtension on ThemeData {
     );
   }
 
-  Padding padding({
+  Padding spacedPadding({
     Key? key,
     int all = 0,
     int horizontal = 0,
@@ -45,7 +45,7 @@ extension SpacingUtilsExtension on ThemeData {
     );
   }
 
-  SizedBox sizedBox({
+  SizedBox spacedSizedBox({
     Key? key,
     int? height,
     int? width,
@@ -57,14 +57,5 @@ extension SpacingUtilsExtension on ThemeData {
       width: width != null ? width * spacingBase : null,
       child: child,
     );
-  }
-
-  double? get lineHeight {
-    final defaultTextStyle = textTheme.bodyMedium;
-    final defaultFontSize = defaultTextStyle?.fontSize;
-    final defaultFontHeight = defaultTextStyle?.height;
-    return defaultFontSize != null && defaultFontHeight != null
-        ? defaultFontSize * defaultFontHeight
-        : null;
   }
 }

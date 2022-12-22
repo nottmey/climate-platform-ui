@@ -20,7 +20,7 @@ class ShowcaseText extends StatelessWidget {
     final height = textTheme?.height;
     final size = textTheme?.fontSize;
 
-    return theme.padding(
+    return theme.spacedPadding(
       all: 2,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -43,7 +43,7 @@ class ShowcaseText extends StatelessWidget {
               softWrap: false,
             ),
           ),
-          theme.sizedBox(height: 2),
+          theme.spacedSizedBox(height: 2),
           Text('Role: ${segments.map((e) => e.toLowerCase()).join(' ')}'),
           Text('Font: ${textTheme?.fontFamily}'),
           Text('Size: ${textTheme?.fontSize}'),

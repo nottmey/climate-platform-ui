@@ -1,4 +1,3 @@
-
 import 'package:climate_platform_ui/common/providers/databases_provider.dart';
 import 'package:climate_platform_ui/common/providers/entities_provider_family.dart';
 import 'package:climate_platform_ui/common/widgets/app_page_widget.dart';

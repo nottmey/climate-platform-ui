@@ -25,7 +25,7 @@ class ShowcaseColorTile extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.topLeft,
-              child: theme.padding(
+              child: theme.spacedPadding(
                 top: 1,
                 left: 1,
                 bottom: 1,
@@ -38,10 +38,10 @@ class ShowcaseColorTile extends StatelessWidget {
                 ),
               ),
             ),
-            theme.sizedBox(height: 4),
+            theme.spacedSizedBox(height: 4),
             Align(
               alignment: Alignment.bottomRight,
-              child: theme.padding(
+              child: theme.spacedPadding(
                 all: 1,
                 child: AppText(
                   value:
