@@ -34,6 +34,7 @@ class ShowcaseColorTile extends StatelessWidget {
                   overrideColor: textColor,
                   minLines: 2,
                   maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ),

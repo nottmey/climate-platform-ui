@@ -6,7 +6,6 @@ class TabTransitionPage<T> extends CustomTransitionPage<T> {
 
   TabTransitionPage({
     super.key,
-    super.barrierColor,
     required super.child,
   }) : super(
           transitionDuration: const Duration(milliseconds: 150),

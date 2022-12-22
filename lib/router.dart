@@ -2,22 +2,25 @@ import 'package:climate_platform_ui/features/dev/pages/dev_menu_page.dart';
 import 'package:climate_platform_ui/features/navigation/models/app_navigation_item.dart';
 import 'package:climate_platform_ui/features/navigation/pages/root_scaffold_page.dart';
 import 'package:climate_platform_ui/features/navigation/pages/tab_transition_page.dart';
+import 'package:climate_platform_ui/features/overview/pages/overview_details_page.dart';
 import 'package:climate_platform_ui/features/overview/pages/overview_page.dart';
 import 'package:climate_platform_ui/features/theming/pages/showcase_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 const _overviewSegment = 'overview';
+const _overviewDetailsSegment = 'details';
 const _devMenuSegment = 'dev';
 const _showcaseSegment = 'showcase';
 
 const overviewPath = '/$_overviewSegment';
+const overviewDetailsPath = '$overviewPath/$_overviewDetailsSegment';
 const devMenuPath = '/$_devMenuSegment';
 const showcasePath = '/$_showcaseSegment';
 
 const initialPath = overviewPath;
 
-GoRouter newRouter({required ThemeData theme}) {
+GoRouter newRouter() {
   final navigationItems = [
     AppNavigationItem(
       label: 'Overview',
@@ -26,9 +29,14 @@ GoRouter newRouter({required ThemeData theme}) {
         path: overviewPath,
         pageBuilder: (context, state) => TabTransitionPage(
           key: const ValueKey(overviewPath),
-          barrierColor: theme.backgroundColor,
           child: const OverviewPage(),
         ),
+        routes: [
+          GoRoute(
+            path: _overviewDetailsSegment,
+            builder: (context, state) => const OverviewDetailsPage(),
+          )
+        ],
       ),
     ),
     AppNavigationItem(
@@ -38,7 +46,6 @@ GoRouter newRouter({required ThemeData theme}) {
         path: devMenuPath,
         pageBuilder: (context, state) => TabTransitionPage(
           key: const ValueKey(devMenuPath),
-          barrierColor: theme.backgroundColor,
           child: const DevMenuPage(),
         ),
       ),
@@ -50,7 +57,6 @@ GoRouter newRouter({required ThemeData theme}) {
         path: showcasePath,
         pageBuilder: (context, state) => TabTransitionPage(
           key: const ValueKey(showcasePath),
-          barrierColor: theme.backgroundColor,
           child: const ShowcasePage(),
         ),
       ),
@@ -67,7 +73,7 @@ GoRouter newRouter({required ThemeData theme}) {
         builder: (context, state, child) {
           return RootScaffoldPage(
             selectedIndex: navigationItems.indexWhere(
-              (item) => item.route.path == state.fullpath,
+              (item) => state.fullpath?.startsWith(item.route.path) ?? false,
             ),
             navigationItems: navigationItems,
             child: child,

@@ -1,7 +1,10 @@
 include: package:lint/analysis_options.yaml
 
 analyzer:
+  errors:
+    invalid_override_of_non_virtual_member: error
   language:
+    strict-casts: true
     strict-inference: true
     strict-raw-types: true
   exclude:

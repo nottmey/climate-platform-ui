@@ -1,30 +1,18 @@
-import 'package:climate_platform_ui/features/theming/themes/default_theme.dart';
+import 'package:climate_platform_ui/features/theming/providers/theme_provider.dart';
 import 'package:climate_platform_ui/router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class App extends StatefulWidget {
-  const App({super.key});
+class App extends ConsumerWidget {
+  final GoRouter router = newRouter();
 
-  @override
-  State<App> createState() => _AppState();
-}
-
-class _AppState extends State<App> {
-  late final ThemeData theme;
-  late final GoRouter router;
+  App({super.key});
 
   @override
-  void initState() {
-    theme = defaultTheme();
-    router = newRouter(theme: theme);
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
-      theme: theme,
+      theme: ref.watch(themeProvider),
       debugShowCheckedModeBanner: false,
       routerConfig: router,
     );

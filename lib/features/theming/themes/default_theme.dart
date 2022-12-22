@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const seedColor = Colors.teal;
-const brightness = Brightness.light;
-
 // small, so we don't need to use half values for min padding
 const spacingBase = 4.0; // px
 
 // function, so it gets hot reloaded when changing a value
-ThemeData defaultTheme() {
+ThemeData defaultTheme({
+  Color seedColor = Colors.teal,
+  Brightness brightness = Brightness.light,
+}) {
   return ThemeData.from(
     colorScheme: ColorScheme.fromSeed(
       seedColor: seedColor,
