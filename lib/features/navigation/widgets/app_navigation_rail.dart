@@ -1,9 +1,10 @@
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
+import 'package:climate_platform_ui/common/widgets/app_widget.dart';
 import 'package:climate_platform_ui/features/navigation/models/app_navigation_item.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AppNavigationRail extends StatelessWidget {
+class AppNavigationRail extends AppWidget {
   final int selectedIndex;
   final List<AppNavigationItem> items;
 
@@ -14,7 +15,7 @@ class AppNavigationRail extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return NavigationRail(
       groupAlignment: -0.8,
       labelType: NavigationRailLabelType.all,

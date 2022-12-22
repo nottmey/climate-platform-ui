@@ -1,9 +1,9 @@
 import 'package:climate_platform_ui/common/utils/iterable_extension.dart';
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
+import 'package:climate_platform_ui/common/widgets/app_widget.dart';
 import 'package:climate_platform_ui/features/theming/utils/context_theme_extension.dart';
 import 'package:climate_platform_ui/features/theming/utils/material_design_utils_extension.dart';
 import 'package:climate_platform_ui/features/theming/utils/spacing_utils_extension.dart';
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 enum AppCardPreset {
@@ -24,7 +24,7 @@ class AppCardAction {
   });
 }
 
-class AppCard extends HookConsumerWidget {
+class AppCard extends AppWidget {
   final AppCardPreset preset;
   final void Function()? onTab;
   final List<AppCardAction>? actions;

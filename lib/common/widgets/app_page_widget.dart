@@ -1,9 +1,12 @@
+import 'package:climate_platform_ui/common/widgets/app_widget.dart';
 import 'package:climate_platform_ui/features/theming/utils/context_theme_extension.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-abstract class AppPageWidget extends HookConsumerWidget {
+export 'package:climate_platform_ui/common/widgets/app_widget.dart'
+    hide AppWidget;
+
+abstract class AppPageWidget extends AppWidget {
   const AppPageWidget({super.key});
 
   @override

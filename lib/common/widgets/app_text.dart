@@ -1,7 +1,8 @@
+import 'package:climate_platform_ui/common/widgets/app_widget.dart';
 import 'package:climate_platform_ui/features/theming/models/text_style_preset.dart';
-import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AppText extends StatelessWidget {
+class AppText extends AppWidget {
   final String value;
   final TextStylePreset? preset;
   final TextAlign? textAlign;
@@ -39,7 +40,7 @@ class AppText extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final minLines = this.minLines;
     return Text(
       // hacky, until solved: https://github.com/flutter/flutter/issues/31134

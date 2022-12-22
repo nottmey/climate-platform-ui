@@ -6,7 +6,6 @@ import 'package:climate_platform_ui/features/theming/models/text_style_preset.da
 import 'package:climate_platform_ui/features/theming/utils/context_theme_extension.dart';
 import 'package:climate_platform_ui/features/theming/utils/spacing_utils_extension.dart';
 import 'package:climate_platform_ui/router.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

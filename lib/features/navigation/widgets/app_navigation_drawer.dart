@@ -1,9 +1,10 @@
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
+import 'package:climate_platform_ui/common/widgets/app_widget.dart';
 import 'package:climate_platform_ui/features/navigation/models/app_navigation_item.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AppNavigationDrawer extends StatelessWidget {
+class AppNavigationDrawer extends AppWidget {
   final int selectedIndex;
   final List<AppNavigationItem> items;
 
@@ -14,7 +15,7 @@ class AppNavigationDrawer extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // can be replaced with material 3 rail once released by flutter core team
     // https://github.com/flutter/flutter/pull/115668
     return NavigationRail(

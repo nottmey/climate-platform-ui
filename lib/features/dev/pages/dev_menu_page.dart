@@ -3,7 +3,6 @@ import 'package:climate_platform_ui/common/providers/entities_provider_family.da
 import 'package:climate_platform_ui/common/widgets/app_page_widget.dart';
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
 import 'package:climate_platform_ui/features/navigation/widgets/main_top_bar.dart';
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class DevMenuPage extends AppPageWidget {

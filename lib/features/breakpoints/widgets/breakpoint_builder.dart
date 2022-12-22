@@ -1,7 +1,8 @@
+import 'package:climate_platform_ui/common/widgets/app_widget.dart';
 import 'package:climate_platform_ui/features/breakpoints/models/window_size_class.dart';
-import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class BreakpointBuilder extends StatelessWidget {
+class BreakpointBuilder extends AppWidget {
   final Widget Function(BuildContext, WindowSize) builder;
 
   const BreakpointBuilder({
@@ -10,7 +11,7 @@ class BreakpointBuilder extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return LayoutBuilder(
       builder: (context, constraints) {
         return builder(context, WindowSize.fromConstraints(constraints));

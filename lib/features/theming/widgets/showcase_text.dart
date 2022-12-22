@@ -1,19 +1,20 @@
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
+import 'package:climate_platform_ui/common/widgets/app_widget.dart';
 import 'package:climate_platform_ui/features/theming/models/text_style_preset.dart';
 import 'package:climate_platform_ui/features/theming/utils/context_theme_extension.dart';
 import 'package:climate_platform_ui/features/theming/utils/spacing_utils_extension.dart';
-import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // https://stackoverflow.com/questions/7593969/regex-to-split-camelcase-or-titlecase-advanced
 final _splitCamelCase = RegExp('(?<!^)(?=[A-Z])');
 
-class ShowcaseText extends StatelessWidget {
+class ShowcaseText extends AppWidget {
   final TextStylePreset preset;
 
   const ShowcaseText({super.key, required this.preset});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = context.theme;
     final textTheme = preset.of(theme);
     final segments = preset.name.split(_splitCamelCase);

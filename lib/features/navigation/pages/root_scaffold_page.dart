@@ -1,11 +1,12 @@
+import 'package:climate_platform_ui/common/widgets/app_widget.dart';
 import 'package:climate_platform_ui/features/breakpoints/utils/context_window_size_extension.dart';
 import 'package:climate_platform_ui/features/navigation/models/app_navigation_item.dart';
 import 'package:climate_platform_ui/features/navigation/widgets/app_bottom_navigation_bar.dart';
 import 'package:climate_platform_ui/features/navigation/widgets/app_navigation_drawer.dart';
 import 'package:climate_platform_ui/features/navigation/widgets/app_navigation_rail.dart';
-import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class RootScaffoldPage extends StatelessWidget {
+class RootScaffoldPage extends AppWidget {
   final int selectedIndex;
   final List<AppNavigationItem> navigationItems;
   final Widget child;
@@ -18,7 +19,7 @@ class RootScaffoldPage extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final windowSize = context.queryWindowSize();
 
     return Scaffold(

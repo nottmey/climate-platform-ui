@@ -1,9 +1,10 @@
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
+import 'package:climate_platform_ui/common/widgets/app_widget.dart';
 import 'package:climate_platform_ui/features/theming/utils/context_theme_extension.dart';
 import 'package:climate_platform_ui/features/theming/utils/spacing_utils_extension.dart';
-import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ShowcaseColorTile extends StatelessWidget {
+class ShowcaseColorTile extends AppWidget {
   final String label;
   final Color textColor;
   final Color showcaseColor;
@@ -16,7 +17,7 @@ class ShowcaseColorTile extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = context.theme;
     return Expanded(
       child: ColoredBox(
