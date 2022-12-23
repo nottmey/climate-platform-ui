@@ -1,5 +1,5 @@
+import 'package:climate_platform_ui/common/widgets/app_header_sliver.dart';
 import 'package:climate_platform_ui/common/widgets/app_page_widget.dart';
-import 'package:climate_platform_ui/common/widgets/main_top_bar.dart';
 import 'package:climate_platform_ui/features/theming/models/text_style_preset.dart';
 import 'package:climate_platform_ui/features/theming/utils/context_theme_extension.dart';
 import 'package:climate_platform_ui/features/theming/widgets/showcase_color_tile.dart';
@@ -13,7 +13,7 @@ class ShowcasePage extends AppPageWidget {
     final theme = context.theme;
     final colorScheme = theme.colorScheme;
     return [
-      const MainTopBar(title: 'Theme Showcase'),
+      const AppHeaderSliver(title: 'Theme Showcase'),
       SliverToBoxAdapter(
         child: SelectionArea(
           child: Row(

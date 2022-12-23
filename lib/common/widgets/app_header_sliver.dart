@@ -4,10 +4,10 @@ import 'package:climate_platform_ui/features/theming/themes/default_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class MainTopBar extends ConsumerWidget {
+class AppHeaderSliver extends ConsumerWidget {
   final String title;
 
-  const MainTopBar({
+  const AppHeaderSliver({
     super.key,
     required this.title,
   });

@@ -1,6 +1,6 @@
 import 'package:climate_platform_ui/common/widgets/app_entity_card.dart';
+import 'package:climate_platform_ui/common/widgets/app_header_sliver.dart';
 import 'package:climate_platform_ui/common/widgets/app_page_widget.dart';
-import 'package:climate_platform_ui/common/widgets/main_top_bar.dart';
 import 'package:climate_platform_ui/router.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,7 +10,7 @@ class PlanetOverviewPage extends AppPageWidget {
   @override
   List<Widget> buildSlivers(BuildContext context, WidgetRef ref) {
     return [
-      const MainTopBar(title: 'Planetary boundaries'),
+      const AppHeaderSliver(title: 'Planetary boundaries'),
       // TODO sketch content
       // TODO content card grid
       SliverToBoxAdapter(
