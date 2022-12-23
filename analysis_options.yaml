@@ -1,4 +1,5 @@
-include: package:lint/analysis_options.yaml
+# see: https://github.com/passsy/dart-lint/blob/master/lib/strict.yaml
+include: package:lint/strict.yaml
 
 analyzer:
   errors:
@@ -11,11 +12,14 @@ analyzer:
     - lib/api/api.graphql.dart
     - lib/api/api.graphql.g.dart
 
+# all: https://dart-lang.github.io/linter/lints/index.html
 linter:
   rules:
+    always_put_control_body_on_new_line: true
     avoid_classes_with_only_static_members: false
     avoid_dynamic_calls: true
     avoid_redundant_argument_values: false
+    combinators_ordering: true
     literal_only_boolean_expressions: true
     omit_local_variable_types: true
     only_throw_errors: true

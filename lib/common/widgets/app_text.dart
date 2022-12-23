@@ -1,6 +1,5 @@
 import 'package:climate_platform_ui/common/widgets/app_widget.dart';
 import 'package:climate_platform_ui/features/theming/models/text_style_preset.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AppText extends AppWidget {
   final String value;

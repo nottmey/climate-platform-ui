@@ -1,10 +1,9 @@
 import 'package:climate_platform_ui/common/widgets/app_page_widget.dart';
-import 'package:climate_platform_ui/features/navigation/widgets/main_top_bar.dart';
+import 'package:climate_platform_ui/common/widgets/main_top_bar.dart';
 import 'package:climate_platform_ui/features/theming/models/text_style_preset.dart';
 import 'package:climate_platform_ui/features/theming/utils/context_theme_extension.dart';
 import 'package:climate_platform_ui/features/theming/widgets/showcase_color_tile.dart';
 import 'package:climate_platform_ui/features/theming/widgets/showcase_text.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ShowcasePage extends AppPageWidget {
   const ShowcasePage({super.key});

@@ -1,9 +1,8 @@
 import 'package:climate_platform_ui/common/widgets/app_entity_card.dart';
 import 'package:climate_platform_ui/common/widgets/app_page_widget.dart';
-import 'package:climate_platform_ui/features/navigation/widgets/main_top_bar.dart';
+import 'package:climate_platform_ui/common/widgets/main_top_bar.dart';
 import 'package:climate_platform_ui/router.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PlanetOverviewPage extends AppPageWidget {
   const PlanetOverviewPage({super.key});

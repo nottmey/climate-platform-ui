@@ -4,7 +4,6 @@ import 'package:climate_platform_ui/features/navigation/models/app_navigation_it
 import 'package:climate_platform_ui/features/navigation/widgets/app_bottom_navigation_bar.dart';
 import 'package:climate_platform_ui/features/navigation/widgets/app_navigation_drawer.dart';
 import 'package:climate_platform_ui/features/navigation/widgets/app_navigation_rail.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class RootScaffoldPage extends AppWidget {
   final int selectedIndex;

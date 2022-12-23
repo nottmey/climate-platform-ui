@@ -4,8 +4,6 @@ import 'package:climate_platform_ui/common/widgets/app_widget.dart';
 import 'package:climate_platform_ui/features/theming/models/text_style_preset.dart';
 import 'package:climate_platform_ui/features/theming/utils/context_theme_extension.dart';
 import 'package:climate_platform_ui/features/theming/utils/spacing_utils_extension.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class AppEntityCard extends AppWidget {
