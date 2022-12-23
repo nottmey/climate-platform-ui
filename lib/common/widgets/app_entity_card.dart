@@ -93,6 +93,8 @@ class AppEntityCard extends AppWidget {
       );
     }
 
+    // TODO animate size and fade when content changes
+    // example: https://pub.dev/packages/animated_size_and_fade
     return AppCard(
       preset: preset,
       onTab: editing
