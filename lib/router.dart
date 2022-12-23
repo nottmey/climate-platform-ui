@@ -21,7 +21,7 @@ const databaseBrowserPath = '/$_databaseBrowserSegment';
 const devMenuPath = '/$_devMenuSegment';
 const showcasePath = '/$_showcaseSegment';
 
-const initialPath = overviewPath;
+const initialPath = databaseBrowserPath;
 
 GoRouter newRouter() {
   final navigationItems = [
