@@ -1,6 +1,11 @@
 query Data($database: ID!) {
     list(database: $database) {
         id
-        data
+        attributes {
+            id
+            name
+            type
+            values
+        }
     }
 }

@@ -41,12 +41,15 @@ directive @aws_cognito_user_pools(
     cognito_groups: [String]
 ) on OBJECT | FIELD_DEFINITION
 
-"Tells the service this field/object has access authorized by an API key."
-directive @aws_api_key on OBJECT | FIELD_DEFINITION
+type Attribute {
+    id: ID!
+    name: String!
+    type: String!
+    values: [String!]
+}
 
-"  example entity, with fields to dump data into"
 type Entity {
-    data: String
+    attributes: [Attribute!]
     id: ID!
 }
 

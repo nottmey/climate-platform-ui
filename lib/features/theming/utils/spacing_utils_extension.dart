@@ -58,4 +58,20 @@ extension SpacingUtilsExtension on ThemeData {
       child: child,
     );
   }
+
+  SliverToBoxAdapter spacedSliverSizedBox({
+    Key? key,
+    int? height,
+    int? width,
+    Widget? child,
+  }) {
+    return SliverToBoxAdapter(
+      child: spacedSizedBox(
+        key: key,
+        height: height,
+        width: width,
+        child: child,
+      ),
+    );
+  }
 }

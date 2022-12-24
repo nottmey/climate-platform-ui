@@ -8,6 +8,27 @@ import 'package:gql/ast.dart';
 part 'api.graphql.g.dart';
 
 @JsonSerializable(explicitToJson: true)
+class Data$Query$Entity$Attribute extends JsonSerializable with EquatableMixin {
+  Data$Query$Entity$Attribute();
+
+  factory Data$Query$Entity$Attribute.fromJson(Map<String, dynamic> json) =>
+      _$Data$Query$Entity$AttributeFromJson(json);
+
+  late String id;
+
+  late String name;
+
+  late String type;
+
+  List<String>? values;
+
+  @override
+  List<Object?> get props => [id, name, type, values];
+  @override
+  Map<String, dynamic> toJson() => _$Data$Query$Entity$AttributeToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class Data$Query$Entity extends JsonSerializable with EquatableMixin {
   Data$Query$Entity();
 
@@ -16,10 +37,10 @@ class Data$Query$Entity extends JsonSerializable with EquatableMixin {
 
   late String id;
 
-  String? data;
+  List<Data$Query$Entity$Attribute>? attributes;
 
   @override
-  List<Object?> get props => [id, data];
+  List<Object?> get props => [id, attributes];
   @override
   Map<String, dynamic> toJson() => _$Data$Query$EntityToJson(this);
 }
@@ -107,11 +128,40 @@ final DATA_QUERY_DOCUMENT = DocumentNode(definitions: [
             selectionSet: null,
           ),
           FieldNode(
-            name: NameNode(value: 'data'),
+            name: NameNode(value: 'attributes'),
             alias: null,
             arguments: [],
             directives: [],
-            selectionSet: null,
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'id'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'name'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'type'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'values'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+            ]),
           ),
         ]),
       )
