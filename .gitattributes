@@ -1,2 +1,1 @@
-lib/api/api.graphql.dart -diff
-lib/api/api.graphql.g.dart -diff
+*.dart -diff
