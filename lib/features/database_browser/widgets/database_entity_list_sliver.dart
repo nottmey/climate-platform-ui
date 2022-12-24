@@ -22,6 +22,7 @@ class DatabaseEntityListSliver extends AppWidget {
       );
     }
 
+    // TODO use fragment for nicer entity type
     return AppPagedSliverList<Data$Query$Entity>(
       fetchPage: (pageKey) async {
         // TODO use pageKey and return nextPageKey (if available)
@@ -37,6 +38,7 @@ class DatabaseEntityListSliver extends AppWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // TODO allow details click to entity page
               AppText(
                 value: 'Entity: ${item.id}',
                 preset: TextStylePreset.titleLarge,
@@ -50,6 +52,7 @@ class DatabaseEntityListSliver extends AppWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          // TODO allow click to attribute page
                           AppText(
                             value: a.name,
                             preset: TextStylePreset.titleMedium,
@@ -64,6 +67,8 @@ class DatabaseEntityListSliver extends AppWidget {
                     ...(a.values ?? []).map(
                       (v) => theme.spacedPadding(
                         left: 4,
+                        // TODO follow value to entity page, if ref
+                        // TODO show transaction id, allow click to transaction details page
                         child: AppText(value: v),
                       ),
                     )
