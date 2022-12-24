@@ -34,6 +34,7 @@ Map<String, dynamic> _$Data$QueryToJson(Data$Query instance) =>
 EntityMixin$Attribute _$EntityMixin$AttributeFromJson(
         Map<String, dynamic> json) =>
     EntityMixin$Attribute()
+      ..$$typename = json['__typename'] as String?
       ..id = json['id'] as String
       ..name = json['name'] as String
       ..type = json['type'] as String
@@ -43,6 +44,7 @@ EntityMixin$Attribute _$EntityMixin$AttributeFromJson(
 Map<String, dynamic> _$EntityMixin$AttributeToJson(
         EntityMixin$Attribute instance) =>
     <String, dynamic>{
+      '__typename': instance.$$typename,
       'id': instance.id,
       'name': instance.name,
       'type': instance.type,

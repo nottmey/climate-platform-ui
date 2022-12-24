@@ -57,7 +57,7 @@ class DatabaseEntityListSliver extends AppWidget {
                             preset: TextStylePreset.titleMedium,
                           ),
                           AppText(
-                            value: 'type=${a.type} id=${a.id}',
+                            value: '${a.$$typename} type=${a.type} id=${a.id}',
                             preset: TextStylePreset.labelMedium,
                           ),
                         ],

@@ -48,6 +48,9 @@ class EntityMixin$Attribute extends JsonSerializable with EquatableMixin {
   factory EntityMixin$Attribute.fromJson(Map<String, dynamic> json) =>
       _$EntityMixin$AttributeFromJson(json);
 
+  @JsonKey(name: '__typename')
+  String? $$typename;
+
   late String id;
 
   late String name;
@@ -57,7 +60,7 @@ class EntityMixin$Attribute extends JsonSerializable with EquatableMixin {
   List<String>? values;
 
   @override
-  List<Object?> get props => [id, name, type, values];
+  List<Object?> get props => [$$typename, id, name, type, values];
   @override
   Map<String, dynamic> toJson() => _$EntityMixin$AttributeToJson(this);
 }
@@ -152,6 +155,13 @@ final DATA_QUERY_DOCUMENT = DocumentNode(definitions: [
         arguments: [],
         directives: [],
         selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
           FieldNode(
             name: NameNode(value: 'id'),
             alias: null,
