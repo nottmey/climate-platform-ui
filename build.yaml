@@ -7,6 +7,7 @@ targets:
           schema_mapping:
             - schema: lib/api/schema.graphql
               output: lib/api/api.graphql.dart
+              fragments_glob: lib/api/fragments/**.graphql
               queries_glob: lib/api/queries/**.graphql
               naming_scheme: pathedWithTypes
               type_name_field: __typename

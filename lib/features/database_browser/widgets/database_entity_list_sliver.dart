@@ -22,8 +22,7 @@ class DatabaseEntityListSliver extends AppWidget {
       );
     }
 
-    // TODO use fragment for nicer entity type
-    return AppPagedSliverList<Data$Query$Entity>(
+    return AppPagedSliverList<EntityMixin>(
       fetchPage: (pageKey) async {
         // TODO use pageKey and return nextPageKey (if available)
         final page = await getIt<ArtemisClient>().execute(

@@ -1,0 +1,9 @@
+fragment Entity on Entity {
+    id
+    attributes {
+        id
+        name
+        type
+        values
+    }
+}
