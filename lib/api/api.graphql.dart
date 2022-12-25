@@ -9,21 +9,62 @@ part 'api.graphql.g.dart';
 
 mixin EntityMixin {
   late String id;
-  List<EntityMixin$Attribute>? attributes;
+  late List<EntityMixin$Attribute> attributes;
 }
 
 @JsonSerializable(explicitToJson: true)
-class Data$Query$Entity extends JsonSerializable
+class Data$Query$EntityList$EntityListSlice$Entity extends JsonSerializable
     with EquatableMixin, EntityMixin {
-  Data$Query$Entity();
+  Data$Query$EntityList$EntityListSlice$Entity();
 
-  factory Data$Query$Entity.fromJson(Map<String, dynamic> json) =>
-      _$Data$Query$EntityFromJson(json);
+  factory Data$Query$EntityList$EntityListSlice$Entity.fromJson(
+          Map<String, dynamic> json) =>
+      _$Data$Query$EntityList$EntityListSlice$EntityFromJson(json);
 
   @override
   List<Object?> get props => [id, attributes];
   @override
-  Map<String, dynamic> toJson() => _$Data$Query$EntityToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$Data$Query$EntityList$EntityListSlice$EntityToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Data$Query$EntityList$EntityListSlice extends JsonSerializable
+    with EquatableMixin {
+  Data$Query$EntityList$EntityListSlice();
+
+  factory Data$Query$EntityList$EntityListSlice.fromJson(
+          Map<String, dynamic> json) =>
+      _$Data$Query$EntityList$EntityListSliceFromJson(json);
+
+  late int usedLimit;
+
+  late int usedOffset;
+
+  late List<Data$Query$EntityList$EntityListSlice$Entity> entities;
+
+  @override
+  List<Object?> get props => [usedLimit, usedOffset, entities];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$Data$Query$EntityList$EntityListSliceToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Data$Query$EntityList extends JsonSerializable with EquatableMixin {
+  Data$Query$EntityList();
+
+  factory Data$Query$EntityList.fromJson(Map<String, dynamic> json) =>
+      _$Data$Query$EntityListFromJson(json);
+
+  late int total;
+
+  late Data$Query$EntityList$EntityListSlice slice;
+
+  @override
+  List<Object?> get props => [total, slice];
+  @override
+  Map<String, dynamic> toJson() => _$Data$Query$EntityListToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -33,7 +74,7 @@ class Data$Query extends JsonSerializable with EquatableMixin {
   factory Data$Query.fromJson(Map<String, dynamic> json) =>
       _$Data$QueryFromJson(json);
 
-  List<Data$Query$Entity>? list;
+  late Data$Query$EntityList list;
 
   @override
   List<Object?> get props => [list];
@@ -57,7 +98,7 @@ class EntityMixin$Attribute extends JsonSerializable with EquatableMixin {
 
   late String type;
 
-  List<String>? values;
+  late List<String> values;
 
   @override
   List<Object?> get props => [$$typename, id, name, type, values];
@@ -72,7 +113,7 @@ class Databases$Query extends JsonSerializable with EquatableMixin {
   factory Databases$Query.fromJson(Map<String, dynamic> json) =>
       _$Databases$QueryFromJson(json);
 
-  List<String>? databases;
+  late List<String> databases;
 
   @override
   List<Object?> get props => [databases];
@@ -125,10 +166,47 @@ final DATA_QUERY_DOCUMENT = DocumentNode(definitions: [
         ],
         directives: [],
         selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Entity'),
+          FieldNode(
+            name: NameNode(value: 'total'),
+            alias: null,
+            arguments: [],
             directives: [],
-          )
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'slice'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'usedLimit'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'usedOffset'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              ),
+              FieldNode(
+                name: NameNode(value: 'entities'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FragmentSpreadNode(
+                    name: NameNode(value: 'Entity'),
+                    directives: [],
+                  )
+                ]),
+              ),
+            ]),
+          ),
         ]),
       )
     ]),

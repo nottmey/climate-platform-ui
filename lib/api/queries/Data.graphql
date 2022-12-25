@@ -1,5 +1,12 @@
 query Data($database: ID!) {
     list(database: $database) {
-        ...Entity
+        total
+        slice {
+            usedLimit
+            usedOffset
+            entities {
+                ...Entity
+            }
+        }
     }
 }

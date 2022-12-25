@@ -25,10 +25,12 @@ class DatabaseEntityListSliver extends AppWidget {
     return AppPagedSliverList<EntityMixin>(
       fetchPage: (pageKey) async {
         // TODO use pageKey and return nextPageKey (if available)
-        final page = await getIt<ArtemisClient>().execute(
+        final result = await getIt<ArtemisClient>().execute(
           DataQuery(variables: DataArguments(database: selectedDatabase)),
         );
-        return AppPagedFetchResult(newItems: page.data?.list ?? []);
+        return AppPagedFetchResult(
+          newItems: result.data?.list.slice.entities ?? [],
+        );
       },
       separatorBuilder: (context, index) => const Divider(),
       itemBuilder: (context, item, index) {
