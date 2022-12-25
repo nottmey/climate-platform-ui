@@ -41,15 +41,20 @@ class _AppPagedSliverListState<T> extends State<AppPagedSliverList<T>> {
 
   Future<void> fetchPage(int pageKey) async {
     try {
+      // TODO use cancel token to cancel request on dispose
       final result = await widget.fetchPage(pageKey);
-      final nextPageKey = result.nextPageKey;
-      if (nextPageKey != null) {
-        controller.appendPage(result.newItems, nextPageKey);
-      } else {
-        controller.appendLastPage(result.newItems);
+      if (mounted) {
+        final nextPageKey = result.nextPageKey;
+        if (nextPageKey != null) {
+          controller.appendPage(result.newItems, nextPageKey);
+        } else {
+          controller.appendLastPage(result.newItems);
+        }
       }
     } catch (e) {
-      controller.error = e;
+      if (mounted) {
+        controller.error = e;
+      }
     }
   }
 
