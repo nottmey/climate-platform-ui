@@ -44,6 +44,7 @@ directive @aws_iam on OBJECT | FIELD_DEFINITION
 "Tells the service this field/object has access authorized by a Lambda Authorizer."
 directive @aws_lambda on OBJECT | FIELD_DEFINITION
 
+" generated, do not edit manually!"
 type Attribute {
     id: ID!
     name: String!
@@ -51,29 +52,39 @@ type Attribute {
     values: [String!]!
 }
 
+" generated, do not edit manually!"
 type Entity {
     attributes: [Attribute!]!
+    context: AWSJSON
     id: ID!
 }
 
+" generated, do not edit manually!"
 type EntityList {
+    context: AWSJSON
     slice(limit: Int, offset: Int): EntityListSlice!
     total: Int!
 }
 
+" generated, do not edit manually!"
 type EntityListSlice {
+    context: AWSJSON
     entities: [Entity!]!
     usedLimit: Int!
     usedOffset: Int!
 }
 
-"  example mutation, so it's not empty"
+" generated, do not edit manually!"
 type Mutation {
     reset: [Entity!]!
 }
 
+" generated, do not edit manually!"
 type Query {
     databases: [ID!]!
     get(database: ID!, id: ID!): Entity
     list(database: ID!): EntityList!
 }
+
+"The `AWSJSON` scalar type provided by AWS AppSync, represents a JSON string that complies with [RFC 8259](https://tools.ietf.org/html/rfc8259).  Maps like \"**{\\\\\"upvotes\\\\\": 10}**\", lists like \"**[1,2,3]**\", and scalar values like \"**\\\\\"AWSJSON example string\\\\\"**\", \"**1**\", and \"**true**\" are accepted as valid JSON and will automatically be parsed and loaded in the resolver mapping templates as Maps, Lists, or Scalar values rather than as the literal input strings.  Invalid JSON strings like \"**{a: 1}**\", \"**{'a': 1}**\" and \"**Unquoted string**\" will throw GraphQL validation errors."
+scalar AWSJSON
