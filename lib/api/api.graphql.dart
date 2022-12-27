@@ -123,7 +123,11 @@ class Databases$Query extends JsonSerializable with EquatableMixin {
 
 @JsonSerializable(explicitToJson: true)
 class DataArguments extends JsonSerializable with EquatableMixin {
-  DataArguments({required this.database});
+  DataArguments({
+    required this.database,
+    this.limit,
+    this.offset,
+  });
 
   @override
   factory DataArguments.fromJson(Map<String, dynamic> json) =>
@@ -131,8 +135,12 @@ class DataArguments extends JsonSerializable with EquatableMixin {
 
   late String database;
 
+  final int? limit;
+
+  final int? offset;
+
   @override
-  List<Object?> get props => [database];
+  List<Object?> get props => [database, limit, offset];
   @override
   Map<String, dynamic> toJson() => _$DataArgumentsToJson(this);
 }
@@ -151,7 +159,25 @@ final DATA_QUERY_DOCUMENT = DocumentNode(definitions: [
         ),
         defaultValue: DefaultValueNode(value: null),
         directives: [],
-      )
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'limit')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'offset')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
     ],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
@@ -176,7 +202,16 @@ final DATA_QUERY_DOCUMENT = DocumentNode(definitions: [
           FieldNode(
             name: NameNode(value: 'slice'),
             alias: null,
-            arguments: [],
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'offset'),
+                value: VariableNode(name: NameNode(value: 'offset')),
+              ),
+            ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(

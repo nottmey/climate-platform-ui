@@ -98,9 +98,13 @@ Map<String, dynamic> _$Databases$QueryToJson(Databases$Query instance) =>
 DataArguments _$DataArgumentsFromJson(Map<String, dynamic> json) =>
     DataArguments(
       database: json['database'] as String,
+      limit: json['limit'] as int?,
+      offset: json['offset'] as int?,
     );
 
 Map<String, dynamic> _$DataArgumentsToJson(DataArguments instance) =>
     <String, dynamic>{
       'database': instance.database,
+      'limit': instance.limit,
+      'offset': instance.offset,
     };

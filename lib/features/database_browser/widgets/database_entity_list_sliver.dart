@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:artemis/client.dart';
 import 'package:climate_platform_ui/api/api.graphql.dart';
 import 'package:climate_platform_ui/common/widgets/app_paged_sliver_list.dart';
@@ -21,15 +23,40 @@ class DatabaseEntityListSliver extends AppWidget {
         child: Center(child: CircularProgressIndicator()),
       );
     }
+    final limitState = useState(200);
 
     return AppPagedSliverList<EntityMixin>(
       fetchPage: (pageKey) async {
-        // TODO use pageKey and return nextPageKey (if available)
+        // TODO way to much boilerplate, transition to page semantic in api
+        final limit = limitState.value;
+        final offset = pageKey * limit;
+        log('fetch entity page $pageKey (offset=$offset,limit=$limit)');
         final result = await getIt<ArtemisClient>().execute(
-          DataQuery(variables: DataArguments(database: selectedDatabase)),
+          DataQuery(
+            variables: DataArguments(
+              database: selectedDatabase,
+              limit: limit,
+              offset: offset,
+            ),
+          ),
         );
+        final list = result.data?.list;
+        if (list == null) {
+          // TODO error case
+          return AppPagedFetchResult(newItems: []);
+        }
+        final total = list.total;
+        final usedOffset = list.slice.usedOffset;
+        final usedLimit = list.slice.usedLimit;
+        if (limit != usedLimit) {
+          // invalid limit value, setting accordingly
+          limitState.value = usedLimit;
+        }
+        final nextPageKey = total > usedOffset + usedLimit ? pageKey + 1 : null;
+        log('got entity page $pageKey (total=$total,offset=$usedOffset,limit=$usedLimit,nextPageKey=$nextPageKey)');
         return AppPagedFetchResult(
-          newItems: result.data?.list.slice.entities ?? [],
+          newItems: list.slice.entities,
+          nextPageKey: nextPageKey,
         );
       },
       separatorBuilder: (context, index) => const Divider(),

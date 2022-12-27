@@ -1,7 +1,7 @@
-query Data($database: ID!) {
+query Data($database: ID!, $limit: Int, $offset: Int) {
     list(database: $database) {
         total
-        slice {
+        slice(limit: $limit, offset: $offset) {
             usedLimit
             usedOffset
             entities {
