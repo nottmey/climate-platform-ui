@@ -15,8 +15,10 @@ abstract class AppPageWidget extends AppWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ColoredBox(
       color: context.theme.backgroundColor,
-      child: CustomScrollView(
-        slivers: buildSlivers(context, ref),
+      child: Scrollbar(
+        child: CustomScrollView(
+          slivers: buildSlivers(context, ref),
+        ),
       ),
     );
   }
