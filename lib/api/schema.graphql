@@ -62,21 +62,30 @@ type Entity {
 " generated, do not edit manually!"
 type EntityList {
     context: AWSJSON
-    slice(limit: Int, offset: Int): EntityListSlice!
+    page(page: Int, size: Int): EntityListPage!
     total: Int!
 }
 
 " generated, do not edit manually!"
-type EntityListSlice {
+type EntityListPage {
     context: AWSJSON
     entities: [Entity!]!
-    usedLimit: Int!
-    usedOffset: Int!
+    info: PageInfo!
 }
 
 " generated, do not edit manually!"
 type Mutation {
     reset: [Entity!]!
+}
+
+" generated, do not edit manually!"
+type PageInfo {
+    current: Int!
+    first: Int!
+    last: Int!
+    next: Int
+    prev: Int
+    size: Int!
 }
 
 " generated, do not edit manually!"

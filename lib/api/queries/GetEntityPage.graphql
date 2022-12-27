@@ -1,0 +1,12 @@
+query GetEntityPage($database: ID!, $page: Int, $size: Int) {
+    list(database: $database) {
+        page(page: $page, size: $size) {
+            info {
+                ...PageInfo
+            }
+            entities {
+                ...Entity
+            }
+        }
+    }
+}

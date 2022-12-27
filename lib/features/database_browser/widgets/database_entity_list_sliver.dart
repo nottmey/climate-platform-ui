@@ -23,40 +23,27 @@ class DatabaseEntityListSliver extends AppWidget {
         child: Center(child: CircularProgressIndicator()),
       );
     }
-    final limitState = useState(200);
 
     return AppPagedSliverList<EntityMixin>(
-      fetchPage: (pageKey) async {
-        // TODO way to much boilerplate, transition to page semantic in api
-        final limit = limitState.value;
-        final offset = pageKey * limit;
-        log('fetch entity page $pageKey (offset=$offset,limit=$limit)');
+      fetchPage: (pageKey, pageSize) async {
+        log('fetch entity page $pageKey with size=$pageSize');
         final result = await getIt<ArtemisClient>().execute(
-          DataQuery(
-            variables: DataArguments(
+          GetEntityPageQuery(
+            variables: GetEntityPageArguments(
               database: selectedDatabase,
-              limit: limit,
-              offset: offset,
+              page: pageKey,
+              size: pageSize,
             ),
           ),
         );
         final list = result.data?.list;
         if (list == null) {
-          // TODO error case
-          return AppPagedFetchResult(newItems: []);
+          return AppPagedFetchResult(newItems: []); // TODO error case
         }
-        final total = list.total;
-        final usedOffset = list.slice.usedOffset;
-        final usedLimit = list.slice.usedLimit;
-        if (limit != usedLimit) {
-          // invalid limit value, setting accordingly
-          limitState.value = usedLimit;
-        }
-        final nextPageKey = total > usedOffset + usedLimit ? pageKey + 1 : null;
-        log('got entity page $pageKey (total=$total,offset=$usedOffset,limit=$usedLimit,nextPageKey=$nextPageKey)');
         return AppPagedFetchResult(
-          newItems: list.slice.entities,
-          nextPageKey: nextPageKey,
+          newItems: list.page.entities,
+          nextPageKey: list.page.info.next,
+          nextPageSize: list.page.info.size,
         );
       },
       separatorBuilder: (context, index) => const Divider(),

@@ -7,79 +7,111 @@ import 'package:equatable/equatable.dart';
 import 'package:gql/ast.dart';
 part 'api.graphql.g.dart';
 
+mixin PageInfoMixin {
+  int? next;
+  late int size;
+}
 mixin EntityMixin {
   late String id;
   late List<EntityMixin$Attribute> attributes;
 }
 
 @JsonSerializable(explicitToJson: true)
-class Data$Query$EntityList$EntityListSlice$Entity extends JsonSerializable
-    with EquatableMixin, EntityMixin {
-  Data$Query$EntityList$EntityListSlice$Entity();
+class Databases$Query extends JsonSerializable with EquatableMixin {
+  Databases$Query();
 
-  factory Data$Query$EntityList$EntityListSlice$Entity.fromJson(
+  factory Databases$Query.fromJson(Map<String, dynamic> json) =>
+      _$Databases$QueryFromJson(json);
+
+  late List<String> databases;
+
+  @override
+  List<Object?> get props => [databases];
+  @override
+  Map<String, dynamic> toJson() => _$Databases$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetEntityPage$Query$EntityList$EntityListPage$PageInfo
+    extends JsonSerializable with EquatableMixin, PageInfoMixin {
+  GetEntityPage$Query$EntityList$EntityListPage$PageInfo();
+
+  factory GetEntityPage$Query$EntityList$EntityListPage$PageInfo.fromJson(
           Map<String, dynamic> json) =>
-      _$Data$Query$EntityList$EntityListSlice$EntityFromJson(json);
+      _$GetEntityPage$Query$EntityList$EntityListPage$PageInfoFromJson(json);
+
+  @override
+  List<Object?> get props => [next, size];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetEntityPage$Query$EntityList$EntityListPage$PageInfoToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetEntityPage$Query$EntityList$EntityListPage$Entity
+    extends JsonSerializable with EquatableMixin, EntityMixin {
+  GetEntityPage$Query$EntityList$EntityListPage$Entity();
+
+  factory GetEntityPage$Query$EntityList$EntityListPage$Entity.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetEntityPage$Query$EntityList$EntityListPage$EntityFromJson(json);
 
   @override
   List<Object?> get props => [id, attributes];
   @override
   Map<String, dynamic> toJson() =>
-      _$Data$Query$EntityList$EntityListSlice$EntityToJson(this);
+      _$GetEntityPage$Query$EntityList$EntityListPage$EntityToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class Data$Query$EntityList$EntityListSlice extends JsonSerializable
+class GetEntityPage$Query$EntityList$EntityListPage extends JsonSerializable
     with EquatableMixin {
-  Data$Query$EntityList$EntityListSlice();
+  GetEntityPage$Query$EntityList$EntityListPage();
 
-  factory Data$Query$EntityList$EntityListSlice.fromJson(
+  factory GetEntityPage$Query$EntityList$EntityListPage.fromJson(
           Map<String, dynamic> json) =>
-      _$Data$Query$EntityList$EntityListSliceFromJson(json);
+      _$GetEntityPage$Query$EntityList$EntityListPageFromJson(json);
 
-  late int usedLimit;
+  late GetEntityPage$Query$EntityList$EntityListPage$PageInfo info;
 
-  late int usedOffset;
-
-  late List<Data$Query$EntityList$EntityListSlice$Entity> entities;
+  late List<GetEntityPage$Query$EntityList$EntityListPage$Entity> entities;
 
   @override
-  List<Object?> get props => [usedLimit, usedOffset, entities];
+  List<Object?> get props => [info, entities];
   @override
   Map<String, dynamic> toJson() =>
-      _$Data$Query$EntityList$EntityListSliceToJson(this);
+      _$GetEntityPage$Query$EntityList$EntityListPageToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class Data$Query$EntityList extends JsonSerializable with EquatableMixin {
-  Data$Query$EntityList();
+class GetEntityPage$Query$EntityList extends JsonSerializable
+    with EquatableMixin {
+  GetEntityPage$Query$EntityList();
 
-  factory Data$Query$EntityList.fromJson(Map<String, dynamic> json) =>
-      _$Data$Query$EntityListFromJson(json);
+  factory GetEntityPage$Query$EntityList.fromJson(Map<String, dynamic> json) =>
+      _$GetEntityPage$Query$EntityListFromJson(json);
 
-  late int total;
-
-  late Data$Query$EntityList$EntityListSlice slice;
+  late GetEntityPage$Query$EntityList$EntityListPage page;
 
   @override
-  List<Object?> get props => [total, slice];
+  List<Object?> get props => [page];
   @override
-  Map<String, dynamic> toJson() => _$Data$Query$EntityListToJson(this);
+  Map<String, dynamic> toJson() => _$GetEntityPage$Query$EntityListToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class Data$Query extends JsonSerializable with EquatableMixin {
-  Data$Query();
+class GetEntityPage$Query extends JsonSerializable with EquatableMixin {
+  GetEntityPage$Query();
 
-  factory Data$Query.fromJson(Map<String, dynamic> json) =>
-      _$Data$QueryFromJson(json);
+  factory GetEntityPage$Query.fromJson(Map<String, dynamic> json) =>
+      _$GetEntityPage$QueryFromJson(json);
 
-  late Data$Query$EntityList list;
+  late GetEntityPage$Query$EntityList list;
 
   @override
   List<Object?> get props => [list];
   @override
-  Map<String, dynamic> toJson() => _$Data$QueryToJson(this);
+  Map<String, dynamic> toJson() => _$GetEntityPage$QueryToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -106,50 +138,70 @@ class EntityMixin$Attribute extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$EntityMixin$AttributeToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true)
-class Databases$Query extends JsonSerializable with EquatableMixin {
-  Databases$Query();
+final DATABASES_QUERY_DOCUMENT_OPERATION_NAME = 'Databases';
+final DATABASES_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'Databases'),
+    variableDefinitions: [],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'databases'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      )
+    ]),
+  )
+]);
 
-  factory Databases$Query.fromJson(Map<String, dynamic> json) =>
-      _$Databases$QueryFromJson(json);
-
-  late List<String> databases;
+class DatabasesQuery extends GraphQLQuery<Databases$Query, JsonSerializable> {
+  DatabasesQuery();
 
   @override
-  List<Object?> get props => [databases];
+  final DocumentNode document = DATABASES_QUERY_DOCUMENT;
+
   @override
-  Map<String, dynamic> toJson() => _$Databases$QueryToJson(this);
+  final String operationName = DATABASES_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  List<Object?> get props => [document, operationName];
+  @override
+  Databases$Query parse(Map<String, dynamic> json) =>
+      Databases$Query.fromJson(json);
 }
 
 @JsonSerializable(explicitToJson: true)
-class DataArguments extends JsonSerializable with EquatableMixin {
-  DataArguments({
+class GetEntityPageArguments extends JsonSerializable with EquatableMixin {
+  GetEntityPageArguments({
     required this.database,
-    this.limit,
-    this.offset,
+    this.page,
+    this.size,
   });
 
   @override
-  factory DataArguments.fromJson(Map<String, dynamic> json) =>
-      _$DataArgumentsFromJson(json);
+  factory GetEntityPageArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetEntityPageArgumentsFromJson(json);
 
   late String database;
 
-  final int? limit;
+  final int? page;
 
-  final int? offset;
+  final int? size;
 
   @override
-  List<Object?> get props => [database, limit, offset];
+  List<Object?> get props => [database, page, size];
   @override
-  Map<String, dynamic> toJson() => _$DataArgumentsToJson(this);
+  Map<String, dynamic> toJson() => _$GetEntityPageArgumentsToJson(this);
 }
 
-final DATA_QUERY_DOCUMENT_OPERATION_NAME = 'Data';
-final DATA_QUERY_DOCUMENT = DocumentNode(definitions: [
+final GET_ENTITY_PAGE_QUERY_DOCUMENT_OPERATION_NAME = 'GetEntityPage';
+final GET_ENTITY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
   OperationDefinitionNode(
     type: OperationType.query,
-    name: NameNode(value: 'Data'),
+    name: NameNode(value: 'GetEntityPage'),
     variableDefinitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'database')),
@@ -161,7 +213,7 @@ final DATA_QUERY_DOCUMENT = DocumentNode(definitions: [
         directives: [],
       ),
       VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'limit')),
+        variable: VariableNode(name: NameNode(value: 'page')),
         type: NamedTypeNode(
           name: NameNode(value: 'Int'),
           isNonNull: false,
@@ -170,7 +222,7 @@ final DATA_QUERY_DOCUMENT = DocumentNode(definitions: [
         directives: [],
       ),
       VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'offset')),
+        variable: VariableNode(name: NameNode(value: 'size')),
         type: NamedTypeNode(
           name: NameNode(value: 'Int'),
           isNonNull: false,
@@ -193,40 +245,31 @@ final DATA_QUERY_DOCUMENT = DocumentNode(definitions: [
         directives: [],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
-            name: NameNode(value: 'total'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'slice'),
+            name: NameNode(value: 'page'),
             alias: null,
             arguments: [
               ArgumentNode(
-                name: NameNode(value: 'limit'),
-                value: VariableNode(name: NameNode(value: 'limit')),
+                name: NameNode(value: 'page'),
+                value: VariableNode(name: NameNode(value: 'page')),
               ),
               ArgumentNode(
-                name: NameNode(value: 'offset'),
-                value: VariableNode(name: NameNode(value: 'offset')),
+                name: NameNode(value: 'size'),
+                value: VariableNode(name: NameNode(value: 'size')),
               ),
             ],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
-                name: NameNode(value: 'usedLimit'),
+                name: NameNode(value: 'info'),
                 alias: null,
                 arguments: [],
                 directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'usedOffset'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
+                selectionSet: SelectionSetNode(selections: [
+                  FragmentSpreadNode(
+                    name: NameNode(value: 'PageInfo'),
+                    directives: [],
+                  )
+                ]),
               ),
               FieldNode(
                 name: NameNode(value: 'entities'),
@@ -241,9 +284,34 @@ final DATA_QUERY_DOCUMENT = DocumentNode(definitions: [
                 ]),
               ),
             ]),
-          ),
+          )
         ]),
       )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'PageInfo'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'PageInfo'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'next'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'size'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
     ]),
   ),
   FragmentDefinitionNode(
@@ -309,55 +377,22 @@ final DATA_QUERY_DOCUMENT = DocumentNode(definitions: [
   ),
 ]);
 
-class DataQuery extends GraphQLQuery<Data$Query, DataArguments> {
-  DataQuery({required this.variables});
+class GetEntityPageQuery
+    extends GraphQLQuery<GetEntityPage$Query, GetEntityPageArguments> {
+  GetEntityPageQuery({required this.variables});
 
   @override
-  final DocumentNode document = DATA_QUERY_DOCUMENT;
+  final DocumentNode document = GET_ENTITY_PAGE_QUERY_DOCUMENT;
 
   @override
-  final String operationName = DATA_QUERY_DOCUMENT_OPERATION_NAME;
+  final String operationName = GET_ENTITY_PAGE_QUERY_DOCUMENT_OPERATION_NAME;
 
   @override
-  final DataArguments variables;
+  final GetEntityPageArguments variables;
 
   @override
   List<Object?> get props => [document, operationName, variables];
   @override
-  Data$Query parse(Map<String, dynamic> json) => Data$Query.fromJson(json);
-}
-
-final DATABASES_QUERY_DOCUMENT_OPERATION_NAME = 'Databases';
-final DATABASES_QUERY_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.query,
-    name: NameNode(value: 'Databases'),
-    variableDefinitions: [],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'databases'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      )
-    ]),
-  )
-]);
-
-class DatabasesQuery extends GraphQLQuery<Databases$Query, JsonSerializable> {
-  DatabasesQuery();
-
-  @override
-  final DocumentNode document = DATABASES_QUERY_DOCUMENT;
-
-  @override
-  final String operationName = DATABASES_QUERY_DOCUMENT_OPERATION_NAME;
-
-  @override
-  List<Object?> get props => [document, operationName];
-  @override
-  Databases$Query parse(Map<String, dynamic> json) =>
-      Databases$Query.fromJson(json);
+  GetEntityPage$Query parse(Map<String, dynamic> json) =>
+      GetEntityPage$Query.fromJson(json);
 }
