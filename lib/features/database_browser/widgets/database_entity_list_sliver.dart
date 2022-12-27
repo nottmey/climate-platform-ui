@@ -71,7 +71,7 @@ class DatabaseEntityListSliver extends AppWidget {
                 value: 'Entity: ${item.id}',
                 preset: TextStylePreset.titleLarge,
               ),
-              ...(item.attributes ?? []).map((a) {
+              ...(item.attributes).map((a) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -92,7 +92,7 @@ class DatabaseEntityListSliver extends AppWidget {
                         ],
                       ),
                     ),
-                    ...(a.values ?? []).map(
+                    ...(a.values).map(
                       (v) => theme.spacedPadding(
                         left: 4,
                         // TODO follow value to entity page, if ref
