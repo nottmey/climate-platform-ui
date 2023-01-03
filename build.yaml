@@ -12,3 +12,7 @@ targets:
               queries_glob: lib/api/queries/**.graphql
               naming_scheme: pathedWithTypes
               type_name_field: __typename
+          custom_parser_import: 'package:climate_platform_ui/api/custom_scalars.dart'
+          scalar_mapping:
+            - graphql_type: AWSDateTime
+              dart_type: DateTime

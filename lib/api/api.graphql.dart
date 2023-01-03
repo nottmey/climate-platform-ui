@@ -115,11 +115,211 @@ class GetEntityPage$Query extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$StringAttribute extends EntityMixin$Attribute
+    with EquatableMixin {
+  EntityMixin$Attribute$StringAttribute();
+
+  factory EntityMixin$Attribute$StringAttribute.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$StringAttributeFromJson(json);
+
+  late String string;
+
+  @override
+  List<Object?> get props => [string];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$StringAttributeToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$BooleanAttribute extends EntityMixin$Attribute
+    with EquatableMixin {
+  EntityMixin$Attribute$BooleanAttribute();
+
+  factory EntityMixin$Attribute$BooleanAttribute.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$BooleanAttributeFromJson(json);
+
+  late bool boolean;
+
+  @override
+  List<Object?> get props => [boolean];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$BooleanAttributeToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$DateTimeAttribute extends EntityMixin$Attribute
+    with EquatableMixin {
+  EntityMixin$Attribute$DateTimeAttribute();
+
+  factory EntityMixin$Attribute$DateTimeAttribute.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$DateTimeAttributeFromJson(json);
+
+  late DateTime dateTime;
+
+  @override
+  List<Object?> get props => [dateTime];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$DateTimeAttributeToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$ReferenceAttribute$Ref extends JsonSerializable
+    with EquatableMixin {
+  EntityMixin$Attribute$ReferenceAttribute$Ref();
+
+  factory EntityMixin$Attribute$ReferenceAttribute$Ref.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$ReferenceAttribute$RefFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$ReferenceAttribute$RefToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$ReferenceAttribute extends EntityMixin$Attribute
+    with EquatableMixin {
+  EntityMixin$Attribute$ReferenceAttribute();
+
+  factory EntityMixin$Attribute$ReferenceAttribute.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$ReferenceAttributeFromJson(json);
+
+  late EntityMixin$Attribute$ReferenceAttribute$Ref ref;
+
+  @override
+  List<Object?> get props => [ref];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$ReferenceAttributeToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$MultiStringAttribute extends EntityMixin$Attribute
+    with EquatableMixin {
+  EntityMixin$Attribute$MultiStringAttribute();
+
+  factory EntityMixin$Attribute$MultiStringAttribute.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$MultiStringAttributeFromJson(json);
+
+  late List<String> strings;
+
+  @override
+  List<Object?> get props => [strings];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$MultiStringAttributeToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$MultiBooleanAttribute extends EntityMixin$Attribute
+    with EquatableMixin {
+  EntityMixin$Attribute$MultiBooleanAttribute();
+
+  factory EntityMixin$Attribute$MultiBooleanAttribute.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$MultiBooleanAttributeFromJson(json);
+
+  late List<bool> booleans;
+
+  @override
+  List<Object?> get props => [booleans];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$MultiBooleanAttributeToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$MultiDateTimeAttribute extends EntityMixin$Attribute
+    with EquatableMixin {
+  EntityMixin$Attribute$MultiDateTimeAttribute();
+
+  factory EntityMixin$Attribute$MultiDateTimeAttribute.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$MultiDateTimeAttributeFromJson(json);
+
+  late List<DateTime> dateTimes;
+
+  @override
+  List<Object?> get props => [dateTimes];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$MultiDateTimeAttributeToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$MultiReferenceAttribute$Refs
+    extends JsonSerializable with EquatableMixin {
+  EntityMixin$Attribute$MultiReferenceAttribute$Refs();
+
+  factory EntityMixin$Attribute$MultiReferenceAttribute$Refs.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$MultiReferenceAttribute$RefsFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$MultiReferenceAttribute$RefsToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$MultiReferenceAttribute
+    extends EntityMixin$Attribute with EquatableMixin {
+  EntityMixin$Attribute$MultiReferenceAttribute();
+
+  factory EntityMixin$Attribute$MultiReferenceAttribute.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$MultiReferenceAttributeFromJson(json);
+
+  late List<EntityMixin$Attribute$MultiReferenceAttribute$Refs> refs;
+
+  @override
+  List<Object?> get props => [refs];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$MultiReferenceAttributeToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class EntityMixin$Attribute extends JsonSerializable with EquatableMixin {
   EntityMixin$Attribute();
 
-  factory EntityMixin$Attribute.fromJson(Map<String, dynamic> json) =>
-      _$EntityMixin$AttributeFromJson(json);
+  factory EntityMixin$Attribute.fromJson(Map<String, dynamic> json) {
+    switch (json['__typename'].toString()) {
+      case r'StringAttribute':
+        return EntityMixin$Attribute$StringAttribute.fromJson(json);
+      case r'BooleanAttribute':
+        return EntityMixin$Attribute$BooleanAttribute.fromJson(json);
+      case r'DateTimeAttribute':
+        return EntityMixin$Attribute$DateTimeAttribute.fromJson(json);
+      case r'ReferenceAttribute':
+        return EntityMixin$Attribute$ReferenceAttribute.fromJson(json);
+      case r'MultiStringAttribute':
+        return EntityMixin$Attribute$MultiStringAttribute.fromJson(json);
+      case r'MultiBooleanAttribute':
+        return EntityMixin$Attribute$MultiBooleanAttribute.fromJson(json);
+      case r'MultiDateTimeAttribute':
+        return EntityMixin$Attribute$MultiDateTimeAttribute.fromJson(json);
+      case r'MultiReferenceAttribute':
+        return EntityMixin$Attribute$MultiReferenceAttribute.fromJson(json);
+      default:
+    }
+    return _$EntityMixin$AttributeFromJson(json);
+  }
 
   @JsonKey(name: '__typename')
   String? $$typename;
@@ -128,14 +328,31 @@ class EntityMixin$Attribute extends JsonSerializable with EquatableMixin {
 
   late String name;
 
-  late String type;
-
-  late List<String> values;
-
   @override
-  List<Object?> get props => [$$typename, id, name, type, values];
+  List<Object?> get props => [$$typename, id, name];
   @override
-  Map<String, dynamic> toJson() => _$EntityMixin$AttributeToJson(this);
+  Map<String, dynamic> toJson() {
+    switch ($$typename) {
+      case r'StringAttribute':
+        return (this as EntityMixin$Attribute$StringAttribute).toJson();
+      case r'BooleanAttribute':
+        return (this as EntityMixin$Attribute$BooleanAttribute).toJson();
+      case r'DateTimeAttribute':
+        return (this as EntityMixin$Attribute$DateTimeAttribute).toJson();
+      case r'ReferenceAttribute':
+        return (this as EntityMixin$Attribute$ReferenceAttribute).toJson();
+      case r'MultiStringAttribute':
+        return (this as EntityMixin$Attribute$MultiStringAttribute).toJson();
+      case r'MultiBooleanAttribute':
+        return (this as EntityMixin$Attribute$MultiBooleanAttribute).toJson();
+      case r'MultiDateTimeAttribute':
+        return (this as EntityMixin$Attribute$MultiDateTimeAttribute).toJson();
+      case r'MultiReferenceAttribute':
+        return (this as EntityMixin$Attribute$MultiReferenceAttribute).toJson();
+      default:
+    }
+    return _$EntityMixin$AttributeToJson(this);
+  }
 }
 
 final DATABASES_QUERY_DOCUMENT_OPERATION_NAME = 'Databases';
@@ -357,19 +574,157 @@ final GET_ENTITY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-          FieldNode(
-            name: NameNode(value: 'type'),
-            alias: null,
-            arguments: [],
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'StringAttribute'),
+              isNonNull: false,
+            )),
             directives: [],
-            selectionSet: null,
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'value'),
+                alias: NameNode(value: 'string'),
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
           ),
-          FieldNode(
-            name: NameNode(value: 'values'),
-            alias: null,
-            arguments: [],
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'BooleanAttribute'),
+              isNonNull: false,
+            )),
             directives: [],
-            selectionSet: null,
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'value'),
+                alias: NameNode(value: 'boolean'),
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'DateTimeAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'value'),
+                alias: NameNode(value: 'dateTime'),
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'ReferenceAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'value'),
+                alias: NameNode(value: 'ref'),
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'id'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  )
+                ]),
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'MultiStringAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'values'),
+                alias: NameNode(value: 'strings'),
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'MultiBooleanAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'values'),
+                alias: NameNode(value: 'booleans'),
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'MultiDateTimeAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'values'),
+                alias: NameNode(value: 'dateTimes'),
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'MultiReferenceAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'values'),
+                alias: NameNode(value: 'refs'),
+                arguments: [],
+                directives: [],
+                selectionSet: SelectionSetNode(selections: [
+                  FieldNode(
+                    name: NameNode(value: 'id'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  )
+                ]),
+              )
+            ]),
           ),
         ]),
       ),

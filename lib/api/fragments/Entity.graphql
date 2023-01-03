@@ -4,7 +4,35 @@ fragment Entity on Entity {
         __typename
         id
         name
-        type
-        values
+        # TODO use non-conflicting values in backend
+        # TODO use fragments for each attribute type, so `a is FragmentType` is possible
+        ... on StringAttribute {
+            string: value
+        }
+        ... on BooleanAttribute {
+            boolean: value
+        }
+        ... on DateTimeAttribute {
+            dateTime: value
+        }
+        ... on ReferenceAttribute {
+            ref: value {
+                id
+            }
+        }
+        ... on MultiStringAttribute {
+            strings: values
+        }
+        ... on MultiBooleanAttribute {
+            booleans: values
+        }
+        ... on MultiDateTimeAttribute {
+            dateTimes: values
+        }
+        ... on MultiReferenceAttribute {
+            refs: values {
+                id
+            }
+        }
     }
 }

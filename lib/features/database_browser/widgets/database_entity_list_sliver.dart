@@ -73,20 +73,62 @@ class DatabaseEntityListSliver extends AppWidget {
                             preset: TextStylePreset.titleMedium,
                           ),
                           AppText(
-                            value: '${a.$$typename} type=${a.type} id=${a.id}',
+                            value: '${a.$$typename} id=${a.id}',
                             preset: TextStylePreset.labelMedium,
                           ),
                         ],
                       ),
                     ),
-                    ...(a.values).map(
-                      (v) => theme.spacedPadding(
+                    if (a is EntityMixin$Attribute$StringAttribute)
+                      theme.spacedPadding(
                         left: 4,
-                        // TODO follow value to entity page, if ref
-                        // TODO show transaction id, allow click to transaction details page
-                        child: AppText(value: v),
+                        child: AppText(value: '"${a.string}"'),
                       ),
-                    )
+                    if (a is EntityMixin$Attribute$MultiStringAttribute)
+                      ...(a.strings).map(
+                        (v) => theme.spacedPadding(
+                          left: 4,
+                          child: AppText(value: '"$v"'),
+                        ),
+                      ),
+                    if (a is EntityMixin$Attribute$BooleanAttribute)
+                      theme.spacedPadding(
+                        left: 4,
+                        child: AppText(value: a.boolean.toString()),
+                      ),
+                    if (a is EntityMixin$Attribute$MultiBooleanAttribute)
+                      ...(a.booleans).map(
+                        (v) => theme.spacedPadding(
+                          left: 4,
+                          child: AppText(value: v.toString()),
+                        ),
+                      ),
+                    if (a is EntityMixin$Attribute$DateTimeAttribute)
+                      theme.spacedPadding(
+                        left: 4,
+                        child: AppText(value: a.dateTime.toIso8601String()),
+                      ),
+                    if (a is EntityMixin$Attribute$MultiDateTimeAttribute)
+                      ...(a.dateTimes).map(
+                        (v) => theme.spacedPadding(
+                          left: 4,
+                          child: AppText(value: v.toIso8601String()),
+                        ),
+                      ),
+                    if (a is EntityMixin$Attribute$ReferenceAttribute)
+                      // TODO allow click to entity page
+                      theme.spacedPadding(
+                        left: 4,
+                        child: AppText(value: a.ref.toJson().toString()),
+                      ),
+                    if (a is EntityMixin$Attribute$MultiReferenceAttribute)
+                      ...(a.refs).map(
+                        // TODO allow click to entity page
+                        (v) => theme.spacedPadding(
+                          left: 4,
+                          child: AppText(value: v.toJson().toString()),
+                        ),
+                      ),
                   ],
                 );
               })

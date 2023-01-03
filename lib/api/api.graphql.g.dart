@@ -93,15 +93,191 @@ Map<String, dynamic> _$GetEntityPage$QueryToJson(
       'list': instance.list.toJson(),
     };
 
+EntityMixin$Attribute$StringAttribute
+    _$EntityMixin$Attribute$StringAttributeFromJson(
+            Map<String, dynamic> json) =>
+        EntityMixin$Attribute$StringAttribute()
+          ..$$typename = json['__typename'] as String?
+          ..id = json['id'] as String
+          ..name = json['name'] as String
+          ..string = json['string'] as String;
+
+Map<String, dynamic> _$EntityMixin$Attribute$StringAttributeToJson(
+        EntityMixin$Attribute$StringAttribute instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'name': instance.name,
+      'string': instance.string,
+    };
+
+EntityMixin$Attribute$BooleanAttribute
+    _$EntityMixin$Attribute$BooleanAttributeFromJson(
+            Map<String, dynamic> json) =>
+        EntityMixin$Attribute$BooleanAttribute()
+          ..$$typename = json['__typename'] as String?
+          ..id = json['id'] as String
+          ..name = json['name'] as String
+          ..boolean = json['boolean'] as bool;
+
+Map<String, dynamic> _$EntityMixin$Attribute$BooleanAttributeToJson(
+        EntityMixin$Attribute$BooleanAttribute instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'name': instance.name,
+      'boolean': instance.boolean,
+    };
+
+EntityMixin$Attribute$DateTimeAttribute
+    _$EntityMixin$Attribute$DateTimeAttributeFromJson(
+            Map<String, dynamic> json) =>
+        EntityMixin$Attribute$DateTimeAttribute()
+          ..$$typename = json['__typename'] as String?
+          ..id = json['id'] as String
+          ..name = json['name'] as String
+          ..dateTime = DateTime.parse(json['dateTime'] as String);
+
+Map<String, dynamic> _$EntityMixin$Attribute$DateTimeAttributeToJson(
+        EntityMixin$Attribute$DateTimeAttribute instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'name': instance.name,
+      'dateTime': instance.dateTime.toIso8601String(),
+    };
+
+EntityMixin$Attribute$ReferenceAttribute$Ref
+    _$EntityMixin$Attribute$ReferenceAttribute$RefFromJson(
+            Map<String, dynamic> json) =>
+        EntityMixin$Attribute$ReferenceAttribute$Ref()
+          ..id = json['id'] as String;
+
+Map<String, dynamic> _$EntityMixin$Attribute$ReferenceAttribute$RefToJson(
+        EntityMixin$Attribute$ReferenceAttribute$Ref instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+EntityMixin$Attribute$ReferenceAttribute
+    _$EntityMixin$Attribute$ReferenceAttributeFromJson(
+            Map<String, dynamic> json) =>
+        EntityMixin$Attribute$ReferenceAttribute()
+          ..$$typename = json['__typename'] as String?
+          ..id = json['id'] as String
+          ..name = json['name'] as String
+          ..ref = EntityMixin$Attribute$ReferenceAttribute$Ref.fromJson(
+              json['ref'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$EntityMixin$Attribute$ReferenceAttributeToJson(
+        EntityMixin$Attribute$ReferenceAttribute instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'name': instance.name,
+      'ref': instance.ref.toJson(),
+    };
+
+EntityMixin$Attribute$MultiStringAttribute
+    _$EntityMixin$Attribute$MultiStringAttributeFromJson(
+            Map<String, dynamic> json) =>
+        EntityMixin$Attribute$MultiStringAttribute()
+          ..$$typename = json['__typename'] as String?
+          ..id = json['id'] as String
+          ..name = json['name'] as String
+          ..strings = (json['strings'] as List<dynamic>)
+              .map((e) => e as String)
+              .toList();
+
+Map<String, dynamic> _$EntityMixin$Attribute$MultiStringAttributeToJson(
+        EntityMixin$Attribute$MultiStringAttribute instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'name': instance.name,
+      'strings': instance.strings,
+    };
+
+EntityMixin$Attribute$MultiBooleanAttribute
+    _$EntityMixin$Attribute$MultiBooleanAttributeFromJson(
+            Map<String, dynamic> json) =>
+        EntityMixin$Attribute$MultiBooleanAttribute()
+          ..$$typename = json['__typename'] as String?
+          ..id = json['id'] as String
+          ..name = json['name'] as String
+          ..booleans = (json['booleans'] as List<dynamic>)
+              .map((e) => e as bool)
+              .toList();
+
+Map<String, dynamic> _$EntityMixin$Attribute$MultiBooleanAttributeToJson(
+        EntityMixin$Attribute$MultiBooleanAttribute instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'name': instance.name,
+      'booleans': instance.booleans,
+    };
+
+EntityMixin$Attribute$MultiDateTimeAttribute
+    _$EntityMixin$Attribute$MultiDateTimeAttributeFromJson(
+            Map<String, dynamic> json) =>
+        EntityMixin$Attribute$MultiDateTimeAttribute()
+          ..$$typename = json['__typename'] as String?
+          ..id = json['id'] as String
+          ..name = json['name'] as String
+          ..dateTimes = (json['dateTimes'] as List<dynamic>)
+              .map((e) => DateTime.parse(e as String))
+              .toList();
+
+Map<String, dynamic> _$EntityMixin$Attribute$MultiDateTimeAttributeToJson(
+        EntityMixin$Attribute$MultiDateTimeAttribute instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'name': instance.name,
+      'dateTimes': instance.dateTimes.map((e) => e.toIso8601String()).toList(),
+    };
+
+EntityMixin$Attribute$MultiReferenceAttribute$Refs
+    _$EntityMixin$Attribute$MultiReferenceAttribute$RefsFromJson(
+            Map<String, dynamic> json) =>
+        EntityMixin$Attribute$MultiReferenceAttribute$Refs()
+          ..id = json['id'] as String;
+
+Map<String, dynamic> _$EntityMixin$Attribute$MultiReferenceAttribute$RefsToJson(
+        EntityMixin$Attribute$MultiReferenceAttribute$Refs instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+EntityMixin$Attribute$MultiReferenceAttribute
+    _$EntityMixin$Attribute$MultiReferenceAttributeFromJson(
+            Map<String, dynamic> json) =>
+        EntityMixin$Attribute$MultiReferenceAttribute()
+          ..$$typename = json['__typename'] as String?
+          ..id = json['id'] as String
+          ..name = json['name'] as String
+          ..refs = (json['refs'] as List<dynamic>)
+              .map((e) =>
+                  EntityMixin$Attribute$MultiReferenceAttribute$Refs.fromJson(
+                      e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic> _$EntityMixin$Attribute$MultiReferenceAttributeToJson(
+        EntityMixin$Attribute$MultiReferenceAttribute instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'name': instance.name,
+      'refs': instance.refs.map((e) => e.toJson()).toList(),
+    };
+
 EntityMixin$Attribute _$EntityMixin$AttributeFromJson(
         Map<String, dynamic> json) =>
     EntityMixin$Attribute()
       ..$$typename = json['__typename'] as String?
       ..id = json['id'] as String
-      ..name = json['name'] as String
-      ..type = json['type'] as String
-      ..values =
-          (json['values'] as List<dynamic>).map((e) => e as String).toList();
+      ..name = json['name'] as String;
 
 Map<String, dynamic> _$EntityMixin$AttributeToJson(
         EntityMixin$Attribute instance) =>
@@ -109,8 +285,6 @@ Map<String, dynamic> _$EntityMixin$AttributeToJson(
       '__typename': instance.$$typename,
       'id': instance.id,
       'name': instance.name,
-      'type': instance.type,
-      'values': instance.values,
     };
 
 GetEntityPageArguments _$GetEntityPageArgumentsFromJson(
