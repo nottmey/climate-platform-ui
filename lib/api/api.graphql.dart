@@ -169,13 +169,13 @@ class EntityMixin$Attribute$DateTimeAttribute extends EntityMixin$Attribute
 }
 
 @JsonSerializable(explicitToJson: true)
-class EntityMixin$Attribute$ReferenceAttribute$Ref extends JsonSerializable
+class EntityMixin$Attribute$ReferenceAttribute$Entity extends JsonSerializable
     with EquatableMixin {
-  EntityMixin$Attribute$ReferenceAttribute$Ref();
+  EntityMixin$Attribute$ReferenceAttribute$Entity();
 
-  factory EntityMixin$Attribute$ReferenceAttribute$Ref.fromJson(
+  factory EntityMixin$Attribute$ReferenceAttribute$Entity.fromJson(
           Map<String, dynamic> json) =>
-      _$EntityMixin$Attribute$ReferenceAttribute$RefFromJson(json);
+      _$EntityMixin$Attribute$ReferenceAttribute$EntityFromJson(json);
 
   late String id;
 
@@ -183,7 +183,7 @@ class EntityMixin$Attribute$ReferenceAttribute$Ref extends JsonSerializable
   List<Object?> get props => [id];
   @override
   Map<String, dynamic> toJson() =>
-      _$EntityMixin$Attribute$ReferenceAttribute$RefToJson(this);
+      _$EntityMixin$Attribute$ReferenceAttribute$EntityToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -195,7 +195,7 @@ class EntityMixin$Attribute$ReferenceAttribute extends EntityMixin$Attribute
           Map<String, dynamic> json) =>
       _$EntityMixin$Attribute$ReferenceAttributeFromJson(json);
 
-  late EntityMixin$Attribute$ReferenceAttribute$Ref ref;
+  late EntityMixin$Attribute$ReferenceAttribute$Entity ref;
 
   @override
   List<Object?> get props => [ref];
@@ -259,13 +259,13 @@ class EntityMixin$Attribute$MultiDateTimeAttribute extends EntityMixin$Attribute
 }
 
 @JsonSerializable(explicitToJson: true)
-class EntityMixin$Attribute$MultiReferenceAttribute$Refs
+class EntityMixin$Attribute$MultiReferenceAttribute$Entity
     extends JsonSerializable with EquatableMixin {
-  EntityMixin$Attribute$MultiReferenceAttribute$Refs();
+  EntityMixin$Attribute$MultiReferenceAttribute$Entity();
 
-  factory EntityMixin$Attribute$MultiReferenceAttribute$Refs.fromJson(
+  factory EntityMixin$Attribute$MultiReferenceAttribute$Entity.fromJson(
           Map<String, dynamic> json) =>
-      _$EntityMixin$Attribute$MultiReferenceAttribute$RefsFromJson(json);
+      _$EntityMixin$Attribute$MultiReferenceAttribute$EntityFromJson(json);
 
   late String id;
 
@@ -273,7 +273,7 @@ class EntityMixin$Attribute$MultiReferenceAttribute$Refs
   List<Object?> get props => [id];
   @override
   Map<String, dynamic> toJson() =>
-      _$EntityMixin$Attribute$MultiReferenceAttribute$RefsToJson(this);
+      _$EntityMixin$Attribute$MultiReferenceAttribute$EntityToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -285,7 +285,7 @@ class EntityMixin$Attribute$MultiReferenceAttribute
           Map<String, dynamic> json) =>
       _$EntityMixin$Attribute$MultiReferenceAttributeFromJson(json);
 
-  late List<EntityMixin$Attribute$MultiReferenceAttribute$Refs> refs;
+  late List<EntityMixin$Attribute$MultiReferenceAttribute$Entity> refs;
 
   @override
   List<Object?> get props => [refs];
@@ -583,8 +583,8 @@ final GET_ENTITY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
-                name: NameNode(value: 'value'),
-                alias: NameNode(value: 'string'),
+                name: NameNode(value: 'string'),
+                alias: null,
                 arguments: [],
                 directives: [],
                 selectionSet: null,
@@ -600,8 +600,8 @@ final GET_ENTITY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
-                name: NameNode(value: 'value'),
-                alias: NameNode(value: 'boolean'),
+                name: NameNode(value: 'boolean'),
+                alias: null,
                 arguments: [],
                 directives: [],
                 selectionSet: null,
@@ -617,8 +617,8 @@ final GET_ENTITY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
-                name: NameNode(value: 'value'),
-                alias: NameNode(value: 'dateTime'),
+                name: NameNode(value: 'dateTime'),
+                alias: null,
                 arguments: [],
                 directives: [],
                 selectionSet: null,
@@ -634,8 +634,8 @@ final GET_ENTITY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
-                name: NameNode(value: 'value'),
-                alias: NameNode(value: 'ref'),
+                name: NameNode(value: 'ref'),
+                alias: null,
                 arguments: [],
                 directives: [],
                 selectionSet: SelectionSetNode(selections: [
@@ -659,8 +659,8 @@ final GET_ENTITY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
-                name: NameNode(value: 'values'),
-                alias: NameNode(value: 'strings'),
+                name: NameNode(value: 'strings'),
+                alias: null,
                 arguments: [],
                 directives: [],
                 selectionSet: null,
@@ -676,8 +676,8 @@ final GET_ENTITY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
-                name: NameNode(value: 'values'),
-                alias: NameNode(value: 'booleans'),
+                name: NameNode(value: 'booleans'),
+                alias: null,
                 arguments: [],
                 directives: [],
                 selectionSet: null,
@@ -693,8 +693,8 @@ final GET_ENTITY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
-                name: NameNode(value: 'values'),
-                alias: NameNode(value: 'dateTimes'),
+                name: NameNode(value: 'dateTimes'),
+                alias: null,
                 arguments: [],
                 directives: [],
                 selectionSet: null,
@@ -710,8 +710,8 @@ final GET_ENTITY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
             directives: [],
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
-                name: NameNode(value: 'values'),
-                alias: NameNode(value: 'refs'),
+                name: NameNode(value: 'refs'),
+                alias: null,
                 arguments: [],
                 directives: [],
                 selectionSet: SelectionSetNode(selections: [

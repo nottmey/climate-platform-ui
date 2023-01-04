@@ -147,14 +147,14 @@ Map<String, dynamic> _$EntityMixin$Attribute$DateTimeAttributeToJson(
       'dateTime': instance.dateTime.toIso8601String(),
     };
 
-EntityMixin$Attribute$ReferenceAttribute$Ref
-    _$EntityMixin$Attribute$ReferenceAttribute$RefFromJson(
+EntityMixin$Attribute$ReferenceAttribute$Entity
+    _$EntityMixin$Attribute$ReferenceAttribute$EntityFromJson(
             Map<String, dynamic> json) =>
-        EntityMixin$Attribute$ReferenceAttribute$Ref()
+        EntityMixin$Attribute$ReferenceAttribute$Entity()
           ..id = json['id'] as String;
 
-Map<String, dynamic> _$EntityMixin$Attribute$ReferenceAttribute$RefToJson(
-        EntityMixin$Attribute$ReferenceAttribute$Ref instance) =>
+Map<String, dynamic> _$EntityMixin$Attribute$ReferenceAttribute$EntityToJson(
+        EntityMixin$Attribute$ReferenceAttribute$Entity instance) =>
     <String, dynamic>{
       'id': instance.id,
     };
@@ -166,7 +166,7 @@ EntityMixin$Attribute$ReferenceAttribute
           ..$$typename = json['__typename'] as String?
           ..id = json['id'] as String
           ..name = json['name'] as String
-          ..ref = EntityMixin$Attribute$ReferenceAttribute$Ref.fromJson(
+          ..ref = EntityMixin$Attribute$ReferenceAttribute$Entity.fromJson(
               json['ref'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$EntityMixin$Attribute$ReferenceAttributeToJson(
@@ -238,17 +238,18 @@ Map<String, dynamic> _$EntityMixin$Attribute$MultiDateTimeAttributeToJson(
       'dateTimes': instance.dateTimes.map((e) => e.toIso8601String()).toList(),
     };
 
-EntityMixin$Attribute$MultiReferenceAttribute$Refs
-    _$EntityMixin$Attribute$MultiReferenceAttribute$RefsFromJson(
+EntityMixin$Attribute$MultiReferenceAttribute$Entity
+    _$EntityMixin$Attribute$MultiReferenceAttribute$EntityFromJson(
             Map<String, dynamic> json) =>
-        EntityMixin$Attribute$MultiReferenceAttribute$Refs()
+        EntityMixin$Attribute$MultiReferenceAttribute$Entity()
           ..id = json['id'] as String;
 
-Map<String, dynamic> _$EntityMixin$Attribute$MultiReferenceAttribute$RefsToJson(
-        EntityMixin$Attribute$MultiReferenceAttribute$Refs instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-    };
+Map<String, dynamic>
+    _$EntityMixin$Attribute$MultiReferenceAttribute$EntityToJson(
+            EntityMixin$Attribute$MultiReferenceAttribute$Entity instance) =>
+        <String, dynamic>{
+          'id': instance.id,
+        };
 
 EntityMixin$Attribute$MultiReferenceAttribute
     _$EntityMixin$Attribute$MultiReferenceAttributeFromJson(
@@ -259,7 +260,7 @@ EntityMixin$Attribute$MultiReferenceAttribute
           ..name = json['name'] as String
           ..refs = (json['refs'] as List<dynamic>)
               .map((e) =>
-                  EntityMixin$Attribute$MultiReferenceAttribute$Refs.fromJson(
+                  EntityMixin$Attribute$MultiReferenceAttribute$Entity.fromJson(
                       e as Map<String, dynamic>))
               .toList();
 
