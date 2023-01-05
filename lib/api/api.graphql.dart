@@ -169,24 +169,6 @@ class EntityMixin$Attribute$DateTimeAttribute extends EntityMixin$Attribute
 }
 
 @JsonSerializable(explicitToJson: true)
-class EntityMixin$Attribute$ReferenceAttribute$Entity extends JsonSerializable
-    with EquatableMixin {
-  EntityMixin$Attribute$ReferenceAttribute$Entity();
-
-  factory EntityMixin$Attribute$ReferenceAttribute$Entity.fromJson(
-          Map<String, dynamic> json) =>
-      _$EntityMixin$Attribute$ReferenceAttribute$EntityFromJson(json);
-
-  late String id;
-
-  @override
-  List<Object?> get props => [id];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$EntityMixin$Attribute$ReferenceAttribute$EntityToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
 class EntityMixin$Attribute$ReferenceAttribute extends EntityMixin$Attribute
     with EquatableMixin {
   EntityMixin$Attribute$ReferenceAttribute();
@@ -195,7 +177,7 @@ class EntityMixin$Attribute$ReferenceAttribute extends EntityMixin$Attribute
           Map<String, dynamic> json) =>
       _$EntityMixin$Attribute$ReferenceAttributeFromJson(json);
 
-  late EntityMixin$Attribute$ReferenceAttribute$Entity ref;
+  late String ref;
 
   @override
   List<Object?> get props => [ref];
@@ -259,24 +241,6 @@ class EntityMixin$Attribute$MultiDateTimeAttribute extends EntityMixin$Attribute
 }
 
 @JsonSerializable(explicitToJson: true)
-class EntityMixin$Attribute$MultiReferenceAttribute$Entity
-    extends JsonSerializable with EquatableMixin {
-  EntityMixin$Attribute$MultiReferenceAttribute$Entity();
-
-  factory EntityMixin$Attribute$MultiReferenceAttribute$Entity.fromJson(
-          Map<String, dynamic> json) =>
-      _$EntityMixin$Attribute$MultiReferenceAttribute$EntityFromJson(json);
-
-  late String id;
-
-  @override
-  List<Object?> get props => [id];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$EntityMixin$Attribute$MultiReferenceAttribute$EntityToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
 class EntityMixin$Attribute$MultiReferenceAttribute
     extends EntityMixin$Attribute with EquatableMixin {
   EntityMixin$Attribute$MultiReferenceAttribute();
@@ -285,7 +249,7 @@ class EntityMixin$Attribute$MultiReferenceAttribute
           Map<String, dynamic> json) =>
       _$EntityMixin$Attribute$MultiReferenceAttributeFromJson(json);
 
-  late List<EntityMixin$Attribute$MultiReferenceAttribute$Entity> refs;
+  late List<String> refs;
 
   @override
   List<Object?> get props => [refs];
@@ -638,15 +602,7 @@ final GET_ENTITY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
                 alias: null,
                 arguments: [],
                 directives: [],
-                selectionSet: SelectionSetNode(selections: [
-                  FieldNode(
-                    name: NameNode(value: 'id'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  )
-                ]),
+                selectionSet: null,
               )
             ]),
           ),
@@ -714,15 +670,7 @@ final GET_ENTITY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
                 alias: null,
                 arguments: [],
                 directives: [],
-                selectionSet: SelectionSetNode(selections: [
-                  FieldNode(
-                    name: NameNode(value: 'id'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  )
-                ]),
+                selectionSet: null,
               )
             ]),
           ),

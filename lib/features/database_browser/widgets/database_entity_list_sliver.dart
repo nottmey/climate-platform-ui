@@ -119,14 +119,14 @@ class DatabaseEntityListSliver extends AppWidget {
                       // TODO allow click to entity page
                       theme.spacedPadding(
                         left: 4,
-                        child: AppText(value: a.ref.toJson().toString()),
+                        child: AppText(value: a.ref),
                       ),
                     if (a is EntityMixin$Attribute$MultiReferenceAttribute)
                       ...(a.refs).map(
                         // TODO allow click to entity page
                         (v) => theme.spacedPadding(
                           left: 4,
-                          child: AppText(value: v.toJson().toString()),
+                          child: AppText(value: v),
                         ),
                       ),
                   ],

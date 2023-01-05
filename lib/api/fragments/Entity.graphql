@@ -15,9 +15,7 @@ fragment Entity on Entity {
             dateTime
         }
         ... on ReferenceAttribute {
-            ref {
-                id
-            }
+            ref
         }
         ... on MultiStringAttribute {
             strings
@@ -29,9 +27,7 @@ fragment Entity on Entity {
             dateTimes
         }
         ... on MultiReferenceAttribute {
-            refs {
-                id
-            }
+            refs
         }
     }
 }
