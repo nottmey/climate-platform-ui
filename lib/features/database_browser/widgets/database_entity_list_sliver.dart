@@ -38,7 +38,6 @@ class DatabaseEntityListSliver extends AppWidget {
           nextPageSize: page.info.size,
         );
       },
-      separatorBuilder: (context, index) => const Divider(),
       itemBuilder: (context, item, index) => EntityDetailsSegment(
         entity: item,
         attributes: attributes,

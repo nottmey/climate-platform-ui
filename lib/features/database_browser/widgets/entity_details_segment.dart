@@ -1,4 +1,5 @@
 import 'package:climate_platform_ui/api/api.graphql.dart';
+import 'package:climate_platform_ui/common/widgets/app_card.dart';
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
 import 'package:climate_platform_ui/common/widgets/app_widget.dart';
 import 'package:climate_platform_ui/features/navigation/helpers/context_router_extension.dart';
@@ -6,6 +7,7 @@ import 'package:climate_platform_ui/features/theming/models/text_style_preset.da
 import 'package:climate_platform_ui/features/theming/utils/context_theme_extension.dart';
 import 'package:climate_platform_ui/features/theming/utils/spacing_utils_extension.dart';
 import 'package:climate_platform_ui/router.dart';
+import 'package:collection/collection.dart';
 
 class EntityDetailsSegment extends AppWidget {
   final EntityMixin entity;
@@ -21,16 +23,22 @@ class EntityDetailsSegment extends AppWidget {
   });
 
   Widget buildValue(BuildContext context, String value) {
-    final theme = context.theme;
-    return theme.spacedPadding(
-      left: 4,
-      child: AppText(value: value),
+    return context.theme.spacedPadding(
+      horizontal: 4,
+      vertical: 2,
+      child: AppText(value: '"$value"'),
     );
   }
 
   Widget buildEntityLink(BuildContext context, String id) {
+    final theme = context.theme;
     return ElevatedButton(
       onPressed: () => context.pushIfNew(databaseEntityPath(id)),
+      style: ElevatedButton.styleFrom(
+        foregroundColor: theme.colorScheme.onPrimary,
+        backgroundColor: theme.colorScheme.primary,
+      ),
+      // TODO enable presets to use the color of the surrounding button, like Text
       child: AppText(value: 'Entity "$id"'),
     );
   }
@@ -39,68 +47,58 @@ class EntityDetailsSegment extends AppWidget {
     BuildContext context,
     EntityMixin$Attribute attribute,
   ) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        AppText(
-          value: attribute.name,
-          preset: TextStylePreset.titleMedium,
-        ),
-        context.theme.spacedSizedBox(width: 1),
-        Expanded(
-          child: AppText(
-            value: '(${attribute.$$typename})',
-            textAlign: TextAlign.end,
-            preset: TextStylePreset.labelMedium,
-            maxLines: 1,
-            softWrap: false,
-          ),
-        ),
-        context.theme.spacedSizedBox(width: 1),
-        ElevatedButton(
-          onPressed: () =>
-              context.pushIfNew(databaseAttributePath(attribute.id)),
-          child: AppText(
-            value: 'id=${attribute.id}',
-            preset: TextStylePreset.labelMedium,
-          ),
-        )
-      ],
+    return OutlinedButton(
+      onPressed: () => context.pushIfNew(databaseAttributePath(attribute.id)),
+      child: AppText(
+        value: attribute.name,
+        preset: TextStylePreset.labelMedium,
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = context.theme;
-    return theme.spacedPadding(
-      horizontal: 2,
+    final nameAttribute =
+        entity.attributes.firstWhereOrNull((a) => a.name == ':db/ident');
+    return AppCard(
+      onTab: () => context.pushIfNew(databaseEntityPath(entity.id)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (showInlineTitle)
-            ElevatedButton(
-              onPressed: () => context.pushIfNew(databaseEntityPath(entity.id)),
-              child: AppText(
-                value: 'Entity "${entity.id}"',
-                preset: TextStylePreset.titleLarge,
-              ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppText(
+                  value: nameAttribute != null &&
+                          nameAttribute is EntityMixin$Attribute$StringAttribute
+                      ? 'Entity ${nameAttribute.string}'
+                      : 'Entity ${entity.id}',
+                  preset: TextStylePreset.headlineSmall,
+                ),
+                const Spacer(),
+                if (nameAttribute != null)
+                  AppText(
+                    value: entity.id,
+                    preset: TextStylePreset.labelMedium,
+                  ),
+              ],
             ),
+          if (showInlineTitle) const Divider(),
           ...entity.attributes
+              .where((a) => a.name != ':db/ident')
               .where((a) => attributes?.contains(a.id) ?? true)
               .map((a) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                theme.spacedPadding(
-                  left: 2,
-                  child: buildAttributeLink(context, a),
-                ),
+                buildAttributeLink(context, a),
                 if (a is EntityMixin$Attribute$StringAttribute)
-                  buildValue(context, '"${a.string}"'),
+                  buildValue(context, a.string),
                 if (a is EntityMixin$Attribute$MultiStringAttribute)
                   ...a.strings.map(
-                    (s) => buildValue(context, '"$s"'),
+                    (s) => buildValue(context, s),
                   ),
                 if (a is EntityMixin$Attribute$BooleanAttribute)
                   buildValue(context, a.boolean.toString()),
@@ -115,19 +113,12 @@ class EntityDetailsSegment extends AppWidget {
                     (dt) => buildValue(context, dt.toIso8601String()),
                   ),
                 if (a is EntityMixin$Attribute$ReferenceAttribute)
-                  theme.spacedPadding(
-                    left: 4,
-                    child: buildEntityLink(context, a.ref),
-                  ),
+                  buildEntityLink(context, a.ref),
                 if (a is EntityMixin$Attribute$MultiReferenceAttribute)
-                  theme.spacedPadding(
-                    left: 4,
-                    child: theme.spacedWrap(
-                      spacing: 2,
-                      children: a.refs
-                          .map((r) => buildEntityLink(context, r))
-                          .toList(),
-                    ),
+                  theme.spacedWrap(
+                    spacing: 2,
+                    children:
+                        a.refs.map((r) => buildEntityLink(context, r)).toList(),
                   ),
               ],
             );
