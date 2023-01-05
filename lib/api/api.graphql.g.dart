@@ -7,16 +7,6 @@ part of 'api.graphql.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Databases$Query _$Databases$QueryFromJson(Map<String, dynamic> json) =>
-    Databases$Query()
-      ..databases =
-          (json['databases'] as List<dynamic>).map((e) => e as String).toList();
-
-Map<String, dynamic> _$Databases$QueryToJson(Databases$Query instance) =>
-    <String, dynamic>{
-      'databases': instance.databases,
-    };
-
 GetEntityPage$Query$EntityList$EntityListPage$PageInfo
     _$GetEntityPage$Query$EntityList$EntityListPage$PageInfoFromJson(
             Map<String, dynamic> json) =>
@@ -259,6 +249,43 @@ Map<String, dynamic> _$EntityMixin$AttributeToJson(
       'name': instance.name,
     };
 
+Databases$Query _$Databases$QueryFromJson(Map<String, dynamic> json) =>
+    Databases$Query()
+      ..databases =
+          (json['databases'] as List<dynamic>).map((e) => e as String).toList();
+
+Map<String, dynamic> _$Databases$QueryToJson(Databases$Query instance) =>
+    <String, dynamic>{
+      'databases': instance.databases,
+    };
+
+GetEntity$Query$Entity _$GetEntity$Query$EntityFromJson(
+        Map<String, dynamic> json) =>
+    GetEntity$Query$Entity()
+      ..id = json['id'] as String
+      ..attributes = (json['attributes'] as List<dynamic>)
+          .map((e) => EntityMixin$Attribute.fromJson(e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetEntity$Query$EntityToJson(
+        GetEntity$Query$Entity instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'attributes': instance.attributes.map((e) => e.toJson()).toList(),
+    };
+
+GetEntity$Query _$GetEntity$QueryFromJson(Map<String, dynamic> json) =>
+    GetEntity$Query()
+      ..kw$get = json['get'] == null
+          ? null
+          : GetEntity$Query$Entity.fromJson(
+              json['get'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetEntity$QueryToJson(GetEntity$Query instance) =>
+    <String, dynamic>{
+      'get': instance.kw$get?.toJson(),
+    };
+
 GetEntityPageArguments _$GetEntityPageArgumentsFromJson(
         Map<String, dynamic> json) =>
     GetEntityPageArguments(
@@ -273,4 +300,16 @@ Map<String, dynamic> _$GetEntityPageArgumentsToJson(
       'database': instance.database,
       'page': instance.page,
       'size': instance.size,
+    };
+
+GetEntityArguments _$GetEntityArgumentsFromJson(Map<String, dynamic> json) =>
+    GetEntityArguments(
+      database: json['database'] as String,
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$GetEntityArgumentsToJson(GetEntityArguments instance) =>
+    <String, dynamic>{
+      'database': instance.database,
+      'id': instance.id,
     };

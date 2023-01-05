@@ -74,4 +74,32 @@ extension SpacingUtilsExtension on ThemeData {
       ),
     );
   }
+
+  Wrap spacedWrap({
+    Key? key,
+    Axis direction = Axis.horizontal,
+    WrapAlignment alignment = WrapAlignment.start,
+    int spacing = 0,
+    WrapAlignment runAlignment = WrapAlignment.start,
+    int runSpacing = 0,
+    WrapCrossAlignment crossAxisAlignment = WrapCrossAlignment.start,
+    TextDirection? textDirection,
+    VerticalDirection verticalDirection = VerticalDirection.down,
+    Clip clipBehavior = Clip.none,
+    required List<Widget> children,
+  }) {
+    return Wrap(
+      key: key,
+      direction: direction,
+      alignment: alignment,
+      spacing: spacing * spacingBase,
+      runAlignment: runAlignment,
+      runSpacing: runSpacing * spacingBase,
+      crossAxisAlignment: crossAxisAlignment,
+      textDirection: textDirection,
+      verticalDirection: verticalDirection,
+      clipBehavior: clipBehavior,
+      children: children,
+    );
+  }
 }
