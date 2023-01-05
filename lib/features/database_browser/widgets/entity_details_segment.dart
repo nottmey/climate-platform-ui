@@ -1,11 +1,11 @@
 import 'package:climate_platform_ui/api/api.graphql.dart';
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
 import 'package:climate_platform_ui/common/widgets/app_widget.dart';
+import 'package:climate_platform_ui/features/navigation/helpers/context_router_extension.dart';
 import 'package:climate_platform_ui/features/theming/models/text_style_preset.dart';
 import 'package:climate_platform_ui/features/theming/utils/context_theme_extension.dart';
 import 'package:climate_platform_ui/features/theming/utils/spacing_utils_extension.dart';
 import 'package:climate_platform_ui/router.dart';
-import 'package:go_router/go_router.dart';
 
 class EntityDetailsSegment extends AppWidget {
   final EntityMixin entity;
@@ -27,9 +27,8 @@ class EntityDetailsSegment extends AppWidget {
   }
 
   Widget buildLink(BuildContext context, String id) {
-    // TODO don't navigate when already on page (use GoRouterState.of(context))
     return ElevatedButton(
-      onPressed: () => context.push(databaseEntityPath(id)),
+      onPressed: () => context.pushIfNew(databaseEntityPath(id)),
       child: AppText(value: 'Entity "$id"'),
     );
   }
@@ -44,7 +43,7 @@ class EntityDetailsSegment extends AppWidget {
         children: [
           if (showInlineTitle)
             ElevatedButton(
-              onPressed: () => context.push(databaseEntityPath(entity.id)),
+              onPressed: () => context.pushIfNew(databaseEntityPath(entity.id)),
               child: AppText(
                 value: 'Entity "${entity.id}"',
                 preset: TextStylePreset.titleLarge,
