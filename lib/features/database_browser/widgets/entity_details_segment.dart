@@ -27,8 +27,9 @@ class EntityDetailsSegment extends AppWidget {
   }
 
   Widget buildLink(BuildContext context, String id) {
+    // TODO don't navigate when already on page (use GoRouterState.of(context))
     return ElevatedButton(
-      onPressed: () => context.go(databaseEntityPath(id)),
+      onPressed: () => context.push(databaseEntityPath(id)),
       child: AppText(value: 'Entity "$id"'),
     );
   }
@@ -43,7 +44,7 @@ class EntityDetailsSegment extends AppWidget {
         children: [
           if (showInlineTitle)
             ElevatedButton(
-              onPressed: () => context.go(databaseEntityPath(entity.id)),
+              onPressed: () => context.push(databaseEntityPath(entity.id)),
               child: AppText(
                 value: 'Entity "${entity.id}"',
                 preset: TextStylePreset.titleLarge,
