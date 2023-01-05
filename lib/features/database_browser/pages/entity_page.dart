@@ -45,12 +45,7 @@ class EntityPage extends AppPageWidget {
       asyncEntity.when(
         loading: buildLoadingSliver,
         error: buildErrorSliver,
-        data: (response) {
-          final entity = response.data?.kw$get;
-          // TODO add graphql error handling (so it's an error in the stream)
-          if (entity == null) {
-            return buildErrorSliver(null, null);
-          }
+        data: (entity) {
           return SliverToBoxAdapter(
             child: EntityDetailsSegment(
               entity: entity,
