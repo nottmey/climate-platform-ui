@@ -305,6 +305,21 @@ class EntityMixin$Attribute extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
+class EntityFilter extends JsonSerializable with EquatableMixin {
+  EntityFilter({this.attributes});
+
+  factory EntityFilter.fromJson(Map<String, dynamic> json) =>
+      _$EntityFilterFromJson(json);
+
+  List<String>? attributes;
+
+  @override
+  List<Object?> get props => [attributes];
+  @override
+  Map<String, dynamic> toJson() => _$EntityFilterToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class Databases$Query extends JsonSerializable with EquatableMixin {
   Databases$Query();
 
@@ -355,6 +370,7 @@ class GetEntityPageArguments extends JsonSerializable with EquatableMixin {
     required this.database,
     this.page,
     this.size,
+    this.filter,
   });
 
   @override
@@ -367,8 +383,10 @@ class GetEntityPageArguments extends JsonSerializable with EquatableMixin {
 
   final int? size;
 
+  final EntityFilter? filter;
+
   @override
-  List<Object?> get props => [database, page, size];
+  List<Object?> get props => [database, page, size, filter];
   @override
   Map<String, dynamic> toJson() => _$GetEntityPageArgumentsToJson(this);
 }
@@ -406,6 +424,15 @@ final GET_ENTITY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
         defaultValue: DefaultValueNode(value: null),
         directives: [],
       ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'filter')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'EntityFilter'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
     ],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
@@ -416,7 +443,11 @@ final GET_ENTITY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
           ArgumentNode(
             name: NameNode(value: 'database'),
             value: VariableNode(name: NameNode(value: 'database')),
-          )
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'filter'),
+            value: VariableNode(name: NameNode(value: 'filter')),
+          ),
         ],
         directives: [],
         selectionSet: SelectionSetNode(selections: [

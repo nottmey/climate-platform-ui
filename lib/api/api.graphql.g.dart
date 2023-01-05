@@ -249,6 +249,17 @@ Map<String, dynamic> _$EntityMixin$AttributeToJson(
       'name': instance.name,
     };
 
+EntityFilter _$EntityFilterFromJson(Map<String, dynamic> json) => EntityFilter(
+      attributes: (json['attributes'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+    );
+
+Map<String, dynamic> _$EntityFilterToJson(EntityFilter instance) =>
+    <String, dynamic>{
+      'attributes': instance.attributes,
+    };
+
 Databases$Query _$Databases$QueryFromJson(Map<String, dynamic> json) =>
     Databases$Query()
       ..databases =
@@ -292,6 +303,9 @@ GetEntityPageArguments _$GetEntityPageArgumentsFromJson(
       database: json['database'] as String,
       page: json['page'] as int?,
       size: json['size'] as int?,
+      filter: json['filter'] == null
+          ? null
+          : EntityFilter.fromJson(json['filter'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$GetEntityPageArgumentsToJson(
@@ -300,6 +314,7 @@ Map<String, dynamic> _$GetEntityPageArgumentsToJson(
       'database': instance.database,
       'page': instance.page,
       'size': instance.size,
+      'filter': instance.filter?.toJson(),
     };
 
 GetEntityArguments _$GetEntityArgumentsFromJson(Map<String, dynamic> json) =>

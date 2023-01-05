@@ -10,11 +10,13 @@ import 'package:climate_platform_ui/router.dart';
 class EntityDetailsSegment extends AppWidget {
   final EntityMixin entity;
 
+  final List<String>? attributes;
   final bool showInlineTitle;
 
   const EntityDetailsSegment({
     super.key,
     required this.entity,
+    this.attributes,
     this.showInlineTitle = true,
   });
 
@@ -26,10 +28,45 @@ class EntityDetailsSegment extends AppWidget {
     );
   }
 
-  Widget buildLink(BuildContext context, String id) {
+  Widget buildEntityLink(BuildContext context, String id) {
     return ElevatedButton(
       onPressed: () => context.pushIfNew(databaseEntityPath(id)),
       child: AppText(value: 'Entity "$id"'),
+    );
+  }
+
+  Widget buildAttributeLink(
+    BuildContext context,
+    EntityMixin$Attribute attribute,
+  ) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        AppText(
+          value: attribute.name,
+          preset: TextStylePreset.titleMedium,
+        ),
+        context.theme.spacedSizedBox(width: 1),
+        Expanded(
+          child: AppText(
+            value: '(${attribute.$$typename})',
+            textAlign: TextAlign.end,
+            preset: TextStylePreset.labelMedium,
+            maxLines: 1,
+            softWrap: false,
+          ),
+        ),
+        context.theme.spacedSizedBox(width: 1),
+        ElevatedButton(
+          onPressed: () =>
+              context.pushIfNew(databaseAttributePath(attribute.id)),
+          child: AppText(
+            value: 'id=${attribute.id}',
+            preset: TextStylePreset.labelMedium,
+          ),
+        )
+      ],
     );
   }
 
@@ -49,26 +86,15 @@ class EntityDetailsSegment extends AppWidget {
                 preset: TextStylePreset.titleLarge,
               ),
             ),
-          ...(entity.attributes).map((a) {
+          ...entity.attributes
+              .where((a) => attributes?.contains(a.id) ?? true)
+              .map((a) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 theme.spacedPadding(
                   left: 2,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // TODO allow click to attribute page
-                      AppText(
-                        value: a.name,
-                        preset: TextStylePreset.titleMedium,
-                      ),
-                      AppText(
-                        value: '${a.$$typename} id=${a.id}',
-                        preset: TextStylePreset.labelMedium,
-                      ),
-                    ],
-                  ),
+                  child: buildAttributeLink(context, a),
                 ),
                 if (a is EntityMixin$Attribute$StringAttribute)
                   buildValue(context, '"${a.string}"'),
@@ -91,15 +117,16 @@ class EntityDetailsSegment extends AppWidget {
                 if (a is EntityMixin$Attribute$ReferenceAttribute)
                   theme.spacedPadding(
                     left: 4,
-                    child: buildLink(context, a.ref),
+                    child: buildEntityLink(context, a.ref),
                   ),
                 if (a is EntityMixin$Attribute$MultiReferenceAttribute)
                   theme.spacedPadding(
                     left: 4,
                     child: theme.spacedWrap(
                       spacing: 2,
-                      children:
-                          a.refs.map((r) => buildLink(context, r)).toList(),
+                      children: a.refs
+                          .map((r) => buildEntityLink(context, r))
+                          .toList(),
                     ),
                   ),
               ],

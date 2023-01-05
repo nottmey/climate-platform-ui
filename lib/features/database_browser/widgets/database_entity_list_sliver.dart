@@ -6,7 +6,9 @@ import 'package:climate_platform_ui/features/database_browser/providers/selected
 import 'package:climate_platform_ui/features/database_browser/widgets/entity_details_segment.dart';
 
 class DatabaseEntityListSliver extends AppWidget {
-  const DatabaseEntityListSliver({super.key});
+  final List<String>? attributes;
+
+  const DatabaseEntityListSliver({super.key, this.attributes});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,6 +27,7 @@ class DatabaseEntityListSliver extends AppWidget {
               database: selectedDatabase,
               page: pageKey,
               size: pageSize,
+              filter: EntityFilter(attributes: attributes),
             ),
           ),
         );
@@ -36,7 +39,10 @@ class DatabaseEntityListSliver extends AppWidget {
         );
       },
       separatorBuilder: (context, index) => const Divider(),
-      itemBuilder: (context, item, index) => EntityDetailsSegment(entity: item),
+      itemBuilder: (context, item, index) => EntityDetailsSegment(
+        entity: item,
+        attributes: attributes,
+      ),
     );
   }
 }

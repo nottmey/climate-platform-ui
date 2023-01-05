@@ -1,3 +1,4 @@
+import 'package:climate_platform_ui/features/database_browser/pages/attribute_page.dart';
 import 'package:climate_platform_ui/features/database_browser/pages/database_navigator_page.dart';
 import 'package:climate_platform_ui/features/database_browser/pages/entity_page.dart';
 import 'package:climate_platform_ui/features/dev/pages/dev_menu_page.dart';
@@ -14,6 +15,7 @@ const _overviewSegment = 'overview';
 const _overviewDetailsSegment = 'details';
 const _databaseBrowserSegment = 'data';
 const _databaseEntitySegment = 'entity';
+const _databaseAttributeSegment = 'attribute';
 const _devMenuSegment = 'dev';
 const _showcaseSegment = 'showcase';
 
@@ -25,6 +27,9 @@ const showcasePath = '/$_showcaseSegment';
 
 String databaseEntityPath(String id) =>
     '$databaseBrowserPath/$_databaseEntitySegment?id=$id';
+
+String databaseAttributePath(String id) =>
+    '$databaseBrowserPath/$_databaseAttributeSegment?id=$id';
 
 const initialPath = databaseBrowserPath;
 
@@ -62,6 +67,11 @@ GoRouter newRouter() {
             builder: (context, state) =>
                 EntityPage(id: state.queryParams['id']!),
           ),
+          GoRoute(
+            path: _databaseAttributeSegment,
+            builder: (context, state) =>
+                AttributePage(id: state.queryParams['id']!),
+          )
         ],
       ),
     ),

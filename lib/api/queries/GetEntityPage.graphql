@@ -1,5 +1,5 @@
-query GetEntityPage($database: ID!, $page: Int, $size: Int) {
-    list(database: $database) {
+query GetEntityPage($database: ID!, $page: Int, $size: Int, $filter: EntityFilter) {
+    list(database: $database, filter: $filter) {
         page(page: $page, size: $size) {
             info {
                 ...PageInfo

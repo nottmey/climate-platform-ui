@@ -8,11 +8,17 @@ schema {
 "This directive allows results to be deferred during execution"
 directive @defer on FIELD
 
-"Tells the service which subscriptions will be published to when this mutation is called. This directive is deprecated use @aws_susbscribe directive instead."
-directive @aws_publish(
-    "List of subscriptions which will be published to when this mutation is called."
-    subscriptions: [String]
+"Directs the schema to enforce authorization on a field"
+directive @aws_auth(
+    "List of cognito user pool groups which have access on this field"
+    cognito_groups: [String]
 ) on FIELD_DEFINITION
+
+"Tells the service this field/object has access authorized by an API key."
+directive @aws_api_key on OBJECT | FIELD_DEFINITION
+
+"Tells the service this field/object has access authorized by sigv4 signing."
+directive @aws_iam on OBJECT | FIELD_DEFINITION
 
 "Tells the service this field/object has access authorized by a Cognito User Pools token."
 directive @aws_cognito_user_pools(
@@ -20,29 +26,23 @@ directive @aws_cognito_user_pools(
     cognito_groups: [String]
 ) on OBJECT | FIELD_DEFINITION
 
+"Tells the service which subscriptions will be published to when this mutation is called. This directive is deprecated use @aws_susbscribe directive instead."
+directive @aws_publish(
+    "List of subscriptions which will be published to when this mutation is called."
+    subscriptions: [String]
+) on FIELD_DEFINITION
+
 "Tells the service this field/object has access authorized by an OIDC token."
 directive @aws_oidc on OBJECT | FIELD_DEFINITION
 
 "Tells the service this field/object has access authorized by a Lambda Authorizer."
 directive @aws_lambda on OBJECT | FIELD_DEFINITION
 
-"Tells the service this field/object has access authorized by sigv4 signing."
-directive @aws_iam on OBJECT | FIELD_DEFINITION
-
-"Directs the schema to enforce authorization on a field"
-directive @aws_auth(
-    "List of cognito user pool groups which have access on this field"
-    cognito_groups: [String]
-) on FIELD_DEFINITION
-
 "Tells the service which mutation triggers this subscription."
 directive @aws_subscribe(
     "List of mutations which will trigger this subscription when they are called."
     mutations: [String]
 ) on FIELD_DEFINITION
-
-"Tells the service this field/object has access authorized by an API key."
-directive @aws_api_key on OBJECT | FIELD_DEFINITION
 
 " generated, do not edit manually!"
 interface Attribute {
@@ -132,7 +132,7 @@ type PageInfo {
 type Query {
     databases: [ID!]!
     get(database: ID!, id: ID!): Entity
-    list(database: ID!): EntityList!
+    list(database: ID!, filter: EntityFilter): EntityList!
 }
 
 " generated, do not edit manually!"
@@ -154,3 +154,8 @@ scalar AWSDateTime
 
 "The `AWSJSON` scalar type provided by AWS AppSync, represents a JSON string that complies with [RFC 8259](https://tools.ietf.org/html/rfc8259).  Maps like \"**{\\\\\"upvotes\\\\\": 10}**\", lists like \"**[1,2,3]**\", and scalar values like \"**\\\\\"AWSJSON example string\\\\\"**\", \"**1**\", and \"**true**\" are accepted as valid JSON and will automatically be parsed and loaded in the resolver mapping templates as Maps, Lists, or Scalar values rather than as the literal input strings.  Invalid JSON strings like \"**{a: 1}**\", \"**{'a': 1}**\" and \"**Unquoted string**\" will throw GraphQL validation errors."
 scalar AWSJSON
+
+" generated, do not edit manually!"
+input EntityFilter {
+    attributes: [ID!]
+}
