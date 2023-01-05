@@ -20,6 +20,7 @@ class DatabaseEntityListSliver extends AppWidget {
       );
     }
 
+    // TODO show newest first
     return AppPagedSliverList<EntityMixin>(
       fetchPage: (pageKey, pageSize) async {
         log('fetch entity page $pageKey with size=$pageSize');
@@ -34,7 +35,7 @@ class DatabaseEntityListSliver extends AppWidget {
         );
         final list = result.data?.list;
         if (list == null) {
-          return AppPagedFetchResult(newItems: []); // TODO error case
+          throw Error(); // TODO error case
         }
         return AppPagedFetchResult(
           newItems: list.page.entities,
