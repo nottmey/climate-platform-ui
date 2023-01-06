@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:artemis/artemis.dart';
 import 'package:climate_platform_ui/app.dart';
 import 'package:climate_platform_ui/get_it.dart';
@@ -29,7 +31,24 @@ void main() async {
               Duration(milliseconds: 500),
               Duration(milliseconds: 1000),
               Duration(milliseconds: 2000),
+              Duration(milliseconds: 4000),
             ],
+            whenError: (Object e, StackTrace st) {
+              // TODO retry on connection issues
+              log(
+                'exception in request, did not decide to retry',
+                error: e,
+                stackTrace: st,
+              );
+              return false;
+            },
+            when: (response) async {
+              // FYI you cannot retry on content here, since the byte stream is single subscription only
+              return response.statusCode == 503;
+            },
+            onRetry: (request, response, retryCount) {
+              log('retrying $request with response $response on #$retryCount');
+            },
           ),
         ),
       ]),
