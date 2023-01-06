@@ -4,7 +4,6 @@ fragment Entity on Entity {
         __typename
         id
         name
-        # TODO use fragments for each attribute type, so `a is FragmentType` is possible
         ... on StringAttribute {
             string
         }

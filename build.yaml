@@ -4,7 +4,6 @@ targets:
       artemis:
         options:
           generate_helpers: true
-          # TODO https://pub.dev/packages/artemis#custom-scalars for https://docs.aws.amazon.com/appsync/latest/devguide/scalars.html
           schema_mapping:
             - schema: lib/api/schema.graphql
               output: lib/api/api.graphql.dart

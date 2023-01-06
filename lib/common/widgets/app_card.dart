@@ -89,7 +89,6 @@ class AppCard extends AppWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // TODO Image.network('https://dummyimage.com/600x400/fff/000.jpg&text=graph'),
                   theme.spacedPadding(
                     all: 2,
                     child: child,

@@ -11,8 +11,6 @@ class PlanetOverviewPage extends AppPageWidget {
   List<Widget> buildSlivers(BuildContext context, WidgetRef ref) {
     return [
       const AppHeaderSliver(title: 'Planetary boundaries'),
-      // TODO sketch content
-      // TODO content card grid
       SliverToBoxAdapter(
         child: AppEntityCard(
           // TODO connect with database
