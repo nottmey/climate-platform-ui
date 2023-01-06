@@ -19,6 +19,7 @@ void main() async {
 
   getIt.registerSingleton(
     ArtemisClient.fromLink(
+      // TODO add graphql data cache, maybe shared between similar requests via normalized data
       Link.from([
         DedupeLink(),
         // not closed, because permanent

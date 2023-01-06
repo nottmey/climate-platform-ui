@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class AppPagedFetchResult<T> {
@@ -13,9 +14,10 @@ class AppPagedFetchResult<T> {
   });
 }
 
-class AppPagedSliverList<T> extends StatefulWidget {
+class AppPagedSliverList<T> extends ConsumerStatefulWidget {
   final int firstPageKey;
   final int firstPageSize;
+  final ProviderListenable<dynamic>? resetProvider;
   final Future<AppPagedFetchResult<T>> Function(int pageKey, int size)
       fetchPage;
   final IndexedWidgetBuilder? separatorBuilder;
@@ -25,16 +27,17 @@ class AppPagedSliverList<T> extends StatefulWidget {
     super.key,
     this.firstPageKey = 0,
     this.firstPageSize = 20,
+    this.resetProvider,
     required this.fetchPage,
     this.separatorBuilder,
     required this.itemBuilder,
   });
 
   @override
-  State<AppPagedSliverList<T>> createState() => _AppPagedSliverListState();
+  _AppPagedSliverListState<T> createState() => _AppPagedSliverListState();
 }
 
-class _AppPagedSliverListState<T> extends State<AppPagedSliverList<T>> {
+class _AppPagedSliverListState<T> extends ConsumerState<AppPagedSliverList<T>> {
   late final PagingController<int, T> controller;
 
   late int currentPageSize;
@@ -80,6 +83,15 @@ class _AppPagedSliverListState<T> extends State<AppPagedSliverList<T>> {
 
   @override
   Widget build(BuildContext context) {
+    final resetProvider = widget.resetProvider;
+    if (resetProvider != null) {
+      ref.listen<dynamic>(resetProvider, (previous, next) {
+        if (previous != null && mounted) {
+          controller.refresh();
+        }
+      });
+    }
+
     final separatorBuilder = widget.separatorBuilder;
     if (separatorBuilder != null) {
       return PagedSliverList.separated(

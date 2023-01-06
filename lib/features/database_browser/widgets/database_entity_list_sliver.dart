@@ -20,6 +20,7 @@ class DatabaseEntityListSliver extends AppWidget {
     }
 
     return AppPagedSliverList<EntityMixin>(
+      resetProvider: selectedDatabaseProvider,
       fetchPage: (pageKey, pageSize) async {
         final data = await execute(
           GetEntityPageQuery(
