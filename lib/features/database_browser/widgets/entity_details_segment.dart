@@ -39,7 +39,7 @@ class EntityDetailsSegment extends AppWidget {
         backgroundColor: theme.colorScheme.primary,
       ),
       // TODO enable presets to use the color of the surrounding button, like Text
-      child: AppText(value: 'Entity "$id"'),
+      child: AppText(value: 'Entity $id'),
     );
   }
 
@@ -48,7 +48,8 @@ class EntityDetailsSegment extends AppWidget {
     EntityMixin$Attribute attribute,
   ) {
     return OutlinedButton(
-      onPressed: () => context.pushIfNew(databaseAttributePath(attribute.id)),
+      onPressed: () => context
+          .pushIfNew(databaseAttributePath(attribute.id, attribute.name)),
       child: AppText(
         value: attribute.name,
         preset: TextStylePreset.labelMedium,

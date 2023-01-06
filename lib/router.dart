@@ -28,8 +28,8 @@ const showcasePath = '/$_showcaseSegment';
 String databaseEntityPath(String id) =>
     '$databaseBrowserPath/$_databaseEntitySegment?id=$id';
 
-String databaseAttributePath(String id) =>
-    '$databaseBrowserPath/$_databaseAttributeSegment?id=$id';
+String databaseAttributePath(String id, String name) =>
+    '$databaseBrowserPath/$_databaseAttributeSegment?id=$id&name=$name';
 
 const initialPath = databaseBrowserPath;
 
@@ -69,8 +69,10 @@ GoRouter newRouter() {
           ),
           GoRoute(
             path: _databaseAttributeSegment,
-            builder: (context, state) =>
-                AttributePage(id: state.queryParams['id']!),
+            builder: (context, state) => AttributePage(
+              id: state.queryParams['id']!,
+              name: state.queryParams['name']!,
+            ),
           )
         ],
       ),

@@ -5,6 +5,7 @@ import 'package:climate_platform_ui/common/widgets/app_text.dart';
 import 'package:climate_platform_ui/features/database_browser/providers/entity_provider_family.dart';
 import 'package:climate_platform_ui/features/database_browser/providers/selected_database_provider.dart';
 import 'package:climate_platform_ui/features/database_browser/widgets/entity_details_segment.dart';
+import 'package:collection/collection.dart';
 
 class EntityPage extends AppPageWidget {
   final String id;
@@ -41,7 +42,20 @@ class EntityPage extends AppPageWidget {
     );
 
     return [
-      AppHeaderSliver(title: 'Entity "$id"'),
+      asyncEntity.when(
+        loading: () => const AppHeaderSliver(title: ''),
+        error: (e, st) => const AppHeaderSliver(title: ''),
+        data: (entity) {
+          final nameAttribute =
+              entity.attributes.firstWhereOrNull((a) => a.name == ':db/ident');
+          return AppHeaderSliver(
+            title: nameAttribute != null &&
+                    nameAttribute is EntityMixin$Attribute$StringAttribute
+                ? 'Entity ${nameAttribute.string}'
+                : 'Entity ${entity.id}',
+          );
+        },
+      ),
       asyncEntity.when(
         loading: buildLoadingSliver,
         error: buildErrorSliver,

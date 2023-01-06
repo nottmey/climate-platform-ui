@@ -6,14 +6,19 @@ import 'package:climate_platform_ui/features/theming/utils/spacing_utils_extensi
 
 class AttributePage extends AppPageWidget {
   final String id;
+  final String name;
 
-  const AttributePage({super.key, required this.id});
+  const AttributePage({
+    super.key,
+    required this.id,
+    required this.name,
+  });
 
   @override
   List<Widget> buildSlivers(BuildContext context, WidgetRef ref) {
     final theme = context.theme;
     return [
-      AppHeaderSliver(title: 'Attribute "$id"'),
+      AppHeaderSliver(title: 'Attribute $name'),
       theme.spacedSliverSizedBox(height: 2),
       DatabaseEntityListSliver(attributes: [id]),
       theme.spacedSliverSizedBox(height: 2),
