@@ -2,7 +2,7 @@ import 'package:climate_platform_ui/api/api.graphql.dart';
 import 'package:climate_platform_ui/api/utils/execute.dart';
 import 'package:climate_platform_ui/common/widgets/app_paged_sliver_list.dart';
 import 'package:climate_platform_ui/common/widgets/app_widget.dart';
-import 'package:climate_platform_ui/features/database_browser/providers/selected_database_provider.dart';
+import 'package:climate_platform_ui/features/database_browser/providers/current_database_future.dart';
 import 'package:climate_platform_ui/features/database_browser/widgets/entity_details_segment.dart';
 
 class DatabaseEntityListSliver extends AppWidget {
@@ -12,20 +12,21 @@ class DatabaseEntityListSliver extends AppWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedDatabase = ref.watch(selectedDatabaseProvider);
-    if (selectedDatabase == null) {
+    final asyncDatabase = ref.watch(currentDatabaseProvider);
+    if (asyncDatabase.isLoading) {
       return const SliverFillRemaining(
         child: Center(child: CircularProgressIndicator()),
       );
     }
 
     return AppPagedSliverList<EntityMixin>(
-      resetProvider: selectedDatabaseProvider,
+      resetProvider: currentDatabaseProvider,
       fetchPage: (pageKey, pageSize) async {
+        final database = await ref.read(currentDatabaseProvider.future);
         final data = await execute(
           GetEntityPageQuery(
             variables: GetEntityPageArguments(
-              database: selectedDatabase,
+              database: database,
               page: pageKey,
               size: pageSize,
               filter: EntityFilter(attributes: attributes),

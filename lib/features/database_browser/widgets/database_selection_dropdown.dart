@@ -1,6 +1,7 @@
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
 import 'package:climate_platform_ui/common/widgets/app_widget.dart';
 import 'package:climate_platform_ui/features/database_browser/providers/available_databases_provider.dart';
+import 'package:climate_platform_ui/features/database_browser/providers/current_database_future.dart';
 import 'package:climate_platform_ui/features/database_browser/providers/selected_database_provider.dart';
 import 'package:climate_platform_ui/features/theming/utils/context_theme_extension.dart';
 import 'package:climate_platform_ui/features/theming/utils/spacing_utils_extension.dart';
@@ -21,7 +22,7 @@ class DatabaseSelectionDropdown extends AppWidget {
         ),
         onChanged: (value) =>
             ref.read(selectedDatabaseProvider.notifier).state = value,
-        value: ref.watch(selectedDatabaseProvider),
+        value: ref.watch(currentDatabaseProvider).asData?.value,
         items: ref.watch(availableDatabasesProvider).when(
               loading: () => [
                 const DropdownMenuItem(child: AppText(value: 'loading...')),
