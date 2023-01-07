@@ -4,6 +4,7 @@ import 'package:climate_platform_ui/features/database_browser/providers/selected
 
 final currentDatabaseProvider = FutureProvider<String>((ref) async {
   final selectedDatabase = ref.watch(selectedDatabaseProvider);
+  // TODO solve issue where a redundant reload happen on first dropdown select
   if (selectedDatabase != null) {
     return Future.value(selectedDatabase);
   } else {

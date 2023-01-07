@@ -13,11 +13,19 @@ abstract class AppPageWidget extends AppWidget {
   @override
   @nonVirtual
   Widget build(BuildContext context, WidgetRef ref) {
+    // TODO refresh page via provider/controller refresh, not via hard rerender
+    final refreshIndicator = useState(0);
     return ColoredBox(
+      key: ValueKey(refreshIndicator.value),
       color: context.theme.backgroundColor,
       child: Scrollbar(
-        child: CustomScrollView(
-          slivers: buildSlivers(context, ref),
+        child: RefreshIndicator(
+          onRefresh: () async {
+            refreshIndicator.value = refreshIndicator.value + 1;
+          },
+          child: CustomScrollView(
+            slivers: buildSlivers(context, ref),
+          ),
         ),
       ),
     );

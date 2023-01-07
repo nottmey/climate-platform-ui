@@ -59,7 +59,7 @@ GoRouter newRouter() {
         path: databaseBrowserPath,
         pageBuilder: (context, state) => TabTransitionPage(
           key: const ValueKey(databaseBrowserPath),
-          child: const DatabaseBrowserPage(),
+          child: DatabaseBrowserPage(),
         ),
         routes: [
           GoRoute(
