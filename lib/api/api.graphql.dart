@@ -17,71 +17,55 @@ mixin EntityMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
-class GetEntityPage$Query$EntityList$EntityListPage$PageInfo
-    extends JsonSerializable with EquatableMixin, PageInfoMixin {
-  GetEntityPage$Query$EntityList$EntityListPage$PageInfo();
+class GetEntityPage$Query$EntityListPage$PageInfo extends JsonSerializable
+    with EquatableMixin, PageInfoMixin {
+  GetEntityPage$Query$EntityListPage$PageInfo();
 
-  factory GetEntityPage$Query$EntityList$EntityListPage$PageInfo.fromJson(
+  factory GetEntityPage$Query$EntityListPage$PageInfo.fromJson(
           Map<String, dynamic> json) =>
-      _$GetEntityPage$Query$EntityList$EntityListPage$PageInfoFromJson(json);
+      _$GetEntityPage$Query$EntityListPage$PageInfoFromJson(json);
 
   @override
   List<Object?> get props => [next, size];
   @override
   Map<String, dynamic> toJson() =>
-      _$GetEntityPage$Query$EntityList$EntityListPage$PageInfoToJson(this);
+      _$GetEntityPage$Query$EntityListPage$PageInfoToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class GetEntityPage$Query$EntityList$EntityListPage$Entity
-    extends JsonSerializable with EquatableMixin, EntityMixin {
-  GetEntityPage$Query$EntityList$EntityListPage$Entity();
+class GetEntityPage$Query$EntityListPage$Entity extends JsonSerializable
+    with EquatableMixin, EntityMixin {
+  GetEntityPage$Query$EntityListPage$Entity();
 
-  factory GetEntityPage$Query$EntityList$EntityListPage$Entity.fromJson(
+  factory GetEntityPage$Query$EntityListPage$Entity.fromJson(
           Map<String, dynamic> json) =>
-      _$GetEntityPage$Query$EntityList$EntityListPage$EntityFromJson(json);
+      _$GetEntityPage$Query$EntityListPage$EntityFromJson(json);
 
   @override
   List<Object?> get props => [id, attributes];
   @override
   Map<String, dynamic> toJson() =>
-      _$GetEntityPage$Query$EntityList$EntityListPage$EntityToJson(this);
+      _$GetEntityPage$Query$EntityListPage$EntityToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class GetEntityPage$Query$EntityList$EntityListPage extends JsonSerializable
+class GetEntityPage$Query$EntityListPage extends JsonSerializable
     with EquatableMixin {
-  GetEntityPage$Query$EntityList$EntityListPage();
+  GetEntityPage$Query$EntityListPage();
 
-  factory GetEntityPage$Query$EntityList$EntityListPage.fromJson(
+  factory GetEntityPage$Query$EntityListPage.fromJson(
           Map<String, dynamic> json) =>
-      _$GetEntityPage$Query$EntityList$EntityListPageFromJson(json);
+      _$GetEntityPage$Query$EntityListPageFromJson(json);
 
-  late GetEntityPage$Query$EntityList$EntityListPage$PageInfo info;
+  late GetEntityPage$Query$EntityListPage$PageInfo info;
 
-  late List<GetEntityPage$Query$EntityList$EntityListPage$Entity> entities;
+  late List<GetEntityPage$Query$EntityListPage$Entity> values;
 
   @override
-  List<Object?> get props => [info, entities];
+  List<Object?> get props => [info, values];
   @override
   Map<String, dynamic> toJson() =>
-      _$GetEntityPage$Query$EntityList$EntityListPageToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetEntityPage$Query$EntityList extends JsonSerializable
-    with EquatableMixin {
-  GetEntityPage$Query$EntityList();
-
-  factory GetEntityPage$Query$EntityList.fromJson(Map<String, dynamic> json) =>
-      _$GetEntityPage$Query$EntityListFromJson(json);
-
-  late GetEntityPage$Query$EntityList$EntityListPage page;
-
-  @override
-  List<Object?> get props => [page];
-  @override
-  Map<String, dynamic> toJson() => _$GetEntityPage$Query$EntityListToJson(this);
+      _$GetEntityPage$Query$EntityListPageToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -91,10 +75,10 @@ class GetEntityPage$Query extends JsonSerializable with EquatableMixin {
   factory GetEntityPage$Query.fromJson(Map<String, dynamic> json) =>
       _$GetEntityPage$QueryFromJson(json);
 
-  late GetEntityPage$Query$EntityList list;
+  late GetEntityPage$Query$EntityListPage listEntity;
 
   @override
-  List<Object?> get props => [list];
+  List<Object?> get props => [listEntity];
   @override
   Map<String, dynamic> toJson() => _$GetEntityPage$QueryToJson(this);
 }
@@ -172,6 +156,24 @@ class EntityMixin$Attribute$ReferenceAttribute extends EntityMixin$Attribute
 }
 
 @JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$TupleAttribute extends EntityMixin$Attribute
+    with EquatableMixin {
+  EntityMixin$Attribute$TupleAttribute();
+
+  factory EntityMixin$Attribute$TupleAttribute.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$TupleAttributeFromJson(json);
+
+  late String tuple;
+
+  @override
+  List<Object?> get props => [tuple];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$TupleAttributeToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class EntityMixin$Attribute$MultiStringAttribute extends EntityMixin$Attribute
     with EquatableMixin {
   EntityMixin$Attribute$MultiStringAttribute();
@@ -244,6 +246,24 @@ class EntityMixin$Attribute$MultiReferenceAttribute
 }
 
 @JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$MultiTupleAttribute extends EntityMixin$Attribute
+    with EquatableMixin {
+  EntityMixin$Attribute$MultiTupleAttribute();
+
+  factory EntityMixin$Attribute$MultiTupleAttribute.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$MultiTupleAttributeFromJson(json);
+
+  late List<String> tuples;
+
+  @override
+  List<Object?> get props => [tuples];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$MultiTupleAttributeToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class EntityMixin$Attribute extends JsonSerializable with EquatableMixin {
   EntityMixin$Attribute();
 
@@ -257,6 +277,8 @@ class EntityMixin$Attribute extends JsonSerializable with EquatableMixin {
         return EntityMixin$Attribute$DateTimeAttribute.fromJson(json);
       case r'ReferenceAttribute':
         return EntityMixin$Attribute$ReferenceAttribute.fromJson(json);
+      case r'TupleAttribute':
+        return EntityMixin$Attribute$TupleAttribute.fromJson(json);
       case r'MultiStringAttribute':
         return EntityMixin$Attribute$MultiStringAttribute.fromJson(json);
       case r'MultiBooleanAttribute':
@@ -265,6 +287,8 @@ class EntityMixin$Attribute extends JsonSerializable with EquatableMixin {
         return EntityMixin$Attribute$MultiDateTimeAttribute.fromJson(json);
       case r'MultiReferenceAttribute':
         return EntityMixin$Attribute$MultiReferenceAttribute.fromJson(json);
+      case r'MultiTupleAttribute':
+        return EntityMixin$Attribute$MultiTupleAttribute.fromJson(json);
       default:
     }
     return _$EntityMixin$AttributeFromJson(json);
@@ -290,6 +314,8 @@ class EntityMixin$Attribute extends JsonSerializable with EquatableMixin {
         return (this as EntityMixin$Attribute$DateTimeAttribute).toJson();
       case r'ReferenceAttribute':
         return (this as EntityMixin$Attribute$ReferenceAttribute).toJson();
+      case r'TupleAttribute':
+        return (this as EntityMixin$Attribute$TupleAttribute).toJson();
       case r'MultiStringAttribute':
         return (this as EntityMixin$Attribute$MultiStringAttribute).toJson();
       case r'MultiBooleanAttribute':
@@ -298,6 +324,8 @@ class EntityMixin$Attribute extends JsonSerializable with EquatableMixin {
         return (this as EntityMixin$Attribute$MultiDateTimeAttribute).toJson();
       case r'MultiReferenceAttribute':
         return (this as EntityMixin$Attribute$MultiReferenceAttribute).toJson();
+      case r'MultiTupleAttribute':
+        return (this as EntityMixin$Attribute$MultiTupleAttribute).toJson();
       default:
     }
     return _$EntityMixin$AttributeToJson(this);
@@ -317,21 +345,6 @@ class EntityFilter extends JsonSerializable with EquatableMixin {
   List<Object?> get props => [attributes];
   @override
   Map<String, dynamic> toJson() => _$EntityFilterToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class Databases$Query extends JsonSerializable with EquatableMixin {
-  Databases$Query();
-
-  factory Databases$Query.fromJson(Map<String, dynamic> json) =>
-      _$Databases$QueryFromJson(json);
-
-  late List<String> databases;
-
-  @override
-  List<Object?> get props => [databases];
-  @override
-  Map<String, dynamic> toJson() => _$Databases$QueryToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -355,11 +368,10 @@ class GetEntity$Query extends JsonSerializable with EquatableMixin {
   factory GetEntity$Query.fromJson(Map<String, dynamic> json) =>
       _$GetEntity$QueryFromJson(json);
 
-  @JsonKey(name: 'get')
-  GetEntity$Query$Entity? kw$get;
+  GetEntity$Query$Entity? getEntity;
 
   @override
-  List<Object?> get props => [kw$get];
+  List<Object?> get props => [getEntity];
   @override
   Map<String, dynamic> toJson() => _$GetEntity$QueryToJson(this);
 }
@@ -367,26 +379,23 @@ class GetEntity$Query extends JsonSerializable with EquatableMixin {
 @JsonSerializable(explicitToJson: true)
 class GetEntityPageArguments extends JsonSerializable with EquatableMixin {
   GetEntityPageArguments({
-    required this.database,
-    this.page,
-    this.size,
     this.filter,
+    required this.page,
+    required this.size,
   });
 
   @override
   factory GetEntityPageArguments.fromJson(Map<String, dynamic> json) =>
       _$GetEntityPageArgumentsFromJson(json);
 
-  late String database;
-
-  final int? page;
-
-  final int? size;
-
   final EntityFilter? filter;
 
+  late int page;
+
+  late int size;
+
   @override
-  List<Object?> get props => [database, page, size, filter];
+  List<Object?> get props => [filter, page, size];
   @override
   Map<String, dynamic> toJson() => _$GetEntityPageArgumentsToJson(this);
 }
@@ -398,33 +407,6 @@ final GET_ENTITY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
     name: NameNode(value: 'GetEntityPage'),
     variableDefinitions: [
       VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'database')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'ID'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'page')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: false,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'size')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: false,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'filter')),
         type: NamedTypeNode(
           name: NameNode(value: 'EntityFilter'),
@@ -433,65 +415,75 @@ final GET_ENTITY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
         defaultValue: DefaultValueNode(value: null),
         directives: [],
       ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'page')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'size')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
     ],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
       FieldNode(
-        name: NameNode(value: 'list'),
+        name: NameNode(value: 'listEntity'),
         alias: null,
         arguments: [
           ArgumentNode(
-            name: NameNode(value: 'database'),
-            value: VariableNode(name: NameNode(value: 'database')),
-          ),
-          ArgumentNode(
             name: NameNode(value: 'filter'),
             value: VariableNode(name: NameNode(value: 'filter')),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'page'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'number'),
+                value: VariableNode(name: NameNode(value: 'page')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'size'),
+                value: VariableNode(name: NameNode(value: 'size')),
+              ),
+            ]),
           ),
         ],
         directives: [],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
-            name: NameNode(value: 'page'),
+            name: NameNode(value: 'info'),
             alias: null,
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'page'),
-                value: VariableNode(name: NameNode(value: 'page')),
-              ),
-              ArgumentNode(
-                name: NameNode(value: 'size'),
-                value: VariableNode(name: NameNode(value: 'size')),
-              ),
-            ],
+            arguments: [],
             directives: [],
             selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'info'),
-                alias: null,
-                arguments: [],
+              FragmentSpreadNode(
+                name: NameNode(value: 'PageInfo'),
                 directives: [],
-                selectionSet: SelectionSetNode(selections: [
-                  FragmentSpreadNode(
-                    name: NameNode(value: 'PageInfo'),
-                    directives: [],
-                  )
-                ]),
-              ),
-              FieldNode(
-                name: NameNode(value: 'entities'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: SelectionSetNode(selections: [
-                  FragmentSpreadNode(
-                    name: NameNode(value: 'Entity'),
-                    directives: [],
-                  )
-                ]),
-              ),
+              )
             ]),
-          )
+          ),
+          FieldNode(
+            name: NameNode(value: 'values'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'Entity'),
+                directives: [],
+              )
+            ]),
+          ),
         ]),
       )
     ]),
@@ -635,6 +627,23 @@ final GET_ENTITY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
           InlineFragmentNode(
             typeCondition: TypeConditionNode(
                 on: NamedTypeNode(
+              name: NameNode(value: 'TupleAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'tuple'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
               name: NameNode(value: 'MultiStringAttribute'),
               isNonNull: false,
             )),
@@ -700,6 +709,23 @@ final GET_ENTITY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
               )
             ]),
           ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'MultiTupleAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'tuples'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
         ]),
       ),
     ]),
@@ -726,58 +752,18 @@ class GetEntityPageQuery
       GetEntityPage$Query.fromJson(json);
 }
 
-final DATABASES_QUERY_DOCUMENT_OPERATION_NAME = 'Databases';
-final DATABASES_QUERY_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.query,
-    name: NameNode(value: 'Databases'),
-    variableDefinitions: [],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'databases'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      )
-    ]),
-  )
-]);
-
-class DatabasesQuery extends GraphQLQuery<Databases$Query, JsonSerializable> {
-  DatabasesQuery();
-
-  @override
-  final DocumentNode document = DATABASES_QUERY_DOCUMENT;
-
-  @override
-  final String operationName = DATABASES_QUERY_DOCUMENT_OPERATION_NAME;
-
-  @override
-  List<Object?> get props => [document, operationName];
-  @override
-  Databases$Query parse(Map<String, dynamic> json) =>
-      Databases$Query.fromJson(json);
-}
-
 @JsonSerializable(explicitToJson: true)
 class GetEntityArguments extends JsonSerializable with EquatableMixin {
-  GetEntityArguments({
-    required this.database,
-    required this.id,
-  });
+  GetEntityArguments({required this.id});
 
   @override
   factory GetEntityArguments.fromJson(Map<String, dynamic> json) =>
       _$GetEntityArgumentsFromJson(json);
 
-  late String database;
-
   late String id;
 
   @override
-  List<Object?> get props => [database, id];
+  List<Object?> get props => [id];
   @override
   Map<String, dynamic> toJson() => _$GetEntityArgumentsToJson(this);
 }
@@ -789,15 +775,6 @@ final GET_ENTITY_QUERY_DOCUMENT = DocumentNode(definitions: [
     name: NameNode(value: 'GetEntity'),
     variableDefinitions: [
       VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'database')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'ID'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'id')),
         type: NamedTypeNode(
           name: NameNode(value: 'ID'),
@@ -805,22 +782,18 @@ final GET_ENTITY_QUERY_DOCUMENT = DocumentNode(definitions: [
         ),
         defaultValue: DefaultValueNode(value: null),
         directives: [],
-      ),
+      )
     ],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
       FieldNode(
-        name: NameNode(value: 'get'),
+        name: NameNode(value: 'getEntity'),
         alias: null,
         arguments: [
           ArgumentNode(
-            name: NameNode(value: 'database'),
-            value: VariableNode(name: NameNode(value: 'database')),
-          ),
-          ArgumentNode(
             name: NameNode(value: 'id'),
             value: VariableNode(name: NameNode(value: 'id')),
-          ),
+          )
         ],
         directives: [],
         selectionSet: SelectionSetNode(selections: [
@@ -946,6 +919,23 @@ final GET_ENTITY_QUERY_DOCUMENT = DocumentNode(definitions: [
           InlineFragmentNode(
             typeCondition: TypeConditionNode(
                 on: NamedTypeNode(
+              name: NameNode(value: 'TupleAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'tuple'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
               name: NameNode(value: 'MultiStringAttribute'),
               isNonNull: false,
             )),
@@ -1004,6 +994,23 @@ final GET_ENTITY_QUERY_DOCUMENT = DocumentNode(definitions: [
             selectionSet: SelectionSetNode(selections: [
               FieldNode(
                 name: NameNode(value: 'refs'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'MultiTupleAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'tuples'),
                 alias: null,
                 arguments: [],
                 directives: [],

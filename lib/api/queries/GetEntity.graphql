@@ -1,5 +1,5 @@
-query GetEntity($database: ID!, $id: ID!) {
-    get(database: $database, id: $id) {
+query GetEntity($id: ID!) {
+    getEntity(id: $id) {
         ...Entity
     }
 }

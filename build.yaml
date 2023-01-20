@@ -15,3 +15,5 @@ targets:
           scalar_mapping:
             - graphql_type: AWSDateTime
               dart_type: DateTime
+            - graphql_type: AWSJSON
+              dart_type: String

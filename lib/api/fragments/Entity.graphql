@@ -16,6 +16,9 @@ fragment Entity on Entity {
         ... on ReferenceAttribute {
             ref
         }
+        ... on TupleAttribute {
+            tuple
+        }
         ... on MultiStringAttribute {
             strings
         }
@@ -27,6 +30,9 @@ fragment Entity on Entity {
         }
         ... on MultiReferenceAttribute {
             refs
+        }
+        ... on MultiTupleAttribute {
+            tuples
         }
     }
 }

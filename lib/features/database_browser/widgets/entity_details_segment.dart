@@ -70,15 +70,20 @@ class EntityDetailsSegment extends AppWidget {
           if (showInlineTitle)
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
               children: [
-                AppText(
-                  value: nameAttribute != null &&
-                          nameAttribute is EntityMixin$Attribute$StringAttribute
-                      ? 'Entity ${nameAttribute.string}'
-                      : 'Entity ${entity.id}',
-                  preset: TextStylePreset.headlineSmall,
+                Flexible(
+                  child: AppText(
+                    value: nameAttribute != null &&
+                            nameAttribute
+                                is EntityMixin$Attribute$StringAttribute
+                        ? 'Entity ${nameAttribute.string}'
+                        : 'Entity ${entity.id}',
+                    preset: TextStylePreset.headlineSmall,
+                    softWrap: false,
+                    overflow: TextOverflow.fade,
+                  ),
                 ),
-                const Spacer(),
                 if (nameAttribute != null)
                   AppText(
                     value: entity.id,
@@ -90,10 +95,11 @@ class EntityDetailsSegment extends AppWidget {
           ...entity.attributes
               .where((a) => a.name != ':db/ident')
               .where((a) => attributes?.contains(a.id) ?? true)
-              .map((a) {
+              .mapIndexed((i, a) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                if (i != 0) const Divider(),
                 buildAttributeLink(context, a),
                 if (a is EntityMixin$Attribute$StringAttribute)
                   buildValue(context, a.string),
@@ -121,6 +127,10 @@ class EntityDetailsSegment extends AppWidget {
                     children:
                         a.refs.map((r) => buildEntityLink(context, r)).toList(),
                   ),
+                if (a is EntityMixin$Attribute$TupleAttribute)
+                  buildValue(context, a.tuple),
+                if (a is EntityMixin$Attribute$MultiTupleAttribute)
+                  ...a.tuples.map((tuple) => buildValue(context, tuple))
               ],
             );
           })

@@ -8,18 +8,6 @@ schema {
 "This directive allows results to be deferred during execution"
 directive @defer on FIELD
 
-"Directs the schema to enforce authorization on a field"
-directive @aws_auth(
-    "List of cognito user pool groups which have access on this field"
-    cognito_groups: [String]
-) on FIELD_DEFINITION
-
-"Tells the service this field/object has access authorized by an API key."
-directive @aws_api_key on OBJECT | FIELD_DEFINITION
-
-"Tells the service this field/object has access authorized by sigv4 signing."
-directive @aws_iam on OBJECT | FIELD_DEFINITION
-
 "Tells the service this field/object has access authorized by a Cognito User Pools token."
 directive @aws_cognito_user_pools(
     "List of cognito user pool groups which have access on this field"
@@ -32,17 +20,29 @@ directive @aws_publish(
     subscriptions: [String]
 ) on FIELD_DEFINITION
 
+"Tells the service which mutation triggers this subscription."
+directive @aws_subscribe(
+    "List of mutations which will trigger this subscription when they are called."
+    mutations: [String]
+) on FIELD_DEFINITION
+
+"Tells the service this field/object has access authorized by an API key."
+directive @aws_api_key on OBJECT | FIELD_DEFINITION
+
+"Directs the schema to enforce authorization on a field"
+directive @aws_auth(
+    "List of cognito user pool groups which have access on this field"
+    cognito_groups: [String]
+) on FIELD_DEFINITION
+
 "Tells the service this field/object has access authorized by an OIDC token."
 directive @aws_oidc on OBJECT | FIELD_DEFINITION
 
 "Tells the service this field/object has access authorized by a Lambda Authorizer."
 directive @aws_lambda on OBJECT | FIELD_DEFINITION
 
-"Tells the service which mutation triggers this subscription."
-directive @aws_subscribe(
-    "List of mutations which will trigger this subscription when they are called."
-    mutations: [String]
-) on FIELD_DEFINITION
+"Tells the service this field/object has access authorized by sigv4 signing."
+directive @aws_iam on OBJECT | FIELD_DEFINITION
 
 " generated, do not edit manually!"
 interface Attribute {
@@ -72,17 +72,10 @@ type Entity {
 }
 
 " generated, do not edit manually!"
-type EntityList {
-    context: AWSJSON
-    page(page: Int, size: Int): EntityListPage!
-    total: Int!
-}
-
-" generated, do not edit manually!"
 type EntityListPage {
     context: AWSJSON
-    entities: [Entity!]!
     info: PageInfo!
+    values: [Entity!]!
 }
 
 " generated, do not edit manually!"
@@ -114,6 +107,13 @@ type MultiStringAttribute implements Attribute {
 }
 
 " generated, do not edit manually!"
+type MultiTupleAttribute implements Attribute {
+    id: ID!
+    name: String!
+    tuples: [AWSJSON!]!
+}
+
+" generated, do not edit manually!"
 type Mutation {
     reset: [Entity!]!
 }
@@ -129,10 +129,25 @@ type PageInfo {
 }
 
 " generated, do not edit manually!"
+type PlanetaryBoundary {
+    context: AWSJSON
+    id: ID!
+    name: String
+}
+
+" generated, do not edit manually!"
+type PlanetaryBoundaryListPage {
+    context: AWSJSON
+    info: PageInfo!
+    values: [PlanetaryBoundary!]!
+}
+
+" generated, do not edit manually!"
 type Query {
-    databases: [ID!]!
-    get(database: ID!, id: ID!): Entity
-    list(database: ID!, filter: EntityFilter): EntityList!
+    getEntity(id: ID!): Entity
+    getPlanetaryBoundary(id: ID!): PlanetaryBoundary
+    listEntity(filter: EntityFilter, page: PageQuery): EntityListPage!
+    listPlanetaryBoundary(page: PageQuery): PlanetaryBoundaryListPage!
 }
 
 " generated, do not edit manually!"
@@ -149,6 +164,13 @@ type StringAttribute implements Attribute {
     string: String!
 }
 
+" generated, do not edit manually!"
+type TupleAttribute implements Attribute {
+    id: ID!
+    name: String!
+    tuple: AWSJSON!
+}
+
 "The `AWSDateTime` scalar type provided by AWS AppSync, represents a valid ***extended*** [ISO 8601 DateTime](https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations) string. In other words, this scalar type accepts datetime strings of the form `YYYY-MM-DDThh:mm:ss.SSSZ`.  The scalar can also accept \"negative years\" of the form `-YYYY` which correspond to years before `0000`. For example, \"**-2017-01-01T00:00Z**\" and \"**-9999-01-01T00:00Z**\" are both valid datetime strings.  The field after the two digit seconds field is a nanoseconds field. It can accept between 1 and 9 digits. So, for example, \"**1970-01-01T12:00:00.2Z**\", \"**1970-01-01T12:00:00.277Z**\" and \"**1970-01-01T12:00:00.123456789Z**\" are all valid datetime strings.  The seconds and nanoseconds fields are optional (the seconds field must be specified if the nanoseconds field is to be used).  The [time zone offset](https://en.wikipedia.org/wiki/ISO_8601#Time_zone_designators) is compulsory for this scalar. The time zone offset must either be `Z` (representing the UTC time zone) or be in the format `±hh:mm:ss`. The seconds field in the timezone offset will be considered valid even though it is not part of the ISO 8601 standard."
 scalar AWSDateTime
 
@@ -158,4 +180,10 @@ scalar AWSJSON
 " generated, do not edit manually!"
 input EntityFilter {
     attributes: [ID!]
+}
+
+" generated, do not edit manually!"
+input PageQuery {
+    number: Int
+    size: Int
 }

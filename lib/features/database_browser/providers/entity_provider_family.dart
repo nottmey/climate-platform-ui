@@ -6,6 +6,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final entityProviderFamily = StreamProvider.autoDispose
     .family<EntityMixin, GetEntityArguments>((ref, arguments) {
   return stream(GetEntityQuery(variables: arguments))
-      .map((data) => data.kw$get)
+      .map((data) => data.getEntity)
       .map(throwNotFoundError);
 });

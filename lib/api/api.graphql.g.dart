@@ -7,80 +7,63 @@ part of 'api.graphql.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetEntityPage$Query$EntityList$EntityListPage$PageInfo
-    _$GetEntityPage$Query$EntityList$EntityListPage$PageInfoFromJson(
+GetEntityPage$Query$EntityListPage$PageInfo
+    _$GetEntityPage$Query$EntityListPage$PageInfoFromJson(
             Map<String, dynamic> json) =>
-        GetEntityPage$Query$EntityList$EntityListPage$PageInfo()
+        GetEntityPage$Query$EntityListPage$PageInfo()
           ..next = json['next'] as int?
           ..size = json['size'] as int;
 
-Map<String, dynamic>
-    _$GetEntityPage$Query$EntityList$EntityListPage$PageInfoToJson(
-            GetEntityPage$Query$EntityList$EntityListPage$PageInfo instance) =>
-        <String, dynamic>{
-          'next': instance.next,
-          'size': instance.size,
-        };
+Map<String, dynamic> _$GetEntityPage$Query$EntityListPage$PageInfoToJson(
+        GetEntityPage$Query$EntityListPage$PageInfo instance) =>
+    <String, dynamic>{
+      'next': instance.next,
+      'size': instance.size,
+    };
 
-GetEntityPage$Query$EntityList$EntityListPage$Entity
-    _$GetEntityPage$Query$EntityList$EntityListPage$EntityFromJson(
+GetEntityPage$Query$EntityListPage$Entity
+    _$GetEntityPage$Query$EntityListPage$EntityFromJson(
             Map<String, dynamic> json) =>
-        GetEntityPage$Query$EntityList$EntityListPage$Entity()
+        GetEntityPage$Query$EntityListPage$Entity()
           ..id = json['id'] as String
           ..attributes = (json['attributes'] as List<dynamic>)
               .map((e) =>
                   EntityMixin$Attribute.fromJson(e as Map<String, dynamic>))
               .toList();
 
-Map<String, dynamic>
-    _$GetEntityPage$Query$EntityList$EntityListPage$EntityToJson(
-            GetEntityPage$Query$EntityList$EntityListPage$Entity instance) =>
-        <String, dynamic>{
-          'id': instance.id,
-          'attributes': instance.attributes.map((e) => e.toJson()).toList(),
-        };
-
-GetEntityPage$Query$EntityList$EntityListPage
-    _$GetEntityPage$Query$EntityList$EntityListPageFromJson(
-            Map<String, dynamic> json) =>
-        GetEntityPage$Query$EntityList$EntityListPage()
-          ..info =
-              GetEntityPage$Query$EntityList$EntityListPage$PageInfo.fromJson(
-                  json['info'] as Map<String, dynamic>)
-          ..entities = (json['entities'] as List<dynamic>)
-              .map((e) =>
-                  GetEntityPage$Query$EntityList$EntityListPage$Entity.fromJson(
-                      e as Map<String, dynamic>))
-              .toList();
-
-Map<String, dynamic> _$GetEntityPage$Query$EntityList$EntityListPageToJson(
-        GetEntityPage$Query$EntityList$EntityListPage instance) =>
+Map<String, dynamic> _$GetEntityPage$Query$EntityListPage$EntityToJson(
+        GetEntityPage$Query$EntityListPage$Entity instance) =>
     <String, dynamic>{
-      'info': instance.info.toJson(),
-      'entities': instance.entities.map((e) => e.toJson()).toList(),
+      'id': instance.id,
+      'attributes': instance.attributes.map((e) => e.toJson()).toList(),
     };
 
-GetEntityPage$Query$EntityList _$GetEntityPage$Query$EntityListFromJson(
+GetEntityPage$Query$EntityListPage _$GetEntityPage$Query$EntityListPageFromJson(
         Map<String, dynamic> json) =>
-    GetEntityPage$Query$EntityList()
-      ..page = GetEntityPage$Query$EntityList$EntityListPage.fromJson(
-          json['page'] as Map<String, dynamic>);
+    GetEntityPage$Query$EntityListPage()
+      ..info = GetEntityPage$Query$EntityListPage$PageInfo.fromJson(
+          json['info'] as Map<String, dynamic>)
+      ..values = (json['values'] as List<dynamic>)
+          .map((e) => GetEntityPage$Query$EntityListPage$Entity.fromJson(
+              e as Map<String, dynamic>))
+          .toList();
 
-Map<String, dynamic> _$GetEntityPage$Query$EntityListToJson(
-        GetEntityPage$Query$EntityList instance) =>
+Map<String, dynamic> _$GetEntityPage$Query$EntityListPageToJson(
+        GetEntityPage$Query$EntityListPage instance) =>
     <String, dynamic>{
-      'page': instance.page.toJson(),
+      'info': instance.info.toJson(),
+      'values': instance.values.map((e) => e.toJson()).toList(),
     };
 
 GetEntityPage$Query _$GetEntityPage$QueryFromJson(Map<String, dynamic> json) =>
     GetEntityPage$Query()
-      ..list = GetEntityPage$Query$EntityList.fromJson(
-          json['list'] as Map<String, dynamic>);
+      ..listEntity = GetEntityPage$Query$EntityListPage.fromJson(
+          json['listEntity'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$GetEntityPage$QueryToJson(
         GetEntityPage$Query instance) =>
     <String, dynamic>{
-      'list': instance.list.toJson(),
+      'listEntity': instance.listEntity.toJson(),
     };
 
 EntityMixin$Attribute$StringAttribute
@@ -153,6 +136,23 @@ Map<String, dynamic> _$EntityMixin$Attribute$ReferenceAttributeToJson(
       'id': instance.id,
       'name': instance.name,
       'ref': instance.ref,
+    };
+
+EntityMixin$Attribute$TupleAttribute
+    _$EntityMixin$Attribute$TupleAttributeFromJson(Map<String, dynamic> json) =>
+        EntityMixin$Attribute$TupleAttribute()
+          ..$$typename = json['__typename'] as String?
+          ..id = json['id'] as String
+          ..name = json['name'] as String
+          ..tuple = json['tuple'] as String;
+
+Map<String, dynamic> _$EntityMixin$Attribute$TupleAttributeToJson(
+        EntityMixin$Attribute$TupleAttribute instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'name': instance.name,
+      'tuple': instance.tuple,
     };
 
 EntityMixin$Attribute$MultiStringAttribute
@@ -234,6 +234,26 @@ Map<String, dynamic> _$EntityMixin$Attribute$MultiReferenceAttributeToJson(
       'refs': instance.refs,
     };
 
+EntityMixin$Attribute$MultiTupleAttribute
+    _$EntityMixin$Attribute$MultiTupleAttributeFromJson(
+            Map<String, dynamic> json) =>
+        EntityMixin$Attribute$MultiTupleAttribute()
+          ..$$typename = json['__typename'] as String?
+          ..id = json['id'] as String
+          ..name = json['name'] as String
+          ..tuples = (json['tuples'] as List<dynamic>)
+              .map((e) => e as String)
+              .toList();
+
+Map<String, dynamic> _$EntityMixin$Attribute$MultiTupleAttributeToJson(
+        EntityMixin$Attribute$MultiTupleAttribute instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'name': instance.name,
+      'tuples': instance.tuples,
+    };
+
 EntityMixin$Attribute _$EntityMixin$AttributeFromJson(
         Map<String, dynamic> json) =>
     EntityMixin$Attribute()
@@ -260,16 +280,6 @@ Map<String, dynamic> _$EntityFilterToJson(EntityFilter instance) =>
       'attributes': instance.attributes,
     };
 
-Databases$Query _$Databases$QueryFromJson(Map<String, dynamic> json) =>
-    Databases$Query()
-      ..databases =
-          (json['databases'] as List<dynamic>).map((e) => e as String).toList();
-
-Map<String, dynamic> _$Databases$QueryToJson(Databases$Query instance) =>
-    <String, dynamic>{
-      'databases': instance.databases,
-    };
-
 GetEntity$Query$Entity _$GetEntity$Query$EntityFromJson(
         Map<String, dynamic> json) =>
     GetEntity$Query$Entity()
@@ -287,44 +297,40 @@ Map<String, dynamic> _$GetEntity$Query$EntityToJson(
 
 GetEntity$Query _$GetEntity$QueryFromJson(Map<String, dynamic> json) =>
     GetEntity$Query()
-      ..kw$get = json['get'] == null
+      ..getEntity = json['getEntity'] == null
           ? null
           : GetEntity$Query$Entity.fromJson(
-              json['get'] as Map<String, dynamic>);
+              json['getEntity'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$GetEntity$QueryToJson(GetEntity$Query instance) =>
     <String, dynamic>{
-      'get': instance.kw$get?.toJson(),
+      'getEntity': instance.getEntity?.toJson(),
     };
 
 GetEntityPageArguments _$GetEntityPageArgumentsFromJson(
         Map<String, dynamic> json) =>
     GetEntityPageArguments(
-      database: json['database'] as String,
-      page: json['page'] as int?,
-      size: json['size'] as int?,
       filter: json['filter'] == null
           ? null
           : EntityFilter.fromJson(json['filter'] as Map<String, dynamic>),
+      page: json['page'] as int,
+      size: json['size'] as int,
     );
 
 Map<String, dynamic> _$GetEntityPageArgumentsToJson(
         GetEntityPageArguments instance) =>
     <String, dynamic>{
-      'database': instance.database,
+      'filter': instance.filter?.toJson(),
       'page': instance.page,
       'size': instance.size,
-      'filter': instance.filter?.toJson(),
     };
 
 GetEntityArguments _$GetEntityArgumentsFromJson(Map<String, dynamic> json) =>
     GetEntityArguments(
-      database: json['database'] as String,
       id: json['id'] as String,
     );
 
 Map<String, dynamic> _$GetEntityArgumentsToJson(GetEntityArguments instance) =>
     <String, dynamic>{
-      'database': instance.database,
       'id': instance.id,
     };

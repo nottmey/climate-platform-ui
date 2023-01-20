@@ -1,12 +1,10 @@
-query GetEntityPage($database: ID!, $page: Int, $size: Int, $filter: EntityFilter) {
-    list(database: $database, filter: $filter) {
-        page(page: $page, size: $size) {
-            info {
-                ...PageInfo
-            }
-            entities {
-                ...Entity
-            }
+query GetEntityPage($filter: EntityFilter, $page: Int!, $size: Int!) {
+    listEntity(filter: $filter, page: {number: $page, size: $size}) {
+        info {
+            ...PageInfo
+        }
+        values {
+            ...Entity
         }
     }
 }
