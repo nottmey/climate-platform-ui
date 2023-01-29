@@ -15,6 +15,10 @@ mixin EntityMixin {
   late String id;
   late List<EntityMixin$Attribute> attributes;
 }
+mixin PlanetaryBoundaryMixin {
+  late String id;
+  String? name;
+}
 
 @JsonSerializable(explicitToJson: true)
 class GetEntityPage$Query$EntityListPage$PageInfo extends JsonSerializable
@@ -374,6 +378,165 @@ class GetEntity$Query extends JsonSerializable with EquatableMixin {
   List<Object?> get props => [getEntity];
   @override
   Map<String, dynamic> toJson() => _$GetEntity$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class CreatePlanetaryBoundary$Mutation$PlanetaryBoundary
+    extends JsonSerializable with EquatableMixin, PlanetaryBoundaryMixin {
+  CreatePlanetaryBoundary$Mutation$PlanetaryBoundary();
+
+  factory CreatePlanetaryBoundary$Mutation$PlanetaryBoundary.fromJson(
+          Map<String, dynamic> json) =>
+      _$CreatePlanetaryBoundary$Mutation$PlanetaryBoundaryFromJson(json);
+
+  @override
+  List<Object?> get props => [id, name];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$CreatePlanetaryBoundary$Mutation$PlanetaryBoundaryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class CreatePlanetaryBoundary$Mutation extends JsonSerializable
+    with EquatableMixin {
+  CreatePlanetaryBoundary$Mutation();
+
+  factory CreatePlanetaryBoundary$Mutation.fromJson(
+          Map<String, dynamic> json) =>
+      _$CreatePlanetaryBoundary$MutationFromJson(json);
+
+  late CreatePlanetaryBoundary$Mutation$PlanetaryBoundary
+      createPlanetaryBoundary;
+
+  @override
+  List<Object?> get props => [createPlanetaryBoundary];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$CreatePlanetaryBoundary$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class PlanetaryBoundaryInput extends JsonSerializable with EquatableMixin {
+  PlanetaryBoundaryInput({this.name});
+
+  factory PlanetaryBoundaryInput.fromJson(Map<String, dynamic> json) =>
+      _$PlanetaryBoundaryInputFromJson(json);
+
+  String? name;
+
+  @override
+  List<Object?> get props => [name];
+  @override
+  Map<String, dynamic> toJson() => _$PlanetaryBoundaryInputToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class DeletePlanetaryBoundary$Mutation$PlanetaryBoundary
+    extends JsonSerializable with EquatableMixin, PlanetaryBoundaryMixin {
+  DeletePlanetaryBoundary$Mutation$PlanetaryBoundary();
+
+  factory DeletePlanetaryBoundary$Mutation$PlanetaryBoundary.fromJson(
+          Map<String, dynamic> json) =>
+      _$DeletePlanetaryBoundary$Mutation$PlanetaryBoundaryFromJson(json);
+
+  @override
+  List<Object?> get props => [id, name];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$DeletePlanetaryBoundary$Mutation$PlanetaryBoundaryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class DeletePlanetaryBoundary$Mutation extends JsonSerializable
+    with EquatableMixin {
+  DeletePlanetaryBoundary$Mutation();
+
+  factory DeletePlanetaryBoundary$Mutation.fromJson(
+          Map<String, dynamic> json) =>
+      _$DeletePlanetaryBoundary$MutationFromJson(json);
+
+  DeletePlanetaryBoundary$Mutation$PlanetaryBoundary? deletePlanetaryBoundary;
+
+  @override
+  List<Object?> get props => [deletePlanetaryBoundary];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$DeletePlanetaryBoundary$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PageInfo
+    extends JsonSerializable with EquatableMixin, PageInfoMixin {
+  GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PageInfo();
+
+  factory GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PageInfo.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PageInfoFromJson(
+          json);
+
+  @override
+  List<Object?> get props => [next, size];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PageInfoToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PlanetaryBoundary
+    extends JsonSerializable with EquatableMixin, PlanetaryBoundaryMixin {
+  GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PlanetaryBoundary();
+
+  factory GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PlanetaryBoundary.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PlanetaryBoundaryFromJson(
+          json);
+
+  @override
+  List<Object?> get props => [id, name];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PlanetaryBoundaryToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage
+    extends JsonSerializable with EquatableMixin {
+  GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage();
+
+  factory GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPageFromJson(json);
+
+  late GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PageInfo info;
+
+  late List<
+          GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PlanetaryBoundary>
+      values;
+
+  @override
+  List<Object?> get props => [info, values];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPageToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetPlanetaryBoundaryPage$Query extends JsonSerializable
+    with EquatableMixin {
+  GetPlanetaryBoundaryPage$Query();
+
+  factory GetPlanetaryBoundaryPage$Query.fromJson(Map<String, dynamic> json) =>
+      _$GetPlanetaryBoundaryPage$QueryFromJson(json);
+
+  late GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage
+      listPlanetaryBoundary;
+
+  @override
+  List<Object?> get props => [listPlanetaryBoundary];
+  @override
+  Map<String, dynamic> toJson() => _$GetPlanetaryBoundaryPage$QueryToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -1041,4 +1204,387 @@ class GetEntityQuery extends GraphQLQuery<GetEntity$Query, GetEntityArguments> {
   @override
   GetEntity$Query parse(Map<String, dynamic> json) =>
       GetEntity$Query.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class CreatePlanetaryBoundaryArguments extends JsonSerializable
+    with EquatableMixin {
+  CreatePlanetaryBoundaryArguments({required this.value});
+
+  @override
+  factory CreatePlanetaryBoundaryArguments.fromJson(
+          Map<String, dynamic> json) =>
+      _$CreatePlanetaryBoundaryArgumentsFromJson(json);
+
+  late PlanetaryBoundaryInput value;
+
+  @override
+  List<Object?> get props => [value];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$CreatePlanetaryBoundaryArgumentsToJson(this);
+}
+
+final CREATE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT_OPERATION_NAME =
+    'CreatePlanetaryBoundary';
+final CREATE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'CreatePlanetaryBoundary'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'value')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'PlanetaryBoundaryInput'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'createPlanetaryBoundary'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'value'),
+            value: VariableNode(name: NameNode(value: 'value')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'PlanetaryBoundary'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'PlanetaryBoundary'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'PlanetaryBoundary'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'name'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class CreatePlanetaryBoundaryMutation extends GraphQLQuery<
+    CreatePlanetaryBoundary$Mutation, CreatePlanetaryBoundaryArguments> {
+  CreatePlanetaryBoundaryMutation({required this.variables});
+
+  @override
+  final DocumentNode document = CREATE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName =
+      CREATE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final CreatePlanetaryBoundaryArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  CreatePlanetaryBoundary$Mutation parse(Map<String, dynamic> json) =>
+      CreatePlanetaryBoundary$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class DeletePlanetaryBoundaryArguments extends JsonSerializable
+    with EquatableMixin {
+  DeletePlanetaryBoundaryArguments({required this.id});
+
+  @override
+  factory DeletePlanetaryBoundaryArguments.fromJson(
+          Map<String, dynamic> json) =>
+      _$DeletePlanetaryBoundaryArgumentsFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$DeletePlanetaryBoundaryArgumentsToJson(this);
+}
+
+final DELETE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT_OPERATION_NAME =
+    'DeletePlanetaryBoundary';
+final DELETE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'DeletePlanetaryBoundary'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'deletePlanetaryBoundary'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'PlanetaryBoundary'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'PlanetaryBoundary'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'PlanetaryBoundary'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'name'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class DeletePlanetaryBoundaryMutation extends GraphQLQuery<
+    DeletePlanetaryBoundary$Mutation, DeletePlanetaryBoundaryArguments> {
+  DeletePlanetaryBoundaryMutation({required this.variables});
+
+  @override
+  final DocumentNode document = DELETE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName =
+      DELETE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final DeletePlanetaryBoundaryArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  DeletePlanetaryBoundary$Mutation parse(Map<String, dynamic> json) =>
+      DeletePlanetaryBoundary$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetPlanetaryBoundaryPageArguments extends JsonSerializable
+    with EquatableMixin {
+  GetPlanetaryBoundaryPageArguments({
+    required this.page,
+    required this.size,
+  });
+
+  @override
+  factory GetPlanetaryBoundaryPageArguments.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetPlanetaryBoundaryPageArgumentsFromJson(json);
+
+  late int page;
+
+  late int size;
+
+  @override
+  List<Object?> get props => [page, size];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetPlanetaryBoundaryPageArgumentsToJson(this);
+}
+
+final GET_PLANETARY_BOUNDARY_PAGE_QUERY_DOCUMENT_OPERATION_NAME =
+    'GetPlanetaryBoundaryPage';
+final GET_PLANETARY_BOUNDARY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'GetPlanetaryBoundaryPage'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'page')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'size')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'listPlanetaryBoundary'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'page'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'number'),
+                value: VariableNode(name: NameNode(value: 'page')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'size'),
+                value: VariableNode(name: NameNode(value: 'size')),
+              ),
+            ]),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'info'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'PageInfo'),
+                directives: [],
+              )
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: 'values'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'PlanetaryBoundary'),
+                directives: [],
+              )
+            ]),
+          ),
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'PageInfo'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'PageInfo'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'next'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'size'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'PlanetaryBoundary'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'PlanetaryBoundary'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'name'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class GetPlanetaryBoundaryPageQuery extends GraphQLQuery<
+    GetPlanetaryBoundaryPage$Query, GetPlanetaryBoundaryPageArguments> {
+  GetPlanetaryBoundaryPageQuery({required this.variables});
+
+  @override
+  final DocumentNode document = GET_PLANETARY_BOUNDARY_PAGE_QUERY_DOCUMENT;
+
+  @override
+  final String operationName =
+      GET_PLANETARY_BOUNDARY_PAGE_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetPlanetaryBoundaryPageArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetPlanetaryBoundaryPage$Query parse(Map<String, dynamic> json) =>
+      GetPlanetaryBoundaryPage$Query.fromJson(json);
 }

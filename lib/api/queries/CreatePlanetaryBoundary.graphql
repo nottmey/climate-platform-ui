@@ -1,0 +1,5 @@
+mutation CreatePlanetaryBoundary($value: PlanetaryBoundaryInput!) {
+    createPlanetaryBoundary(value: $value) {
+        ...PlanetaryBoundary
+    }
+}

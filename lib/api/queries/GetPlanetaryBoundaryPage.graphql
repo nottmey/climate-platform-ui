@@ -1,0 +1,10 @@
+query GetPlanetaryBoundaryPage($page: Int!, $size: Int!) {
+    listPlanetaryBoundary(page: {number: $page, size: $size}) {
+        info {
+            ...PageInfo
+        }
+        values {
+            ...PlanetaryBoundary
+        }
+    }
+}

@@ -1,0 +1,4 @@
+fragment PlanetaryBoundary on PlanetaryBoundary {
+    id
+    name
+}
