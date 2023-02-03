@@ -31,7 +31,7 @@ String databaseEntityPath(String id) =>
 String databaseAttributePath(String id, String name) =>
     '$databaseBrowserPath/$_databaseAttributeSegment?id=$id&name=$name';
 
-const initialPath = databaseBrowserPath;
+const initialPath = overviewPath;
 
 GoRouter newRouter() {
   final navigationItems = [
