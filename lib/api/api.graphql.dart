@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart = 2.12
 
 import 'package:artemis/artemis.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -352,35 +351,6 @@ class EntityFilter extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
-class GetEntity$Query$Entity extends JsonSerializable
-    with EquatableMixin, EntityMixin {
-  GetEntity$Query$Entity();
-
-  factory GetEntity$Query$Entity.fromJson(Map<String, dynamic> json) =>
-      _$GetEntity$Query$EntityFromJson(json);
-
-  @override
-  List<Object?> get props => [id, attributes];
-  @override
-  Map<String, dynamic> toJson() => _$GetEntity$Query$EntityToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetEntity$Query extends JsonSerializable with EquatableMixin {
-  GetEntity$Query();
-
-  factory GetEntity$Query.fromJson(Map<String, dynamic> json) =>
-      _$GetEntity$QueryFromJson(json);
-
-  GetEntity$Query$Entity? getEntity;
-
-  @override
-  List<Object?> get props => [getEntity];
-  @override
-  Map<String, dynamic> toJson() => _$GetEntity$QueryToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
 class CreatePlanetaryBoundary$Mutation$PlanetaryBoundary
     extends JsonSerializable with EquatableMixin, PlanetaryBoundaryMixin {
   CreatePlanetaryBoundary$Mutation$PlanetaryBoundary();
@@ -537,6 +507,35 @@ class GetPlanetaryBoundaryPage$Query extends JsonSerializable
   List<Object?> get props => [listPlanetaryBoundary];
   @override
   Map<String, dynamic> toJson() => _$GetPlanetaryBoundaryPage$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetEntity$Query$Entity extends JsonSerializable
+    with EquatableMixin, EntityMixin {
+  GetEntity$Query$Entity();
+
+  factory GetEntity$Query$Entity.fromJson(Map<String, dynamic> json) =>
+      _$GetEntity$Query$EntityFromJson(json);
+
+  @override
+  List<Object?> get props => [id, attributes];
+  @override
+  Map<String, dynamic> toJson() => _$GetEntity$Query$EntityToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetEntity$Query extends JsonSerializable with EquatableMixin {
+  GetEntity$Query();
+
+  factory GetEntity$Query.fromJson(Map<String, dynamic> json) =>
+      _$GetEntity$QueryFromJson(json);
+
+  GetEntity$Query$Entity? getEntity;
+
+  @override
+  List<Object?> get props => [getEntity];
+  @override
+  Map<String, dynamic> toJson() => _$GetEntity$QueryToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -913,297 +912,6 @@ class GetEntityPageQuery
   @override
   GetEntityPage$Query parse(Map<String, dynamic> json) =>
       GetEntityPage$Query.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetEntityArguments extends JsonSerializable with EquatableMixin {
-  GetEntityArguments({required this.id});
-
-  @override
-  factory GetEntityArguments.fromJson(Map<String, dynamic> json) =>
-      _$GetEntityArgumentsFromJson(json);
-
-  late String id;
-
-  @override
-  List<Object?> get props => [id];
-  @override
-  Map<String, dynamic> toJson() => _$GetEntityArgumentsToJson(this);
-}
-
-final GET_ENTITY_QUERY_DOCUMENT_OPERATION_NAME = 'GetEntity';
-final GET_ENTITY_QUERY_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.query,
-    name: NameNode(value: 'GetEntity'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'id')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'ID'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'getEntity'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'id'),
-            value: VariableNode(name: NameNode(value: 'id')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Entity'),
-            directives: [],
-          )
-        ]),
-      )
-    ]),
-  ),
-  FragmentDefinitionNode(
-    name: NameNode(value: 'Entity'),
-    typeCondition: TypeConditionNode(
-        on: NamedTypeNode(
-      name: NameNode(value: 'Entity'),
-      isNonNull: false,
-    )),
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'attributes'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'name'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'StringAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'string'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'BooleanAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'boolean'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'DateTimeAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'dateTime'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'ReferenceAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'ref'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'TupleAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'tuple'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'MultiStringAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'strings'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'MultiBooleanAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'booleans'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'MultiDateTimeAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'dateTimes'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'MultiReferenceAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'refs'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'MultiTupleAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'tuples'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-        ]),
-      ),
-    ]),
-  ),
-]);
-
-class GetEntityQuery extends GraphQLQuery<GetEntity$Query, GetEntityArguments> {
-  GetEntityQuery({required this.variables});
-
-  @override
-  final DocumentNode document = GET_ENTITY_QUERY_DOCUMENT;
-
-  @override
-  final String operationName = GET_ENTITY_QUERY_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final GetEntityArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  GetEntity$Query parse(Map<String, dynamic> json) =>
-      GetEntity$Query.fromJson(json);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -1587,4 +1295,295 @@ class GetPlanetaryBoundaryPageQuery extends GraphQLQuery<
   @override
   GetPlanetaryBoundaryPage$Query parse(Map<String, dynamic> json) =>
       GetPlanetaryBoundaryPage$Query.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetEntityArguments extends JsonSerializable with EquatableMixin {
+  GetEntityArguments({required this.id});
+
+  @override
+  factory GetEntityArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetEntityArgumentsFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$GetEntityArgumentsToJson(this);
+}
+
+final GET_ENTITY_QUERY_DOCUMENT_OPERATION_NAME = 'GetEntity';
+final GET_ENTITY_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'GetEntity'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'getEntity'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'Entity'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'Entity'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'Entity'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'attributes'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'name'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'StringAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'string'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'BooleanAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'boolean'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'DateTimeAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'dateTime'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'ReferenceAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'ref'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'TupleAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'tuple'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'MultiStringAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'strings'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'MultiBooleanAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'booleans'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'MultiDateTimeAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'dateTimes'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'MultiReferenceAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'refs'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'MultiTupleAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'tuples'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+        ]),
+      ),
+    ]),
+  ),
+]);
+
+class GetEntityQuery extends GraphQLQuery<GetEntity$Query, GetEntityArguments> {
+  GetEntityQuery({required this.variables});
+
+  @override
+  final DocumentNode document = GET_ENTITY_QUERY_DOCUMENT;
+
+  @override
+  final String operationName = GET_ENTITY_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetEntityArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetEntity$Query parse(Map<String, dynamic> json) =>
+      GetEntity$Query.fromJson(json);
 }

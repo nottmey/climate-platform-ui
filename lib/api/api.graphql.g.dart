@@ -1,5 +1,4 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// @dart=2.12
 
 part of 'api.graphql.dart';
 
@@ -280,33 +279,6 @@ Map<String, dynamic> _$EntityFilterToJson(EntityFilter instance) =>
       'attributes': instance.attributes,
     };
 
-GetEntity$Query$Entity _$GetEntity$Query$EntityFromJson(
-        Map<String, dynamic> json) =>
-    GetEntity$Query$Entity()
-      ..id = json['id'] as String
-      ..attributes = (json['attributes'] as List<dynamic>)
-          .map((e) => EntityMixin$Attribute.fromJson(e as Map<String, dynamic>))
-          .toList();
-
-Map<String, dynamic> _$GetEntity$Query$EntityToJson(
-        GetEntity$Query$Entity instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'attributes': instance.attributes.map((e) => e.toJson()).toList(),
-    };
-
-GetEntity$Query _$GetEntity$QueryFromJson(Map<String, dynamic> json) =>
-    GetEntity$Query()
-      ..getEntity = json['getEntity'] == null
-          ? null
-          : GetEntity$Query$Entity.fromJson(
-              json['getEntity'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$GetEntity$QueryToJson(GetEntity$Query instance) =>
-    <String, dynamic>{
-      'getEntity': instance.getEntity?.toJson(),
-    };
-
 CreatePlanetaryBoundary$Mutation$PlanetaryBoundary
     _$CreatePlanetaryBoundary$Mutation$PlanetaryBoundaryFromJson(
             Map<String, dynamic> json) =>
@@ -440,6 +412,33 @@ Map<String, dynamic> _$GetPlanetaryBoundaryPage$QueryToJson(
       'listPlanetaryBoundary': instance.listPlanetaryBoundary.toJson(),
     };
 
+GetEntity$Query$Entity _$GetEntity$Query$EntityFromJson(
+        Map<String, dynamic> json) =>
+    GetEntity$Query$Entity()
+      ..id = json['id'] as String
+      ..attributes = (json['attributes'] as List<dynamic>)
+          .map((e) => EntityMixin$Attribute.fromJson(e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetEntity$Query$EntityToJson(
+        GetEntity$Query$Entity instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'attributes': instance.attributes.map((e) => e.toJson()).toList(),
+    };
+
+GetEntity$Query _$GetEntity$QueryFromJson(Map<String, dynamic> json) =>
+    GetEntity$Query()
+      ..getEntity = json['getEntity'] == null
+          ? null
+          : GetEntity$Query$Entity.fromJson(
+              json['getEntity'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetEntity$QueryToJson(GetEntity$Query instance) =>
+    <String, dynamic>{
+      'getEntity': instance.getEntity?.toJson(),
+    };
+
 GetEntityPageArguments _$GetEntityPageArgumentsFromJson(
         Map<String, dynamic> json) =>
     GetEntityPageArguments(
@@ -456,16 +455,6 @@ Map<String, dynamic> _$GetEntityPageArgumentsToJson(
       'filter': instance.filter?.toJson(),
       'page': instance.page,
       'size': instance.size,
-    };
-
-GetEntityArguments _$GetEntityArgumentsFromJson(Map<String, dynamic> json) =>
-    GetEntityArguments(
-      id: json['id'] as String,
-    );
-
-Map<String, dynamic> _$GetEntityArgumentsToJson(GetEntityArguments instance) =>
-    <String, dynamic>{
-      'id': instance.id,
     };
 
 CreatePlanetaryBoundaryArguments _$CreatePlanetaryBoundaryArgumentsFromJson(
@@ -505,4 +494,14 @@ Map<String, dynamic> _$GetPlanetaryBoundaryPageArgumentsToJson(
     <String, dynamic>{
       'page': instance.page,
       'size': instance.size,
+    };
+
+GetEntityArguments _$GetEntityArgumentsFromJson(Map<String, dynamic> json) =>
+    GetEntityArguments(
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$GetEntityArgumentsToJson(GetEntityArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
     };
