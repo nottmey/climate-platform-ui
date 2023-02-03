@@ -19,7 +19,7 @@ class PlanetOverviewPage extends AppPageWidget {
         child: AppEntityCard<PlanetaryBoundary>(
           onSave: (form) {
             final value = PlanetaryBoundary();
-            value.name = form.value['title'] as String?;
+            value.name = form.value['name'] as String?;
             // TODO save to database
             return value;
           },
@@ -29,7 +29,7 @@ class PlanetOverviewPage extends AppPageWidget {
           },
           formControlBuilder: (data) {
             return FormGroup({
-              'title': FormControl<String>(
+              'name': FormControl<String>(
                 value: data?.name,
                 validators: [Validators.required],
               )
@@ -37,13 +37,13 @@ class PlanetOverviewPage extends AppPageWidget {
           },
           formBuilder: (save) => [
             ReactiveTextField<String>(
-              formControlName: 'title',
+              formControlName: 'name',
               decoration: const InputDecoration(
-                labelText: 'Title',
+                labelText: 'Name',
                 border: OutlineInputBorder(gapPadding: 4),
               ),
               validationMessages: {
-                ValidationMessage.required: (_) => 'Title must not be empty',
+                ValidationMessage.required: (_) => 'Name must not be empty',
               },
               onSubmitted: (_) => save(),
             )
