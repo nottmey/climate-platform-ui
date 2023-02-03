@@ -1,15 +1,24 @@
 import 'package:climate_platform_ui/common/widgets/app_card.dart';
-import 'package:climate_platform_ui/common/widgets/app_text.dart';
 import 'package:climate_platform_ui/common/widgets/app_widget.dart';
-import 'package:climate_platform_ui/features/theming/models/text_style_preset.dart';
 import 'package:climate_platform_ui/features/theming/utils/context_theme_extension.dart';
 import 'package:climate_platform_ui/features/theming/utils/spacing_utils_extension.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class AppEntityCard extends AppWidget {
-  final void Function()? onTab;
+class AppEntityCard<T> extends AppWidget {
+  final T Function(FormGroup form) onSave;
+  final void Function(T data)? onTab;
+  final FormGroup Function(T? data) formControlBuilder;
+  final List<Widget> Function(void Function() save) formBuilder;
+  final Widget Function(T data) dataBuilder;
 
-  const AppEntityCard({super.key, this.onTab});
+  const AppEntityCard({
+    super.key,
+    required this.formControlBuilder,
+    required this.onSave,
+    this.onTab,
+    required this.formBuilder,
+    required this.dataBuilder,
+  });
 
   Widget buildCreating() {
     return const Center(
@@ -19,7 +28,7 @@ class AppEntityCard extends AppWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final dataState = useState<String?>(null);
+    final dataState = useState<T?>(null);
     final editingState = useState<bool>(false);
 
     final theme = context.theme;
@@ -32,34 +41,18 @@ class AppEntityCard extends AppWidget {
         : AppCardPreset.elevated;
 
     Widget buildEditing() {
-      // TODO try out https://pub.dev/packages/reactive_forms_generator
       return ReactiveFormBuilder(
-        form: () => FormGroup({
-          'title': FormControl<String>(
-            value: data,
-            validators: [Validators.required],
-          )
-        }),
+        form: () => formControlBuilder(data),
         builder: (context, form, child) {
           void save() {
-            dataState.value = form.value['title'] as String?;
+            dataState.value = onSave(form);
             editingState.value = false;
           }
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              ReactiveTextField<String>(
-                formControlName: 'title',
-                decoration: const InputDecoration(
-                  labelText: 'Title',
-                  border: OutlineInputBorder(gapPadding: 4),
-                ),
-                validationMessages: {
-                  ValidationMessage.required: (_) => 'Title must not be empty',
-                },
-                onSubmitted: (_) => save(),
-              ),
+              ...formBuilder(save),
               theme.spacedSizedBox(height: 1),
               ReactiveFormConsumer(
                 builder: (context, form, child) {
@@ -79,18 +72,6 @@ class AppEntityCard extends AppWidget {
       );
     }
 
-    Widget buildDisplaying() {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AppText(
-            value: data ?? '',
-            preset: TextStylePreset.titleLarge,
-          ),
-        ],
-      );
-    }
-
     // TODO animate size and fade when content changes
     // example: https://pub.dev/packages/animated_size_and_fade
     return AppCard(
@@ -99,7 +80,9 @@ class AppEntityCard extends AppWidget {
           ? null
           : data == null
               ? () => editingState.value = true
-              : onTab,
+              : onTab == null
+                  ? null
+                  : () => onTab!(data),
       actions: creating || editing
           ? null
           : [
@@ -109,7 +92,7 @@ class AppEntityCard extends AppWidget {
               ),
               AppCardAction(
                 label: 'Delete',
-                color: theme.errorColor,
+                color: theme.colorScheme.error,
                 onSelected: () {
                   dataState.value = null;
                 },
@@ -119,7 +102,7 @@ class AppEntityCard extends AppWidget {
           ? buildCreating()
           : editing
               ? buildEditing()
-              : buildDisplaying(),
+              : dataBuilder(data as T),
     );
   }
 }
