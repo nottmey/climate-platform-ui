@@ -7,7 +7,7 @@ class PlanetaryBoundaryStateNotifier
 
   @override
   Future<PlanetaryBoundary> requestCreation(PlanetaryBoundary value) async {
-    // TODO: implement createInDatabase
+    // TODO: implement requestCreation
     await Future<void>.delayed(const Duration(seconds: 1));
     final copy = value.copy();
     copy.id = '123';
@@ -16,8 +16,18 @@ class PlanetaryBoundaryStateNotifier
   }
 
   @override
+  Future<PlanetaryBoundary> requestUpdate(PlanetaryBoundary value) async {
+    // TODO: implement requestUpdate
+    await Future<void>.delayed(const Duration(seconds: 1));
+    final copy = value.copy();
+    copy.id = '123';
+    copy.name = 'updated planetary boundary';
+    return copy;
+  }
+
+  @override
   Future<PlanetaryBoundary> requestDeletion(String id) async {
-    // TODO: implement deleteInDatabase
+    // TODO: implement requestDeletion
     await Future<void>.delayed(const Duration(seconds: 1));
     final copy = value.copy();
     copy.name = 'deleted planetary boundary';

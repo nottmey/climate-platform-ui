@@ -21,7 +21,8 @@ abstract class EntityStateNotifier<T extends Entity>
       final responseValue = await requestCreation(newValue);
       state = state.copyWith(value: responseValue);
     } else {
-      // TODO update in database
+      final responseValue = await requestUpdate(newValue);
+      state = state.copyWith(value: responseValue);
     }
   }
 
@@ -34,6 +35,8 @@ abstract class EntityStateNotifier<T extends Entity>
   }
 
   Future<T> requestCreation(T value);
+
+  Future<T> requestUpdate(T value);
 
   Future<T> requestDeletion(String id);
 }
