@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@v3
-      - name: "Setup empty .env.local"
+      - name: "Setup Empty .env.local"
         run: cp .env .env.local
       - name: "Determine Flutter Version"
         id: flutter-version
@@ -21,9 +21,9 @@ jobs:
           cache: true
       - name: "Install Dependencies"
         run: flutter pub get
-      - name: "Run tests"
+      - name: "Run Tests"
         run: flutter test --coverage
-      - name: "Upload coverage reports to Codecov"
+      - name: "Upload Coverage Report to Codecov"
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
