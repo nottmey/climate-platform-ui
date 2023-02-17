@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$EntityState<T extends Entity> {
-  bool get isDeleted => throw _privateConstructorUsedError;
   T get value => throw _privateConstructorUsedError;
+  bool get isDeleted => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EntityStateCopyWith<T, EntityState<T>> get copyWith =>
@@ -30,7 +30,7 @@ abstract class $EntityStateCopyWith<T extends Entity, $Res> {
           EntityState<T> value, $Res Function(EntityState<T>) then) =
       _$EntityStateCopyWithImpl<T, $Res, EntityState<T>>;
   @useResult
-  $Res call({bool isDeleted, T value});
+  $Res call({T value, bool isDeleted});
 }
 
 /// @nodoc
@@ -46,18 +46,18 @@ class _$EntityStateCopyWithImpl<T extends Entity, $Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isDeleted = null,
     Object? value = null,
+    Object? isDeleted = null,
   }) {
     return _then(_value.copyWith(
-      isDeleted: null == isDeleted
-          ? _value.isDeleted
-          : isDeleted // ignore: cast_nullable_to_non_nullable
-              as bool,
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as T,
+      isDeleted: null == isDeleted
+          ? _value.isDeleted
+          : isDeleted // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -70,7 +70,7 @@ abstract class _$$_EntityStateCopyWith<T extends Entity, $Res>
       __$$_EntityStateCopyWithImpl<T, $Res>;
   @override
   @useResult
-  $Res call({bool isDeleted, T value});
+  $Res call({T value, bool isDeleted});
 }
 
 /// @nodoc
@@ -84,18 +84,18 @@ class __$$_EntityStateCopyWithImpl<T extends Entity, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isDeleted = null,
     Object? value = null,
+    Object? isDeleted = null,
   }) {
     return _then(_$_EntityState<T>(
-      isDeleted: null == isDeleted
-          ? _value.isDeleted
-          : isDeleted // ignore: cast_nullable_to_non_nullable
-              as bool,
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as T,
+      isDeleted: null == isDeleted
+          ? _value.isDeleted
+          : isDeleted // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -103,16 +103,17 @@ class __$$_EntityStateCopyWithImpl<T extends Entity, $Res>
 /// @nodoc
 
 class _$_EntityState<T extends Entity> implements _EntityState<T> {
-  const _$_EntityState({required this.isDeleted, required this.value});
+  const _$_EntityState({required this.value, this.isDeleted = false});
 
   @override
-  final bool isDeleted;
-  @override
   final T value;
+  @override
+  @JsonKey()
+  final bool isDeleted;
 
   @override
   String toString() {
-    return 'EntityState<$T>(isDeleted: $isDeleted, value: $value)';
+    return 'EntityState<$T>(value: $value, isDeleted: $isDeleted)';
   }
 
   @override
@@ -120,14 +121,14 @@ class _$_EntityState<T extends Entity> implements _EntityState<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_EntityState<T> &&
+            const DeepCollectionEquality().equals(other.value, value) &&
             (identical(other.isDeleted, isDeleted) ||
-                other.isDeleted == isDeleted) &&
-            const DeepCollectionEquality().equals(other.value, value));
+                other.isDeleted == isDeleted));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, isDeleted, const DeepCollectionEquality().hash(value));
+      runtimeType, const DeepCollectionEquality().hash(value), isDeleted);
 
   @JsonKey(ignore: true)
   @override
@@ -137,14 +138,13 @@ class _$_EntityState<T extends Entity> implements _EntityState<T> {
 }
 
 abstract class _EntityState<T extends Entity> implements EntityState<T> {
-  const factory _EntityState(
-      {required final bool isDeleted,
-      required final T value}) = _$_EntityState<T>;
+  const factory _EntityState({required final T value, final bool isDeleted}) =
+      _$_EntityState<T>;
 
   @override
-  bool get isDeleted;
-  @override
   T get value;
+  @override
+  bool get isDeleted;
   @override
   @JsonKey(ignore: true)
   _$$_EntityStateCopyWith<T, _$_EntityState<T>> get copyWith =>
