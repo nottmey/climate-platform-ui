@@ -5,7 +5,9 @@ import 'package:climate_platform_ui/common/notifiers/entity_state_notifier.dart'
 import 'package:climate_platform_ui/common/widgets/app_paged_sliver_list.dart';
 import 'package:climate_platform_ui/common/widgets/app_widget.dart';
 import 'package:climate_platform_ui/features/planetary_boundaries/models/planetary_boundary.dart';
+import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_cache_provider.dart';
 import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_creations_provider.dart';
+import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_provider_family.dart';
 import 'package:climate_platform_ui/features/planetary_boundaries/widgets/planetary_boundary_card.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -28,17 +30,13 @@ class PlanetaryBoundaryListSliver extends AppWidget {
           ),
         );
         final page = data.listPlanetaryBoundary;
-        // ref.read(planetaryBoundaryCacheProvider.notifier).add(page.values);
-        return AppPagedFetchResult(
-          newItems: page.values.map((mixin) {
-            return AutoDisposeStateNotifierProvider<
-                EntityStateNotifier<PlanetaryBoundary>,
-                EntityState<PlanetaryBoundary>>(
-              (ref) => EntityStateNotifier(
-                value: PlanetaryBoundary.existing(mixin),
-              ),
+        ref.read(planetaryBoundaryCacheProvider.notifier).add(
+              page.values.map(PlanetaryBoundary.existing).toList(),
             );
-          }).toList(),
+        return AppPagedFetchResult(
+          newItems: page.values
+              .map((mixin) => planetaryBoundaryProviderFamily(mixin.id))
+              .toList(),
           nextPageKey: page.info.next,
           nextPageSize: page.info.size,
         );

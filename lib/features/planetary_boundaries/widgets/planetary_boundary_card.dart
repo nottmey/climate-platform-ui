@@ -4,16 +4,28 @@ import 'package:climate_platform_ui/common/widgets/app_entity_card.dart';
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
 import 'package:climate_platform_ui/common/widgets/app_widget.dart';
 import 'package:climate_platform_ui/features/planetary_boundaries/models/planetary_boundary.dart';
+import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_cache_provider.dart';
 import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_creations_provider.dart';
 import 'package:climate_platform_ui/features/theming/models/text_style_preset.dart';
 import 'package:climate_platform_ui/router.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class PlanetaryBoundaryCard extends AppEntityCard<PlanetaryBoundary> {
   PlanetaryBoundaryCard.creation({super.key})
       : super.creation(
-          emptyValueConstructor: PlanetaryBoundary.new,
+          providerConstructor: () {
+            return AutoDisposeStateNotifierProvider(
+              (ref) {
+                final cache = ref.read(planetaryBoundaryCacheProvider.notifier);
+                return EntityStateNotifier(
+                  value: PlanetaryBoundary(),
+                  cache: cache,
+                );
+              },
+            );
+          },
           creationsSink: planetaryBoundaryCreationsController,
         );
 

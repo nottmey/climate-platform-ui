@@ -24,7 +24,8 @@ enum _AppEntityCardMode {
 abstract class AppEntityCard<T extends Entity> extends AppWidget {
   final _AppEntityCardMode mode;
 
-  final T Function()? emptyValueConstructor;
+  final AutoDisposeStateNotifierProvider<EntityStateNotifier<T>, EntityState<T>>
+      Function()? providerConstructor;
   final StreamSink<
       AutoDisposeStateNotifierProvider<EntityStateNotifier<T>,
           EntityState<T>>>? creationsSink;
@@ -34,7 +35,10 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
 
   const AppEntityCard.creation({
     super.key,
-    required T Function() this.emptyValueConstructor,
+    required AutoDisposeStateNotifierProvider<EntityStateNotifier<T>,
+                EntityState<T>>
+            Function()
+        this.providerConstructor,
     required StreamSink<
             AutoDisposeStateNotifierProvider<EntityStateNotifier<T>,
                 EntityState<T>>>
@@ -48,7 +52,7 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
             EntityState<T>>
         this.provider,
   })  : mode = _AppEntityCardMode.display,
-        emptyValueConstructor = null,
+        providerConstructor = null,
         creationsSink = null;
 
   void onTab(BuildContext context, EntityStateNotifier<T> notifier);
@@ -64,10 +68,7 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentProviderState = useState(
-      this.provider ??
-          AutoDisposeStateNotifierProvider(
-            (ref) => EntityStateNotifier(value: emptyValueConstructor!()),
-          ),
+      this.provider ?? providerConstructor!(),
     );
     final currentProvider = currentProviderState.value;
 
@@ -106,10 +107,8 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
                 creationsSink!.add(currentProvider);
               }
 
-              if (emptyValueConstructor != null) {
-                currentProviderState.value = AutoDisposeStateNotifierProvider(
-                  (ref) => EntityStateNotifier(value: emptyValueConstructor!()),
-                );
+              if (providerConstructor != null) {
+                currentProviderState.value = providerConstructor!();
               }
 
               if (mode == _AppEntityCardMode.createAndReset) {
