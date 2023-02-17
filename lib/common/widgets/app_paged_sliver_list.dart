@@ -18,6 +18,7 @@ class AppPagedSliverList<T> extends ConsumerStatefulWidget {
   final int firstPageKey;
   final int firstPageSize;
   final ProviderListenable<dynamic>? resetProvider;
+  final StreamProvider<T>? creationsProvider;
   final Future<AppPagedFetchResult<T>> Function(int pageKey, int size)
       fetchPage;
   final IndexedWidgetBuilder? separatorBuilder;
@@ -28,6 +29,7 @@ class AppPagedSliverList<T> extends ConsumerStatefulWidget {
     this.firstPageKey = 0,
     this.firstPageSize = 20,
     this.resetProvider,
+    this.creationsProvider,
     required this.fetchPage,
     this.separatorBuilder,
     required this.itemBuilder,
@@ -39,15 +41,21 @@ class AppPagedSliverList<T> extends ConsumerStatefulWidget {
 
 class _AppPagedSliverListState<T> extends ConsumerState<AppPagedSliverList<T>> {
   late final PagingController<int, T> controller;
-
   late int currentPageSize;
+
+  bool completed = false;
 
   @override
   void initState() {
     controller = PagingController(firstPageKey: widget.firstPageKey);
+    controller.addStatusListener(setCompleted);
     controller.addPageRequestListener(fetchPage);
     currentPageSize = widget.firstPageSize;
     super.initState();
+  }
+
+  void setCompleted(PagingStatus status) {
+    completed = status == PagingStatus.completed;
   }
 
   Future<void> fetchPage(int pageKey) async {
@@ -88,6 +96,15 @@ class _AppPagedSliverListState<T> extends ConsumerState<AppPagedSliverList<T>> {
       ref.listen<dynamic>(resetProvider, (previous, next) {
         if (previous != null && mounted) {
           controller.refresh();
+        }
+      });
+    }
+
+    final creationsProvider = widget.creationsProvider;
+    if (creationsProvider != null) {
+      ref.listen(creationsProvider, (prev, next) {
+        if (completed && mounted && next.hasValue) {
+          controller.appendLastPage([next.value as T]);
         }
       });
     }

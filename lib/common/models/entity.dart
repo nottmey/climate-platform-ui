@@ -1,0 +1,3 @@
+mixin Entity {
+  String? id;
+}

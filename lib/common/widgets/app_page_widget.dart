@@ -5,7 +5,14 @@ import 'package:flutter/foundation.dart';
 export 'package:climate_platform_ui/common/widgets/app_widget.dart'
     hide AppWidget;
 export 'package:flutter_hooks/flutter_hooks.dart';
-export 'package:hooks_riverpod/hooks_riverpod.dart';
+export 'package:hooks_riverpod/hooks_riverpod.dart'
+    show
+        AsyncData,
+        AsyncError,
+        AsyncLoading,
+        AsyncValue,
+        AsyncValueX,
+        WidgetRef;
 
 abstract class AppPageWidget extends AppWidget {
   const AppPageWidget({super.key});
@@ -17,7 +24,7 @@ abstract class AppPageWidget extends AppWidget {
     final refreshIndicator = useState(0);
     return ColoredBox(
       key: ValueKey(refreshIndicator.value),
-      color: context.theme.backgroundColor,
+      color: context.theme.colorScheme.background,
       child: Scrollbar(
         child: RefreshIndicator(
           onRefresh: () async {

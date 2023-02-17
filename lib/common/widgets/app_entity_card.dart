@@ -1,108 +1,167 @@
+import 'dart:async';
+import 'dart:developer';
+
+import 'package:climate_platform_ui/common/models/entity.dart';
+import 'package:climate_platform_ui/common/models/entity_state.dart';
+import 'package:climate_platform_ui/common/notifiers/entity_state_notifier.dart';
 import 'package:climate_platform_ui/common/widgets/app_card.dart';
 import 'package:climate_platform_ui/common/widgets/app_widget.dart';
 import 'package:climate_platform_ui/features/theming/utils/context_theme_extension.dart';
 import 'package:climate_platform_ui/features/theming/utils/spacing_utils_extension.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class AppEntityCard<T> extends AppWidget {
-  final T Function(FormGroup form) onSave;
-  final void Function(T data)? onTab;
-  final FormGroup Function(T? data) formControlBuilder;
-  final List<Widget> Function(void Function() save) formBuilder;
-  final Widget Function(T data) dataBuilder;
+enum _AppEntityCardDisplayState {
+  offerCreation,
+  editing,
+  display,
+}
 
-  const AppEntityCard({
+enum _AppEntityCardMode {
+  createAndReset,
+  display,
+}
+
+abstract class AppEntityCard<T extends Entity> extends AppWidget {
+  final _AppEntityCardMode mode;
+
+  final T Function()? emptyValueConstructor;
+  final StreamSink<EntityStateNotifier<T>>? creationController;
+
+  final AutoDisposeStateNotifierProvider<EntityStateNotifier<T>,
+      EntityState<T>>? provider;
+
+  const AppEntityCard.creation({
     super.key,
-    required this.formControlBuilder,
-    required this.onSave,
-    this.onTab,
-    required this.formBuilder,
-    required this.dataBuilder,
-  });
+    required T Function() this.emptyValueConstructor,
+    required StreamSink<EntityStateNotifier<T>> this.creationController,
+  })  : mode = _AppEntityCardMode.createAndReset,
+        provider = null;
 
-  Widget buildCreating() {
-    return const Center(
-      child: Icon(Icons.add),
-    );
-  }
+  const AppEntityCard.display({
+    super.key,
+    required AutoDisposeStateNotifierProvider<EntityStateNotifier<T>,
+            EntityState<T>>
+        this.provider,
+  })  : mode = _AppEntityCardMode.display,
+        emptyValueConstructor = null,
+        creationController = null;
+
+  void onTab(BuildContext context, EntityStateNotifier<T> notifier);
+
+  FormGroup createFormControls(T value);
+
+  T mergeFormControlsWithValue(FormGroup form, T value);
+
+  Widget buildForm(BuildContext context, void Function() save);
+
+  Widget buildDisplay(BuildContext context, EntityState<T> state);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final dataState = useState<T?>(null);
-    final editingState = useState<bool>(false);
+    final currentProviderState = useState(
+      this.provider ??
+          AutoDisposeStateNotifierProvider(
+            (ref) => EntityStateNotifier(value: emptyValueConstructor!()),
+          ),
+    );
+    final currentProvider = currentProviderState.value;
+
+    final entityState = ref.watch(currentProviderState.value);
+    final value = entityState.value;
+
+    final displayState = useState<_AppEntityCardDisplayState>(
+      mode == _AppEntityCardMode.createAndReset
+          ? _AppEntityCardDisplayState.offerCreation
+          : _AppEntityCardDisplayState.display,
+    );
+    final displayStateValue = displayState.value;
+
+    log('render card $mode & ${displayState.value}');
 
     final theme = context.theme;
-    final data = dataState.value;
-    final editing = editingState.value;
-    final creating = data == null && !editing;
-
-    final preset = data == null && !editing
-        ? AppCardPreset.outlined
-        : AppCardPreset.elevated;
-
-    Widget buildEditing() {
-      return ReactiveFormBuilder(
-        form: () => formControlBuilder(data),
-        builder: (context, form, child) {
-          void save() {
-            dataState.value = onSave(form);
-            editingState.value = false;
-          }
-
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              ...formBuilder(save),
-              theme.spacedSizedBox(height: 1),
-              ReactiveFormConsumer(
-                builder: (context, form, child) {
-                  return ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: theme.colorScheme.onPrimary,
-                      backgroundColor: theme.colorScheme.primary,
-                    ),
-                    onPressed: form.invalid ? null : save,
-                    child: const Text('Submit'),
-                  );
-                },
-              ),
-            ],
-          );
+    if (displayStateValue == _AppEntityCardDisplayState.offerCreation) {
+      return AppCard(
+        preset: AppCardPreset.outlined,
+        onTab: () {
+          displayState.value = _AppEntityCardDisplayState.editing;
         },
+        child: const Center(
+          child: Icon(Icons.add),
+        ),
+      );
+    } else if (displayStateValue == _AppEntityCardDisplayState.editing) {
+      return AppCard(
+        preset: AppCardPreset.elevated,
+        child: ReactiveFormBuilder(
+          form: () => createFormControls(value),
+          builder: (context, form, child) {
+            void save() {
+              final newValue = mergeFormControlsWithValue(form, value);
+              ref.read(currentProvider.notifier).update(newValue);
+
+              if (creationController != null) {
+                creationController!.add(ref.read(currentProvider.notifier));
+              }
+
+              if (emptyValueConstructor != null) {
+                currentProviderState.value = AutoDisposeStateNotifierProvider(
+                  (ref) => EntityStateNotifier(value: emptyValueConstructor!()),
+                );
+              }
+
+              if (mode == _AppEntityCardMode.createAndReset) {
+                displayState.value = _AppEntityCardDisplayState.offerCreation;
+              } else {
+                displayState.value = _AppEntityCardDisplayState.display;
+              }
+            }
+
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                buildForm(context, save),
+                theme.spacedSizedBox(height: 1),
+                ReactiveFormConsumer(
+                  builder: (context, form, child) {
+                    return ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: theme.colorScheme.onPrimary,
+                        backgroundColor: theme.colorScheme.primary,
+                      ),
+                      onPressed: form.invalid ? null : save,
+                      child: const Text('Submit'),
+                    );
+                  },
+                ),
+              ],
+            );
+          },
+        ),
+      );
+    } else {
+      return AppCard(
+        preset: AppCardPreset.elevated,
+        onTab: () {
+          onTab(context, ref.read(currentProvider.notifier));
+        },
+        actions: [
+          AppCardAction(
+            label: 'Edit',
+            onSelected: () {
+              displayState.value = _AppEntityCardDisplayState.editing;
+            },
+          ),
+          AppCardAction(
+            label: 'Delete',
+            color: theme.colorScheme.error,
+            onSelected: () {
+              ref.read(currentProvider.notifier).delete();
+            },
+          ),
+        ],
+        child: buildDisplay(context, entityState),
       );
     }
-
-    // TODO animate size and fade when content changes
-    // example: https://pub.dev/packages/animated_size_and_fade
-    return AppCard(
-      preset: preset,
-      onTab: editing
-          ? null
-          : data == null
-              ? () => editingState.value = true
-              : onTab == null
-                  ? null
-                  : () => onTab!(data),
-      actions: creating || editing
-          ? null
-          : [
-              AppCardAction(
-                label: 'Edit',
-                onSelected: () => editingState.value = true,
-              ),
-              AppCardAction(
-                label: 'Delete',
-                color: theme.colorScheme.error,
-                onSelected: () {
-                  dataState.value = null;
-                },
-              ),
-            ],
-      child: creating
-          ? buildCreating()
-          : editing
-              ? buildEditing()
-              : dataBuilder(data as T),
-    );
   }
 }

@@ -1,37 +1,59 @@
+import 'package:climate_platform_ui/common/models/entity_state.dart';
+import 'package:climate_platform_ui/common/notifiers/entity_state_notifier.dart';
 import 'package:climate_platform_ui/common/widgets/app_entity_card.dart';
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
 import 'package:climate_platform_ui/common/widgets/app_widget.dart';
 import 'package:climate_platform_ui/features/planetary_boundaries/models/planetary_boundary.dart';
+import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_creations_provider.dart';
 import 'package:climate_platform_ui/features/theming/models/text_style_preset.dart';
 import 'package:climate_platform_ui/router.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class PlanetaryBoundaryCard extends AppWidget {
-  const PlanetaryBoundaryCard({super.key});
+class PlanetaryBoundaryCard extends AppEntityCard<PlanetaryBoundary> {
+  PlanetaryBoundaryCard.creation({super.key})
+      : super.creation(
+          emptyValueConstructor: PlanetaryBoundary.new,
+          creationController: planetaryBoundaryCreationsController,
+        );
+
+  const PlanetaryBoundaryCard.display({super.key, required super.provider})
+      : super.display();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return AppEntityCard<PlanetaryBoundary>(
-      onSave: (form) {
-        final value = PlanetaryBoundary();
-        value.name = form.value['name'] as String?;
-        // TODO save to database
-        return value;
-      },
-      onTab: (data) {
-        // TODO loading state until save is complete, else we don't have an id to navigate to
-        context.go(overviewDetailsPath);
-      },
-      formControlBuilder: (data) {
-        return FormGroup({
-          'name': FormControl<String>(
-            value: data?.name,
-            validators: [Validators.required],
-          )
-        });
-      },
-      formBuilder: (save) => [
+  void onTab(
+    BuildContext context,
+    EntityStateNotifier<PlanetaryBoundary> notifier,
+  ) {
+    // TODO
+    context.go(overviewDetailsPath);
+  }
+
+  @override
+  FormGroup createFormControls(PlanetaryBoundary value) {
+    return FormGroup({
+      'name': FormControl<String>(
+        value: value.name,
+        validators: [Validators.required],
+      )
+    });
+  }
+
+  @override
+  PlanetaryBoundary mergeFormControlsWithValue(
+    FormGroup form,
+    PlanetaryBoundary value,
+  ) {
+    final newValue = value.copy();
+    newValue.name = form.value['name'] as String?;
+    return newValue;
+  }
+
+  @override
+  Widget buildForm(BuildContext context, void Function() save) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
         ReactiveTextField<String>(
           formControlName: 'name',
           decoration: const InputDecoration(
@@ -42,19 +64,24 @@ class PlanetaryBoundaryCard extends AppWidget {
             ValidationMessage.required: (_) => 'Name must not be empty',
           },
           onSubmitted: (_) => save(),
-        )
+        ),
       ],
-      dataBuilder: (data) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppText(
-              value: data.name ?? '',
-              preset: TextStylePreset.titleLarge,
-            ),
-          ],
-        );
-      },
+    );
+  }
+
+  @override
+  Widget buildDisplay(
+    BuildContext context,
+    EntityState<PlanetaryBoundary> state,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AppText(
+          value: state.isDeleted ? 'DELETED' : state.value.name ?? '',
+          preset: TextStylePreset.titleLarge,
+        ),
+      ],
     );
   }
 }
