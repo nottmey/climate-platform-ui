@@ -123,17 +123,34 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
               children: [
                 buildForm(context, save),
                 theme.spacedSizedBox(height: 1),
-                ReactiveFormConsumer(
-                  builder: (context, form, child) {
-                    return ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: theme.colorScheme.onPrimary,
-                        backgroundColor: theme.colorScheme.primary,
-                      ),
-                      onPressed: form.invalid ? null : save,
-                      child: const Text('Submit'),
-                    );
-                  },
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        if (mode == _AppEntityCardMode.createAndReset) {
+                          displayState.value =
+                              _AppEntityCardDisplayState.offerCreation;
+                        } else {
+                          displayState.value =
+                              _AppEntityCardDisplayState.display;
+                        }
+                      },
+                      child: const Text('Cancel'),
+                    ),
+                    ReactiveFormConsumer(
+                      builder: (context, form, child) {
+                        return ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: theme.colorScheme.onPrimary,
+                            backgroundColor: theme.colorScheme.primary,
+                          ),
+                          onPressed: form.invalid ? null : save,
+                          child: const Text('Submit'),
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ],
             );
