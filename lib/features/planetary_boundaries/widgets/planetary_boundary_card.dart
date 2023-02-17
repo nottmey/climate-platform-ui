@@ -14,7 +14,7 @@ class PlanetaryBoundaryCard extends AppEntityCard<PlanetaryBoundary> {
   PlanetaryBoundaryCard.creation({super.key})
       : super.creation(
           emptyValueConstructor: PlanetaryBoundary.new,
-          creationController: planetaryBoundaryCreationsController,
+          creationsSink: planetaryBoundaryCreationsController,
         );
 
   const PlanetaryBoundaryCard.display({super.key, required super.provider})

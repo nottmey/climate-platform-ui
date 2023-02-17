@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:climate_platform_ui/common/models/entity.dart';
 import 'package:climate_platform_ui/common/models/entity_state.dart';
@@ -26,7 +25,9 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
   final _AppEntityCardMode mode;
 
   final T Function()? emptyValueConstructor;
-  final StreamSink<EntityStateNotifier<T>>? creationController;
+  final StreamSink<
+      AutoDisposeStateNotifierProvider<EntityStateNotifier<T>,
+          EntityState<T>>>? creationsSink;
 
   final AutoDisposeStateNotifierProvider<EntityStateNotifier<T>,
       EntityState<T>>? provider;
@@ -34,7 +35,10 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
   const AppEntityCard.creation({
     super.key,
     required T Function() this.emptyValueConstructor,
-    required StreamSink<EntityStateNotifier<T>> this.creationController,
+    required StreamSink<
+            AutoDisposeStateNotifierProvider<EntityStateNotifier<T>,
+                EntityState<T>>>
+        this.creationsSink,
   })  : mode = _AppEntityCardMode.createAndReset,
         provider = null;
 
@@ -45,7 +49,7 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
         this.provider,
   })  : mode = _AppEntityCardMode.display,
         emptyValueConstructor = null,
-        creationController = null;
+        creationsSink = null;
 
   void onTab(BuildContext context, EntityStateNotifier<T> notifier);
 
@@ -77,8 +81,6 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
     );
     final displayStateValue = displayState.value;
 
-    log('render card $mode & ${displayState.value}');
-
     final theme = context.theme;
     if (displayStateValue == _AppEntityCardDisplayState.offerCreation) {
       return AppCard(
@@ -100,8 +102,8 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
               final newValue = mergeFormControlsWithValue(form, value);
               ref.read(currentProvider.notifier).update(newValue);
 
-              if (creationController != null) {
-                creationController!.add(ref.read(currentProvider.notifier));
+              if (creationsSink != null) {
+                creationsSink!.add(currentProvider);
               }
 
               if (emptyValueConstructor != null) {
@@ -145,21 +147,23 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
         onTab: () {
           onTab(context, ref.read(currentProvider.notifier));
         },
-        actions: [
-          AppCardAction(
-            label: 'Edit',
-            onSelected: () {
-              displayState.value = _AppEntityCardDisplayState.editing;
-            },
-          ),
-          AppCardAction(
-            label: 'Delete',
-            color: theme.colorScheme.error,
-            onSelected: () {
-              ref.read(currentProvider.notifier).delete();
-            },
-          ),
-        ],
+        actions: entityState.isDeleted
+            ? null
+            : [
+                AppCardAction(
+                  label: 'Edit',
+                  onSelected: () {
+                    displayState.value = _AppEntityCardDisplayState.editing;
+                  },
+                ),
+                AppCardAction(
+                  label: 'Delete',
+                  color: theme.colorScheme.error,
+                  onSelected: () {
+                    ref.read(currentProvider.notifier).delete();
+                  },
+                ),
+              ],
         child: buildDisplay(context, entityState),
       );
     }

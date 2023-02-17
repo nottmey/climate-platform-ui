@@ -1,5 +1,6 @@
 import 'package:climate_platform_ui/api/api.graphql.dart';
 import 'package:climate_platform_ui/api/utils/execute.dart';
+import 'package:climate_platform_ui/common/models/entity_state.dart';
 import 'package:climate_platform_ui/common/notifiers/entity_state_notifier.dart';
 import 'package:climate_platform_ui/common/widgets/app_paged_sliver_list.dart';
 import 'package:climate_platform_ui/common/widgets/app_widget.dart';
@@ -13,7 +14,9 @@ class PlanetaryBoundaryListSliver extends AppWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return AppPagedSliverList<EntityStateNotifier<PlanetaryBoundary>>(
+    return AppPagedSliverList<
+        AutoDisposeStateNotifierProvider<EntityStateNotifier<PlanetaryBoundary>,
+            EntityState<PlanetaryBoundary>>>(
       creationsProvider: planetaryBoundaryCreationsProvider,
       fetchPage: (pageKey, pageSize) async {
         final data = await execute(
@@ -27,17 +30,22 @@ class PlanetaryBoundaryListSliver extends AppWidget {
         final page = data.listPlanetaryBoundary;
         // ref.read(planetaryBoundaryCacheProvider.notifier).add(page.values);
         return AppPagedFetchResult(
-          newItems: page.values
-              .map(PlanetaryBoundary.existing)
-              .map((pb) => EntityStateNotifier(value: pb))
-              .toList(),
+          newItems: page.values.map((mixin) {
+            return AutoDisposeStateNotifierProvider<
+                EntityStateNotifier<PlanetaryBoundary>,
+                EntityState<PlanetaryBoundary>>(
+              (ref) => EntityStateNotifier(
+                value: PlanetaryBoundary.existing(mixin),
+              ),
+            );
+          }).toList(),
           nextPageKey: page.info.next,
           nextPageSize: page.info.size,
         );
       },
       itemBuilder: (context, item, index) {
         return PlanetaryBoundaryCard.display(
-          provider: AutoDisposeStateNotifierProvider((ref) => item),
+          provider: item,
         );
       },
     );
