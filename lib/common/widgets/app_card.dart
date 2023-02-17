@@ -24,13 +24,15 @@ class AppCardAction {
 }
 
 class AppCard extends AppWidget {
+  final bool disabled;
   final AppCardPreset preset;
   final void Function()? onTab;
   final List<AppCardAction>? actions;
-  final Widget? child;
+  final Widget child;
 
   const AppCard({
     super.key,
+    this.disabled = false,
     this.preset = AppCardPreset.elevated,
     this.onTab,
     this.actions,
@@ -51,10 +53,14 @@ class AppCard extends AppWidget {
       horizontal: 2,
       vertical: 1,
       child: Card(
-        color: isFilled ? colorScheme.surfaceVariant : null,
-        elevation: isOutlined || isFilled ? 0 : null,
+        color: disabled
+            ? colorScheme.onSurface.withOpacity(0.12)
+            : isFilled
+                ? colorScheme.surfaceVariant
+                : null,
+        elevation: isOutlined || isFilled || disabled ? 0 : null,
         shape: RoundedRectangleBorder(
-          side: isOutlined
+          side: isOutlined && !disabled
               ? BorderSide(color: colorScheme.outline)
               : BorderSide.none,
           borderRadius: theme.defaultBorderRadius,

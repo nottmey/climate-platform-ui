@@ -78,7 +78,8 @@ class PlanetaryBoundaryCard extends AppEntityCard<PlanetaryBoundary> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AppText(
-          value: state.isDeleted ? 'DELETED' : state.value.name ?? '',
+          value: state.value.name ?? '',
+          looksDisabled: state.isDeleted,
           preset: TextStylePreset.titleLarge,
         ),
       ],

@@ -1,5 +1,7 @@
+import 'package:climate_platform_ui/common/widgets/app_card.dart';
 import 'package:climate_platform_ui/common/widgets/app_header_sliver.dart';
 import 'package:climate_platform_ui/common/widgets/app_page_widget.dart';
+import 'package:climate_platform_ui/common/widgets/app_text.dart';
 import 'package:climate_platform_ui/features/theming/models/text_style_preset.dart';
 import 'package:climate_platform_ui/features/theming/utils/context_theme_extension.dart';
 import 'package:climate_platform_ui/features/theming/widgets/showcase_color_tile.dart';
@@ -171,6 +173,36 @@ class ShowcasePage extends AppPageWidget {
         delegate: SliverChildListDelegate(
           TextStylePreset.values
               .map((preset) => ShowcaseText(preset: preset))
+              .toList(),
+        ),
+      ),
+      SliverList(
+        delegate: SliverChildListDelegate(
+          AppCardPreset.values
+              .map(
+                (preset) => AppCard(
+                  preset: preset,
+                  child: AppText(
+                    value: '$AppCard with $preset',
+                  ),
+                ),
+              )
+              .toList(),
+        ),
+      ),
+      SliverList(
+        delegate: SliverChildListDelegate(
+          AppCardPreset.values
+              .map(
+                (preset) => AppCard(
+                  disabled: true,
+                  preset: preset,
+                  child: AppText(
+                    value: '$AppCard with $preset disabled',
+                    looksDisabled: true,
+                  ),
+                ),
+              )
               .toList(),
         ),
       ),

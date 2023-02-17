@@ -3,6 +3,7 @@ import 'package:climate_platform_ui/features/theming/models/text_style_preset.da
 
 class AppText extends AppWidget {
   final String value;
+  final bool looksDisabled;
   final TextStylePreset? preset;
   final TextAlign? textAlign;
   final int? minLines;
@@ -15,6 +16,7 @@ class AppText extends AppWidget {
   const AppText({
     super.key,
     required this.value,
+    this.looksDisabled = false,
     this.preset,
     this.textAlign,
     this.minLines,
@@ -32,6 +34,13 @@ class AppText extends AppWidget {
         return style.copyWith(color: overrideColor);
       } else {
         return TextStyle(color: overrideColor);
+      }
+    } else if (looksDisabled) {
+      final disabledColor = theme.disabledColor;
+      if (style != null) {
+        return style.copyWith(color: disabledColor);
+      } else {
+        return TextStyle(color: disabledColor);
       }
     } else {
       return style;

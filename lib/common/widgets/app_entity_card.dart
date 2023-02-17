@@ -143,10 +143,13 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
       );
     } else {
       return AppCard(
+        disabled: entityState.isDeleted,
         preset: AppCardPreset.elevated,
-        onTab: () {
-          onTab(context, ref.read(currentProvider.notifier));
-        },
+        onTab: entityState.isDeleted
+            ? null
+            : () {
+                onTab(context, ref.read(currentProvider.notifier));
+              },
         actions: entityState.isDeleted
             ? null
             : [
