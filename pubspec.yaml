@@ -38,14 +38,19 @@ dependencies:
 
 dev_dependencies:
   build_runner:
+  file:
   flutter_test:
     sdk: flutter
   freezed:
+  golden_toolkit:
   json_serializable:
   lint:
+  mockito:
+  platform:
   riverpod_generator:
 
 flutter:
   uses-material-design: true
   assets:
     - .env.local
+    - assets/google_fonts/
