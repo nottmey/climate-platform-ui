@@ -2,7 +2,7 @@ import 'package:artemis/artemis.dart';
 import 'package:climate_platform_ui/api/api.graphql.dart';
 import 'package:climate_platform_ui/app.dart';
 import 'package:climate_platform_ui/get_it.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -60,9 +60,22 @@ void main() {
       devices: [
         const Device(
           name: 'phone',
-          size: Size(360, 640),
-          devicePixelRatio: 2.0,
-        )
+          size: Size(390, 844),
+          safeArea: EdgeInsets.fromLTRB(0, 47, 0, 34),
+          // devicePixelRatio breaks responsiveness (MediaQuery size is wrong)
+        ),
+        const Device(
+          name: 'tablet',
+          size: Size(820, 1180),
+        ),
+        const Device(
+          name: 'laptop',
+          size: Size(1366, 768),
+        ),
+        const Device(
+          name: 'desktop',
+          size: Size(1920, 1080),
+        ),
       ],
     );
 
