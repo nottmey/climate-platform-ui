@@ -7,10 +7,6 @@ abstract class EntityStateNotifier<T extends Entity>
   EntityStateNotifier({required T initialValue})
       : super(EntityState(value: initialValue));
 
-  T get value => state.value;
-
-  bool get isDeleted => state.isDeleted;
-
   void set(T value) {
     state = state.copyWith(value: value);
   }

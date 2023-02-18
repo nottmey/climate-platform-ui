@@ -29,7 +29,7 @@ class PlanetaryBoundaryStateNotifier
   Future<PlanetaryBoundary> requestDeletion(String id) async {
     // TODO: implement requestDeletion
     await Future<void>.delayed(const Duration(seconds: 1));
-    final copy = value.copy();
+    final copy = state.value.copy();
     copy.name = 'deleted planetary boundary';
     return copy;
   }
