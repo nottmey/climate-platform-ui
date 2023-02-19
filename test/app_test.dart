@@ -64,18 +64,22 @@ void main() {
           size: Size(390, 844),
           safeArea: EdgeInsets.fromLTRB(0, 47, 0, 34),
           // devicePixelRatio breaks responsiveness (MediaQuery size is wrong)
+          devicePixelRatio: 2,
         ),
         const Device(
           name: 'tablet',
           size: Size(820, 1180),
+          devicePixelRatio: 2,
         ),
         const Device(
           name: 'laptop',
           size: Size(1366, 768),
+          devicePixelRatio: 2,
         ),
         const Device(
           name: 'desktop',
           size: Size(1920, 1080),
+          devicePixelRatio: 2,
         ),
       ],
     );
