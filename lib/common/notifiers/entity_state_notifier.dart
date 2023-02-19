@@ -26,7 +26,9 @@ abstract class EntityStateNotifier<T extends Entity>
     state = state.copyWith(isDeleted: true);
     if (state.value.id != null) {
       final responseValue = await requestDeletion(state.value.id!);
-      state = state.copyWith(value: responseValue);
+      if (responseValue != null) {
+        state = state.copyWith(value: responseValue);
+      }
     }
   }
 
@@ -34,5 +36,5 @@ abstract class EntityStateNotifier<T extends Entity>
 
   Future<T> requestUpdate(T value);
 
-  Future<T> requestDeletion(String id);
+  Future<T?> requestDeletion(String id);
 }
