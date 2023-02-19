@@ -50,6 +50,7 @@ void main() {
       ProviderScope(
         child: App(),
       ),
+      surfaceSize: const Size(390, 763), // height = 844 - 47 - 34
     );
 
     await tester.pumpAndSettle();
