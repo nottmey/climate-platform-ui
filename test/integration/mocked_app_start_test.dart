@@ -10,8 +10,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'app_test.mocks.dart';
-import 'utils/load_internal_icon_font.dart';
+import './mocked_app_start_test.mocks.dart';
+import '../utils/capture_screen.dart';
+import '../utils/load_internal_icon_font.dart';
 
 @GenerateMocks([ArtemisClient])
 void main() {
@@ -42,7 +43,10 @@ void main() {
       query.listPlanetaryBoundary = listPlanetaryBoundary;
       return GraphQLResponse(data: query);
     });
-    getIt.registerSingleton<ArtemisClient>(mockArtemisClient);
+    getIt.registerSingleton<ArtemisClient>(
+      instanceName: InstanceName.httpsClient,
+      mockArtemisClient,
+    );
   });
 
   testGoldens('app start', (tester) async {
@@ -57,7 +61,7 @@ void main() {
 
     await multiScreenGolden(
       tester,
-      'app_start',
+      'mocked_app_start',
       devices: [
         const Device(
           name: 'phone',
@@ -85,6 +89,8 @@ void main() {
         // ),
       ],
     );
+
+    await captureScreen(tester, 'example');
 
     expect(find.text('Planetary boundaries'), findsAtLeastNWidgets(1));
     expect(find.text('Test 1'), findsOneWidget);

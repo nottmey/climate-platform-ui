@@ -68,8 +68,11 @@ amplifytools.xcconfig
 # Environment files
 .env.local
 
-# golden_toolkit failures
-/test/failures/
+# any golden_toolkit failures
+failures/
+
+# any screenshots taken within test
+screenshots/
 
 # --coverage
 /coverage/
