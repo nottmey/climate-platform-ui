@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:artemis/artemis.dart';
+import 'package:climate_platform_ui/api/utils/web_socket_request_serializer.dart';
 import 'package:climate_platform_ui/app.dart';
 import 'package:climate_platform_ui/get_it.dart';
 import 'package:flutter/foundation.dart';
@@ -11,11 +14,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:gql_dedupe_link/gql_dedupe_link.dart';
 import 'package:gql_http_link/gql_http_link.dart';
 import 'package:gql_link/gql_link.dart';
+import 'package:gql_websocket_link/gql_websocket_link.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart';
 import 'package:http/retry.dart';
+import 'package:web_socket_channel/io.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   GoogleFonts.config.allowRuntimeFetching = false;
@@ -25,16 +30,31 @@ void main() async {
   });
 
   await dotenv.load(fileName: '.env.local');
+  final graphqlApi = Uri.parse(dotenv.env['APP_SYNC_API_URL']!);
+  final realtimeApi = Uri.parse(dotenv.env['APP_SYNC_API_WSS_URL']!);
+  final apiKey = dotenv.env['APP_SYNC_API_KEY']!;
+
+  final wssHeader = base64.encode(
+    utf8.encode(json.encode({'host': graphqlApi.host, 'x-api-key': apiKey})),
+  );
+  final wssPayload = base64.encode(utf8.encode(json.encode({})));
+  final wssUrl = realtimeApi.replace(
+    queryParameters: {'header': wssHeader, 'payload': wssPayload},
+  );
 
   getIt.registerSingleton(
+    instanceName: InstanceName.httpsClient,
     ArtemisClient.fromLink(
       // TODO add graphql data cache, maybe shared between similar requests via normalized data
       Link.from([
+        // TODO maybe helpful: https://github.com/gql-dart/gql/tree/master/links/gql_error_link
+        // https://github.com/gql-dart/gql/tree/master/links/gql_dedupe_link
         DedupeLink(),
+        // https://github.com/gql-dart/gql/tree/master/links/gql_http_link
         // not closed, because permanent
         HttpLink(
-          dotenv.env['APP_SYNC_API_URL']!,
-          defaultHeaders: {'x-api-key': dotenv.env['APP_SYNC_API_KEY']!},
+          graphqlApi.toString(),
+          defaultHeaders: {'x-api-key': apiKey},
           httpClient: RetryClient.withDelays(
             Client(),
             const [
@@ -62,6 +82,34 @@ void main() async {
           ),
         ),
       ]),
+    ),
+  );
+
+  getIt.registerSingleton(
+    instanceName: InstanceName.wssClient,
+    ArtemisClient.fromLink(
+      WebSocketLink(
+        null,
+        channelGenerator: () async {
+          final socket = await WebSocket.connect(
+            wssUrl.toString(),
+            protocols: ['graphql-ws'],
+          );
+          return IOWebSocketChannel(socket);
+        },
+        serializer: WebSocketRequestSerializer(graphqlApi.host, apiKey),
+        graphQLSocketMessageEncoder: (Map<String, dynamic> message) {
+          // log('ws request: $message');
+          return json.encode(message);
+        },
+        graphQLSocketMessageDecoder: (dynamic message) {
+          // log('ws response: $message');
+          return json.decode(message as String) as Map<String, dynamic>;
+        },
+        inactivityTimeout: const Duration(
+          milliseconds: 300000, // TODO set from connection_ack payload
+        ),
+      ),
     ),
   );
 

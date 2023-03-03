@@ -11,8 +11,9 @@ Future<T> execute<T, U extends JsonSerializable>(
   final stopwatch = Stopwatch();
   stopwatch.start();
   try {
-    final result =
-        await getIt<ArtemisClient>().execute(query).then(throwResponseErrors);
+    final result = await getIt<ArtemisClient>(
+      instanceName: InstanceName.httpsClient,
+    ).execute(query).then(throwResponseErrors);
     stopwatch.stop();
     log('executed ${query.variables ?? query.operationName} in ${stopwatch.elapsedMilliseconds}ms');
     return result;

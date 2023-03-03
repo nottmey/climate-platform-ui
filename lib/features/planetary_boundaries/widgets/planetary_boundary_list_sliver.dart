@@ -18,6 +18,7 @@ class PlanetaryBoundaryListSliver extends AppWidget {
     return AppPagedSliverList<
         AutoDisposeStateNotifierProvider<EntityStateNotifier<PlanetaryBoundary>,
             EntityState<PlanetaryBoundary>>>(
+      // TODO sort out time basis: only show consistent list of specific t and append all newer creations from ws
       creationsProvider: planetaryBoundaryCreationsProvider,
       fetchPage: (pageKey, pageSize) async {
         final data = await execute(

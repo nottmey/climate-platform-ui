@@ -8,7 +8,7 @@ import 'package:json_annotation/json_annotation.dart';
 Stream<T> stream<T, U extends JsonSerializable>(GraphQLQuery<T, U> query) {
   final stopwatch = Stopwatch();
   stopwatch.start();
-  return getIt<ArtemisClient>()
+  return getIt<ArtemisClient>(instanceName: InstanceName.wssClient)
       .stream(query)
       .map(throwResponseErrors)
       .map((data) {

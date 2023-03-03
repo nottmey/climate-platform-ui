@@ -435,6 +435,41 @@ class DeletePlanetaryBoundary$Mutation extends JsonSerializable
 }
 
 @JsonSerializable(explicitToJson: true)
+class OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundary
+    extends JsonSerializable with EquatableMixin, PlanetaryBoundaryMixin {
+  OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundary();
+
+  factory OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundary.fromJson(
+          Map<String, dynamic> json) =>
+      _$OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundaryFromJson(json);
+
+  @override
+  List<Object?> get props => [id, name];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundaryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class OnCreatedPlanetaryBoundary$Subscription extends JsonSerializable
+    with EquatableMixin {
+  OnCreatedPlanetaryBoundary$Subscription();
+
+  factory OnCreatedPlanetaryBoundary$Subscription.fromJson(
+          Map<String, dynamic> json) =>
+      _$OnCreatedPlanetaryBoundary$SubscriptionFromJson(json);
+
+  OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundary?
+      onCreatedPlanetaryBoundary;
+
+  @override
+  List<Object?> get props => [onCreatedPlanetaryBoundary];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$OnCreatedPlanetaryBoundary$SubscriptionToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PageInfo
     extends JsonSerializable with EquatableMixin, PageInfoMixin {
   GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PageInfo();
@@ -507,6 +542,46 @@ class GetPlanetaryBoundaryPage$Query extends JsonSerializable
   List<Object?> get props => [listPlanetaryBoundary];
   @override
   Map<String, dynamic> toJson() => _$GetPlanetaryBoundaryPage$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class PublishCreatedPlanetaryBoundary$Mutation$PlanetaryBoundary
+    extends JsonSerializable with EquatableMixin {
+  PublishCreatedPlanetaryBoundary$Mutation$PlanetaryBoundary();
+
+  factory PublishCreatedPlanetaryBoundary$Mutation$PlanetaryBoundary.fromJson(
+          Map<String, dynamic> json) =>
+      _$PublishCreatedPlanetaryBoundary$Mutation$PlanetaryBoundaryFromJson(
+          json);
+
+  late String id;
+
+  String? name;
+
+  @override
+  List<Object?> get props => [id, name];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$PublishCreatedPlanetaryBoundary$Mutation$PlanetaryBoundaryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class PublishCreatedPlanetaryBoundary$Mutation extends JsonSerializable
+    with EquatableMixin {
+  PublishCreatedPlanetaryBoundary$Mutation();
+
+  factory PublishCreatedPlanetaryBoundary$Mutation.fromJson(
+          Map<String, dynamic> json) =>
+      _$PublishCreatedPlanetaryBoundary$MutationFromJson(json);
+
+  PublishCreatedPlanetaryBoundary$Mutation$PlanetaryBoundary?
+      publishCreatedPlanetaryBoundary;
+
+  @override
+  List<Object?> get props => [publishCreatedPlanetaryBoundary];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$PublishCreatedPlanetaryBoundary$MutationToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -1124,6 +1199,76 @@ class DeletePlanetaryBoundaryMutation extends GraphQLQuery<
       DeletePlanetaryBoundary$Mutation.fromJson(json);
 }
 
+final ON_CREATED_PLANETARY_BOUNDARY_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+    'OnCreatedPlanetaryBoundary';
+final ON_CREATED_PLANETARY_BOUNDARY_SUBSCRIPTION_DOCUMENT =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.subscription,
+    name: NameNode(value: 'OnCreatedPlanetaryBoundary'),
+    variableDefinitions: [],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'onCreatedPlanetaryBoundary'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'PlanetaryBoundary'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'PlanetaryBoundary'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'PlanetaryBoundary'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'name'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class OnCreatedPlanetaryBoundarySubscription extends GraphQLQuery<
+    OnCreatedPlanetaryBoundary$Subscription, JsonSerializable> {
+  OnCreatedPlanetaryBoundarySubscription();
+
+  @override
+  final DocumentNode document =
+      ON_CREATED_PLANETARY_BOUNDARY_SUBSCRIPTION_DOCUMENT;
+
+  @override
+  final String operationName =
+      ON_CREATED_PLANETARY_BOUNDARY_SUBSCRIPTION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  List<Object?> get props => [document, operationName];
+  @override
+  OnCreatedPlanetaryBoundary$Subscription parse(Map<String, dynamic> json) =>
+      OnCreatedPlanetaryBoundary$Subscription.fromJson(json);
+}
+
 @JsonSerializable(explicitToJson: true)
 class GetPlanetaryBoundaryPageArguments extends JsonSerializable
     with EquatableMixin {
@@ -1295,6 +1440,81 @@ class GetPlanetaryBoundaryPageQuery extends GraphQLQuery<
   @override
   GetPlanetaryBoundaryPage$Query parse(Map<String, dynamic> json) =>
       GetPlanetaryBoundaryPage$Query.fromJson(json);
+}
+
+final PUBLISH_CREATED_PLANETARY_BOUNDARY_MUTATION_DOCUMENT_OPERATION_NAME =
+    'PublishCreatedPlanetaryBoundary';
+final PUBLISH_CREATED_PLANETARY_BOUNDARY_MUTATION_DOCUMENT =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'PublishCreatedPlanetaryBoundary'),
+    variableDefinitions: [],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'publishCreatedPlanetaryBoundary'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: StringValueNode(
+              value: '3',
+              isBlock: false,
+            ),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'value'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'name'),
+                value: StringValueNode(
+                  value: 'Climate 2',
+                  isBlock: false,
+                ),
+              )
+            ]),
+          ),
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'name'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ]),
+      )
+    ]),
+  )
+]);
+
+class PublishCreatedPlanetaryBoundaryMutation extends GraphQLQuery<
+    PublishCreatedPlanetaryBoundary$Mutation, JsonSerializable> {
+  PublishCreatedPlanetaryBoundaryMutation();
+
+  @override
+  final DocumentNode document =
+      PUBLISH_CREATED_PLANETARY_BOUNDARY_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName =
+      PUBLISH_CREATED_PLANETARY_BOUNDARY_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  List<Object?> get props => [document, operationName];
+  @override
+  PublishCreatedPlanetaryBoundary$Mutation parse(Map<String, dynamic> json) =>
+      PublishCreatedPlanetaryBoundary$Mutation.fromJson(json);
 }
 
 @JsonSerializable(explicitToJson: true)
