@@ -42,6 +42,8 @@ Future<void> main() async {
     queryParameters: {'header': wssHeader, 'payload': wssPayload},
   );
 
+  // pricing: $4.00 per million Query and Data Modification Operations + $0.09 per GB
+  // -> reduce query count by fetching everything at once + only fetch what you need
   getIt.registerSingleton(
     instanceName: InstanceName.httpsClient,
     ArtemisClient.fromLink(
@@ -85,6 +87,8 @@ Future<void> main() async {
     ),
   );
 
+  // pricing: $2.00 per million Real-time 5kb Update Chunks + $0.08 per million minutes of open connection
+  // -> only subscribe to events needed, with shallow data query + close or don't open connection when not needed
   getIt.registerSingleton(
     instanceName: InstanceName.wssClient,
     ArtemisClient.fromLink(
