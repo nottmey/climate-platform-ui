@@ -1,0 +1,6 @@
+ignore:
+  - "**/*.freezed.dart"
+  - "**/*.g.dart"
+  - "**/api.graphql.dart"
+  - "lib/features/database_browser/**/*.dart"
+  - "lib/features/dev/**/*.dart"
