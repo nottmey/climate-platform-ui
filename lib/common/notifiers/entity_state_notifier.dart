@@ -19,20 +19,16 @@ abstract class EntityStateNotifier<T extends Entity>
     final id = value.id;
     if (id != null) {
       // TODO cancel subscriptions on dispose
-      try {
-        subscribeToDeletion(id).first.then((value) {
-          if (mounted) {
-            state = state.copyWith(
-              value: value,
-              isDeleted: true,
-              isLoading: false,
-              isDefault: false,
-            );
-          }
-        });
-      } catch (e) {
-        print(e);
-      }
+      subscribeToDeletion(id).first.then((value) {
+        if (mounted) {
+          state = state.copyWith(
+            value: value,
+            isDeleted: true,
+            isLoading: false,
+            isDefault: false,
+          );
+        }
+      });
     }
   }
 
