@@ -1,0 +1,5 @@
+subscription OnDeletedPlanetaryBoundary($id: ID!) {
+    onDeletedPlanetaryBoundary(id: $id) {
+        ...PlanetaryBoundary
+    }
+}

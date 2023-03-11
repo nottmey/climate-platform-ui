@@ -4,33 +4,112 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class EntityStateNotifier<T extends Entity>
     extends StateNotifier<EntityState<T>> {
-  EntityStateNotifier({required T initialValue})
-      : super(EntityState(value: initialValue));
+  EntityStateNotifier({required T defaultValue})
+      : super(
+          EntityState(
+            value: defaultValue,
+            isDefault: true,
+            isLoading: false,
+          ),
+        ) {
+    _startSubscriptions(defaultValue);
+  }
 
-  void set(T value) {
-    state = state.copyWith(value: value);
+  void _startSubscriptions(T value) {
+    final id = value.id;
+    if (id != null) {
+      // TODO cancel subscriptions on dispose
+      try {
+        subscribeToDeletion(id).first.then((value) {
+          if (mounted) {
+            state = state.copyWith(
+              value: value,
+              isDeleted: true,
+              isLoading: false,
+              isDefault: false,
+            );
+          }
+        });
+      } catch (e) {
+        print(e);
+      }
+    }
+  }
+
+  void set(T initialValue) {
+    state = state.copyWith(
+      value: initialValue,
+      isDefault: false,
+    );
+  }
+
+  Future<void> initLoad() async {
+    final id = state.value.id;
+    if (state.isDefault && !state.isLoading && !state.isDeleted && id != null) {
+      state = state.copyWith(isLoading: true);
+      final value = await requestGet(id);
+      if (mounted) {
+        if (value != null) {
+          state = state.copyWith(
+            value: value,
+            isLoading: false,
+            isDefault: false,
+          );
+        } else {
+          state = state.copyWith(
+            isLoading: false,
+            isDefault: false,
+            isDeleted: true,
+          );
+        }
+      }
+    }
   }
 
   Future<void> update(T newValue) async {
-    state = state.copyWith(value: newValue);
+    state = state.copyWith(
+      value: newValue,
+      isLoading: true,
+    );
     if (newValue.id == null) {
       final responseValue = await requestCreation(newValue);
-      state = state.copyWith(value: responseValue);
+      if (mounted) {
+        _startSubscriptions(responseValue);
+        state = state.copyWith(
+          value: responseValue,
+          isLoading: false,
+        );
+      }
     } else {
       final responseValue = await requestUpdate(newValue);
-      state = state.copyWith(value: responseValue);
+      if (mounted) {
+        state = state.copyWith(
+          value: responseValue,
+          isLoading: false,
+        );
+      }
     }
   }
 
   Future<void> delete() async {
-    state = state.copyWith(isDeleted: true);
+    state = state.copyWith(
+      isDeleted: true,
+      isLoading: true,
+    );
     if (state.value.id != null) {
       final responseValue = await requestDeletion(state.value.id!);
-      if (responseValue != null) {
-        state = state.copyWith(value: responseValue);
+      if (mounted && responseValue != null) {
+        state = state.copyWith(
+          value: responseValue,
+          isLoading: false,
+        );
       }
     }
   }
+
+  Stream<T> subscribeToDeletion(String id);
+
+  Future<T?> requestGet(String id);
 
   Future<T> requestCreation(T value);
 

@@ -1,7 +1,0 @@
-# example for manual testing
-mutation PublishCreatedPlanetaryBoundary {
-    publishCreatedPlanetaryBoundary(id: "3", value: {name: "Climate 2"}) {
-        id
-        name
-    }
-}

@@ -5,9 +5,10 @@ import 'package:climate_platform_ui/api/utils/throw_response_errors.dart';
 import 'package:climate_platform_ui/get_it.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-Stream<T> stream<T, U extends JsonSerializable>(GraphQLQuery<T, U> query) {
+Stream<T> subscribe<T, U extends JsonSerializable>(GraphQLQuery<T, U> query) {
   final stopwatch = Stopwatch();
   stopwatch.start();
+  // TODO close when no longer needed!
   return getIt<ArtemisClient>(instanceName: InstanceName.wssClient)
       .stream(query)
       .map(throwResponseErrors)

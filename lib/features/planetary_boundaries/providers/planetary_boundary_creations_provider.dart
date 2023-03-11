@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:async/async.dart';
 import 'package:climate_platform_ui/api/api.graphql.dart';
-import 'package:climate_platform_ui/api/utils/stream.dart';
+import 'package:climate_platform_ui/api/utils/subscribe.dart';
 import 'package:climate_platform_ui/common/models/entity_state.dart';
 import 'package:climate_platform_ui/common/notifiers/entity_state_notifier.dart';
 import 'package:climate_platform_ui/features/planetary_boundaries/models/planetary_boundary.dart';
@@ -17,7 +17,7 @@ final planetaryBoundaryCreationsProvider = StreamProvider<
     AutoDisposeStateNotifierProvider<EntityStateNotifier<PlanetaryBoundary>,
         EntityState<PlanetaryBoundary>>>((ref) {
   // TODO send stop events when not needed
-  final onlineCreations = stream(OnCreatedPlanetaryBoundarySubscription())
+  final onlineCreations = subscribe(OnCreatedPlanetaryBoundarySubscription())
       .where((event) => event.onCreatedPlanetaryBoundary != null)
       .map((event) {
     final newPlanetaryBoundary = event.onCreatedPlanetaryBoundary!;

@@ -11,6 +11,6 @@ final planetaryBoundaryProviderFamily = StateNotifierProvider.autoDispose
     // keep notifier alive until it is used (allows us to pre-fill it's state)
     final initialKeepAliveLink = ref.keepAlive();
     ref.onAddListener(initialKeepAliveLink.close);
-    return PlanetaryBoundaryStateNotifier();
+    return PlanetaryBoundaryStateNotifier(id: id);
   },
 );

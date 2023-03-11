@@ -1,0 +1,5 @@
+query GetPlanetaryBoundary($id: ID!) {
+    getPlanetaryBoundary(id: $id) {
+        ...PlanetaryBoundary
+    }
+}

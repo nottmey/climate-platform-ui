@@ -7,6 +7,8 @@ part 'entity_state.freezed.dart';
 class EntityState<T extends Entity> with _$EntityState<T> {
   const factory EntityState({
     required T value,
+    @Default(false) bool isDefault,
+    @Default(false) bool isLoading,
     @Default(false) bool isDeleted,
   }) = _EntityState;
 }

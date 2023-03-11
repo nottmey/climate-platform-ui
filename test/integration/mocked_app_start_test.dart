@@ -48,6 +48,13 @@ void main() {
 
   final onCreatedStreamController = StreamController<
       GraphQLResponse<OnCreatedPlanetaryBoundary$Subscription>>();
+  final onCreatedBroadcastStream =
+      onCreatedStreamController.stream.asBroadcastStream();
+
+  final onDeletedStreamController = StreamController<
+      GraphQLResponse<OnDeletedPlanetaryBoundary$Subscription>>();
+  final onDeletedBroadcastStream =
+      onDeletedStreamController.stream.asBroadcastStream();
 
   setUp(() async {
     GoogleFonts.config.allowRuntimeFetching = false;
@@ -83,10 +90,16 @@ void main() {
 
     final mockWssClient = MockArtemisClient();
     when(
-      mockWssClient.stream<OnCreatedPlanetaryBoundary$Subscription,
-          JsonSerializable>(any),
-    ).thenAnswer((_) {
-      return onCreatedStreamController.stream;
+      mockWssClient.stream<dynamic, JsonSerializable>(any),
+    ).thenAnswer((invocation) {
+      final firstArg = invocation.positionalArguments.first;
+      if (firstArg is OnCreatedPlanetaryBoundarySubscription) {
+        return onCreatedBroadcastStream;
+      } else if (firstArg is OnDeletedPlanetaryBoundarySubscription) {
+        return onDeletedBroadcastStream;
+      } else {
+        throw AssertionError('not able to mock $firstArg');
+      }
     });
 
     getIt.registerSingleton<ArtemisClient>(
@@ -114,12 +127,13 @@ void main() {
     expect(find.text('Test 2'), findsOneWidget);
     expect(find.text('Test 3'), findsOneWidget);
 
-    final value = OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundary();
-    value.id = '4';
-    value.name = 'Test 4';
-    final data = OnCreatedPlanetaryBoundary$Subscription();
-    data.onCreatedPlanetaryBoundary = value;
-    onCreatedStreamController.add(GraphQLResponse(data: data));
+    final creation =
+        OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundary();
+    creation.id = '4';
+    creation.name = 'Test 4';
+    final onCreatedData = OnCreatedPlanetaryBoundary$Subscription();
+    onCreatedData.onCreatedPlanetaryBoundary = creation;
+    onCreatedStreamController.add(GraphQLResponse(data: onCreatedData));
 
     await multiScreenGolden(
       tester,
@@ -130,5 +144,21 @@ void main() {
     await captureScreen(tester, 'mocked_app_start_with_pushed_update');
 
     expect(find.text('Test 4'), findsOneWidget);
+
+    final deletion =
+        OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundary();
+    deletion.id = '1';
+    deletion.name = 'Test 1';
+    final onDeletedData = OnDeletedPlanetaryBoundary$Subscription();
+    onDeletedData.onDeletedPlanetaryBoundary = deletion;
+    onDeletedStreamController.add(GraphQLResponse(data: onDeletedData));
+
+    await multiScreenGolden(
+      tester,
+      'mocked_app_start_with_pushed_deletion',
+      devices: devices,
+    );
+
+    await captureScreen(tester, 'mocked_app_start_with_pushed_deletion');
   });
 }
