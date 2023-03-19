@@ -6,31 +6,63 @@ part of 'api.graphql.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetEntity$Query$Entity _$GetEntity$Query$EntityFromJson(
-        Map<String, dynamic> json) =>
-    GetEntity$Query$Entity()
-      ..id = json['id'] as String
-      ..attributes = (json['attributes'] as List<dynamic>)
-          .map((e) => EntityMixin$Attribute.fromJson(e as Map<String, dynamic>))
-          .toList();
+GetEntityPage$Query$EntityListPage$PageInfo
+    _$GetEntityPage$Query$EntityListPage$PageInfoFromJson(
+            Map<String, dynamic> json) =>
+        GetEntityPage$Query$EntityListPage$PageInfo()
+          ..next = json['next'] as int?
+          ..size = json['size'] as int;
 
-Map<String, dynamic> _$GetEntity$Query$EntityToJson(
-        GetEntity$Query$Entity instance) =>
+Map<String, dynamic> _$GetEntityPage$Query$EntityListPage$PageInfoToJson(
+        GetEntityPage$Query$EntityListPage$PageInfo instance) =>
+    <String, dynamic>{
+      'next': instance.next,
+      'size': instance.size,
+    };
+
+GetEntityPage$Query$EntityListPage$Entity
+    _$GetEntityPage$Query$EntityListPage$EntityFromJson(
+            Map<String, dynamic> json) =>
+        GetEntityPage$Query$EntityListPage$Entity()
+          ..id = json['id'] as String
+          ..attributes = (json['attributes'] as List<dynamic>)
+              .map((e) =>
+                  EntityMixin$Attribute.fromJson(e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic> _$GetEntityPage$Query$EntityListPage$EntityToJson(
+        GetEntityPage$Query$EntityListPage$Entity instance) =>
     <String, dynamic>{
       'id': instance.id,
       'attributes': instance.attributes.map((e) => e.toJson()).toList(),
     };
 
-GetEntity$Query _$GetEntity$QueryFromJson(Map<String, dynamic> json) =>
-    GetEntity$Query()
-      ..getEntity = json['getEntity'] == null
-          ? null
-          : GetEntity$Query$Entity.fromJson(
-              json['getEntity'] as Map<String, dynamic>);
+GetEntityPage$Query$EntityListPage _$GetEntityPage$Query$EntityListPageFromJson(
+        Map<String, dynamic> json) =>
+    GetEntityPage$Query$EntityListPage()
+      ..info = GetEntityPage$Query$EntityListPage$PageInfo.fromJson(
+          json['info'] as Map<String, dynamic>)
+      ..values = (json['values'] as List<dynamic>)
+          .map((e) => GetEntityPage$Query$EntityListPage$Entity.fromJson(
+              e as Map<String, dynamic>))
+          .toList();
 
-Map<String, dynamic> _$GetEntity$QueryToJson(GetEntity$Query instance) =>
+Map<String, dynamic> _$GetEntityPage$Query$EntityListPageToJson(
+        GetEntityPage$Query$EntityListPage instance) =>
     <String, dynamic>{
-      'getEntity': instance.getEntity?.toJson(),
+      'info': instance.info.toJson(),
+      'values': instance.values.map((e) => e.toJson()).toList(),
+    };
+
+GetEntityPage$Query _$GetEntityPage$QueryFromJson(Map<String, dynamic> json) =>
+    GetEntityPage$Query()
+      ..listEntity = GetEntityPage$Query$EntityListPage.fromJson(
+          json['listEntity'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetEntityPage$QueryToJson(
+        GetEntityPage$Query instance) =>
+    <String, dynamic>{
+      'listEntity': instance.listEntity.toJson(),
     };
 
 EntityMixin$Attribute$StringAttribute
@@ -236,65 +268,6 @@ Map<String, dynamic> _$EntityMixin$AttributeToJson(
       'name': instance.name,
     };
 
-GetEntityPage$Query$EntityListPage$PageInfo
-    _$GetEntityPage$Query$EntityListPage$PageInfoFromJson(
-            Map<String, dynamic> json) =>
-        GetEntityPage$Query$EntityListPage$PageInfo()
-          ..next = json['next'] as int?
-          ..size = json['size'] as int;
-
-Map<String, dynamic> _$GetEntityPage$Query$EntityListPage$PageInfoToJson(
-        GetEntityPage$Query$EntityListPage$PageInfo instance) =>
-    <String, dynamic>{
-      'next': instance.next,
-      'size': instance.size,
-    };
-
-GetEntityPage$Query$EntityListPage$Entity
-    _$GetEntityPage$Query$EntityListPage$EntityFromJson(
-            Map<String, dynamic> json) =>
-        GetEntityPage$Query$EntityListPage$Entity()
-          ..id = json['id'] as String
-          ..attributes = (json['attributes'] as List<dynamic>)
-              .map((e) =>
-                  EntityMixin$Attribute.fromJson(e as Map<String, dynamic>))
-              .toList();
-
-Map<String, dynamic> _$GetEntityPage$Query$EntityListPage$EntityToJson(
-        GetEntityPage$Query$EntityListPage$Entity instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'attributes': instance.attributes.map((e) => e.toJson()).toList(),
-    };
-
-GetEntityPage$Query$EntityListPage _$GetEntityPage$Query$EntityListPageFromJson(
-        Map<String, dynamic> json) =>
-    GetEntityPage$Query$EntityListPage()
-      ..info = GetEntityPage$Query$EntityListPage$PageInfo.fromJson(
-          json['info'] as Map<String, dynamic>)
-      ..values = (json['values'] as List<dynamic>)
-          .map((e) => GetEntityPage$Query$EntityListPage$Entity.fromJson(
-              e as Map<String, dynamic>))
-          .toList();
-
-Map<String, dynamic> _$GetEntityPage$Query$EntityListPageToJson(
-        GetEntityPage$Query$EntityListPage instance) =>
-    <String, dynamic>{
-      'info': instance.info.toJson(),
-      'values': instance.values.map((e) => e.toJson()).toList(),
-    };
-
-GetEntityPage$Query _$GetEntityPage$QueryFromJson(Map<String, dynamic> json) =>
-    GetEntityPage$Query()
-      ..listEntity = GetEntityPage$Query$EntityListPage.fromJson(
-          json['listEntity'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$GetEntityPage$QueryToJson(
-        GetEntityPage$Query instance) =>
-    <String, dynamic>{
-      'listEntity': instance.listEntity.toJson(),
-    };
-
 EntityFilter _$EntityFilterFromJson(Map<String, dynamic> json) => EntityFilter(
       attributes: (json['attributes'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -304,6 +277,33 @@ EntityFilter _$EntityFilterFromJson(Map<String, dynamic> json) => EntityFilter(
 Map<String, dynamic> _$EntityFilterToJson(EntityFilter instance) =>
     <String, dynamic>{
       'attributes': instance.attributes,
+    };
+
+GetEntity$Query$Entity _$GetEntity$Query$EntityFromJson(
+        Map<String, dynamic> json) =>
+    GetEntity$Query$Entity()
+      ..id = json['id'] as String
+      ..attributes = (json['attributes'] as List<dynamic>)
+          .map((e) => EntityMixin$Attribute.fromJson(e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetEntity$Query$EntityToJson(
+        GetEntity$Query$Entity instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'attributes': instance.attributes.map((e) => e.toJson()).toList(),
+    };
+
+GetEntity$Query _$GetEntity$QueryFromJson(Map<String, dynamic> json) =>
+    GetEntity$Query()
+      ..getEntity = json['getEntity'] == null
+          ? null
+          : GetEntity$Query$Entity.fromJson(
+              json['getEntity'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetEntity$QueryToJson(GetEntity$Query instance) =>
+    <String, dynamic>{
+      'getEntity': instance.getEntity?.toJson(),
     };
 
 CreatePlanetaryBoundary$Mutation$PlanetaryBoundary
@@ -347,6 +347,41 @@ Map<String, dynamic> _$PlanetaryBoundaryInputToJson(
       'name': instance.name,
     };
 
+OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundary
+    _$OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundaryFromJson(
+            Map<String, dynamic> json) =>
+        OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundary()
+          ..id = json['id'] as String
+          ..session = json['session'] as String?
+          ..name = json['name'] as String?;
+
+Map<String,
+    dynamic> _$OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundaryToJson(
+        OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundary instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'session': instance.session,
+      'name': instance.name,
+    };
+
+OnDeletedPlanetaryBoundary$Subscription
+    _$OnDeletedPlanetaryBoundary$SubscriptionFromJson(
+            Map<String, dynamic> json) =>
+        OnDeletedPlanetaryBoundary$Subscription()
+          ..onDeletedPlanetaryBoundary =
+              json['onDeletedPlanetaryBoundary'] == null
+                  ? null
+                  : OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundary
+                      .fromJson(json['onDeletedPlanetaryBoundary']
+                          as Map<String, dynamic>);
+
+Map<String, dynamic> _$OnDeletedPlanetaryBoundary$SubscriptionToJson(
+        OnDeletedPlanetaryBoundary$Subscription instance) =>
+    <String, dynamic>{
+      'onDeletedPlanetaryBoundary':
+          instance.onDeletedPlanetaryBoundary?.toJson(),
+    };
+
 DeletePlanetaryBoundary$Mutation$PlanetaryBoundary
     _$DeletePlanetaryBoundary$Mutation$PlanetaryBoundaryFromJson(
             Map<String, dynamic> json) =>
@@ -377,34 +412,39 @@ Map<String, dynamic> _$DeletePlanetaryBoundary$MutationToJson(
       'deletePlanetaryBoundary': instance.deletePlanetaryBoundary?.toJson(),
     };
 
-GetPlanetaryBoundary$Query$PlanetaryBoundary
-    _$GetPlanetaryBoundary$Query$PlanetaryBoundaryFromJson(
+OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundary
+    _$OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundaryFromJson(
             Map<String, dynamic> json) =>
-        GetPlanetaryBoundary$Query$PlanetaryBoundary()
+        OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundary()
           ..id = json['id'] as String
           ..session = json['session'] as String?
           ..name = json['name'] as String?;
 
-Map<String, dynamic> _$GetPlanetaryBoundary$Query$PlanetaryBoundaryToJson(
-        GetPlanetaryBoundary$Query$PlanetaryBoundary instance) =>
+Map<String,
+    dynamic> _$OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundaryToJson(
+        OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundary instance) =>
     <String, dynamic>{
       'id': instance.id,
       'session': instance.session,
       'name': instance.name,
     };
 
-GetPlanetaryBoundary$Query _$GetPlanetaryBoundary$QueryFromJson(
-        Map<String, dynamic> json) =>
-    GetPlanetaryBoundary$Query()
-      ..getPlanetaryBoundary = json['getPlanetaryBoundary'] == null
-          ? null
-          : GetPlanetaryBoundary$Query$PlanetaryBoundary.fromJson(
-              json['getPlanetaryBoundary'] as Map<String, dynamic>);
+OnCreatedPlanetaryBoundary$Subscription
+    _$OnCreatedPlanetaryBoundary$SubscriptionFromJson(
+            Map<String, dynamic> json) =>
+        OnCreatedPlanetaryBoundary$Subscription()
+          ..onCreatedPlanetaryBoundary =
+              json['onCreatedPlanetaryBoundary'] == null
+                  ? null
+                  : OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundary
+                      .fromJson(json['onCreatedPlanetaryBoundary']
+                          as Map<String, dynamic>);
 
-Map<String, dynamic> _$GetPlanetaryBoundary$QueryToJson(
-        GetPlanetaryBoundary$Query instance) =>
+Map<String, dynamic> _$OnCreatedPlanetaryBoundary$SubscriptionToJson(
+        OnCreatedPlanetaryBoundary$Subscription instance) =>
     <String, dynamic>{
-      'getPlanetaryBoundary': instance.getPlanetaryBoundary?.toJson(),
+      'onCreatedPlanetaryBoundary':
+          instance.onCreatedPlanetaryBoundary?.toJson(),
     };
 
 GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PageInfo
@@ -475,84 +515,34 @@ Map<String, dynamic> _$GetPlanetaryBoundaryPage$QueryToJson(
       'listPlanetaryBoundary': instance.listPlanetaryBoundary.toJson(),
     };
 
-OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundary
-    _$OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundaryFromJson(
+GetPlanetaryBoundary$Query$PlanetaryBoundary
+    _$GetPlanetaryBoundary$Query$PlanetaryBoundaryFromJson(
             Map<String, dynamic> json) =>
-        OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundary()
+        GetPlanetaryBoundary$Query$PlanetaryBoundary()
           ..id = json['id'] as String
           ..session = json['session'] as String?
           ..name = json['name'] as String?;
 
-Map<String,
-    dynamic> _$OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundaryToJson(
-        OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundary instance) =>
+Map<String, dynamic> _$GetPlanetaryBoundary$Query$PlanetaryBoundaryToJson(
+        GetPlanetaryBoundary$Query$PlanetaryBoundary instance) =>
     <String, dynamic>{
       'id': instance.id,
       'session': instance.session,
       'name': instance.name,
     };
 
-OnCreatedPlanetaryBoundary$Subscription
-    _$OnCreatedPlanetaryBoundary$SubscriptionFromJson(
-            Map<String, dynamic> json) =>
-        OnCreatedPlanetaryBoundary$Subscription()
-          ..onCreatedPlanetaryBoundary =
-              json['onCreatedPlanetaryBoundary'] == null
-                  ? null
-                  : OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundary
-                      .fromJson(json['onCreatedPlanetaryBoundary']
-                          as Map<String, dynamic>);
+GetPlanetaryBoundary$Query _$GetPlanetaryBoundary$QueryFromJson(
+        Map<String, dynamic> json) =>
+    GetPlanetaryBoundary$Query()
+      ..getPlanetaryBoundary = json['getPlanetaryBoundary'] == null
+          ? null
+          : GetPlanetaryBoundary$Query$PlanetaryBoundary.fromJson(
+              json['getPlanetaryBoundary'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$OnCreatedPlanetaryBoundary$SubscriptionToJson(
-        OnCreatedPlanetaryBoundary$Subscription instance) =>
+Map<String, dynamic> _$GetPlanetaryBoundary$QueryToJson(
+        GetPlanetaryBoundary$Query instance) =>
     <String, dynamic>{
-      'onCreatedPlanetaryBoundary':
-          instance.onCreatedPlanetaryBoundary?.toJson(),
-    };
-
-OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundary
-    _$OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundaryFromJson(
-            Map<String, dynamic> json) =>
-        OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundary()
-          ..id = json['id'] as String
-          ..session = json['session'] as String?
-          ..name = json['name'] as String?;
-
-Map<String,
-    dynamic> _$OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundaryToJson(
-        OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundary instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'session': instance.session,
-      'name': instance.name,
-    };
-
-OnDeletedPlanetaryBoundary$Subscription
-    _$OnDeletedPlanetaryBoundary$SubscriptionFromJson(
-            Map<String, dynamic> json) =>
-        OnDeletedPlanetaryBoundary$Subscription()
-          ..onDeletedPlanetaryBoundary =
-              json['onDeletedPlanetaryBoundary'] == null
-                  ? null
-                  : OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundary
-                      .fromJson(json['onDeletedPlanetaryBoundary']
-                          as Map<String, dynamic>);
-
-Map<String, dynamic> _$OnDeletedPlanetaryBoundary$SubscriptionToJson(
-        OnDeletedPlanetaryBoundary$Subscription instance) =>
-    <String, dynamic>{
-      'onDeletedPlanetaryBoundary':
-          instance.onDeletedPlanetaryBoundary?.toJson(),
-    };
-
-GetEntityArguments _$GetEntityArgumentsFromJson(Map<String, dynamic> json) =>
-    GetEntityArguments(
-      id: json['id'] as String,
-    );
-
-Map<String, dynamic> _$GetEntityArgumentsToJson(GetEntityArguments instance) =>
-    <String, dynamic>{
-      'id': instance.id,
+      'getPlanetaryBoundary': instance.getPlanetaryBoundary?.toJson(),
     };
 
 GetEntityPageArguments _$GetEntityPageArgumentsFromJson(
@@ -573,6 +563,16 @@ Map<String, dynamic> _$GetEntityPageArgumentsToJson(
       'size': instance.size,
     };
 
+GetEntityArguments _$GetEntityArgumentsFromJson(Map<String, dynamic> json) =>
+    GetEntityArguments(
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$GetEntityArgumentsToJson(GetEntityArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
 CreatePlanetaryBoundaryArguments _$CreatePlanetaryBoundaryArgumentsFromJson(
         Map<String, dynamic> json) =>
     CreatePlanetaryBoundaryArguments(
@@ -586,6 +586,18 @@ Map<String, dynamic> _$CreatePlanetaryBoundaryArgumentsToJson(
     <String, dynamic>{
       'session': instance.session,
       'value': instance.value.toJson(),
+    };
+
+OnDeletedPlanetaryBoundaryArguments
+    _$OnDeletedPlanetaryBoundaryArgumentsFromJson(Map<String, dynamic> json) =>
+        OnDeletedPlanetaryBoundaryArguments(
+          id: json['id'] as String,
+        );
+
+Map<String, dynamic> _$OnDeletedPlanetaryBoundaryArgumentsToJson(
+        OnDeletedPlanetaryBoundaryArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
     };
 
 DeletePlanetaryBoundaryArguments _$DeletePlanetaryBoundaryArgumentsFromJson(
@@ -602,18 +614,6 @@ Map<String, dynamic> _$DeletePlanetaryBoundaryArgumentsToJson(
       'session': instance.session,
     };
 
-GetPlanetaryBoundaryArguments _$GetPlanetaryBoundaryArgumentsFromJson(
-        Map<String, dynamic> json) =>
-    GetPlanetaryBoundaryArguments(
-      id: json['id'] as String,
-    );
-
-Map<String, dynamic> _$GetPlanetaryBoundaryArgumentsToJson(
-        GetPlanetaryBoundaryArguments instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-    };
-
 GetPlanetaryBoundaryPageArguments _$GetPlanetaryBoundaryPageArgumentsFromJson(
         Map<String, dynamic> json) =>
     GetPlanetaryBoundaryPageArguments(
@@ -628,14 +628,14 @@ Map<String, dynamic> _$GetPlanetaryBoundaryPageArgumentsToJson(
       'size': instance.size,
     };
 
-OnDeletedPlanetaryBoundaryArguments
-    _$OnDeletedPlanetaryBoundaryArgumentsFromJson(Map<String, dynamic> json) =>
-        OnDeletedPlanetaryBoundaryArguments(
-          id: json['id'] as String,
-        );
+GetPlanetaryBoundaryArguments _$GetPlanetaryBoundaryArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetPlanetaryBoundaryArguments(
+      id: json['id'] as String,
+    );
 
-Map<String, dynamic> _$OnDeletedPlanetaryBoundaryArgumentsToJson(
-        OnDeletedPlanetaryBoundaryArguments instance) =>
+Map<String, dynamic> _$GetPlanetaryBoundaryArgumentsToJson(
+        GetPlanetaryBoundaryArguments instance) =>
     <String, dynamic>{
       'id': instance.id,
     };

@@ -4,6 +4,7 @@ import 'package:climate_platform_ui/common/providers/session_provider.dart';
 import 'package:climate_platform_ui/common/widgets/app_entity_card.dart';
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
 import 'package:climate_platform_ui/common/widgets/app_widget.dart';
+import 'package:climate_platform_ui/features/planetary_boundaries/models/boundary_details_page_extra.dart';
 import 'package:climate_platform_ui/features/planetary_boundaries/models/planetary_boundary.dart';
 import 'package:climate_platform_ui/features/planetary_boundaries/notifiers/planetary_boundary_state_notifier.dart';
 import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_creations_provider.dart';
@@ -31,10 +32,15 @@ class PlanetaryBoundaryCard extends AppEntityCard<PlanetaryBoundary> {
   @override
   void onTab(
     BuildContext context,
-    EntityStateNotifier<PlanetaryBoundary> notifier,
+    AutoDisposeStateNotifierProvider<EntityStateNotifier<PlanetaryBoundary>,
+            EntityState<PlanetaryBoundary>>
+        provider,
+    String? id,
   ) {
-    // TODO
-    context.go(overviewDetailsPath);
+    context.go(
+      overviewDetailsPath(id),
+      extra: BoundaryDetailsPageExtra(provider: provider),
+    );
   }
 
   @override

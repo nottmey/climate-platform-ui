@@ -55,7 +55,12 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
         providerConstructor = null,
         creationsSink = null;
 
-  void onTab(BuildContext context, EntityStateNotifier<T> notifier);
+  void onTab(
+    BuildContext context,
+    AutoDisposeStateNotifierProvider<EntityStateNotifier<T>, EntityState<T>>
+        provider,
+    String? id,
+  );
 
   FormGroup createFormControls(T value);
 
@@ -164,7 +169,11 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
         onTab: entityState.isDeleted
             ? null
             : () {
-                onTab(context, ref.read(currentProvider.notifier));
+                onTab(
+                  context,
+                  currentProvider,
+                  ref.read(currentProvider).value.id,
+                );
               },
         actions: entityState.isDeleted
             ? null
