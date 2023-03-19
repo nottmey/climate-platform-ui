@@ -15,36 +15,13 @@ import 'package:mockito/mockito.dart';
 
 import './mocked_app_start_test.mocks.dart';
 import '../utils/capture_screen.dart';
+import '../utils/clear_screenshots_and_failures.dart';
+import '../utils/devices.dart';
 import '../utils/load_internal_icon_font.dart';
 
 @GenerateMocks([ArtemisClient])
 void main() {
-  final devices = [
-    const Device(
-      name: 'phone',
-      size: Size(390, 844),
-      safeArea: EdgeInsets.fromLTRB(0, 47, 0, 34),
-      // devicePixelRatio breaks responsiveness (MediaQuery size is wrong)
-      // using it nevertheless, because else we get false 'Pixel test failed, 0.00% diff detected.' errors
-      devicePixelRatio: 2,
-    ),
-    const Device(
-      name: 'tablet',
-      size: Size(820, 1180),
-      devicePixelRatio: 2,
-    ),
-    // larger devices cause false 'Pixel test failed, 0.00% diff detected.' errors
-    // const Device(
-    //   name: 'laptop',
-    //   size: Size(1366, 768),
-    //   devicePixelRatio: 2,
-    // ),
-    // const Device(
-    //   name: 'desktop',
-    //   size: Size(1920, 1080),
-    //   devicePixelRatio: 2,
-    // ),
-  ];
+  clearScreenshotsAndFailures();
 
   final onCreatedStreamController = StreamController<
       GraphQLResponse<OnCreatedPlanetaryBoundary$Subscription>>();
@@ -147,8 +124,8 @@ void main() {
 
     final deletion =
         OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundary();
-    deletion.id = '1';
-    deletion.name = 'Test 1';
+    deletion.id = '4';
+    deletion.name = 'Test 4';
     final onDeletedData = OnDeletedPlanetaryBoundary$Subscription();
     onDeletedData.onDeletedPlanetaryBoundary = deletion;
     onDeletedStreamController.add(GraphQLResponse(data: onDeletedData));

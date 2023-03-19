@@ -23,7 +23,10 @@ abstract class EntityStateNotifier<T extends Entity>
     final id = value.id;
     if (id != null) {
       // TODO cancel subscriptions on dispose
-      subscribeToDeletion(id).first.then((value) {
+      subscribeToDeletion(id)
+          .where((event) => event.id == id)
+          .first
+          .then((value) {
         if (mounted) {
           state = state.copyWith(
             value: value,

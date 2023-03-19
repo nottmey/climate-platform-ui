@@ -51,6 +51,7 @@ dev_dependencies:
   json_serializable:
   lint:
   mockito:
+  path:
   platform:
   riverpod_generator:
 
