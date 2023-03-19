@@ -16,6 +16,6 @@ const devices = [
   Device(
     name: 'laptop',
     size: Size(1366, 768),
-    devicePixelRatio: 2,
+    devicePixelRatio: 1.5, // higher causes invalid 0.00% pixel diff errors
   ),
 ];
