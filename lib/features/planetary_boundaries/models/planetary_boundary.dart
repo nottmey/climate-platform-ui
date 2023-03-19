@@ -8,6 +8,7 @@ class PlanetaryBoundary extends PlanetaryBoundaryInput with Entity {
 
   PlanetaryBoundary.existing(PlanetaryBoundaryMixin mixin) {
     id = mixin.id;
+    session = mixin.session;
     name = mixin.name;
   }
 
@@ -15,6 +16,7 @@ class PlanetaryBoundary extends PlanetaryBoundaryInput with Entity {
     // TODO use lib for this
     final copy = PlanetaryBoundary();
     copy.id = id;
+    copy.session = session;
     copy.name = name;
     return copy;
   }

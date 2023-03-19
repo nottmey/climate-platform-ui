@@ -5,6 +5,8 @@ mixin Entity on JsonSerializable, EquatableMixin {
   // volatile, not present in json, which is only used as input object (without id)
   String? id;
 
+  String? session;
+
   @override
-  List<Object?> get props => [id, ...super.props];
+  List<Object?> get props => [id, session, ...super.props];
 }

@@ -4,8 +4,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class EntityStateNotifier<T extends Entity>
     extends StateNotifier<EntityState<T>> {
-  EntityStateNotifier({required T defaultValue})
-      : super(
+  final String session;
+
+  EntityStateNotifier({
+    required this.session,
+    required T defaultValue,
+  }) : super(
           EntityState(
             value: defaultValue,
             isDefault: true,
@@ -68,7 +72,7 @@ abstract class EntityStateNotifier<T extends Entity>
       isLoading: true,
     );
     if (newValue.id == null) {
-      final responseValue = await requestCreation(newValue);
+      final responseValue = await requestCreation(session, newValue);
       if (mounted) {
         _startSubscriptions(responseValue);
         state = state.copyWith(
@@ -77,7 +81,7 @@ abstract class EntityStateNotifier<T extends Entity>
         );
       }
     } else {
-      final responseValue = await requestUpdate(newValue);
+      final responseValue = await requestUpdate(session, newValue);
       if (mounted) {
         state = state.copyWith(
           value: responseValue,
@@ -93,7 +97,7 @@ abstract class EntityStateNotifier<T extends Entity>
       isLoading: true,
     );
     if (state.value.id != null) {
-      final responseValue = await requestDeletion(state.value.id!);
+      final responseValue = await requestDeletion(state.value.id!, session);
       if (mounted && responseValue != null) {
         state = state.copyWith(
           value: responseValue,
@@ -107,9 +111,9 @@ abstract class EntityStateNotifier<T extends Entity>
 
   Future<T?> requestGet(String id);
 
-  Future<T> requestCreation(T value);
+  Future<T> requestCreation(String session, T value);
 
-  Future<T> requestUpdate(T value);
+  Future<T> requestUpdate(String session, T value);
 
-  Future<T?> requestDeletion(String id);
+  Future<T?> requestDeletion(String id, String session);
 }

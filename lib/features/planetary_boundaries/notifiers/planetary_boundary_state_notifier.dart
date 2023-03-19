@@ -6,7 +6,7 @@ import 'package:climate_platform_ui/features/planetary_boundaries/models/planeta
 
 class PlanetaryBoundaryStateNotifier
     extends EntityStateNotifier<PlanetaryBoundary> {
-  PlanetaryBoundaryStateNotifier({String? id})
+  PlanetaryBoundaryStateNotifier({required super.session, String? id})
       : super(defaultValue: PlanetaryBoundary(id: id));
 
   @override
@@ -37,30 +37,40 @@ class PlanetaryBoundaryStateNotifier
   }
 
   @override
-  Future<PlanetaryBoundary> requestCreation(PlanetaryBoundary value) async {
+  Future<PlanetaryBoundary> requestCreation(
+    String session,
+    PlanetaryBoundary value,
+  ) async {
     final result = await execute(
       CreatePlanetaryBoundaryMutation(
-        variables: CreatePlanetaryBoundaryArguments(value: value),
+        variables: CreatePlanetaryBoundaryArguments(
+          session: session,
+          value: value,
+        ),
       ),
     );
     return PlanetaryBoundary.existing(result.createPlanetaryBoundary);
   }
 
   @override
-  Future<PlanetaryBoundary> requestUpdate(PlanetaryBoundary value) async {
+  Future<PlanetaryBoundary> requestUpdate(
+    String session,
+    PlanetaryBoundary value,
+  ) async {
     // TODO: implement requestUpdate
     await Future<void>.delayed(const Duration(seconds: 1));
     final copy = value.copy();
     copy.id = '123';
+    copy.session = session;
     copy.name = 'updated planetary boundary';
     return copy;
   }
 
   @override
-  Future<PlanetaryBoundary?> requestDeletion(String id) async {
+  Future<PlanetaryBoundary?> requestDeletion(String id, String session) async {
     final result = await execute(
       DeletePlanetaryBoundaryMutation(
-        variables: DeletePlanetaryBoundaryArguments(id: id),
+        variables: DeletePlanetaryBoundaryArguments(id: id, session: session),
       ),
     );
     if (result.deletePlanetaryBoundary != null) {

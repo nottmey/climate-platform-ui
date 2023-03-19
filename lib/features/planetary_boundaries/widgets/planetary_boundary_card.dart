@@ -1,5 +1,6 @@
 import 'package:climate_platform_ui/common/models/entity_state.dart';
 import 'package:climate_platform_ui/common/notifiers/entity_state_notifier.dart';
+import 'package:climate_platform_ui/common/providers/session_provider.dart';
 import 'package:climate_platform_ui/common/widgets/app_entity_card.dart';
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
 import 'package:climate_platform_ui/common/widgets/app_widget.dart';
@@ -16,7 +17,10 @@ class PlanetaryBoundaryCard extends AppEntityCard<PlanetaryBoundary> {
   PlanetaryBoundaryCard.creation({super.key})
       : super.creation(
           providerConstructor: () => AutoDisposeStateNotifierProvider(
-            (ref) => PlanetaryBoundaryStateNotifier(),
+            (ref) {
+              final session = ref.read(sessionProvider);
+              return PlanetaryBoundaryStateNotifier(session: session);
+            },
           ),
           creationsSink: planetaryBoundaryCreationsSink,
         );

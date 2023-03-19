@@ -16,6 +16,7 @@ mixin PageInfoMixin {
 }
 mixin PlanetaryBoundaryMixin {
   late String id;
+  String? session;
   String? name;
 }
 
@@ -389,7 +390,7 @@ class CreatePlanetaryBoundary$Mutation$PlanetaryBoundary
       _$CreatePlanetaryBoundary$Mutation$PlanetaryBoundaryFromJson(json);
 
   @override
-  List<Object?> get props => [id, name];
+  List<Object?> get props => [id, session, name];
   @override
   Map<String, dynamic> toJson() =>
       _$CreatePlanetaryBoundary$Mutation$PlanetaryBoundaryToJson(this);
@@ -439,7 +440,7 @@ class DeletePlanetaryBoundary$Mutation$PlanetaryBoundary
       _$DeletePlanetaryBoundary$Mutation$PlanetaryBoundaryFromJson(json);
 
   @override
-  List<Object?> get props => [id, name];
+  List<Object?> get props => [id, session, name];
   @override
   Map<String, dynamic> toJson() =>
       _$DeletePlanetaryBoundary$Mutation$PlanetaryBoundaryToJson(this);
@@ -473,7 +474,7 @@ class GetPlanetaryBoundary$Query$PlanetaryBoundary extends JsonSerializable
       _$GetPlanetaryBoundary$Query$PlanetaryBoundaryFromJson(json);
 
   @override
-  List<Object?> get props => [id, name];
+  List<Object?> get props => [id, session, name];
   @override
   Map<String, dynamic> toJson() =>
       _$GetPlanetaryBoundary$Query$PlanetaryBoundaryToJson(this);
@@ -523,7 +524,7 @@ class GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PlanetaryBoundary
           json);
 
   @override
-  List<Object?> get props => [id, name];
+  List<Object?> get props => [id, session, name];
   @override
   Map<String, dynamic> toJson() =>
       _$GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PlanetaryBoundaryToJson(
@@ -579,7 +580,7 @@ class OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundary
       _$OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundaryFromJson(json);
 
   @override
-  List<Object?> get props => [id, name];
+  List<Object?> get props => [id, session, name];
   @override
   Map<String, dynamic> toJson() =>
       _$OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundaryToJson(this);
@@ -614,7 +615,7 @@ class OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundary
       _$OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundaryFromJson(json);
 
   @override
-  List<Object?> get props => [id, name];
+  List<Object?> get props => [id, session, name];
   @override
   Map<String, dynamic> toJson() =>
       _$OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundaryToJson(this);
@@ -1309,17 +1310,22 @@ class GetEntityPageQuery
 @JsonSerializable(explicitToJson: true)
 class CreatePlanetaryBoundaryArguments extends JsonSerializable
     with EquatableMixin {
-  CreatePlanetaryBoundaryArguments({required this.value});
+  CreatePlanetaryBoundaryArguments({
+    required this.session,
+    required this.value,
+  });
 
   @override
   factory CreatePlanetaryBoundaryArguments.fromJson(
           Map<String, dynamic> json) =>
       _$CreatePlanetaryBoundaryArgumentsFromJson(json);
 
+  late String session;
+
   late PlanetaryBoundaryInput value;
 
   @override
-  List<Object?> get props => [value];
+  List<Object?> get props => [session, value];
   @override
   Map<String, dynamic> toJson() =>
       _$CreatePlanetaryBoundaryArgumentsToJson(this);
@@ -1333,6 +1339,15 @@ final CREATE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT = DocumentNode(definitions: [
     name: NameNode(value: 'CreatePlanetaryBoundary'),
     variableDefinitions: [
       VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'session')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'value')),
         type: NamedTypeNode(
           name: NameNode(value: 'PlanetaryBoundaryInput'),
@@ -1340,7 +1355,7 @@ final CREATE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT = DocumentNode(definitions: [
         ),
         defaultValue: DefaultValueNode(value: null),
         directives: [],
-      )
+      ),
     ],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
@@ -1349,9 +1364,13 @@ final CREATE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT = DocumentNode(definitions: [
         alias: null,
         arguments: [
           ArgumentNode(
+            name: NameNode(value: 'session'),
+            value: VariableNode(name: NameNode(value: 'session')),
+          ),
+          ArgumentNode(
             name: NameNode(value: 'value'),
             value: VariableNode(name: NameNode(value: 'value')),
-          )
+          ),
         ],
         directives: [],
         selectionSet: SelectionSetNode(selections: [
@@ -1374,6 +1393,13 @@ final CREATE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT = DocumentNode(definitions: [
     selectionSet: SelectionSetNode(selections: [
       FieldNode(
         name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'session'),
         alias: null,
         arguments: [],
         directives: [],
@@ -1414,7 +1440,10 @@ class CreatePlanetaryBoundaryMutation extends GraphQLQuery<
 @JsonSerializable(explicitToJson: true)
 class DeletePlanetaryBoundaryArguments extends JsonSerializable
     with EquatableMixin {
-  DeletePlanetaryBoundaryArguments({required this.id});
+  DeletePlanetaryBoundaryArguments({
+    required this.id,
+    required this.session,
+  });
 
   @override
   factory DeletePlanetaryBoundaryArguments.fromJson(
@@ -1423,8 +1452,10 @@ class DeletePlanetaryBoundaryArguments extends JsonSerializable
 
   late String id;
 
+  late String session;
+
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [id, session];
   @override
   Map<String, dynamic> toJson() =>
       _$DeletePlanetaryBoundaryArgumentsToJson(this);
@@ -1445,7 +1476,16 @@ final DELETE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT = DocumentNode(definitions: [
         ),
         defaultValue: DefaultValueNode(value: null),
         directives: [],
-      )
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'session')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
     ],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
@@ -1456,7 +1496,11 @@ final DELETE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT = DocumentNode(definitions: [
           ArgumentNode(
             name: NameNode(value: 'id'),
             value: VariableNode(name: NameNode(value: 'id')),
-          )
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'session'),
+            value: VariableNode(name: NameNode(value: 'session')),
+          ),
         ],
         directives: [],
         selectionSet: SelectionSetNode(selections: [
@@ -1479,6 +1523,13 @@ final DELETE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT = DocumentNode(definitions: [
     selectionSet: SelectionSetNode(selections: [
       FieldNode(
         name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'session'),
         alias: null,
         arguments: [],
         directives: [],
@@ -1582,6 +1633,13 @@ final GET_PLANETARY_BOUNDARY_QUERY_DOCUMENT = DocumentNode(definitions: [
     selectionSet: SelectionSetNode(selections: [
       FieldNode(
         name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'session'),
         alias: null,
         arguments: [],
         directives: [],
@@ -1761,6 +1819,13 @@ final GET_PLANETARY_BOUNDARY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
         selectionSet: null,
       ),
       FieldNode(
+        name: NameNode(value: 'session'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
         name: NameNode(value: 'name'),
         alias: null,
         arguments: [],
@@ -1827,6 +1892,13 @@ final ON_CREATED_PLANETARY_BOUNDARY_SUBSCRIPTION_DOCUMENT =
     selectionSet: SelectionSetNode(selections: [
       FieldNode(
         name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'session'),
         alias: null,
         arguments: [],
         directives: [],
@@ -1931,6 +2003,13 @@ final ON_DELETED_PLANETARY_BOUNDARY_SUBSCRIPTION_DOCUMENT =
     selectionSet: SelectionSetNode(selections: [
       FieldNode(
         name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'session'),
         alias: null,
         arguments: [],
         directives: [],
