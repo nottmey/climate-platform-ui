@@ -11,6 +11,7 @@ import 'package:climate_platform_ui/features/planetary_boundaries/pages/planet_o
 import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_provider_family.dart';
 import 'package:climate_platform_ui/features/theming/pages/showcase_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/src/consumer.dart';
 import 'package:go_router/go_router.dart';
 
 const _overviewSegment = 'overview';
@@ -37,7 +38,7 @@ String databaseAttributePath(String id, String name) =>
 
 const initialPath = overviewPath;
 
-GoRouter newRouter() {
+GoRouter newRouter(WidgetRef ref) {
   final navigationItems = [
     AppNavigationItem(
       label: 'Overview',
@@ -55,10 +56,15 @@ GoRouter newRouter() {
               final extra = state.extra;
               final provider =
                   extra is BoundaryDetailsPageExtra ? extra.provider : null;
-              return BoundaryDetailsPage(
-                provider: provider ??
-                    planetaryBoundaryProviderFamily(state.queryParams['id']!),
-              );
+              if (provider != null) {
+                return BoundaryDetailsPage(provider: provider);
+              } else {
+                final provider = planetaryBoundaryProviderFamily(
+                  state.queryParams['id']!,
+                );
+                ref.read(provider.notifier).initLoad();
+                return BoundaryDetailsPage(provider: provider);
+              }
             },
           )
         ],

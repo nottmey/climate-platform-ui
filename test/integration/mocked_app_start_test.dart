@@ -87,9 +87,7 @@ void main() {
 
   testGoldens('app start with pushed update', (tester) async {
     await tester.pumpWidgetBuilder(
-      ProviderScope(
-        child: App(),
-      ),
+      const ProviderScope(child: App()),
       surfaceSize: const Size(390, 763), // height = 844 - 47 - 34
     );
 
