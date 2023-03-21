@@ -37,8 +37,7 @@ Future<void> captureScreen(
   String name, {
   // default: iPhone 14
   Size deviceSize = const Size(390, 844),
-  SafeArea deviceSafeArea =
-      const SafeArea(bottom: 34, left: 0, right: 0, top: 47),
+  SafeArea deviceSafeArea = const SafeArea(bottom: 34, top: 47),
   double devicePixelRatio = 2.0,
   double textScaleFactor = 1.0,
   Brightness brightness = Brightness.light,
@@ -50,7 +49,10 @@ Future<void> captureScreen(
     final file = File.fromUri(fileUri);
 
     await tester.binding.setSurfaceSize(deviceSize);
-    tester.binding.window.physicalSizeTestValue = deviceSize;
+    tester.binding.window.physicalSizeTestValue = Size(
+      deviceSize.width * devicePixelRatio,
+      deviceSize.height * devicePixelRatio,
+    );
     tester.binding.window.devicePixelRatioTestValue = devicePixelRatio;
     tester.binding.window.platformDispatcher.textScaleFactorTestValue =
         textScaleFactor;
