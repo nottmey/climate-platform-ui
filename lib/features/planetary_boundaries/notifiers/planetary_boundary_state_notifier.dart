@@ -72,13 +72,17 @@ class PlanetaryBoundaryStateNotifier
     String session,
     PlanetaryBoundary value,
   ) async {
-    // TODO: implement requestUpdate
-    await Future<void>.delayed(const Duration(seconds: 1));
-    final copy = value.copy();
-    copy.id = '123';
-    copy.session = session;
-    copy.name = 'updated planetary boundary';
-    return copy;
+    // TODO delay until id is present
+    final result = await execute(
+      MergePlanetaryBoundaryMutation(
+        variables: MergePlanetaryBoundaryArguments(
+          id: value.id!,
+          session: session,
+          value: value,
+        ),
+      ),
+    );
+    return PlanetaryBoundary.existing(result.mergePlanetaryBoundary!);
   }
 
   @override
