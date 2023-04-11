@@ -18,15 +18,16 @@ final planetaryBoundaryCreationsProvider = StreamProvider<
     AutoDisposeStateNotifierProvider<EntityStateNotifier<PlanetaryBoundary>,
         EntityState<PlanetaryBoundary>>>((ref) {
   // TODO send stop events when not needed
-  final session = ref.read(sessionProvider);
-  final onlineCreations = subscribe(OnCreatedPlanetaryBoundarySubscription())
-      .where((event) => event.onCreatedPlanetaryBoundary != null)
-      .where((event) => event.onCreatedPlanetaryBoundary!.session != session)
-      .map((event) {
-    final newPlanetaryBoundary = event.onCreatedPlanetaryBoundary!;
-    final provider = planetaryBoundaryProviderFamily(newPlanetaryBoundary.id);
-    final existing = PlanetaryBoundary.existing(newPlanetaryBoundary);
-    ref.read(provider.notifier).set(existing);
+  final onlineCreations = subscribe(
+    OnCreatedPlanetaryBoundarySubscription(),
+    ref.read(sessionProvider),
+    (event) => event.onCreatedPlanetaryBoundary,
+    (result) => result.session,
+    // ignore: unnecessary_lambdas
+    (result) => PlanetaryBoundary.existing(result),
+  ).map((entity) {
+    final provider = planetaryBoundaryProviderFamily(entity.id!);
+    ref.read(provider.notifier).set(entity);
     return provider;
   });
   final localCreations = planetaryBoundaryCreationsSink.stream;

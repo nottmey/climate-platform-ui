@@ -15,11 +15,12 @@ class PlanetaryBoundaryStateNotifier
       OnDeletedPlanetaryBoundarySubscription(
         variables: OnDeletedPlanetaryBoundaryArguments(id: id),
       ),
-    ).where((event) {
-      return event.onDeletedPlanetaryBoundary != null;
-    }).map((event) {
-      return PlanetaryBoundary.existing(event.onDeletedPlanetaryBoundary!);
-    });
+      super.session,
+      (event) => event.onDeletedPlanetaryBoundary,
+      (result) => result.session,
+      // ignore: unnecessary_lambdas
+      (result) => PlanetaryBoundary.existing(result),
+    );
   }
 
   @override
