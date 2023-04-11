@@ -1,0 +1,5 @@
+subscription OnUpdatedPlanetaryBoundary {
+    onUpdatedPlanetaryBoundary {
+        ...PlanetaryBoundary
+    }
+}

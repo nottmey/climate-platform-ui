@@ -1,9 +1,9 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 import 'package:artemis/artemis.dart';
-import 'package:json_annotation/json_annotation.dart';
 import 'package:equatable/equatable.dart';
 import 'package:gql/ast.dart';
+import 'package:json_annotation/json_annotation.dart';
 part 'api.graphql.g.dart';
 
 mixin PageInfoMixin {
@@ -636,8 +636,81 @@ class GetPlanetaryBoundary$Query extends JsonSerializable with EquatableMixin {
 
   @override
   List<Object?> get props => [getPlanetaryBoundary];
+
   @override
   Map<String, dynamic> toJson() => _$GetPlanetaryBoundary$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class MergePlanetaryBoundary$Mutation$PlanetaryBoundary extends JsonSerializable
+    with EquatableMixin, PlanetaryBoundaryMixin {
+  MergePlanetaryBoundary$Mutation$PlanetaryBoundary();
+
+  factory MergePlanetaryBoundary$Mutation$PlanetaryBoundary.fromJson(
+          Map<String, dynamic> json) =>
+      _$MergePlanetaryBoundary$Mutation$PlanetaryBoundaryFromJson(json);
+
+  @override
+  List<Object?> get props => [id, session, name];
+
+  @override
+  Map<String, dynamic> toJson() =>
+      _$MergePlanetaryBoundary$Mutation$PlanetaryBoundaryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class MergePlanetaryBoundary$Mutation extends JsonSerializable
+    with EquatableMixin {
+  MergePlanetaryBoundary$Mutation();
+
+  factory MergePlanetaryBoundary$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$MergePlanetaryBoundary$MutationFromJson(json);
+
+  MergePlanetaryBoundary$Mutation$PlanetaryBoundary? mergePlanetaryBoundary;
+
+  @override
+  List<Object?> get props => [mergePlanetaryBoundary];
+
+  @override
+  Map<String, dynamic> toJson() =>
+      _$MergePlanetaryBoundary$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class OnUpdatedPlanetaryBoundary$Subscription$PlanetaryBoundary
+    extends JsonSerializable with EquatableMixin, PlanetaryBoundaryMixin {
+  OnUpdatedPlanetaryBoundary$Subscription$PlanetaryBoundary();
+
+  factory OnUpdatedPlanetaryBoundary$Subscription$PlanetaryBoundary.fromJson(
+          Map<String, dynamic> json) =>
+      _$OnUpdatedPlanetaryBoundary$Subscription$PlanetaryBoundaryFromJson(json);
+
+  @override
+  List<Object?> get props => [id, session, name];
+
+  @override
+  Map<String, dynamic> toJson() =>
+      _$OnUpdatedPlanetaryBoundary$Subscription$PlanetaryBoundaryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class OnUpdatedPlanetaryBoundary$Subscription extends JsonSerializable
+    with EquatableMixin {
+  OnUpdatedPlanetaryBoundary$Subscription();
+
+  factory OnUpdatedPlanetaryBoundary$Subscription.fromJson(
+          Map<String, dynamic> json) =>
+      _$OnUpdatedPlanetaryBoundary$SubscriptionFromJson(json);
+
+  OnUpdatedPlanetaryBoundary$Subscription$PlanetaryBoundary?
+      onUpdatedPlanetaryBoundary;
+
+  @override
+  List<Object?> get props => [onUpdatedPlanetaryBoundary];
+
+  @override
+  Map<String, dynamic> toJson() =>
+      _$OnUpdatedPlanetaryBoundary$SubscriptionToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -2044,7 +2117,233 @@ class GetPlanetaryBoundaryQuery extends GraphQLQuery<GetPlanetaryBoundary$Query,
 
   @override
   List<Object?> get props => [document, operationName, variables];
+
   @override
   GetPlanetaryBoundary$Query parse(Map<String, dynamic> json) =>
       GetPlanetaryBoundary$Query.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class MergePlanetaryBoundaryArguments extends JsonSerializable
+    with EquatableMixin {
+  MergePlanetaryBoundaryArguments({
+    required this.id,
+    required this.session,
+    required this.value,
+  });
+
+  @override
+  factory MergePlanetaryBoundaryArguments.fromJson(Map<String, dynamic> json) =>
+      _$MergePlanetaryBoundaryArgumentsFromJson(json);
+
+  late String id;
+
+  late String session;
+
+  late PlanetaryBoundaryInput value;
+
+  @override
+  List<Object?> get props => [id, session, value];
+
+  @override
+  Map<String, dynamic> toJson() =>
+      _$MergePlanetaryBoundaryArgumentsToJson(this);
+}
+
+final MERGE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT_OPERATION_NAME =
+    'MergePlanetaryBoundary';
+final MERGE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'MergePlanetaryBoundary'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'session')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'value')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'PlanetaryBoundaryInput'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'mergePlanetaryBoundary'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'session'),
+            value: VariableNode(name: NameNode(value: 'session')),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'value'),
+            value: VariableNode(name: NameNode(value: 'value')),
+          ),
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'PlanetaryBoundary'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'PlanetaryBoundary'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'PlanetaryBoundary'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'session'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'name'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class MergePlanetaryBoundaryMutation extends GraphQLQuery<
+    MergePlanetaryBoundary$Mutation, MergePlanetaryBoundaryArguments> {
+  MergePlanetaryBoundaryMutation({required this.variables});
+
+  @override
+  final DocumentNode document = MERGE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName =
+      MERGE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final MergePlanetaryBoundaryArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+
+  @override
+  MergePlanetaryBoundary$Mutation parse(Map<String, dynamic> json) =>
+      MergePlanetaryBoundary$Mutation.fromJson(json);
+}
+
+final ON_UPDATED_PLANETARY_BOUNDARY_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+    'OnUpdatedPlanetaryBoundary';
+final ON_UPDATED_PLANETARY_BOUNDARY_SUBSCRIPTION_DOCUMENT =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.subscription,
+    name: NameNode(value: 'OnUpdatedPlanetaryBoundary'),
+    variableDefinitions: [],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'onUpdatedPlanetaryBoundary'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'PlanetaryBoundary'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'PlanetaryBoundary'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'PlanetaryBoundary'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'session'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'name'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class OnUpdatedPlanetaryBoundarySubscription extends GraphQLQuery<
+    OnUpdatedPlanetaryBoundary$Subscription, JsonSerializable> {
+  OnUpdatedPlanetaryBoundarySubscription();
+
+  @override
+  final DocumentNode document =
+      ON_UPDATED_PLANETARY_BOUNDARY_SUBSCRIPTION_DOCUMENT;
+
+  @override
+  final String operationName =
+      ON_UPDATED_PLANETARY_BOUNDARY_SUBSCRIPTION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  List<Object?> get props => [document, operationName];
+
+  @override
+  OnUpdatedPlanetaryBoundary$Subscription parse(Map<String, dynamic> json) =>
+      OnUpdatedPlanetaryBoundary$Subscription.fromJson(json);
 }
