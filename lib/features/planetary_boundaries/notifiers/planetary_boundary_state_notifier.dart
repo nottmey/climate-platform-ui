@@ -10,12 +10,26 @@ class PlanetaryBoundaryStateNotifier
       : super(defaultValue: PlanetaryBoundary(id: id));
 
   @override
+  Stream<PlanetaryBoundary> subscribeToUpdates(String id) {
+    return subscribe(
+      OnUpdatedPlanetaryBoundarySubscription(
+        variables: OnUpdatedPlanetaryBoundaryArguments(id: id),
+      ),
+      session,
+      (event) => event.onUpdatedPlanetaryBoundary,
+      (result) => result.session,
+      // ignore: unnecessary_lambdas
+      (result) => PlanetaryBoundary.existing(result),
+    );
+  }
+
+  @override
   Stream<PlanetaryBoundary> subscribeToDeletion(String id) {
     return subscribe(
       OnDeletedPlanetaryBoundarySubscription(
         variables: OnDeletedPlanetaryBoundaryArguments(id: id),
       ),
-      super.session,
+      session,
       (event) => event.onDeletedPlanetaryBoundary,
       (result) => result.session,
       // ignore: unnecessary_lambdas

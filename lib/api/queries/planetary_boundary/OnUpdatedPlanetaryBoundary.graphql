@@ -1,5 +1,5 @@
-subscription OnUpdatedPlanetaryBoundary {
-    onUpdatedPlanetaryBoundary {
+subscription OnUpdatedPlanetaryBoundary($id: ID!) {
+    onUpdatedPlanetaryBoundary(id: $id) {
         ...PlanetaryBoundary
     }
 }

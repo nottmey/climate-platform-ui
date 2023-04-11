@@ -28,6 +28,11 @@ void main() {
   final onCreatedBroadcastStream =
       onCreatedStreamController.stream.asBroadcastStream();
 
+  final onUpdatedStreamController = StreamController<
+      GraphQLResponse<OnUpdatedPlanetaryBoundary$Subscription>>();
+  final onUpdatedBroadcastStream =
+      onUpdatedStreamController.stream.asBroadcastStream();
+
   final onDeletedStreamController = StreamController<
       GraphQLResponse<OnDeletedPlanetaryBoundary$Subscription>>();
   final onDeletedBroadcastStream =
@@ -72,6 +77,8 @@ void main() {
       final firstArg = invocation.positionalArguments.first;
       if (firstArg is OnCreatedPlanetaryBoundarySubscription) {
         return onCreatedBroadcastStream;
+      } else if (firstArg is OnUpdatedPlanetaryBoundarySubscription) {
+        return onUpdatedBroadcastStream;
       } else if (firstArg is OnDeletedPlanetaryBoundarySubscription) {
         return onDeletedBroadcastStream;
       } else {
@@ -119,6 +126,24 @@ void main() {
     await captureScreen(tester, 'mocked_app_start_with_pushed_creation');
 
     expect(find.text('Test 4'), findsOneWidget);
+
+    final update = OnUpdatedPlanetaryBoundary$Subscription$PlanetaryBoundary();
+    update.id = '1';
+    update.name = 'New Value 1';
+    final onUpdatedData = OnUpdatedPlanetaryBoundary$Subscription();
+    onUpdatedData.onUpdatedPlanetaryBoundary = update;
+    onUpdatedStreamController.add(GraphQLResponse(data: onUpdatedData));
+
+    await multiScreenGolden(
+      tester,
+      'mocked_app_start_with_pushed_update',
+      devices: devices,
+    );
+
+    await captureScreen(tester, 'mocked_app_start_with_pushed_update');
+
+    expect(find.text('Test 1'), findsNothing);
+    expect(find.text('New Value 1'), findsOneWidget);
 
     final deletion =
         OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundary();

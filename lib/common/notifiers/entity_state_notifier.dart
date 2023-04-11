@@ -19,17 +19,28 @@ abstract class EntityStateNotifier<T extends Entity>
     _startSubscriptions(defaultValue);
   }
 
-  void _startSubscriptions(T value) {
-    final id = value.id;
+  void _startSubscriptions(T initialValue) {
+    final id = initialValue.id;
     if (id != null) {
       // TODO cancel subscriptions on dispose
-      subscribeToDeletion(id)
-          .where((event) => event.id == id)
-          .first
-          .then((value) {
+      subscribeToUpdates(id)
+          .where((entity) => entity.id == id)
+          .forEach((entity) {
         if (mounted) {
           state = state.copyWith(
-            value: value,
+            value: entity,
+            isLoading: false,
+            isDefault: false,
+          );
+        }
+      });
+      subscribeToDeletion(id)
+          .where((entity) => entity.id == id)
+          .first
+          .then((entity) {
+        if (mounted) {
+          state = state.copyWith(
+            value: entity,
             isDeleted: true,
             isLoading: false,
             isDefault: false,
@@ -109,6 +120,8 @@ abstract class EntityStateNotifier<T extends Entity>
       }
     }
   }
+
+  Stream<T> subscribeToUpdates(String id);
 
   Stream<T> subscribeToDeletion(String id);
 

@@ -721,3 +721,15 @@ Map<String, dynamic> _$MergePlanetaryBoundaryArgumentsToJson(
       'session': instance.session,
       'value': instance.value.toJson(),
     };
+
+OnUpdatedPlanetaryBoundaryArguments
+    _$OnUpdatedPlanetaryBoundaryArgumentsFromJson(Map<String, dynamic> json) =>
+        OnUpdatedPlanetaryBoundaryArguments(
+          id: json['id'] as String,
+        );
+
+Map<String, dynamic> _$OnUpdatedPlanetaryBoundaryArgumentsToJson(
+        OnUpdatedPlanetaryBoundaryArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
