@@ -41,6 +41,12 @@ dependencies:
   uuid:
   web_socket_channel:
 
+dependency_overrides:
+  # leaving out version causes upgrade to use the newest version
+  # safe to do so, assuming libs don't cause breaking changes
+  collection:
+  path:
+
 dev_dependencies:
   build_runner:
   file:
