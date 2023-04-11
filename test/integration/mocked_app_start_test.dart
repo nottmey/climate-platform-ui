@@ -112,11 +112,11 @@ void main() {
 
     await multiScreenGolden(
       tester,
-      'mocked_app_start_with_pushed_update',
+      'mocked_app_start_with_pushed_creation',
       devices: devices,
     );
 
-    await captureScreen(tester, 'mocked_app_start_with_pushed_update');
+    await captureScreen(tester, 'mocked_app_start_with_pushed_creation');
 
     expect(find.text('Test 4'), findsOneWidget);
 
