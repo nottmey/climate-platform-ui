@@ -12,6 +12,7 @@
 # IntelliJ related
 *.ipr
 *.iws
+*.iml
 .idea/*
 !.idea/runConfigurations
 !.idea/misc.xml
