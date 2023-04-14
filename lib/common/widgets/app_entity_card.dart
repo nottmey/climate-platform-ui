@@ -22,7 +22,7 @@ enum _AppEntityCardMode {
 }
 
 abstract class AppEntityCard<T extends Entity> extends AppWidget {
-  final _AppEntityCardMode mode;
+  final _AppEntityCardMode _mode;
 
   final AutoDisposeStateNotifierProvider<EntityStateNotifier<T>, EntityState<T>>
       Function()? providerConstructor;
@@ -43,7 +43,7 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
             AutoDisposeStateNotifierProvider<EntityStateNotifier<T>,
                 EntityState<T>>>
         this.creationsSink,
-  })  : mode = _AppEntityCardMode.createAndReset,
+  })  : _mode = _AppEntityCardMode.createAndReset,
         provider = null;
 
   const AppEntityCard.display({
@@ -51,7 +51,7 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
     required AutoDisposeStateNotifierProvider<EntityStateNotifier<T>,
             EntityState<T>>
         this.provider,
-  })  : mode = _AppEntityCardMode.display,
+  })  : _mode = _AppEntityCardMode.display,
         providerConstructor = null,
         creationsSink = null;
 
@@ -68,7 +68,11 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
 
   Widget buildForm(BuildContext context, void Function() save);
 
-  Widget buildDisplay(BuildContext context, EntityState<T> state);
+  Widget buildDisplay(
+    BuildContext context,
+    EntityState<T> state,
+    double safeIconButtonPadding,
+  );
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -81,7 +85,7 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
     final value = entityState.value;
 
     final displayState = useState<_AppEntityCardDisplayState>(
-      mode == _AppEntityCardMode.createAndReset
+      _mode == _AppEntityCardMode.createAndReset
           ? _AppEntityCardDisplayState.offerCreation
           : _AppEntityCardDisplayState.display,
     );
@@ -94,14 +98,14 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
         onTab: () {
           displayState.value = _AppEntityCardDisplayState.editing;
         },
-        child: const Center(
+        builder: (_) => const Center(
           child: Icon(Icons.add),
         ),
       );
     } else if (displayStateValue == _AppEntityCardDisplayState.editing) {
       return AppCard(
         preset: AppCardPreset.elevated,
-        child: ReactiveFormBuilder(
+        builder: (_) => ReactiveFormBuilder(
           form: () => createFormControls(value),
           builder: (context, form, child) {
             void save() {
@@ -116,7 +120,7 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
                 currentProviderState.value = providerConstructor!();
               }
 
-              if (mode == _AppEntityCardMode.createAndReset) {
+              if (_mode == _AppEntityCardMode.createAndReset) {
                 displayState.value = _AppEntityCardDisplayState.offerCreation;
               } else {
                 displayState.value = _AppEntityCardDisplayState.display;
@@ -133,7 +137,7 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        if (mode == _AppEntityCardMode.createAndReset) {
+                        if (_mode == _AppEntityCardMode.createAndReset) {
                           displayState.value =
                               _AppEntityCardDisplayState.offerCreation;
                         } else {
@@ -192,7 +196,8 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
                   },
                 ),
               ],
-        child: buildDisplay(context, entityState),
+        builder: (safeIconButtonPadding) =>
+            buildDisplay(context, entityState, safeIconButtonPadding),
       );
     }
   }

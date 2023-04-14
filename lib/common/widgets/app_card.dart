@@ -28,7 +28,7 @@ class AppCard extends AppWidget {
   final AppCardPreset preset;
   final void Function()? onTab;
   final List<AppCardAction>? actions;
-  final Widget child;
+  final Widget Function(double safeIconButtonPadding) builder;
 
   const AppCard({
     super.key,
@@ -36,7 +36,7 @@ class AppCard extends AppWidget {
     this.preset = AppCardPreset.elevated,
     this.onTab,
     this.actions,
-    required this.child,
+    required this.builder,
   });
 
   @override
@@ -97,7 +97,11 @@ class AppCard extends AppWidget {
                 children: [
                   theme.spacedPadding(
                     all: 2,
-                    child: child,
+                    child: builder(
+                      actions != null
+                          ? kMinInteractiveDimension - 2 * theme.spacingBase
+                          : 0,
+                    ),
                   ),
                 ],
               ),

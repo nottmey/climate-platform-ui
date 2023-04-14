@@ -87,14 +87,18 @@ class PlanetaryBoundaryCard extends AppEntityCard<PlanetaryBoundary> {
   Widget buildDisplay(
     BuildContext context,
     EntityState<PlanetaryBoundary> state,
+    double safeIconButtonPadding,
   ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppText(
-          value: state.value.name ?? '',
-          looksDisabled: state.isDeleted,
-          preset: TextStylePreset.titleLarge,
+        Padding(
+          padding: EdgeInsets.only(right: safeIconButtonPadding),
+          child: AppText(
+            value: state.value.name ?? '',
+            looksDisabled: state.isDeleted,
+            preset: TextStylePreset.titleLarge,
+          ),
         ),
       ],
     );

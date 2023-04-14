@@ -64,7 +64,7 @@ class EntityDetailsSegment extends AppWidget {
         entity.attributes.firstWhereOrNull((a) => a.name == ':db/ident');
     return AppCard(
       onTab: () => context.pushIfNew(databaseEntityPath(entity.id)),
-      child: Column(
+      builder: (_) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (showInlineTitle)

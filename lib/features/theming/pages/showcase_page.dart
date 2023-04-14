@@ -182,8 +182,34 @@ class ShowcasePage extends AppPageWidget {
               .map(
                 (preset) => AppCard(
                   preset: preset,
-                  child: AppText(
+                  builder: (_) => AppText(
                     value: '$AppCard with $preset',
+                  ),
+                ),
+              )
+              .toList(),
+        ),
+      ),
+      SliverList(
+        delegate: SliverChildListDelegate(
+          AppCardPreset.values
+              .map(
+                (preset) => AppCard(
+                  preset: preset,
+                  actions: [AppCardAction(label: 'Hello', onSelected: () {})],
+                  builder: (safeIconButtonPadding) => Padding(
+                    padding: EdgeInsets.only(right: safeIconButtonPadding),
+                    child: ColoredBox(
+                      color: Colors.green,
+                      child: Row(
+                        children: [
+                          AppText(
+                            value:
+                                '$AppCard with action (valid space highlighted)',
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               )
@@ -197,7 +223,7 @@ class ShowcasePage extends AppPageWidget {
                 (preset) => AppCard(
                   disabled: true,
                   preset: preset,
-                  child: AppText(
+                  builder: (_) => AppText(
                     value: '$AppCard with $preset disabled',
                     looksDisabled: true,
                   ),

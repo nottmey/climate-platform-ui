@@ -1,15 +1,13 @@
+import 'package:climate_platform_ui/features/theming/utils/spacing_utils_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-// small, so we don't need to use half values for min padding
-const spacingBase = 4.0; // px
 
 // function, so it gets hot reloaded when changing a value
 ThemeData defaultTheme({
   Color seedColor = Colors.teal,
   Brightness brightness = Brightness.light,
 }) {
-  return ThemeData.from(
+  final m3theme = ThemeData.from(
     colorScheme: ColorScheme.fromSeed(
       seedColor: seedColor,
       brightness: brightness,
@@ -36,6 +34,11 @@ ThemeData defaultTheme({
       ),
     ),
     useMaterial3: true,
+  );
+  return m3theme.copyWith(
+    iconTheme: m3theme.iconTheme.copyWith(
+      size: m3theme.spacingBase * 6,
+    ),
   );
 }
 

@@ -1,7 +1,11 @@
-import 'package:climate_platform_ui/features/theming/themes/default_theme.dart';
 import 'package:flutter/material.dart';
 
+// small, so we don't need to use half values for min padding
+const _spacingBase = 4.0; // px
+
 extension SpacingUtilsExtension on ThemeData {
+  double get spacingBase => _spacingBase;
+
   EdgeInsets spacing({
     int all = 0,
     int horizontal = 0,
