@@ -58,9 +58,7 @@ class PlanetaryBoundaryCard extends AppEntityCard<PlanetaryBoundary> {
     FormGroup form,
     PlanetaryBoundary value,
   ) {
-    final newValue = value.copy();
-    newValue.name = form.value['name'] as String?;
-    return newValue;
+    return value.copyWith(name: form.value['name'] as String?);
   }
 
   @override

@@ -10,14 +10,19 @@ class PlanetaryBoundary extends PlanetaryBoundaryInput with Entity {
     id = mixin.id;
     session = mixin.session;
     name = mixin.name;
+    description = mixin.description;
   }
 
-  PlanetaryBoundary copy() {
+  PlanetaryBoundary copyWith({
+    String? name,
+    String? description,
+  }) {
     // TODO use lib for this
     final copy = PlanetaryBoundary();
     copy.id = id;
     copy.session = session;
-    copy.name = name;
+    copy.name = name ?? this.name;
+    copy.description = description ?? this.description;
     return copy;
   }
 }
