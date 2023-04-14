@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:climate_platform_ui/common/models/entity.dart';
 import 'package:climate_platform_ui/common/models/entity_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -17,6 +19,12 @@ abstract class EntityStateNotifier<T extends Entity>
           ),
         ) {
     _startSubscriptions(defaultValue);
+  }
+
+  @override
+  void dispose() {
+    log('disposing $state');
+    super.dispose();
   }
 
   void _startSubscriptions(T initialValue) {

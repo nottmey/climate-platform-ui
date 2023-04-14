@@ -83,6 +83,8 @@ class _AppPagedSliverListState<T> extends ConsumerState<AppPagedSliverList<T>> {
     }
   }
 
+  void _emptyNoOp(dynamic prev, dynamic next) {}
+
   @override
   void dispose() {
     controller.dispose();
@@ -122,7 +124,12 @@ class _AppPagedSliverListState<T> extends ConsumerState<AppPagedSliverList<T>> {
       return PagedSliverList(
         pagingController: controller,
         builderDelegate: PagedChildBuilderDelegate(
-          itemBuilder: widget.itemBuilder,
+          itemBuilder: (context, T item, index) {
+            if (item is ProviderListenable) {
+              ref.listenManual(item, _emptyNoOp); // tie lifecycle to list
+            }
+            return widget.itemBuilder(context, item, index);
+          },
         ),
       );
     }
