@@ -104,7 +104,7 @@ void main() {
 
     await captureScreen(tester, 'mocked_app_start');
 
-    expect(find.text('Planetary boundaries'), findsAtLeastNWidgets(1));
+    expect(find.text('Planetary Boundaries'), findsAtLeastNWidgets(1));
     expect(find.text('Test 1'), findsOneWidget);
     expect(find.text('Test 2'), findsOneWidget);
     expect(find.text('Test 3'), findsOneWidget);

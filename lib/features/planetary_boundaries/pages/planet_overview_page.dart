@@ -9,11 +9,14 @@ class PlanetOverviewPage extends AppPageWidget {
   @override
   List<Widget> buildSlivers(BuildContext context, WidgetRef ref) {
     return [
-      const AppHeaderSliver(title: 'Planetary boundaries'),
+      const AppHeaderSliver(title: 'Planetary Boundaries'),
       const PlanetaryBoundaryListSliver(),
       SliverToBoxAdapter(
         child: PlanetaryBoundaryCard.creation(),
-      )
+      ),
+      SliverToBoxAdapter(
+        child: SizedBox(height: MediaQuery.of(context).size.height / 4),
+      ),
     ];
   }
 }
