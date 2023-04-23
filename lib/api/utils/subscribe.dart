@@ -5,13 +5,13 @@ import 'package:climate_platform_ui/api/utils/throw_response_errors.dart';
 import 'package:climate_platform_ui/get_it.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+/// close via closing the stream subscription
 Stream<R> subscribe<T, U extends JsonSerializable, R>(
   GraphQLQuery<T, U> query,
   R? Function(T) getResult,
 ) {
   final stopwatch = Stopwatch();
   stopwatch.start();
-  // TODO close when no longer needed!
   return getIt<ArtemisClient>(instanceName: InstanceName.wssClient)
       .stream(query)
       .map(throwResponseErrors)
@@ -24,6 +24,7 @@ Stream<R> subscribe<T, U extends JsonSerializable, R>(
     return result;
   }).handleError((Object e, StackTrace st) {
     final elapsedMs = stopwatch.elapsedMilliseconds;
+    // TODO subscription causes error in web (use debugger)
     log(
       'streamed with error ${query.variables ?? query.operationName} after ${elapsedMs}ms',
       error: e,
