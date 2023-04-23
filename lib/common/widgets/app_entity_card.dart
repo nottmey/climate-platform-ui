@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:climate_platform_ui/common/models/entity.dart';
 import 'package:climate_platform_ui/common/models/entity_state.dart';
 import 'package:climate_platform_ui/common/notifiers/entity_state_notifier.dart';
 import 'package:climate_platform_ui/common/widgets/app_card.dart';
 import 'package:climate_platform_ui/common/widgets/app_widget.dart';
 import 'package:climate_platform_ui/features/theming/utils/context_theme_extension.dart';
 import 'package:climate_platform_ui/features/theming/utils/spacing_utils_extension.dart';
+import 'package:gql_websocket_link/gql_websocket_link.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -16,55 +16,35 @@ enum _AppEntityCardDisplayState {
   display,
 }
 
-enum _AppEntityCardMode {
-  createAndReset,
-  display,
-}
+abstract class AppEntityCard<T, I> extends AppWidget {
+  final AutoDisposeStateNotifierProviderFamily<EntityStateNotifier<T, I>,
+      EntityState<T>, String> family;
 
-abstract class AppEntityCard<T extends Entity> extends AppWidget {
-  final _AppEntityCardMode _mode;
+  final _AppEntityCardDisplayState _startState;
 
-  final AutoDisposeStateNotifierProvider<EntityStateNotifier<T>, EntityState<T>>
-      Function()? providerConstructor;
-  final StreamSink<
-      AutoDisposeStateNotifierProvider<EntityStateNotifier<T>,
-          EntityState<T>>>? creationsSink;
+  final String? displayId;
 
-  final AutoDisposeStateNotifierProvider<EntityStateNotifier<T>,
-      EntityState<T>>? provider;
+  final StreamSink<String>? creationsSink;
 
   const AppEntityCard.creation({
     super.key,
-    required AutoDisposeStateNotifierProvider<EntityStateNotifier<T>,
-                EntityState<T>>
-            Function()
-        this.providerConstructor,
-    required StreamSink<
-            AutoDisposeStateNotifierProvider<EntityStateNotifier<T>,
-                EntityState<T>>>
-        this.creationsSink,
-  })  : _mode = _AppEntityCardMode.createAndReset,
-        provider = null;
+    required this.family,
+    required StreamSink<String> this.creationsSink,
+  })  : _startState = _AppEntityCardDisplayState.offerCreation,
+        displayId = null;
 
   const AppEntityCard.display({
     super.key,
-    required AutoDisposeStateNotifierProvider<EntityStateNotifier<T>,
-            EntityState<T>>
-        this.provider,
-  })  : _mode = _AppEntityCardMode.display,
-        providerConstructor = null,
+    required this.family,
+    required String this.displayId,
+  })  : _startState = _AppEntityCardDisplayState.display,
         creationsSink = null;
 
-  void onTab(
-    BuildContext context,
-    AutoDisposeStateNotifierProvider<EntityStateNotifier<T>, EntityState<T>>
-        provider,
-    String? id,
-  );
+  void onTab(BuildContext context, String id);
 
-  FormGroup createFormControls(T value);
+  FormGroup createFormControls(T? value);
 
-  T mergeFormControlsWithValue(FormGroup form, T value);
+  I createInputFromForm(FormGroup form);
 
   Widget buildForm(BuildContext context, void Function() save);
 
@@ -76,19 +56,15 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentProviderState = useState(
-      this.provider ?? providerConstructor!(),
-    );
-    final currentProvider = currentProviderState.value;
+    final providerState = useState(family(displayId ?? uuid.v4()));
+    final provider = providerState.value;
 
-    final entityState = ref.watch(currentProviderState.value);
-    final value = entityState.value;
+    final entityState = ref.watch(provider);
+    final asyncValue = entityState.inCreation ? null : entityState.value;
+    // TODO loading state, when not creating
+    final value = asyncValue?.asData?.value;
 
-    final displayState = useState<_AppEntityCardDisplayState>(
-      _mode == _AppEntityCardMode.createAndReset
-          ? _AppEntityCardDisplayState.offerCreation
-          : _AppEntityCardDisplayState.display,
-    );
+    final displayState = useState(_startState);
     final displayStateValue = displayState.value;
 
     final theme = context.theme;
@@ -109,18 +85,15 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
           form: () => createFormControls(value),
           builder: (context, form, child) {
             void save() {
-              final newValue = mergeFormControlsWithValue(form, value);
-              ref.read(currentProvider.notifier).update(newValue);
+              ref
+                  .read(provider.notifier)
+                  .createOrMerge(createInputFromForm(form));
 
               if (creationsSink != null) {
-                creationsSink!.add(currentProvider);
-              }
+                // value already cached
+                creationsSink!.add(ref.read(provider.notifier).id);
 
-              if (providerConstructor != null) {
-                currentProviderState.value = providerConstructor!();
-              }
-
-              if (_mode == _AppEntityCardMode.createAndReset) {
+                providerState.value = family(uuid.v4());
                 displayState.value = _AppEntityCardDisplayState.offerCreation;
               } else {
                 displayState.value = _AppEntityCardDisplayState.display;
@@ -137,7 +110,7 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        if (_mode == _AppEntityCardMode.createAndReset) {
+                        if (displayId == null) {
                           displayState.value =
                               _AppEntityCardDisplayState.offerCreation;
                         } else {
@@ -172,13 +145,7 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
         preset: AppCardPreset.elevated,
         onTab: entityState.isDeleted
             ? null
-            : () {
-                onTab(
-                  context,
-                  currentProvider,
-                  ref.read(currentProvider).value.id,
-                );
-              },
+            : () => onTab(context, ref.read(provider.notifier).id),
         actions: entityState.isDeleted
             ? null
             : [
@@ -192,7 +159,7 @@ abstract class AppEntityCard<T extends Entity> extends AppWidget {
                   label: 'Delete',
                   color: theme.colorScheme.error,
                   onSelected: () {
-                    ref.read(currentProvider.notifier).delete();
+                    ref.read(provider.notifier).delete();
                   },
                 ),
               ],

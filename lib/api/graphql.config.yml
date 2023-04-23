@@ -1,0 +1,8 @@
+schema: schema.graphql
+extensions:
+  endpoints:
+    AppSync:
+      url: ${APP_SYNC_API_URL}
+      headers:
+        x-api-key: ${APP_SYNC_API_KEY}
+      introspect: true

@@ -2,100 +2,111 @@ import 'package:climate_platform_ui/api/api.graphql.dart';
 import 'package:climate_platform_ui/api/utils/execute.dart';
 import 'package:climate_platform_ui/api/utils/subscribe.dart';
 import 'package:climate_platform_ui/common/notifiers/entity_state_notifier.dart';
-import 'package:climate_platform_ui/features/planetary_boundaries/models/planetary_boundary.dart';
 
-class PlanetaryBoundaryStateNotifier
-    extends EntityStateNotifier<PlanetaryBoundary> {
-  PlanetaryBoundaryStateNotifier({required super.session, String? id})
-      : super(defaultValue: PlanetaryBoundary(id: id));
+class _OptimisticUpdateResult with PlanetaryBoundaryMixin {}
+
+class PlanetaryBoundaryStateNotifier extends EntityStateNotifier<
+    PlanetaryBoundaryMixin, PlanetaryBoundaryInput> {
+  PlanetaryBoundaryStateNotifier({
+    required super.id,
+    required super.cache,
+    super.managesCreation,
+  }) : super();
 
   @override
-  Stream<PlanetaryBoundary> subscribeToUpdates(String id) {
+  Stream<PlanetaryBoundaryMixin> subscribeToUpdates(String id) {
     return subscribe(
       OnUpdatedPlanetaryBoundarySubscription(
         variables: OnUpdatedPlanetaryBoundaryArguments(id: id),
       ),
-      session,
       (event) => event.onUpdatedPlanetaryBoundary,
-      (result) => result.session,
-      // ignore: unnecessary_lambdas
-      (result) => PlanetaryBoundary.existing(result),
-    );
+    ).where((event) => event.id == id);
   }
 
   @override
-  Stream<PlanetaryBoundary> subscribeToDeletion(String id) {
+  Stream<PlanetaryBoundaryMixin> subscribeToDeletion(String id) {
     return subscribe(
       OnDeletedPlanetaryBoundarySubscription(
         variables: OnDeletedPlanetaryBoundaryArguments(id: id),
       ),
-      session,
       (event) => event.onDeletedPlanetaryBoundary,
-      (result) => result.session,
-      // ignore: unnecessary_lambdas
-      (result) => PlanetaryBoundary.existing(result),
-    );
+    ).where((event) => event.id == id);
   }
 
   @override
-  Future<PlanetaryBoundary?> requestGet(String id) async {
+  Future<PlanetaryBoundaryMixin?> requestGet(String id) async {
     final result = await execute(
       GetPlanetaryBoundaryQuery(
         variables: GetPlanetaryBoundaryArguments(id: id),
       ),
     );
-    if (result.getPlanetaryBoundary != null) {
-      return PlanetaryBoundary.existing(result.getPlanetaryBoundary!);
-    } else {
-      return null;
-    }
+    return result.getPlanetaryBoundary;
   }
 
   @override
-  Future<PlanetaryBoundary> requestCreation(
-    String session,
-    PlanetaryBoundary value,
+  PlanetaryBoundaryMixin estimateCreation(
+    String id,
+    PlanetaryBoundaryInput input,
+  ) {
+    final result = _OptimisticUpdateResult();
+    result.id = id;
+    result.name = input.name;
+    result.description = input.description;
+    return result;
+  }
+
+  @override
+  Future<PlanetaryBoundaryMixin> requestCreation(
+    String id,
+    PlanetaryBoundaryInput value,
   ) async {
     final result = await execute(
       CreatePlanetaryBoundaryMutation(
         variables: CreatePlanetaryBoundaryArguments(
-          session: session,
+          id: id,
           value: value,
         ),
       ),
     );
-    return PlanetaryBoundary.existing(result.createPlanetaryBoundary);
+    return result.createPlanetaryBoundary;
   }
 
   @override
-  Future<PlanetaryBoundary> requestUpdate(
-    String session,
-    PlanetaryBoundary value,
+  PlanetaryBoundaryMixin estimateMerge(
+    String id,
+    PlanetaryBoundaryMixin value,
+    PlanetaryBoundaryInput input,
+  ) {
+    final result = _OptimisticUpdateResult();
+    result.id = id;
+    result.name = input.name ?? value.name;
+    result.description = input.description ?? value.description;
+    return result;
+  }
+
+  @override
+  Future<PlanetaryBoundaryMixin?> requestMerge(
+    String id,
+    PlanetaryBoundaryInput input,
   ) async {
-    // TODO delay until id is present
     final result = await execute(
       MergePlanetaryBoundaryMutation(
         variables: MergePlanetaryBoundaryArguments(
-          id: value.id!,
-          session: session,
-          value: value,
+          id: id,
+          value: input,
         ),
       ),
     );
-    return PlanetaryBoundary.existing(result.mergePlanetaryBoundary!);
+    return result.mergePlanetaryBoundary;
   }
 
   @override
-  Future<PlanetaryBoundary?> requestDeletion(String id, String session) async {
+  Future<PlanetaryBoundaryMixin?> requestDeletion(String id) async {
     final result = await execute(
       DeletePlanetaryBoundaryMutation(
-        variables: DeletePlanetaryBoundaryArguments(id: id, session: session),
+        variables: DeletePlanetaryBoundaryArguments(id: id),
       ),
     );
-    if (result.deletePlanetaryBoundary != null) {
-      return PlanetaryBoundary.existing(result.deletePlanetaryBoundary!);
-    } else {
-      return null;
-    }
+    return result.deletePlanetaryBoundary;
   }
 }

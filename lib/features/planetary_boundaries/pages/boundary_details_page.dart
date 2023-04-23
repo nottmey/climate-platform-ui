@@ -1,35 +1,39 @@
-import 'package:climate_platform_ui/common/models/entity_state.dart';
-import 'package:climate_platform_ui/common/notifiers/entity_state_notifier.dart';
+import 'package:climate_platform_ui/api/api.graphql.dart';
 import 'package:climate_platform_ui/common/widgets/app_card.dart';
 import 'package:climate_platform_ui/common/widgets/app_header_sliver.dart';
 import 'package:climate_platform_ui/common/widgets/app_page_widget.dart';
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
-import 'package:climate_platform_ui/features/planetary_boundaries/models/planetary_boundary.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_family.dart';
 
 class BoundaryDetailsPage extends AppPageWidget {
-  final AutoDisposeStateNotifierProvider<EntityStateNotifier<PlanetaryBoundary>,
-      EntityState<PlanetaryBoundary>> provider;
+  final String id;
 
   const BoundaryDetailsPage({
     super.key,
-    required this.provider,
+    required this.id,
   });
 
   @override
   List<Widget> buildSlivers(BuildContext context, WidgetRef ref) {
-    final boundary = ref.watch(provider).value;
-    final controller = useTextEditingController(text: boundary.description);
+    final provider = planetaryBoundaryFamily(id);
+    final asyncValue = ref.watch(provider).value;
+    if (asyncValue.isLoading || asyncValue.hasError) {
+      // TODO loading state & error state
+      return [];
+    }
+    final value = asyncValue.value!;
+
+    final controller = useTextEditingController(text: value.description);
     ref.listen(provider, (previous, next) {
       // TODO solve conflict when user already updated local value
-      final externallyUpdatedDescription = next.value.description;
+      final externallyUpdatedDescription = next.value.asData?.value.description;
       if (externallyUpdatedDescription != null) {
         controller.text = externallyUpdatedDescription;
       }
     });
 
     return [
-      AppHeaderSliver(title: boundary.name ?? '...'),
+      AppHeaderSliver(title: value.name ?? '...'),
 
       // TODO make this a single card functionality
       SliverToBoxAdapter(
@@ -37,7 +41,7 @@ class BoundaryDetailsPage extends AppPageWidget {
           preset: AppCardPreset.filled,
           builder: (_) {
             return AppText(
-              value: boundary.description ?? '<no description>',
+              value: value.description ?? '<no description>',
             );
           },
         ),
@@ -54,9 +58,9 @@ class BoundaryDetailsPage extends AppPageWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  ref
-                      .read(provider.notifier)
-                      .update(boundary.copyWith(description: controller.text));
+                  ref.read(provider.notifier).createOrMerge(
+                        PlanetaryBoundaryInput(description: controller.text),
+                      );
                 },
                 child: const AppText(value: 'Save'),
               )

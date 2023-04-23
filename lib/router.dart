@@ -5,13 +5,10 @@ import 'package:climate_platform_ui/features/dev/pages/dev_menu_page.dart';
 import 'package:climate_platform_ui/features/navigation/models/app_navigation_item.dart';
 import 'package:climate_platform_ui/features/navigation/pages/root_scaffold_page.dart';
 import 'package:climate_platform_ui/features/navigation/pages/tab_transition_page.dart';
-import 'package:climate_platform_ui/features/planetary_boundaries/models/boundary_details_page_extra.dart';
 import 'package:climate_platform_ui/features/planetary_boundaries/pages/boundary_details_page.dart';
 import 'package:climate_platform_ui/features/planetary_boundaries/pages/planet_overview_page.dart';
-import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_provider_family.dart';
 import 'package:climate_platform_ui/features/theming/pages/showcase_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/src/consumer.dart';
 import 'package:go_router/go_router.dart';
 
 const _overviewSegment = 'overview';
@@ -27,8 +24,8 @@ const databaseBrowserPath = '/$_databaseBrowserSegment';
 const devMenuPath = '/$_devMenuSegment';
 const showcasePath = '/$_showcaseSegment';
 
-String overviewDetailsPath(String? id) =>
-    '$overviewPath/$_overviewDetailsSegment?id=${id ?? "_"}';
+String overviewDetailsPath(String id) =>
+    '$overviewPath/$_overviewDetailsSegment?id=$id';
 
 String databaseEntityPath(String id) =>
     '$databaseBrowserPath/$_databaseEntitySegment?id=$id';
@@ -38,7 +35,7 @@ String databaseAttributePath(String id, String name) =>
 
 const initialPath = overviewPath;
 
-GoRouter newRouter(WidgetRef ref) {
+GoRouter newRouter() {
   final navigationItems = [
     AppNavigationItem(
       label: 'Overview',
@@ -53,18 +50,7 @@ GoRouter newRouter(WidgetRef ref) {
           GoRoute(
             path: _overviewDetailsSegment,
             builder: (context, state) {
-              final extra = state.extra;
-              final provider =
-                  extra is BoundaryDetailsPageExtra ? extra.provider : null;
-              if (provider != null) {
-                return BoundaryDetailsPage(provider: provider);
-              } else {
-                final provider = planetaryBoundaryProviderFamily(
-                  state.queryParams['id']!,
-                );
-                ref.read(provider.notifier).initLoad();
-                return BoundaryDetailsPage(provider: provider);
-              }
+              return BoundaryDetailsPage(id: state.queryParams['id']!);
             },
           )
         ],

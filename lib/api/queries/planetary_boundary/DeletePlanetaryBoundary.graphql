@@ -1,5 +1,5 @@
-mutation DeletePlanetaryBoundary($id: ID!, $session: ID!) {
-    deletePlanetaryBoundary(id: $id, session: $session) {
+mutation DeletePlanetaryBoundary($id: ID!) {
+    deletePlanetaryBoundary(id: $id) {
         ...PlanetaryBoundary
     }
 }

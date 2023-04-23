@@ -1,131 +1,124 @@
-import 'dart:developer';
+import 'dart:async';
 
-import 'package:climate_platform_ui/common/models/entity.dart';
 import 'package:climate_platform_ui/common/models/entity_state.dart';
+import 'package:climate_platform_ui/common/notifiers/entity_cache_notifier.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-abstract class EntityStateNotifier<T extends Entity>
-    extends StateNotifier<EntityState<T>> {
-  final String session;
+abstract class EntityStateNotifier<T, I> extends StateNotifier<EntityState<T>> {
+  final String id;
+  final EntityCacheNotifier cache;
+  final bool managesCreation;
+
+  StreamSubscription<T>? updates;
+  StreamSubscription<T>? deletion;
 
   EntityStateNotifier({
-    required this.session,
-    required T defaultValue,
+    required this.id,
+    required this.cache,
+    this.managesCreation = false,
   }) : super(
           EntityState(
-            value: defaultValue,
-            isDefault: true,
-            isLoading: false,
+            value: cache.getAsync(id),
+            phase: managesCreation
+                ? EntityPhase.beforeCreation
+                : EntityPhase.display,
           ),
         ) {
-    _startSubscriptions(defaultValue);
+    if (!managesCreation) {
+      _startSubscriptions();
+      _initLoad();
+    }
+    // log('started ${managesCreation ? 'creation' : 'entity'} notifier $id ($T)');
   }
 
   @override
   void dispose() {
-    log('disposing $state');
+    _cancelSubscriptions();
+    cache.setStale(id);
+    // log('stopped ${managesCreation ? 'creation' : 'entity'} notifier $id ($T)');
     super.dispose();
   }
 
-  void _startSubscriptions(T initialValue) {
-    final id = initialValue.id;
-    if (id != null) {
-      // TODO cancel subscriptions on dispose
-      subscribeToUpdates(id)
-          .where((entity) => entity.id == id)
-          .forEach((entity) {
-        if (mounted) {
-          state = state.copyWith(
-            value: entity,
-            isLoading: false,
-            isDefault: false,
-          );
-        }
-      });
-      subscribeToDeletion(id)
-          .where((entity) => entity.id == id)
-          .first
-          .then((entity) {
-        if (mounted) {
-          state = state.copyWith(
-            value: entity,
-            isDeleted: true,
-            isLoading: false,
-            isDefault: false,
-          );
-        }
-      });
+  void _setState({
+    AsyncValue<T>? value,
+    EntityPhase? phase,
+  }) {
+    if (mounted) {
+      state = state.copyWith(
+        value: value ?? state.value,
+        phase: phase ?? state.phase,
+      );
     }
   }
 
-  void set(T initialValue) {
-    state = state.copyWith(
-      value: initialValue,
-      isDefault: false,
-    );
+  void _startSubscriptions() {
+    updates ??= subscribeToUpdates(id).listen((value) {
+      cache.setSynced(id, value);
+      _setState(value: AsyncValue.data(value));
+    });
+    deletion ??= subscribeToDeletion(id).listen((value) {
+      cache.setSynced(id, value);
+      _setState(
+        value: AsyncValue.data(value),
+        phase: EntityPhase.afterDeletion,
+      );
+      _cancelSubscriptions();
+    });
   }
 
-  Future<void> initLoad() async {
-    final id = state.value.id;
-    if (state.isDefault && !state.isLoading && !state.isDeleted && id != null) {
-      state = state.copyWith(isLoading: true);
+  void _cancelSubscriptions() {
+    updates?.cancel();
+    deletion?.cancel();
+  }
+
+  Future<void> _initLoad() async {
+    if (cache.isStale(id)) {
       final value = await requestGet(id);
-      if (mounted) {
-        if (value != null) {
-          state = state.copyWith(
-            value: value,
-            isLoading: false,
-            isDefault: false,
-          );
-        } else {
-          state = state.copyWith(
-            isLoading: false,
-            isDefault: false,
-            isDeleted: true,
-          );
-        }
+      if (value != null) {
+        cache.setSynced(id, value);
+        _setState(value: AsyncValue.data(value));
+      } else {
+        // TODO display error that entity was deleted just in that moment
+        _setState(phase: EntityPhase.afterDeletion);
       }
     }
   }
 
-  Future<void> update(T newValue) async {
-    state = state.copyWith(
-      value: newValue,
-      isLoading: true,
-    );
-    if (newValue.id == null) {
-      final responseValue = await requestCreation(session, newValue);
-      if (mounted) {
-        _startSubscriptions(responseValue);
-        state = state.copyWith(
-          value: responseValue,
-          isLoading: false,
-        );
-      }
+  Future<void> createOrMerge(I input) async {
+    if (state.inCreation) {
+      _startSubscriptions();
+      final optimisticValue = estimateCreation(id, input);
+      cache.setOptimistic(id, optimisticValue);
+      _setState(
+        value: AsyncValue.data(optimisticValue),
+        // so updates while creating are requested as merges
+        phase: EntityPhase.beforeCreation,
+      );
+      final value = await requestCreation(id, input);
+      cache.setSynced(id, value);
+      _setState(value: AsyncValue.data(value));
     } else {
-      final responseValue = await requestUpdate(session, newValue);
-      if (mounted) {
-        state = state.copyWith(
-          value: responseValue,
-          isLoading: false,
-        );
+      final optimisticValue = estimateMerge(id, state.value.value as T, input);
+      cache.setOptimistic(id, optimisticValue);
+      _setState(value: AsyncValue.data(optimisticValue));
+      final value = await requestMerge(id, input);
+      if (value != null) {
+        cache.setSynced(id, value);
+        _setState(value: AsyncValue.data(value));
+      } else {
+        // TODO display error that entity was deleted just in that moment
+        _setState(phase: EntityPhase.afterDeletion);
       }
     }
   }
 
   Future<void> delete() async {
-    state = state.copyWith(
-      isDeleted: true,
-      isLoading: true,
-    );
-    if (state.value.id != null) {
-      final responseValue = await requestDeletion(state.value.id!, session);
-      if (mounted && responseValue != null) {
-        state = state.copyWith(
-          value: responseValue,
-          isLoading: false,
-        );
-      }
+    _setState(phase: EntityPhase.afterDeletion);
+    final entity = await requestDeletion(id);
+    if (entity != null) {
+      cache.setSynced(id, entity);
+      _setState(value: AsyncValue.data(entity));
+      _cancelSubscriptions();
     }
   }
 
@@ -135,9 +128,13 @@ abstract class EntityStateNotifier<T extends Entity>
 
   Future<T?> requestGet(String id);
 
-  Future<T> requestCreation(String session, T value);
+  T estimateCreation(String id, I input);
 
-  Future<T> requestUpdate(String session, T value);
+  Future<T> requestCreation(String id, I input);
 
-  Future<T?> requestDeletion(String id, String session);
+  T estimateMerge(String id, T value, I input);
+
+  Future<T?> requestMerge(String id, I input);
+
+  Future<T?> requestDeletion(String id);
 }

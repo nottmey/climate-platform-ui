@@ -15,11 +15,9 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$EntityState<T extends Entity> {
-  T get value => throw _privateConstructorUsedError;
-  bool get isDefault => throw _privateConstructorUsedError;
-  bool get isLoading => throw _privateConstructorUsedError;
-  bool get isDeleted => throw _privateConstructorUsedError;
+mixin _$EntityState<T> {
+  AsyncValue<T> get value => throw _privateConstructorUsedError;
+  EntityPhase get phase => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EntityStateCopyWith<T, EntityState<T>> get copyWith =>
@@ -27,17 +25,17 @@ mixin _$EntityState<T extends Entity> {
 }
 
 /// @nodoc
-abstract class $EntityStateCopyWith<T extends Entity, $Res> {
+abstract class $EntityStateCopyWith<T, $Res> {
   factory $EntityStateCopyWith(
           EntityState<T> value, $Res Function(EntityState<T>) then) =
       _$EntityStateCopyWithImpl<T, $Res, EntityState<T>>;
   @useResult
-  $Res call({T value, bool isDefault, bool isLoading, bool isDeleted});
+  $Res call({AsyncValue<T> value, EntityPhase phase});
 }
 
 /// @nodoc
-class _$EntityStateCopyWithImpl<T extends Entity, $Res,
-    $Val extends EntityState<T>> implements $EntityStateCopyWith<T, $Res> {
+class _$EntityStateCopyWithImpl<T, $Res, $Val extends EntityState<T>>
+    implements $EntityStateCopyWith<T, $Res> {
   _$EntityStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -49,44 +47,34 @@ class _$EntityStateCopyWithImpl<T extends Entity, $Res,
   @override
   $Res call({
     Object? value = null,
-    Object? isDefault = null,
-    Object? isLoading = null,
-    Object? isDeleted = null,
+    Object? phase = null,
   }) {
     return _then(_value.copyWith(
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
-              as T,
-      isDefault: null == isDefault
-          ? _value.isDefault
-          : isDefault // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isDeleted: null == isDeleted
-          ? _value.isDeleted
-          : isDeleted // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as AsyncValue<T>,
+      phase: null == phase
+          ? _value.phase
+          : phase // ignore: cast_nullable_to_non_nullable
+              as EntityPhase,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_EntityStateCopyWith<T extends Entity, $Res>
+abstract class _$$_EntityStateCopyWith<T, $Res>
     implements $EntityStateCopyWith<T, $Res> {
   factory _$$_EntityStateCopyWith(
           _$_EntityState<T> value, $Res Function(_$_EntityState<T>) then) =
       __$$_EntityStateCopyWithImpl<T, $Res>;
   @override
   @useResult
-  $Res call({T value, bool isDefault, bool isLoading, bool isDeleted});
+  $Res call({AsyncValue<T> value, EntityPhase phase});
 }
 
 /// @nodoc
-class __$$_EntityStateCopyWithImpl<T extends Entity, $Res>
+class __$$_EntityStateCopyWithImpl<T, $Res>
     extends _$EntityStateCopyWithImpl<T, $Res, _$_EntityState<T>>
     implements _$$_EntityStateCopyWith<T, $Res> {
   __$$_EntityStateCopyWithImpl(
@@ -97,55 +85,36 @@ class __$$_EntityStateCopyWithImpl<T extends Entity, $Res>
   @override
   $Res call({
     Object? value = null,
-    Object? isDefault = null,
-    Object? isLoading = null,
-    Object? isDeleted = null,
+    Object? phase = null,
   }) {
     return _then(_$_EntityState<T>(
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
-              as T,
-      isDefault: null == isDefault
-          ? _value.isDefault
-          : isDefault // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isDeleted: null == isDeleted
-          ? _value.isDeleted
-          : isDeleted // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as AsyncValue<T>,
+      phase: null == phase
+          ? _value.phase
+          : phase // ignore: cast_nullable_to_non_nullable
+              as EntityPhase,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_EntityState<T extends Entity> implements _EntityState<T> {
-  const _$_EntityState(
-      {required this.value,
-      this.isDefault = false,
-      this.isLoading = false,
-      this.isDeleted = false});
+class _$_EntityState<T> extends _EntityState<T> {
+  const _$_EntityState({required this.value, this.phase = EntityPhase.display})
+      : super._();
 
   @override
-  final T value;
+  final AsyncValue<T> value;
   @override
   @JsonKey()
-  final bool isDefault;
-  @override
-  @JsonKey()
-  final bool isLoading;
-  @override
-  @JsonKey()
-  final bool isDeleted;
+  final EntityPhase phase;
 
   @override
   String toString() {
-    return 'EntityState<$T>(value: $value, isDefault: $isDefault, isLoading: $isLoading, isDeleted: $isDeleted)';
+    return 'EntityState<$T>(value: $value, phase: $phase)';
   }
 
   @override
@@ -153,22 +122,12 @@ class _$_EntityState<T extends Entity> implements _EntityState<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_EntityState<T> &&
-            const DeepCollectionEquality().equals(other.value, value) &&
-            (identical(other.isDefault, isDefault) ||
-                other.isDefault == isDefault) &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
-            (identical(other.isDeleted, isDeleted) ||
-                other.isDeleted == isDeleted));
+            (identical(other.value, value) || other.value == value) &&
+            (identical(other.phase, phase) || other.phase == phase));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(value),
-      isDefault,
-      isLoading,
-      isDeleted);
+  int get hashCode => Object.hash(runtimeType, value, phase);
 
   @JsonKey(ignore: true)
   @override
@@ -177,21 +136,16 @@ class _$_EntityState<T extends Entity> implements _EntityState<T> {
       __$$_EntityStateCopyWithImpl<T, _$_EntityState<T>>(this, _$identity);
 }
 
-abstract class _EntityState<T extends Entity> implements EntityState<T> {
+abstract class _EntityState<T> extends EntityState<T> {
   const factory _EntityState(
-      {required final T value,
-      final bool isDefault,
-      final bool isLoading,
-      final bool isDeleted}) = _$_EntityState<T>;
+      {required final AsyncValue<T> value,
+      final EntityPhase phase}) = _$_EntityState<T>;
+  const _EntityState._() : super._();
 
   @override
-  T get value;
+  AsyncValue<T> get value;
   @override
-  bool get isDefault;
-  @override
-  bool get isLoading;
-  @override
-  bool get isDeleted;
+  EntityPhase get phase;
   @override
   @JsonKey(ignore: true)
   _$$_EntityStateCopyWith<T, _$_EntityState<T>> get copyWith =>

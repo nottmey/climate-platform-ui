@@ -311,7 +311,6 @@ MergePlanetaryBoundary$Mutation$PlanetaryBoundary
             Map<String, dynamic> json) =>
         MergePlanetaryBoundary$Mutation$PlanetaryBoundary()
           ..id = json['id'] as String
-          ..session = json['session'] as String?
           ..name = json['name'] as String?
           ..description = json['description'] as String?;
 
@@ -319,7 +318,6 @@ Map<String, dynamic> _$MergePlanetaryBoundary$Mutation$PlanetaryBoundaryToJson(
         MergePlanetaryBoundary$Mutation$PlanetaryBoundary instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'session': instance.session,
       'name': instance.name,
       'description': instance.description,
     };
@@ -357,7 +355,6 @@ OnUpdatedPlanetaryBoundary$Subscription$PlanetaryBoundary
             Map<String, dynamic> json) =>
         OnUpdatedPlanetaryBoundary$Subscription$PlanetaryBoundary()
           ..id = json['id'] as String
-          ..session = json['session'] as String?
           ..name = json['name'] as String?
           ..description = json['description'] as String?;
 
@@ -366,7 +363,6 @@ Map<String,
         OnUpdatedPlanetaryBoundary$Subscription$PlanetaryBoundary instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'session': instance.session,
       'name': instance.name,
       'description': instance.description,
     };
@@ -394,7 +390,6 @@ CreatePlanetaryBoundary$Mutation$PlanetaryBoundary
             Map<String, dynamic> json) =>
         CreatePlanetaryBoundary$Mutation$PlanetaryBoundary()
           ..id = json['id'] as String
-          ..session = json['session'] as String?
           ..name = json['name'] as String?
           ..description = json['description'] as String?;
 
@@ -402,7 +397,6 @@ Map<String, dynamic> _$CreatePlanetaryBoundary$Mutation$PlanetaryBoundaryToJson(
         CreatePlanetaryBoundary$Mutation$PlanetaryBoundary instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'session': instance.session,
       'name': instance.name,
       'description': instance.description,
     };
@@ -425,7 +419,6 @@ OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundary
             Map<String, dynamic> json) =>
         OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundary()
           ..id = json['id'] as String
-          ..session = json['session'] as String?
           ..name = json['name'] as String?
           ..description = json['description'] as String?;
 
@@ -434,7 +427,6 @@ Map<String,
         OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundary instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'session': instance.session,
       'name': instance.name,
       'description': instance.description,
     };
@@ -462,7 +454,6 @@ DeletePlanetaryBoundary$Mutation$PlanetaryBoundary
             Map<String, dynamic> json) =>
         DeletePlanetaryBoundary$Mutation$PlanetaryBoundary()
           ..id = json['id'] as String
-          ..session = json['session'] as String?
           ..name = json['name'] as String?
           ..description = json['description'] as String?;
 
@@ -470,7 +461,6 @@ Map<String, dynamic> _$DeletePlanetaryBoundary$Mutation$PlanetaryBoundaryToJson(
         DeletePlanetaryBoundary$Mutation$PlanetaryBoundary instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'session': instance.session,
       'name': instance.name,
       'description': instance.description,
     };
@@ -494,7 +484,6 @@ OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundary
             Map<String, dynamic> json) =>
         OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundary()
           ..id = json['id'] as String
-          ..session = json['session'] as String?
           ..name = json['name'] as String?
           ..description = json['description'] as String?;
 
@@ -503,7 +492,6 @@ Map<String,
         OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundary instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'session': instance.session,
       'name': instance.name,
       'description': instance.description,
     };
@@ -547,7 +535,6 @@ GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PlanetaryBoundary
             Map<String, dynamic> json) =>
         GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PlanetaryBoundary()
           ..id = json['id'] as String
-          ..session = json['session'] as String?
           ..name = json['name'] as String?
           ..description = json['description'] as String?;
 
@@ -557,7 +544,6 @@ Map<String, dynamic>
                 instance) =>
         <String, dynamic>{
           'id': instance.id,
-          'session': instance.session,
           'name': instance.name,
           'description': instance.description,
         };
@@ -601,7 +587,6 @@ GetPlanetaryBoundary$Query$PlanetaryBoundary
             Map<String, dynamic> json) =>
         GetPlanetaryBoundary$Query$PlanetaryBoundary()
           ..id = json['id'] as String
-          ..session = json['session'] as String?
           ..name = json['name'] as String?
           ..description = json['description'] as String?;
 
@@ -609,7 +594,6 @@ Map<String, dynamic> _$GetPlanetaryBoundary$Query$PlanetaryBoundaryToJson(
         GetPlanetaryBoundary$Query$PlanetaryBoundary instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'session': instance.session,
       'name': instance.name,
       'description': instance.description,
     };
@@ -660,7 +644,6 @@ MergePlanetaryBoundaryArguments _$MergePlanetaryBoundaryArgumentsFromJson(
         Map<String, dynamic> json) =>
     MergePlanetaryBoundaryArguments(
       id: json['id'] as String,
-      session: json['session'] as String,
       value: PlanetaryBoundaryInput.fromJson(
           json['value'] as Map<String, dynamic>),
     );
@@ -669,7 +652,6 @@ Map<String, dynamic> _$MergePlanetaryBoundaryArgumentsToJson(
         MergePlanetaryBoundaryArguments instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'session': instance.session,
       'value': instance.value.toJson(),
     };
 
@@ -688,7 +670,7 @@ Map<String, dynamic> _$OnUpdatedPlanetaryBoundaryArgumentsToJson(
 CreatePlanetaryBoundaryArguments _$CreatePlanetaryBoundaryArgumentsFromJson(
         Map<String, dynamic> json) =>
     CreatePlanetaryBoundaryArguments(
-      session: json['session'] as String,
+      id: json['id'] as String,
       value: PlanetaryBoundaryInput.fromJson(
           json['value'] as Map<String, dynamic>),
     );
@@ -696,7 +678,7 @@ CreatePlanetaryBoundaryArguments _$CreatePlanetaryBoundaryArgumentsFromJson(
 Map<String, dynamic> _$CreatePlanetaryBoundaryArgumentsToJson(
         CreatePlanetaryBoundaryArguments instance) =>
     <String, dynamic>{
-      'session': instance.session,
+      'id': instance.id,
       'value': instance.value.toJson(),
     };
 
@@ -716,14 +698,12 @@ DeletePlanetaryBoundaryArguments _$DeletePlanetaryBoundaryArgumentsFromJson(
         Map<String, dynamic> json) =>
     DeletePlanetaryBoundaryArguments(
       id: json['id'] as String,
-      session: json['session'] as String,
     );
 
 Map<String, dynamic> _$DeletePlanetaryBoundaryArgumentsToJson(
         DeletePlanetaryBoundaryArguments instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'session': instance.session,
     };
 
 GetPlanetaryBoundaryPageArguments _$GetPlanetaryBoundaryPageArgumentsFromJson(

@@ -1,4 +1,4 @@
-# This file was generated based on ".graphqlconfig". Do not edit manually.
+# This file was generated. Do not edit manually.
 
 schema {
     query: Query
@@ -6,8 +6,8 @@ schema {
     subscription: Subscription
 }
 
-"This directive allows results to be deferred during execution"
-directive @defer on FIELD
+"Tells the service this field/object has access authorized by an API key."
+directive @aws_api_key on OBJECT | FIELD_DEFINITION
 
 "Directs the schema to enforce authorization on a field"
 directive @aws_auth(
@@ -21,8 +21,14 @@ directive @aws_cognito_user_pools(
     cognito_groups: [String]
 ) on OBJECT | FIELD_DEFINITION
 
+"Tells the service this field/object has access authorized by sigv4 signing."
+directive @aws_iam on OBJECT | FIELD_DEFINITION
+
 "Tells the service this field/object has access authorized by a Lambda Authorizer."
 directive @aws_lambda on OBJECT | FIELD_DEFINITION
+
+"Tells the service this field/object has access authorized by an OIDC token."
+directive @aws_oidc on OBJECT | FIELD_DEFINITION
 
 "Tells the service which subscriptions will be published to when this mutation is called. This directive is deprecated use @aws_susbscribe directive instead."
 directive @aws_publish(
@@ -30,25 +36,24 @@ directive @aws_publish(
     subscriptions: [String]
 ) on FIELD_DEFINITION
 
-"Tells the service this field/object has access authorized by an OIDC token."
-directive @aws_oidc on OBJECT | FIELD_DEFINITION
-
-"Tells the service this field/object has access authorized by an API key."
-directive @aws_api_key on OBJECT | FIELD_DEFINITION
-
 "Tells the service which mutation triggers this subscription."
 directive @aws_subscribe(
     "List of mutations which will trigger this subscription when they are called."
     mutations: [String]
 ) on FIELD_DEFINITION
 
-"Tells the service this field/object has access authorized by sigv4 signing."
-directive @aws_iam on OBJECT | FIELD_DEFINITION
+"This directive allows results to be deferred during execution"
+directive @defer on FIELD
 
 " generated, do not edit manually!"
 interface Attribute {
     id: ID!
     name: String!
+}
+
+" generated, do not edit manually!"
+interface EntityBase {
+    id: ID!
 }
 
 " generated, do not edit manually!"
@@ -116,12 +121,12 @@ type MultiTupleAttribute implements Attribute {
 
 " generated, do not edit manually!"
 type Mutation {
-    createPlanetaryBoundary(session: ID, value: PlanetaryBoundaryInput!): PlanetaryBoundary!
-    deletePlanetaryBoundary(id: ID!, session: ID): PlanetaryBoundary
-    mergePlanetaryBoundary(id: ID!, session: ID, value: PlanetaryBoundaryInput!): PlanetaryBoundary
-    publishCreatedPlanetaryBoundary(id: ID!, session: ID, value: PlanetaryBoundaryInput!): PlanetaryBoundary
-    publishDeletedPlanetaryBoundary(id: ID!, session: ID, value: PlanetaryBoundaryInput!): PlanetaryBoundary
-    publishUpdatedPlanetaryBoundary(id: ID!, session: ID, value: PlanetaryBoundaryInput!): PlanetaryBoundary
+    createPlanetaryBoundary(id: ID!, value: PlanetaryBoundaryInput!): PlanetaryBoundary!
+    deletePlanetaryBoundary(id: ID!): PlanetaryBoundary
+    mergePlanetaryBoundary(id: ID!, value: PlanetaryBoundaryInput!): PlanetaryBoundary
+    publishCreatedPlanetaryBoundary(id: ID!, value: PlanetaryBoundaryInput!): PlanetaryBoundary
+    publishDeletedPlanetaryBoundary(id: ID!, value: PlanetaryBoundaryInput!): PlanetaryBoundary
+    publishUpdatedPlanetaryBoundary(id: ID!, value: PlanetaryBoundaryInput!): PlanetaryBoundary
 }
 
 " generated, do not edit manually!"
@@ -135,12 +140,11 @@ type PageInfo {
 }
 
 " generated, do not edit manually!"
-type PlanetaryBoundary {
+type PlanetaryBoundary implements EntityBase {
     context: AWSJSON
     description: String
     id: ID!
     name: String
-    session: ID
 }
 
 " generated, do not edit manually!"
@@ -174,9 +178,9 @@ type StringAttribute implements Attribute {
 
 " generated, do not edit manually!"
 type Subscription {
-    onCreatedPlanetaryBoundary(description: String, id: ID, name: String, session: ID): PlanetaryBoundary
-    onDeletedPlanetaryBoundary(description: String, id: ID, name: String, session: ID): PlanetaryBoundary
-    onUpdatedPlanetaryBoundary(description: String, id: ID, name: String, session: ID): PlanetaryBoundary
+    onCreatedPlanetaryBoundary(description: String, id: ID, name: String): PlanetaryBoundary
+    onDeletedPlanetaryBoundary(description: String, id: ID, name: String): PlanetaryBoundary
+    onUpdatedPlanetaryBoundary(description: String, id: ID, name: String): PlanetaryBoundary
 }
 
 " generated, do not edit manually!"

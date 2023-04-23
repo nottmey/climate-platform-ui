@@ -1,64 +1,45 @@
+import 'package:climate_platform_ui/api/api.graphql.dart';
 import 'package:climate_platform_ui/common/models/entity_state.dart';
-import 'package:climate_platform_ui/common/notifiers/entity_state_notifier.dart';
-import 'package:climate_platform_ui/common/providers/session_provider.dart';
 import 'package:climate_platform_ui/common/widgets/app_entity_card.dart';
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
 import 'package:climate_platform_ui/common/widgets/app_widget.dart';
-import 'package:climate_platform_ui/features/planetary_boundaries/models/boundary_details_page_extra.dart';
-import 'package:climate_platform_ui/features/planetary_boundaries/models/planetary_boundary.dart';
-import 'package:climate_platform_ui/features/planetary_boundaries/notifiers/planetary_boundary_state_notifier.dart';
+import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_creation_family.dart';
 import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_creations_provider.dart';
+import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_family.dart';
 import 'package:climate_platform_ui/features/theming/models/text_style_preset.dart';
 import 'package:climate_platform_ui/router.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class PlanetaryBoundaryCard extends AppEntityCard<PlanetaryBoundary> {
+class PlanetaryBoundaryCard
+    extends AppEntityCard<PlanetaryBoundaryMixin, PlanetaryBoundaryInput> {
   PlanetaryBoundaryCard.creation({super.key})
       : super.creation(
-          providerConstructor: () => AutoDisposeStateNotifierProvider(
-            (ref) {
-              final session = ref.read(sessionProvider);
-              return PlanetaryBoundaryStateNotifier(session: session);
-            },
-          ),
+          family: planetaryBoundaryCreationFamily,
           creationsSink: planetaryBoundaryCreationsSink,
         );
 
-  const PlanetaryBoundaryCard.display({super.key, required super.provider})
-      : super.display();
+  PlanetaryBoundaryCard.display({super.key, required super.displayId})
+      : super.display(family: planetaryBoundaryFamily);
 
   @override
-  void onTab(
-    BuildContext context,
-    AutoDisposeStateNotifierProvider<EntityStateNotifier<PlanetaryBoundary>,
-            EntityState<PlanetaryBoundary>>
-        provider,
-    String? id,
-  ) {
-    context.go(
-      overviewDetailsPath(id),
-      extra: BoundaryDetailsPageExtra(provider: provider),
-    );
+  void onTab(BuildContext context, String id) {
+    context.go(overviewDetailsPath(id));
   }
 
   @override
-  FormGroup createFormControls(PlanetaryBoundary value) {
+  FormGroup createFormControls(PlanetaryBoundaryMixin? value) {
     return FormGroup({
       'name': FormControl<String>(
-        value: value.name,
+        value: value?.name,
         validators: [Validators.required],
       )
     });
   }
 
   @override
-  PlanetaryBoundary mergeFormControlsWithValue(
-    FormGroup form,
-    PlanetaryBoundary value,
-  ) {
-    return value.copyWith(name: form.value['name'] as String?);
+  PlanetaryBoundaryInput createInputFromForm(FormGroup form) {
+    return PlanetaryBoundaryInput(name: form.value['name'] as String?);
   }
 
   @override
@@ -84,7 +65,7 @@ class PlanetaryBoundaryCard extends AppEntityCard<PlanetaryBoundary> {
   @override
   Widget buildDisplay(
     BuildContext context,
-    EntityState<PlanetaryBoundary> state,
+    EntityState<PlanetaryBoundaryMixin> state,
     double safeIconButtonPadding,
   ) {
     return Column(
@@ -92,10 +73,16 @@ class PlanetaryBoundaryCard extends AppEntityCard<PlanetaryBoundary> {
       children: [
         Padding(
           padding: EdgeInsets.only(right: safeIconButtonPadding),
-          child: AppText(
-            value: state.value.name ?? '',
-            looksDisabled: state.isDeleted,
-            preset: TextStylePreset.titleLarge,
+          child: state.value.when(
+            data: (value) {
+              return AppText(
+                value: value.name ?? '',
+                looksDisabled: state.isDeleted,
+                preset: TextStylePreset.titleLarge,
+              );
+            },
+            error: (e, s) => const Icon(Icons.error),
+            loading: CircularProgressIndicator.new,
           ),
         ),
       ],

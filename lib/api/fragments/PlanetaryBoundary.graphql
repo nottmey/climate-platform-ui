@@ -1,6 +1,5 @@
 fragment PlanetaryBoundary on PlanetaryBoundary {
     id
-    session
     name
     description
 }

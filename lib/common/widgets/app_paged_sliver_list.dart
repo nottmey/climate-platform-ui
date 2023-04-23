@@ -17,7 +17,6 @@ class AppPagedFetchResult<T> {
 class AppPagedSliverList<T> extends ConsumerStatefulWidget {
   final int firstPageKey;
   final int firstPageSize;
-  final ProviderListenable<dynamic>? resetProvider;
   final StreamProvider<T>? creationsProvider;
   final Future<AppPagedFetchResult<T>> Function(int pageKey, int size)
       fetchPage;
@@ -28,7 +27,6 @@ class AppPagedSliverList<T> extends ConsumerStatefulWidget {
     super.key,
     this.firstPageKey = 0,
     this.firstPageSize = 20,
-    this.resetProvider,
     this.creationsProvider,
     required this.fetchPage,
     this.separatorBuilder,
@@ -41,8 +39,9 @@ class AppPagedSliverList<T> extends ConsumerStatefulWidget {
 
 class _AppPagedSliverListState<T> extends ConsumerState<AppPagedSliverList<T>> {
   late final PagingController<int, T> controller;
-  late int currentPageSize;
 
+  late int currentPageSize;
+  Set<T> currentItems = {};
   bool completed = false;
 
   @override
@@ -69,11 +68,14 @@ class _AppPagedSliverListState<T> extends ConsumerState<AppPagedSliverList<T>> {
           // no race conditions, because multiple fetchPage calls are executed sequentially in the same thread
           currentPageSize = nextPageSize;
         }
+        final newItems = result.newItems;
+        currentItems.addAll(newItems);
+
         final nextPageKey = result.nextPageKey;
         if (nextPageKey != null) {
-          controller.appendPage(result.newItems, nextPageKey);
+          controller.appendPage(newItems, nextPageKey);
         } else {
-          controller.appendLastPage(result.newItems);
+          controller.appendLastPage(newItems);
         }
       }
     } catch (e) {
@@ -83,8 +85,6 @@ class _AppPagedSliverListState<T> extends ConsumerState<AppPagedSliverList<T>> {
     }
   }
 
-  void _emptyNoOp(dynamic prev, dynamic next) {}
-
   @override
   void dispose() {
     controller.dispose();
@@ -93,20 +93,15 @@ class _AppPagedSliverListState<T> extends ConsumerState<AppPagedSliverList<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final resetProvider = widget.resetProvider;
-    if (resetProvider != null) {
-      ref.listen<dynamic>(resetProvider, (previous, next) {
-        if (previous != null && mounted) {
-          controller.refresh();
-        }
-      });
-    }
-
     final creationsProvider = widget.creationsProvider;
     if (creationsProvider != null) {
       ref.listen(creationsProvider, (prev, next) {
         if (completed && mounted && next.hasValue) {
-          controller.appendLastPage([next.value as T]);
+          final value = next.value as T;
+          if (!currentItems.contains(value)) {
+            currentItems.add(value);
+            controller.appendLastPage([value]);
+          }
         }
       });
     }
@@ -125,9 +120,6 @@ class _AppPagedSliverListState<T> extends ConsumerState<AppPagedSliverList<T>> {
         pagingController: controller,
         builderDelegate: PagedChildBuilderDelegate(
           itemBuilder: (context, T item, index) {
-            if (item is ProviderListenable) {
-              ref.listenManual(item, _emptyNoOp); // tie lifecycle to list
-            }
             return widget.itemBuilder(context, item, index);
           },
         ),

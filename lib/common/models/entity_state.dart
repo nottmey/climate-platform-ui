@@ -1,14 +1,24 @@
-import 'package:climate_platform_ui/common/models/entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 part 'entity_state.freezed.dart';
 
+enum EntityPhase {
+  beforeCreation,
+  display,
+  afterDeletion,
+}
+
 @freezed
-class EntityState<T extends Entity> with _$EntityState<T> {
+class EntityState<T> with _$EntityState<T> {
   const factory EntityState({
-    required T value,
-    @Default(false) bool isDefault,
-    @Default(false) bool isLoading,
-    @Default(false) bool isDeleted,
+    required AsyncValue<T> value,
+    @Default(EntityPhase.display) EntityPhase phase,
   }) = _EntityState;
+
+  const EntityState._(); // enables use of custom getters
+
+  bool get inCreation => phase == EntityPhase.beforeCreation;
+
+  bool get isDeleted => phase == EntityPhase.afterDeletion;
 }

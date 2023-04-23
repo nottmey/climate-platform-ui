@@ -9,7 +9,7 @@ class App extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final routerState = useState(newRouter(ref));
+    final routerState = useState(newRouter());
 
     return MaterialApp.router(
       theme: ref.watch(themeProvider),
