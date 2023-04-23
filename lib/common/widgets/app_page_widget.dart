@@ -31,6 +31,7 @@ abstract class AppPageWidget extends AppWidget {
             refreshIndicator.value = refreshIndicator.value + 1;
           },
           child: CustomScrollView(
+            primary: true,
             slivers: buildSlivers(context, ref),
           ),
         ),
