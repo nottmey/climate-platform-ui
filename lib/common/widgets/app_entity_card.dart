@@ -60,9 +60,9 @@ abstract class AppEntityCard<T, I> extends AppWidget {
     final provider = providerState.value;
 
     final entityState = ref.watch(provider);
-    final asyncValue = entityState.inCreation ? null : entityState.value;
+    final asyncEntity = entityState.inCreation ? null : entityState.asyncEntity;
     // TODO loading state, when not creating
-    final value = asyncValue?.asData?.value;
+    final value = asyncEntity?.asData?.value;
 
     final displayState = useState(_startState);
     final displayStateValue = displayState.value;

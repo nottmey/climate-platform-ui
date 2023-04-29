@@ -19,13 +19,13 @@ class BoundaryDetailsPage extends AppPageWidget {
     return [
       AppHeaderSliver(
         provider: provider.select(
-          (state) => state.value.whenData((value) => value.name),
+          (state) => state.asyncEntity.whenData((value) => value.name),
         ),
       ),
       SliverToBoxAdapter(
         child: AppDescriptionBlock(
           provider: planetaryBoundaryFamily(id).select(
-            (state) => state.value.whenData((value) => value.description),
+            (state) => state.asyncEntity.whenData((value) => value.description),
           ),
           onSave: (value) => ref
               .read(provider.notifier)

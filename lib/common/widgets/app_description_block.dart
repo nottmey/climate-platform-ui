@@ -1,4 +1,6 @@
 import 'package:climate_platform_ui/common/widgets/app_card.dart';
+import 'package:climate_platform_ui/common/widgets/app_error.dart';
+import 'package:climate_platform_ui/common/widgets/app_loading.dart';
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
 import 'package:climate_platform_ui/common/widgets/app_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -19,9 +21,10 @@ class AppDescriptionBlock extends AppWidget {
     final editing = editingState.value;
 
     return ref.watch(provider).when(
-          loading: () =>
-              AppCard(builder: (_) => const CircularProgressIndicator()),
-          error: (e, st) => AppCard(builder: (_) => const Icon(Icons.error)),
+          loading: () => AppCard(builder: (_) => const AppLoading()),
+          error: (error, stackTrace) => AppCard(
+            builder: (_) => AppError(error: error, stackTrace: stackTrace),
+          ),
           data: (value) {
             final controller = useTextEditingController(text: value);
             ref.listen(provider, (previous, next) {

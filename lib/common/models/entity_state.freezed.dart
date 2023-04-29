@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$EntityState<T> {
-  AsyncValue<T> get value => throw _privateConstructorUsedError;
+  AsyncValue<T> get asyncEntity => throw _privateConstructorUsedError;
   EntityPhase get phase => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +30,7 @@ abstract class $EntityStateCopyWith<T, $Res> {
           EntityState<T> value, $Res Function(EntityState<T>) then) =
       _$EntityStateCopyWithImpl<T, $Res, EntityState<T>>;
   @useResult
-  $Res call({AsyncValue<T> value, EntityPhase phase});
+  $Res call({AsyncValue<T> asyncEntity, EntityPhase phase});
 }
 
 /// @nodoc
@@ -46,13 +46,13 @@ class _$EntityStateCopyWithImpl<T, $Res, $Val extends EntityState<T>>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? value = null,
+    Object? asyncEntity = null,
     Object? phase = null,
   }) {
     return _then(_value.copyWith(
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
+      asyncEntity: null == asyncEntity
+          ? _value.asyncEntity
+          : asyncEntity // ignore: cast_nullable_to_non_nullable
               as AsyncValue<T>,
       phase: null == phase
           ? _value.phase
@@ -70,7 +70,7 @@ abstract class _$$_EntityStateCopyWith<T, $Res>
       __$$_EntityStateCopyWithImpl<T, $Res>;
   @override
   @useResult
-  $Res call({AsyncValue<T> value, EntityPhase phase});
+  $Res call({AsyncValue<T> asyncEntity, EntityPhase phase});
 }
 
 /// @nodoc
@@ -84,13 +84,13 @@ class __$$_EntityStateCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? value = null,
+    Object? asyncEntity = null,
     Object? phase = null,
   }) {
     return _then(_$_EntityState<T>(
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
+      asyncEntity: null == asyncEntity
+          ? _value.asyncEntity
+          : asyncEntity // ignore: cast_nullable_to_non_nullable
               as AsyncValue<T>,
       phase: null == phase
           ? _value.phase
@@ -103,18 +103,19 @@ class __$$_EntityStateCopyWithImpl<T, $Res>
 /// @nodoc
 
 class _$_EntityState<T> extends _EntityState<T> {
-  const _$_EntityState({required this.value, this.phase = EntityPhase.display})
+  const _$_EntityState(
+      {required this.asyncEntity, this.phase = EntityPhase.display})
       : super._();
 
   @override
-  final AsyncValue<T> value;
+  final AsyncValue<T> asyncEntity;
   @override
   @JsonKey()
   final EntityPhase phase;
 
   @override
   String toString() {
-    return 'EntityState<$T>(value: $value, phase: $phase)';
+    return 'EntityState<$T>(asyncEntity: $asyncEntity, phase: $phase)';
   }
 
   @override
@@ -122,12 +123,13 @@ class _$_EntityState<T> extends _EntityState<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_EntityState<T> &&
-            (identical(other.value, value) || other.value == value) &&
+            (identical(other.asyncEntity, asyncEntity) ||
+                other.asyncEntity == asyncEntity) &&
             (identical(other.phase, phase) || other.phase == phase));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, value, phase);
+  int get hashCode => Object.hash(runtimeType, asyncEntity, phase);
 
   @JsonKey(ignore: true)
   @override
@@ -138,12 +140,12 @@ class _$_EntityState<T> extends _EntityState<T> {
 
 abstract class _EntityState<T> extends EntityState<T> {
   const factory _EntityState(
-      {required final AsyncValue<T> value,
+      {required final AsyncValue<T> asyncEntity,
       final EntityPhase phase}) = _$_EntityState<T>;
   const _EntityState._() : super._();
 
   @override
-  AsyncValue<T> get value;
+  AsyncValue<T> get asyncEntity;
   @override
   EntityPhase get phase;
   @override

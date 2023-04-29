@@ -12,7 +12,7 @@ enum EntityPhase {
 @freezed
 class EntityState<T> with _$EntityState<T> {
   const factory EntityState({
-    required AsyncValue<T> value,
+    required AsyncValue<T> asyncEntity,
     @Default(EntityPhase.display) EntityPhase phase,
   }) = _EntityState;
 

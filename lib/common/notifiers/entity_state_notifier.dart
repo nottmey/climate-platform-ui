@@ -18,7 +18,7 @@ abstract class EntityStateNotifier<T, I> extends StateNotifier<EntityState<T>> {
     this.managesCreation = false,
   }) : super(
           EntityState(
-            value: cache.getAsync(id),
+            asyncEntity: cache.getAsync(id),
             phase: managesCreation
                 ? EntityPhase.beforeCreation
                 : EntityPhase.display,
@@ -45,7 +45,7 @@ abstract class EntityStateNotifier<T, I> extends StateNotifier<EntityState<T>> {
   }) {
     if (mounted) {
       state = state.copyWith(
-        value: value ?? state.value,
+        asyncEntity: value ?? state.asyncEntity,
         phase: phase ?? state.phase,
       );
     }
@@ -98,7 +98,8 @@ abstract class EntityStateNotifier<T, I> extends StateNotifier<EntityState<T>> {
       cache.setSynced(id, value);
       _setState(value: AsyncValue.data(value));
     } else {
-      final optimisticValue = estimateMerge(id, state.value.value as T, input);
+      final optimisticValue =
+          estimateMerge(id, state.asyncEntity.value as T, input);
       cache.setOptimistic(id, optimisticValue);
       _setState(value: AsyncValue.data(optimisticValue));
       final value = await requestMerge(id, input);

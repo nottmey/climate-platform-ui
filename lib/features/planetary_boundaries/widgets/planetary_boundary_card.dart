@@ -73,7 +73,7 @@ class PlanetaryBoundaryCard
       children: [
         Padding(
           padding: EdgeInsets.only(right: safeIconButtonPadding),
-          child: state.value.when(
+          child: state.asyncEntity.when(
             data: (value) {
               return AppText(
                 value: value.name ?? '',
