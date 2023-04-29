@@ -1,5 +1,6 @@
 import 'package:climate_platform_ui/api/api.graphql.dart';
 import 'package:climate_platform_ui/common/widgets/app_header_sliver.dart';
+import 'package:climate_platform_ui/common/widgets/app_loading.dart';
 import 'package:climate_platform_ui/common/widgets/app_page_widget.dart';
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
 import 'package:climate_platform_ui/features/database_browser/providers/entity_provider_family.dart';
@@ -13,7 +14,7 @@ class EntityPage extends AppPageWidget {
 
   Widget buildLoadingSliver() {
     return const SliverFillRemaining(
-      child: Center(child: CircularProgressIndicator()),
+      child: Center(child: AppLoading()),
     );
   }
 

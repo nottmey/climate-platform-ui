@@ -1,6 +1,8 @@
 import 'package:climate_platform_ui/api/api.graphql.dart';
 import 'package:climate_platform_ui/common/models/entity_state.dart';
 import 'package:climate_platform_ui/common/widgets/app_entity_card.dart';
+import 'package:climate_platform_ui/common/widgets/app_error.dart';
+import 'package:climate_platform_ui/common/widgets/app_loading.dart';
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
 import 'package:climate_platform_ui/common/widgets/app_widget.dart';
 import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_creation_family.dart';
@@ -81,8 +83,8 @@ class PlanetaryBoundaryCard
                 preset: TextStylePreset.titleLarge,
               );
             },
-            error: (e, s) => const Icon(Icons.error),
-            loading: CircularProgressIndicator.new,
+            error: (e, s) => AppError(error: e, stackTrace: s),
+            loading: AppLoading.new,
           ),
         ),
       ],
