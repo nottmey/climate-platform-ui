@@ -3,6 +3,7 @@ import 'package:climate_platform_ui/common/widgets/app_error.dart';
 import 'package:climate_platform_ui/common/widgets/app_loading.dart';
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
 import 'package:climate_platform_ui/common/widgets/app_widget.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AppDescriptionBlock extends AppWidget {
@@ -25,10 +26,10 @@ class AppDescriptionBlock extends AppWidget {
           error: (error, stackTrace) => AppCard(
             builder: (_) => AppError(error: error, stackTrace: stackTrace),
           ),
-          data: (value) {
-            final controller = useTextEditingController(text: value);
-            ref.listen(provider, (previous, next) {
-              final value = next.asData?.value;
+          data: (description) {
+            final controller = useTextEditingController(text: description);
+            ref.listen(provider, (_, nextAsyncDescription) {
+              final value = nextAsyncDescription.asData?.value;
               if (value != null) {
                 // TODO solve conflict when user already updated local value
                 controller.text = value;
@@ -48,8 +49,12 @@ class AppDescriptionBlock extends AppWidget {
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
                       ),
-                    // TODO use markdown renderer
-                    if (!editing) AppText(value: value ?? ''),
+                    if (!editing)
+                      Markdown(
+                        data: description ?? '',
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                      ),
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.end,
