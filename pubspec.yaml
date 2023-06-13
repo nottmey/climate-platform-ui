@@ -46,6 +46,7 @@ dependency_overrides:
   # leaving out version causes upgrade to use the newest version
   # safe to do so, assuming libs don't cause breaking changes
   collection:
+  http:
   path:
 
 dev_dependencies:
