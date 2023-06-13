@@ -12,26 +12,12 @@ ThemeData defaultTheme({
       seedColor: seedColor,
       brightness: brightness,
     ),
-    textTheme: GoogleFonts.openSansTextTheme(
-      // empty param means using the default material value
+    textTheme: GoogleFonts.atkinsonHyperlegibleTextTheme(
+      // disclaimer: Atkinson Hyperlegible only has weights 400 and 700 available
       const TextTheme(
-        // overwrite height, because else characters overflow
-        displayLarge: TextStyle(fontSize: 57, height: 73 / 57),
-        displayMedium: TextStyle(fontSize: 45, height: 57 / 45),
-        displaySmall: TextStyle(fontSize: 36, height: 46 / 36),
-        headlineLarge: TextStyle(),
-        headlineMedium: TextStyle(),
-        headlineSmall: TextStyle(),
-        titleLarge: TextStyle(fontSize: 22, height: 29 / 22),
-        titleMedium: TextStyle(),
-        titleSmall: TextStyle(),
-        labelLarge: TextStyle(),
-        labelMedium: TextStyle(fontSize: 12, height: 17 / 12),
-        labelSmall: TextStyle(),
-        bodyLarge: TextStyle(),
-        bodyMedium: TextStyle(),
-        bodySmall: TextStyle(fontSize: 12, height: 17 / 12),
-      ),
+          // override values here if you want
+          // empty param means using the default material value
+          ),
     ),
     useMaterial3: true,
   );
