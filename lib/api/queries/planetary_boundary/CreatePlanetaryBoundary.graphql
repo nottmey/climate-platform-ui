@@ -1,5 +1,5 @@
-mutation CreatePlanetaryBoundary($id: ID!, $value: PlanetaryBoundaryInput!) {
-    createPlanetaryBoundary(id: $id, value: $value) {
+mutation CreatePlanetaryBoundary($value: PlanetaryBoundaryInput!) {
+    createPlanetaryBoundary(value: $value) {
         ...PlanetaryBoundary
     }
 }

@@ -87,22 +87,22 @@ abstract class EntityStateNotifier<T, I> extends StateNotifier<EntityState<T>> {
   Future<void> createOrMerge(I input) async {
     if (state.inCreation) {
       _startSubscriptions();
-      final optimisticValue = estimateCreation(id, input);
+      final optimisticValue = estimateCreation(input);
       cache.setOptimistic(id, optimisticValue);
       _setState(
         value: AsyncValue.data(optimisticValue),
         // so updates while creating are requested as merges
         phase: EntityPhase.beforeCreation,
       );
-      final value = await requestCreation(id, input);
+      final value = await requestCreation(input);
       cache.setSynced(id, value);
       _setState(value: AsyncValue.data(value));
     } else {
       final optimisticValue =
-          estimateMerge(id, state.asyncEntity.value as T, input);
+          estimateMerge(state.asyncEntity.value as T, input);
       cache.setOptimistic(id, optimisticValue);
       _setState(value: AsyncValue.data(optimisticValue));
-      final value = await requestMerge(id, input);
+      final value = await requestMerge(input);
       if (value != null) {
         cache.setSynced(id, value);
         _setState(value: AsyncValue.data(value));
@@ -129,13 +129,13 @@ abstract class EntityStateNotifier<T, I> extends StateNotifier<EntityState<T>> {
 
   Future<T?> requestGet(String id);
 
-  T estimateCreation(String id, I input);
+  T estimateCreation(I input);
 
-  Future<T> requestCreation(String id, I input);
+  Future<T> requestCreation(I input);
 
-  T estimateMerge(String id, T value, I input);
+  T estimateMerge(T value, I input);
 
-  Future<T?> requestMerge(String id, I input);
+  Future<T?> requestMerge(I input);
 
   Future<T?> requestDeletion(String id);
 }

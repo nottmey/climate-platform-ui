@@ -417,6 +417,7 @@ class MergePlanetaryBoundary$Mutation extends JsonSerializable
 class PlanetaryBoundaryInput extends JsonSerializable with EquatableMixin {
   PlanetaryBoundaryInput({
     this.description,
+    required this.id,
     this.name,
   });
 
@@ -425,10 +426,12 @@ class PlanetaryBoundaryInput extends JsonSerializable with EquatableMixin {
 
   String? description;
 
+  late String id;
+
   String? name;
 
   @override
-  List<Object?> get props => [description, name];
+  List<Object?> get props => [description, id, name];
   @override
   Map<String, dynamic> toJson() => _$PlanetaryBoundaryInputToJson(this);
 }
@@ -1383,21 +1386,16 @@ class GetEntityQuery extends GraphQLQuery<GetEntity$Query, GetEntityArguments> {
 @JsonSerializable(explicitToJson: true)
 class MergePlanetaryBoundaryArguments extends JsonSerializable
     with EquatableMixin {
-  MergePlanetaryBoundaryArguments({
-    required this.id,
-    required this.value,
-  });
+  MergePlanetaryBoundaryArguments({required this.value});
 
   @override
   factory MergePlanetaryBoundaryArguments.fromJson(Map<String, dynamic> json) =>
       _$MergePlanetaryBoundaryArgumentsFromJson(json);
 
-  late String id;
-
   late PlanetaryBoundaryInput value;
 
   @override
-  List<Object?> get props => [id, value];
+  List<Object?> get props => [value];
   @override
   Map<String, dynamic> toJson() =>
       _$MergePlanetaryBoundaryArgumentsToJson(this);
@@ -1411,15 +1409,6 @@ final MERGE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT = DocumentNode(definitions: [
     name: NameNode(value: 'MergePlanetaryBoundary'),
     variableDefinitions: [
       VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'id')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'ID'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'value')),
         type: NamedTypeNode(
           name: NameNode(value: 'PlanetaryBoundaryInput'),
@@ -1427,7 +1416,7 @@ final MERGE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT = DocumentNode(definitions: [
         ),
         defaultValue: DefaultValueNode(value: null),
         directives: [],
-      ),
+      )
     ],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
@@ -1436,13 +1425,9 @@ final MERGE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT = DocumentNode(definitions: [
         alias: null,
         arguments: [
           ArgumentNode(
-            name: NameNode(value: 'id'),
-            value: VariableNode(name: NameNode(value: 'id')),
-          ),
-          ArgumentNode(
             name: NameNode(value: 'value'),
             value: VariableNode(name: NameNode(value: 'value')),
-          ),
+          )
         ],
         directives: [],
         selectionSet: SelectionSetNode(selections: [
@@ -1627,22 +1612,17 @@ class OnUpdatedPlanetaryBoundarySubscription extends GraphQLQuery<
 @JsonSerializable(explicitToJson: true)
 class CreatePlanetaryBoundaryArguments extends JsonSerializable
     with EquatableMixin {
-  CreatePlanetaryBoundaryArguments({
-    required this.id,
-    required this.value,
-  });
+  CreatePlanetaryBoundaryArguments({required this.value});
 
   @override
   factory CreatePlanetaryBoundaryArguments.fromJson(
           Map<String, dynamic> json) =>
       _$CreatePlanetaryBoundaryArgumentsFromJson(json);
 
-  late String id;
-
   late PlanetaryBoundaryInput value;
 
   @override
-  List<Object?> get props => [id, value];
+  List<Object?> get props => [value];
   @override
   Map<String, dynamic> toJson() =>
       _$CreatePlanetaryBoundaryArgumentsToJson(this);
@@ -1656,15 +1636,6 @@ final CREATE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT = DocumentNode(definitions: [
     name: NameNode(value: 'CreatePlanetaryBoundary'),
     variableDefinitions: [
       VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'id')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'ID'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'value')),
         type: NamedTypeNode(
           name: NameNode(value: 'PlanetaryBoundaryInput'),
@@ -1672,7 +1643,7 @@ final CREATE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT = DocumentNode(definitions: [
         ),
         defaultValue: DefaultValueNode(value: null),
         directives: [],
-      ),
+      )
     ],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
@@ -1681,13 +1652,9 @@ final CREATE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT = DocumentNode(definitions: [
         alias: null,
         arguments: [
           ArgumentNode(
-            name: NameNode(value: 'id'),
-            value: VariableNode(name: NameNode(value: 'id')),
-          ),
-          ArgumentNode(
             name: NameNode(value: 'value'),
             value: VariableNode(name: NameNode(value: 'value')),
-          ),
+          )
         ],
         directives: [],
         selectionSet: SelectionSetNode(selections: [

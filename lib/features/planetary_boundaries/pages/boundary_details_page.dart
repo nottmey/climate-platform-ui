@@ -27,11 +27,14 @@ class BoundaryDetailsPage extends AppPageWidget {
           provider: planetaryBoundaryFamily(id).select(
             (state) => state.asyncEntity.whenData((value) => value.description),
           ),
-          onSave: (value) => ref
-              .read(provider.notifier)
-              .createOrMerge(PlanetaryBoundaryInput(description: value)),
+          onSave: (value) => ref.read(provider.notifier).createOrMerge(
+                PlanetaryBoundaryInput(id: id, description: value),
+              ),
         ),
       ),
+      // const PlanetaryBoundaryListSliver(),
+      // TODO create ref attribute in backend
+      // TODO then create list sliver for quantification with param boundary id
     ];
   }
 }

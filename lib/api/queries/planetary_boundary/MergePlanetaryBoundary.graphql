@@ -1,5 +1,5 @@
-mutation MergePlanetaryBoundary($id: ID!, $value: PlanetaryBoundaryInput!) {
-    mergePlanetaryBoundary(id: $id, value: $value) {
+mutation MergePlanetaryBoundary($value: PlanetaryBoundaryInput!) {
+    mergePlanetaryBoundary(value: $value) {
         ...PlanetaryBoundary
     }
 }

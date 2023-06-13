@@ -340,6 +340,7 @@ PlanetaryBoundaryInput _$PlanetaryBoundaryInputFromJson(
         Map<String, dynamic> json) =>
     PlanetaryBoundaryInput(
       description: json['description'] as String?,
+      id: json['id'] as String,
       name: json['name'] as String?,
     );
 
@@ -347,6 +348,7 @@ Map<String, dynamic> _$PlanetaryBoundaryInputToJson(
         PlanetaryBoundaryInput instance) =>
     <String, dynamic>{
       'description': instance.description,
+      'id': instance.id,
       'name': instance.name,
     };
 
@@ -643,7 +645,6 @@ Map<String, dynamic> _$GetEntityArgumentsToJson(GetEntityArguments instance) =>
 MergePlanetaryBoundaryArguments _$MergePlanetaryBoundaryArgumentsFromJson(
         Map<String, dynamic> json) =>
     MergePlanetaryBoundaryArguments(
-      id: json['id'] as String,
       value: PlanetaryBoundaryInput.fromJson(
           json['value'] as Map<String, dynamic>),
     );
@@ -651,7 +652,6 @@ MergePlanetaryBoundaryArguments _$MergePlanetaryBoundaryArgumentsFromJson(
 Map<String, dynamic> _$MergePlanetaryBoundaryArgumentsToJson(
         MergePlanetaryBoundaryArguments instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'value': instance.value.toJson(),
     };
 
@@ -670,7 +670,6 @@ Map<String, dynamic> _$OnUpdatedPlanetaryBoundaryArgumentsToJson(
 CreatePlanetaryBoundaryArguments _$CreatePlanetaryBoundaryArgumentsFromJson(
         Map<String, dynamic> json) =>
     CreatePlanetaryBoundaryArguments(
-      id: json['id'] as String,
       value: PlanetaryBoundaryInput.fromJson(
           json['value'] as Map<String, dynamic>),
     );
@@ -678,7 +677,6 @@ CreatePlanetaryBoundaryArguments _$CreatePlanetaryBoundaryArgumentsFromJson(
 Map<String, dynamic> _$CreatePlanetaryBoundaryArgumentsToJson(
         CreatePlanetaryBoundaryArguments instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'value': instance.value.toJson(),
     };
 

@@ -73,13 +73,11 @@ type DateTimeAttribute implements Attribute {
 " generated, do not edit manually!"
 type Entity {
     attributes: [Attribute!]!
-    context: AWSJSON
     id: ID!
 }
 
 " generated, do not edit manually!"
 type EntityListPage {
-    context: AWSJSON
     info: PageInfo!
     values: [Entity!]!
 }
@@ -121,12 +119,18 @@ type MultiTupleAttribute implements Attribute {
 
 " generated, do not edit manually!"
 type Mutation {
-    createPlanetaryBoundary(id: ID!, value: PlanetaryBoundaryInput!): PlanetaryBoundary!
+    createPlanetaryBoundary(value: PlanetaryBoundaryInput!): PlanetaryBoundary!
+    createQuantification(value: QuantificationInput!): Quantification!
     deletePlanetaryBoundary(id: ID!): PlanetaryBoundary
-    mergePlanetaryBoundary(id: ID!, value: PlanetaryBoundaryInput!): PlanetaryBoundary
-    publishCreatedPlanetaryBoundary(id: ID!, value: PlanetaryBoundaryInput!): PlanetaryBoundary
-    publishDeletedPlanetaryBoundary(id: ID!, value: PlanetaryBoundaryInput!): PlanetaryBoundary
-    publishUpdatedPlanetaryBoundary(id: ID!, value: PlanetaryBoundaryInput!): PlanetaryBoundary
+    deleteQuantification(id: ID!): Quantification
+    mergePlanetaryBoundary(value: PlanetaryBoundaryInput!): PlanetaryBoundary
+    mergeQuantification(value: QuantificationInput!): Quantification
+    publishCreatedPlanetaryBoundary(value: PlanetaryBoundaryInput!): PlanetaryBoundary
+    publishCreatedQuantification(value: QuantificationInput!): Quantification
+    publishDeletedPlanetaryBoundary(value: PlanetaryBoundaryInput!): PlanetaryBoundary
+    publishDeletedQuantification(value: QuantificationInput!): Quantification
+    publishUpdatedPlanetaryBoundary(value: PlanetaryBoundaryInput!): PlanetaryBoundary
+    publishUpdatedQuantification(value: QuantificationInput!): Quantification
 }
 
 " generated, do not edit manually!"
@@ -141,7 +145,6 @@ type PageInfo {
 
 " generated, do not edit manually!"
 type PlanetaryBoundary implements EntityBase {
-    context: AWSJSON
     description: String
     id: ID!
     name: String
@@ -149,17 +152,30 @@ type PlanetaryBoundary implements EntityBase {
 
 " generated, do not edit manually!"
 type PlanetaryBoundaryListPage {
-    context: AWSJSON
     info: PageInfo!
     values: [PlanetaryBoundary!]!
+}
+
+" generated, do not edit manually!"
+type Quantification implements EntityBase {
+    id: ID!
+    name: String
+}
+
+" generated, do not edit manually!"
+type QuantificationListPage {
+    info: PageInfo!
+    values: [Quantification!]!
 }
 
 " generated, do not edit manually!"
 type Query {
     getEntity(id: ID!): Entity
     getPlanetaryBoundary(id: ID!): PlanetaryBoundary
+    getQuantification(id: ID!): Quantification
     listEntity(filter: EntityFilter, page: PageQuery): EntityListPage!
     listPlanetaryBoundary(page: PageQuery): PlanetaryBoundaryListPage!
+    listQuantification(page: PageQuery): QuantificationListPage!
 }
 
 " generated, do not edit manually!"
@@ -179,8 +195,11 @@ type StringAttribute implements Attribute {
 " generated, do not edit manually!"
 type Subscription {
     onCreatedPlanetaryBoundary(description: String, id: ID, name: String): PlanetaryBoundary
+    onCreatedQuantification(id: ID, name: String): Quantification
     onDeletedPlanetaryBoundary(description: String, id: ID, name: String): PlanetaryBoundary
+    onDeletedQuantification(id: ID, name: String): Quantification
     onUpdatedPlanetaryBoundary(description: String, id: ID, name: String): PlanetaryBoundary
+    onUpdatedQuantification(id: ID, name: String): Quantification
 }
 
 " generated, do not edit manually!"
@@ -210,5 +229,12 @@ input PageQuery {
 " generated, do not edit manually!"
 input PlanetaryBoundaryInput {
     description: String
+    id: ID!
+    name: String
+}
+
+" generated, do not edit manually!"
+input QuantificationInput {
+    id: ID!
     name: String
 }

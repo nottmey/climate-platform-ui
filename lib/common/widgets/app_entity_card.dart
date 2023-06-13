@@ -44,7 +44,7 @@ abstract class AppEntityCard<T, I> extends AppWidget {
 
   FormGroup createFormControls(T? value);
 
-  I createInputFromForm(FormGroup form);
+  I createInputFromForm(String id, FormGroup form);
 
   Widget buildForm(BuildContext context, void Function() save);
 
@@ -56,10 +56,11 @@ abstract class AppEntityCard<T, I> extends AppWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final providerState = useState(family(displayId ?? uuid.v4()));
-    final provider = providerState.value;
+    final currentEntityIdState = useState(displayId ?? uuid.v4());
+    final currentProviderState = useState(family(currentEntityIdState.value));
+    final currentProvider = currentProviderState.value;
 
-    final entityState = ref.watch(provider);
+    final entityState = ref.watch(currentProvider);
     final asyncEntity = entityState.inCreation ? null : entityState.asyncEntity;
     // TODO loading state, when not creating
     final value = asyncEntity?.asData?.value;
@@ -85,15 +86,17 @@ abstract class AppEntityCard<T, I> extends AppWidget {
           form: () => createFormControls(value),
           builder: (context, form, child) {
             void save() {
-              ref
-                  .read(provider.notifier)
-                  .createOrMerge(createInputFromForm(form));
+              ref.read(currentProvider.notifier).createOrMerge(
+                    createInputFromForm(currentEntityIdState.value, form),
+                  );
 
               if (creationsSink != null) {
-                // value already cached
-                creationsSink!.add(ref.read(provider.notifier).id);
+                // value is already cached, so we just publish the id to the sink
+                creationsSink!.add(ref.read(currentProvider.notifier).id);
 
-                providerState.value = family(uuid.v4());
+                final newEntityId = uuid.v4();
+                currentEntityIdState.value = newEntityId;
+                currentProviderState.value = family(newEntityId);
                 displayState.value = _AppEntityCardDisplayState.offerCreation;
               } else {
                 displayState.value = _AppEntityCardDisplayState.display;
@@ -145,7 +148,7 @@ abstract class AppEntityCard<T, I> extends AppWidget {
         preset: AppCardPreset.elevated,
         onTab: entityState.isDeleted
             ? null
-            : () => onTab(context, ref.read(provider.notifier).id),
+            : () => onTab(context, ref.read(currentProvider.notifier).id),
         actions: entityState.isDeleted
             ? null
             : [
@@ -159,7 +162,7 @@ abstract class AppEntityCard<T, I> extends AppWidget {
                   label: 'Delete',
                   color: theme.colorScheme.error,
                   onSelected: () {
-                    ref.read(provider.notifier).delete();
+                    ref.read(currentProvider.notifier).delete();
                   },
                 ),
               ],

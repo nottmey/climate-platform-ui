@@ -45,11 +45,10 @@ class PlanetaryBoundaryStateNotifier extends EntityStateNotifier<
 
   @override
   PlanetaryBoundaryMixin estimateCreation(
-    String id,
     PlanetaryBoundaryInput input,
   ) {
     final result = _OptimisticUpdateResult();
-    result.id = id;
+    result.id = input.id;
     result.name = input.name;
     result.description = input.description;
     return result;
@@ -57,13 +56,11 @@ class PlanetaryBoundaryStateNotifier extends EntityStateNotifier<
 
   @override
   Future<PlanetaryBoundaryMixin> requestCreation(
-    String id,
     PlanetaryBoundaryInput value,
   ) async {
     final result = await execute(
       CreatePlanetaryBoundaryMutation(
         variables: CreatePlanetaryBoundaryArguments(
-          id: id,
           value: value,
         ),
       ),
@@ -73,12 +70,11 @@ class PlanetaryBoundaryStateNotifier extends EntityStateNotifier<
 
   @override
   PlanetaryBoundaryMixin estimateMerge(
-    String id,
     PlanetaryBoundaryMixin value,
     PlanetaryBoundaryInput input,
   ) {
     final result = _OptimisticUpdateResult();
-    result.id = id;
+    result.id = input.id;
     result.name = input.name ?? value.name;
     result.description = input.description ?? value.description;
     return result;
@@ -86,13 +82,11 @@ class PlanetaryBoundaryStateNotifier extends EntityStateNotifier<
 
   @override
   Future<PlanetaryBoundaryMixin?> requestMerge(
-    String id,
     PlanetaryBoundaryInput input,
   ) async {
     final result = await execute(
       MergePlanetaryBoundaryMutation(
         variables: MergePlanetaryBoundaryArguments(
-          id: id,
           value: input,
         ),
       ),
