@@ -50,7 +50,7 @@ GoRouter newRouter() {
           GoRoute(
             path: _overviewDetailsSegment,
             builder: (context, state) {
-              return BoundaryDetailsPage(id: state.queryParams['id']!);
+              return BoundaryDetailsPage(id: state.queryParameters['id']!);
             },
           )
         ],
@@ -69,13 +69,13 @@ GoRouter newRouter() {
           GoRoute(
             path: _databaseEntitySegment,
             builder: (context, state) =>
-                EntityPage(id: state.queryParams['id']!),
+                EntityPage(id: state.queryParameters['id']!),
           ),
           GoRoute(
             path: _databaseAttributeSegment,
             builder: (context, state) => AttributePage(
-              id: state.queryParams['id']!,
-              name: state.queryParams['name']!,
+              id: state.queryParameters['id']!,
+              name: state.queryParameters['name']!,
             ),
           )
         ],
@@ -115,7 +115,7 @@ GoRouter newRouter() {
         builder: (context, state, child) {
           return RootScaffoldPage(
             selectedIndex: navigationItems.indexWhere(
-              (item) => state.fullpath?.startsWith(item.route.path) ?? false,
+              (item) => state.fullPath?.startsWith(item.route.path) ?? false,
             ),
             navigationItems: navigationItems,
             child: child,
