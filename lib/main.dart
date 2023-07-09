@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:artemis/artemis.dart';
 import 'package:climate_platform_ui/api/utils/web_socket_request_serializer.dart';
@@ -18,7 +17,7 @@ import 'package:gql_websocket_link/gql_websocket_link.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart';
 import 'package:http/retry.dart';
-import 'package:web_socket_channel/io.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -95,11 +94,7 @@ Future<void> main() async {
       WebSocketLink(
         null,
         channelGenerator: () async {
-          final socket = await WebSocket.connect(
-            wssUrl.toString(),
-            protocols: ['graphql-ws'],
-          );
-          return IOWebSocketChannel(socket);
+          return WebSocketChannel.connect(wssUrl, protocols: ['graphql-ws']);
         },
         serializer: WebSocketRequestSerializer(graphqlApi.host, apiKey),
         graphQLSocketMessageEncoder: (Map<String, dynamic> message) {

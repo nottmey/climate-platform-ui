@@ -24,7 +24,6 @@ Stream<R> subscribe<T, U extends JsonSerializable, R>(
     return result;
   }).handleError((Object e, StackTrace st) {
     final elapsedMs = stopwatch.elapsedMilliseconds;
-    // TODO subscription causes error in web (use debugger)
     log(
       'streamed with error ${query.variables ?? query.operationName} after ${elapsedMs}ms',
       error: e,
