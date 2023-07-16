@@ -1,0 +1,5 @@
+subscription OnUpdatedQuantification($id: ID!) {
+    onUpdatedQuantification(id: $id) {
+        ...Quantification
+    }
+}

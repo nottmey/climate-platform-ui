@@ -2,18 +2,18 @@ import 'package:async/async.dart';
 import 'package:climate_platform_ui/api/api.graphql.dart';
 import 'package:climate_platform_ui/api/utils/subscribe.dart';
 import 'package:climate_platform_ui/common/providers/entity_cache_provider.dart';
-import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_creations_sink.dart';
+import 'package:climate_platform_ui/features/quantifications/providers/quantification_creations_sink.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final planetaryBoundaryCreationsProvider = StreamProvider<String>((ref) {
+final quantificationCreationsProvider = StreamProvider<String>((ref) {
   // remember to check whether the stream provider subscription is closed, once you implement connection closing/reopening
   final onlineCreations = subscribe(
-    OnCreatedPlanetaryBoundarySubscription(),
-    (event) => event.onCreatedPlanetaryBoundary,
+    OnCreatedQuantificationSubscription(),
+    (event) => event.onCreatedQuantification,
   ).map((value) {
     ref.read(entityCacheProvider.notifier).setSynced(value.id, value);
     return value.id;
   });
-  final localCreations = planetaryBoundaryCreationsSink.stream;
+  final localCreations = quantificationCreationsSink.stream;
   return StreamGroup.merge([onlineCreations, localCreations]);
 });

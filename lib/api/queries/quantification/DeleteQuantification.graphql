@@ -1,0 +1,5 @@
+mutation DeleteQuantification($id: ID!) {
+    deleteQuantification(id: $id) {
+        ...Quantification
+    }
+}

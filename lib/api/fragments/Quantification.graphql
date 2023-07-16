@@ -1,0 +1,4 @@
+fragment Quantification on Quantification {
+    id
+    name
+}

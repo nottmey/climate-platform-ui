@@ -3,34 +3,32 @@ import 'package:climate_platform_ui/common/models/entity_state.dart';
 import 'package:climate_platform_ui/common/widgets/app_entity_card.dart';
 import 'package:climate_platform_ui/common/widgets/app_error.dart';
 import 'package:climate_platform_ui/common/widgets/app_loading.dart';
+import 'package:climate_platform_ui/common/widgets/app_page_widget.dart';
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
-import 'package:climate_platform_ui/common/widgets/app_widget.dart';
-import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_creation_family.dart';
-import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_creations_sink.dart';
-import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_family.dart';
+import 'package:climate_platform_ui/features/quantifications/providers/quantification_creation_family.dart';
+import 'package:climate_platform_ui/features/quantifications/providers/quantification_creations_sink.dart';
+import 'package:climate_platform_ui/features/quantifications/providers/quantifications_family.dart';
 import 'package:climate_platform_ui/features/theming/models/text_style_preset.dart';
-import 'package:climate_platform_ui/router.dart';
-import 'package:go_router/go_router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class PlanetaryBoundaryCard
-    extends AppEntityCard<PlanetaryBoundaryMixin, PlanetaryBoundaryInput> {
-  PlanetaryBoundaryCard.creation({super.key})
+class QuantificationCard
+    extends AppEntityCard<QuantificationMixin, QuantificationInput> {
+  QuantificationCard.creation({super.key})
       : super.creation(
-          family: planetaryBoundaryCreationFamily,
-          creationsSink: planetaryBoundaryCreationsSink,
+          family: quantificationCreationFamily,
+          creationsSink: quantificationCreationsSink,
         );
 
-  PlanetaryBoundaryCard.display({super.key, required super.displayId})
-      : super.display(family: planetaryBoundaryFamily);
+  QuantificationCard.display({super.key, required super.displayId})
+      : super.display(family: quantificationFamily);
 
   @override
   void onTab(BuildContext context, String id) {
-    context.go(overviewDetailsPath(id));
+    // TODO: implement onTab
   }
 
   @override
-  FormGroup createFormControls(PlanetaryBoundaryMixin? value) {
+  FormGroup createFormControls(QuantificationMixin? value) {
     return FormGroup({
       'name': FormControl<String>(
         value: value?.name,
@@ -40,8 +38,8 @@ class PlanetaryBoundaryCard
   }
 
   @override
-  PlanetaryBoundaryInput createInputFromForm(String id, FormGroup form) {
-    return PlanetaryBoundaryInput(id: id, name: form.value['name'] as String?);
+  QuantificationInput createInputFromForm(String id, FormGroup form) {
+    return QuantificationInput(id: id, name: form.value['name'] as String?);
   }
 
   @override
@@ -67,7 +65,7 @@ class PlanetaryBoundaryCard
   @override
   Widget buildDisplay(
     BuildContext context,
-    EntityState<PlanetaryBoundaryMixin> state,
+    EntityState<QuantificationMixin> state,
     double safeIconButtonPadding,
   ) {
     return Column(

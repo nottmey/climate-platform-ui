@@ -1,0 +1,5 @@
+mutation MergeQuantification($value: QuantificationInput!) {
+    mergeQuantification(value: $value) {
+        ...Quantification
+    }
+}

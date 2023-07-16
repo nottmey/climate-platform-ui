@@ -1,0 +1,5 @@
+subscription OnDeletedQuantification($id: ID!) {
+    onDeletedQuantification(id: $id) {
+        ...Quantification
+    }
+}

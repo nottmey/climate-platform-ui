@@ -1,0 +1,10 @@
+query GetQuantificationPage($page: Int!, $size: Int!) {
+    listQuantification(page: {number: $page, size: $size}) {
+        info {
+            ...PageInfo
+        }
+        values {
+            ...Quantification
+        }
+    }
+}

@@ -24,7 +24,7 @@ class AppDescriptionBlock extends AppWidget {
     return ref.watch(provider).when(
           loading: () => AppCard(builder: (_) => const AppLoading()),
           error: (error, stackTrace) => AppCard(
-            builder: (_) => AppError(error: error, stackTrace: stackTrace),
+            builder: (_) => AppError(error, stackTrace),
           ),
           data: (description) {
             final controller = useTextEditingController(text: description);

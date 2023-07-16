@@ -3,27 +3,26 @@ import 'package:climate_platform_ui/api/utils/execute.dart';
 import 'package:climate_platform_ui/common/providers/entity_cache_provider.dart';
 import 'package:climate_platform_ui/common/widgets/app_paged_sliver_list.dart';
 import 'package:climate_platform_ui/common/widgets/app_widget.dart';
-import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_creations_provider.dart';
-import 'package:climate_platform_ui/features/planetary_boundaries/widgets/planetary_boundary_card.dart';
+import 'package:climate_platform_ui/features/quantifications/providers/quantification_creations_provider.dart';
+import 'package:climate_platform_ui/features/quantifications/widgets/quantification_card.dart';
 
-class PlanetaryBoundaryListSliver extends AppWidget {
-  const PlanetaryBoundaryListSliver({super.key});
+class QuantificationListSliver extends AppWidget {
+  const QuantificationListSliver({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AppPagedSliverList<String>(
-      // TODO sort out time basis: only show consistent list of specific t and append all newer creations from ws
-      creationsProvider: planetaryBoundaryCreationsProvider,
+      creationsProvider: quantificationCreationsProvider,
       fetchPage: (pageKey, pageSize) async {
         final data = await execute(
-          GetPlanetaryBoundaryPageQuery(
-            variables: GetPlanetaryBoundaryPageArguments(
+          GetQuantificationPageQuery(
+            variables: GetQuantificationPageArguments(
               page: pageKey,
               size: pageSize,
             ),
           ),
         );
-        final page = data.listPlanetaryBoundary;
+        final page = data.listQuantification;
         for (final value in page.values) {
           // TODO not actually synced; items which are not directly mounted don't have a subscription running
           ref.read(entityCacheProvider.notifier).setSynced(value.id, value);
@@ -34,8 +33,8 @@ class PlanetaryBoundaryListSliver extends AppWidget {
           nextPageSize: page.info.size,
         );
       },
-      itemBuilder: (context, item, index) {
-        return PlanetaryBoundaryCard.display(displayId: item);
+      itemBuilder: (BuildContext context, item, int index) {
+        return QuantificationCard.display(displayId: item);
       },
     );
   }

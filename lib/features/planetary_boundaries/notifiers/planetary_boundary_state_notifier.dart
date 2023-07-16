@@ -56,12 +56,12 @@ class PlanetaryBoundaryStateNotifier extends EntityStateNotifier<
 
   @override
   Future<PlanetaryBoundaryMixin> requestCreation(
-    PlanetaryBoundaryInput value,
+    PlanetaryBoundaryInput input,
   ) async {
     final result = await execute(
       CreatePlanetaryBoundaryMutation(
         variables: CreatePlanetaryBoundaryArguments(
-          value: value,
+          value: input,
         ),
       ),
     );

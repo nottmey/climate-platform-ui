@@ -14,6 +14,10 @@ mixin EntityMixin {
   late String id;
   late List<EntityMixin$Attribute> attributes;
 }
+mixin QuantificationMixin {
+  late String id;
+  String? name;
+}
 mixin PlanetaryBoundaryMixin {
   late String id;
   String? name;
@@ -381,6 +385,77 @@ class GetEntity$Query extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
+class GetQuantificationPage$Query$QuantificationListPage$PageInfo
+    extends JsonSerializable with EquatableMixin, PageInfoMixin {
+  GetQuantificationPage$Query$QuantificationListPage$PageInfo();
+
+  factory GetQuantificationPage$Query$QuantificationListPage$PageInfo.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetQuantificationPage$Query$QuantificationListPage$PageInfoFromJson(
+          json);
+
+  @override
+  List<Object?> get props => [next, size];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetQuantificationPage$Query$QuantificationListPage$PageInfoToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetQuantificationPage$Query$QuantificationListPage$Quantification
+    extends JsonSerializable with EquatableMixin, QuantificationMixin {
+  GetQuantificationPage$Query$QuantificationListPage$Quantification();
+
+  factory GetQuantificationPage$Query$QuantificationListPage$Quantification.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetQuantificationPage$Query$QuantificationListPage$QuantificationFromJson(
+          json);
+
+  @override
+  List<Object?> get props => [id, name];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetQuantificationPage$Query$QuantificationListPage$QuantificationToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetQuantificationPage$Query$QuantificationListPage
+    extends JsonSerializable with EquatableMixin {
+  GetQuantificationPage$Query$QuantificationListPage();
+
+  factory GetQuantificationPage$Query$QuantificationListPage.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetQuantificationPage$Query$QuantificationListPageFromJson(json);
+
+  late GetQuantificationPage$Query$QuantificationListPage$PageInfo info;
+
+  late List<GetQuantificationPage$Query$QuantificationListPage$Quantification>
+      values;
+
+  @override
+  List<Object?> get props => [info, values];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetQuantificationPage$Query$QuantificationListPageToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetQuantificationPage$Query extends JsonSerializable with EquatableMixin {
+  GetQuantificationPage$Query();
+
+  factory GetQuantificationPage$Query.fromJson(Map<String, dynamic> json) =>
+      _$GetQuantificationPage$QueryFromJson(json);
+
+  late GetQuantificationPage$Query$QuantificationListPage listQuantification;
+
+  @override
+  List<Object?> get props => [listQuantification];
+  @override
+  Map<String, dynamic> toJson() => _$GetQuantificationPage$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class MergePlanetaryBoundary$Mutation$PlanetaryBoundary extends JsonSerializable
     with EquatableMixin, PlanetaryBoundaryMixin {
   MergePlanetaryBoundary$Mutation$PlanetaryBoundary();
@@ -714,6 +789,255 @@ class GetPlanetaryBoundary$Query extends JsonSerializable with EquatableMixin {
   List<Object?> get props => [getPlanetaryBoundary];
   @override
   Map<String, dynamic> toJson() => _$GetPlanetaryBoundary$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class CreateQuantification$Mutation$Quantification extends JsonSerializable
+    with EquatableMixin, QuantificationMixin {
+  CreateQuantification$Mutation$Quantification();
+
+  factory CreateQuantification$Mutation$Quantification.fromJson(
+          Map<String, dynamic> json) =>
+      _$CreateQuantification$Mutation$QuantificationFromJson(json);
+
+  @override
+  List<Object?> get props => [id, name];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$CreateQuantification$Mutation$QuantificationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class CreateQuantification$Mutation extends JsonSerializable
+    with EquatableMixin {
+  CreateQuantification$Mutation();
+
+  factory CreateQuantification$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$CreateQuantification$MutationFromJson(json);
+
+  late CreateQuantification$Mutation$Quantification createQuantification;
+
+  @override
+  List<Object?> get props => [createQuantification];
+  @override
+  Map<String, dynamic> toJson() => _$CreateQuantification$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class QuantificationInput extends JsonSerializable with EquatableMixin {
+  QuantificationInput({
+    required this.id,
+    this.name,
+  });
+
+  factory QuantificationInput.fromJson(Map<String, dynamic> json) =>
+      _$QuantificationInputFromJson(json);
+
+  late String id;
+
+  String? name;
+
+  @override
+  List<Object?> get props => [id, name];
+  @override
+  Map<String, dynamic> toJson() => _$QuantificationInputToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class DeleteQuantification$Mutation$Quantification extends JsonSerializable
+    with EquatableMixin, QuantificationMixin {
+  DeleteQuantification$Mutation$Quantification();
+
+  factory DeleteQuantification$Mutation$Quantification.fromJson(
+          Map<String, dynamic> json) =>
+      _$DeleteQuantification$Mutation$QuantificationFromJson(json);
+
+  @override
+  List<Object?> get props => [id, name];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$DeleteQuantification$Mutation$QuantificationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class DeleteQuantification$Mutation extends JsonSerializable
+    with EquatableMixin {
+  DeleteQuantification$Mutation();
+
+  factory DeleteQuantification$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$DeleteQuantification$MutationFromJson(json);
+
+  DeleteQuantification$Mutation$Quantification? deleteQuantification;
+
+  @override
+  List<Object?> get props => [deleteQuantification];
+  @override
+  Map<String, dynamic> toJson() => _$DeleteQuantification$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class MergeQuantification$Mutation$Quantification extends JsonSerializable
+    with EquatableMixin, QuantificationMixin {
+  MergeQuantification$Mutation$Quantification();
+
+  factory MergeQuantification$Mutation$Quantification.fromJson(
+          Map<String, dynamic> json) =>
+      _$MergeQuantification$Mutation$QuantificationFromJson(json);
+
+  @override
+  List<Object?> get props => [id, name];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$MergeQuantification$Mutation$QuantificationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class MergeQuantification$Mutation extends JsonSerializable
+    with EquatableMixin {
+  MergeQuantification$Mutation();
+
+  factory MergeQuantification$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$MergeQuantification$MutationFromJson(json);
+
+  MergeQuantification$Mutation$Quantification? mergeQuantification;
+
+  @override
+  List<Object?> get props => [mergeQuantification];
+  @override
+  Map<String, dynamic> toJson() => _$MergeQuantification$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetQuantification$Query$Quantification extends JsonSerializable
+    with EquatableMixin, QuantificationMixin {
+  GetQuantification$Query$Quantification();
+
+  factory GetQuantification$Query$Quantification.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetQuantification$Query$QuantificationFromJson(json);
+
+  @override
+  List<Object?> get props => [id, name];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetQuantification$Query$QuantificationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetQuantification$Query extends JsonSerializable with EquatableMixin {
+  GetQuantification$Query();
+
+  factory GetQuantification$Query.fromJson(Map<String, dynamic> json) =>
+      _$GetQuantification$QueryFromJson(json);
+
+  GetQuantification$Query$Quantification? getQuantification;
+
+  @override
+  List<Object?> get props => [getQuantification];
+  @override
+  Map<String, dynamic> toJson() => _$GetQuantification$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class OnUpdatedQuantification$Subscription$Quantification
+    extends JsonSerializable with EquatableMixin, QuantificationMixin {
+  OnUpdatedQuantification$Subscription$Quantification();
+
+  factory OnUpdatedQuantification$Subscription$Quantification.fromJson(
+          Map<String, dynamic> json) =>
+      _$OnUpdatedQuantification$Subscription$QuantificationFromJson(json);
+
+  @override
+  List<Object?> get props => [id, name];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$OnUpdatedQuantification$Subscription$QuantificationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class OnUpdatedQuantification$Subscription extends JsonSerializable
+    with EquatableMixin {
+  OnUpdatedQuantification$Subscription();
+
+  factory OnUpdatedQuantification$Subscription.fromJson(
+          Map<String, dynamic> json) =>
+      _$OnUpdatedQuantification$SubscriptionFromJson(json);
+
+  OnUpdatedQuantification$Subscription$Quantification? onUpdatedQuantification;
+
+  @override
+  List<Object?> get props => [onUpdatedQuantification];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$OnUpdatedQuantification$SubscriptionToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class OnDeletedQuantification$Subscription$Quantification
+    extends JsonSerializable with EquatableMixin, QuantificationMixin {
+  OnDeletedQuantification$Subscription$Quantification();
+
+  factory OnDeletedQuantification$Subscription$Quantification.fromJson(
+          Map<String, dynamic> json) =>
+      _$OnDeletedQuantification$Subscription$QuantificationFromJson(json);
+
+  @override
+  List<Object?> get props => [id, name];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$OnDeletedQuantification$Subscription$QuantificationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class OnDeletedQuantification$Subscription extends JsonSerializable
+    with EquatableMixin {
+  OnDeletedQuantification$Subscription();
+
+  factory OnDeletedQuantification$Subscription.fromJson(
+          Map<String, dynamic> json) =>
+      _$OnDeletedQuantification$SubscriptionFromJson(json);
+
+  OnDeletedQuantification$Subscription$Quantification? onDeletedQuantification;
+
+  @override
+  List<Object?> get props => [onDeletedQuantification];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$OnDeletedQuantification$SubscriptionToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class OnCreatedQuantification$Subscription$Quantification
+    extends JsonSerializable with EquatableMixin, QuantificationMixin {
+  OnCreatedQuantification$Subscription$Quantification();
+
+  factory OnCreatedQuantification$Subscription$Quantification.fromJson(
+          Map<String, dynamic> json) =>
+      _$OnCreatedQuantification$Subscription$QuantificationFromJson(json);
+
+  @override
+  List<Object?> get props => [id, name];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$OnCreatedQuantification$Subscription$QuantificationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class OnCreatedQuantification$Subscription extends JsonSerializable
+    with EquatableMixin {
+  OnCreatedQuantification$Subscription();
+
+  factory OnCreatedQuantification$Subscription.fromJson(
+          Map<String, dynamic> json) =>
+      _$OnCreatedQuantification$SubscriptionFromJson(json);
+
+  OnCreatedQuantification$Subscription$Quantification? onCreatedQuantification;
+
+  @override
+  List<Object?> get props => [onCreatedQuantification];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$OnCreatedQuantification$SubscriptionToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -1381,6 +1705,177 @@ class GetEntityQuery extends GraphQLQuery<GetEntity$Query, GetEntityArguments> {
   @override
   GetEntity$Query parse(Map<String, dynamic> json) =>
       GetEntity$Query.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetQuantificationPageArguments extends JsonSerializable
+    with EquatableMixin {
+  GetQuantificationPageArguments({
+    required this.page,
+    required this.size,
+  });
+
+  @override
+  factory GetQuantificationPageArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetQuantificationPageArgumentsFromJson(json);
+
+  late int page;
+
+  late int size;
+
+  @override
+  List<Object?> get props => [page, size];
+  @override
+  Map<String, dynamic> toJson() => _$GetQuantificationPageArgumentsToJson(this);
+}
+
+final GET_QUANTIFICATION_PAGE_QUERY_DOCUMENT_OPERATION_NAME =
+    'GetQuantificationPage';
+final GET_QUANTIFICATION_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'GetQuantificationPage'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'page')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'size')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'listQuantification'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'page'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'number'),
+                value: VariableNode(name: NameNode(value: 'page')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'size'),
+                value: VariableNode(name: NameNode(value: 'size')),
+              ),
+            ]),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'info'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'PageInfo'),
+                directives: [],
+              )
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: 'values'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'Quantification'),
+                directives: [],
+              )
+            ]),
+          ),
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'PageInfo'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'PageInfo'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'next'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'size'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'Quantification'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'Quantification'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'name'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class GetQuantificationPageQuery extends GraphQLQuery<
+    GetQuantificationPage$Query, GetQuantificationPageArguments> {
+  GetQuantificationPageQuery({required this.variables});
+
+  @override
+  final DocumentNode document = GET_QUANTIFICATION_PAGE_QUERY_DOCUMENT;
+
+  @override
+  final String operationName =
+      GET_QUANTIFICATION_PAGE_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetQuantificationPageArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetQuantificationPage$Query parse(Map<String, dynamic> json) =>
+      GetQuantificationPage$Query.fromJson(json);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -2313,4 +2808,694 @@ class GetPlanetaryBoundaryQuery extends GraphQLQuery<GetPlanetaryBoundary$Query,
   @override
   GetPlanetaryBoundary$Query parse(Map<String, dynamic> json) =>
       GetPlanetaryBoundary$Query.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class CreateQuantificationArguments extends JsonSerializable
+    with EquatableMixin {
+  CreateQuantificationArguments({required this.value});
+
+  @override
+  factory CreateQuantificationArguments.fromJson(Map<String, dynamic> json) =>
+      _$CreateQuantificationArgumentsFromJson(json);
+
+  late QuantificationInput value;
+
+  @override
+  List<Object?> get props => [value];
+  @override
+  Map<String, dynamic> toJson() => _$CreateQuantificationArgumentsToJson(this);
+}
+
+final CREATE_QUANTIFICATION_MUTATION_DOCUMENT_OPERATION_NAME =
+    'CreateQuantification';
+final CREATE_QUANTIFICATION_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'CreateQuantification'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'value')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'QuantificationInput'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'createQuantification'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'value'),
+            value: VariableNode(name: NameNode(value: 'value')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'Quantification'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'Quantification'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'Quantification'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'name'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class CreateQuantificationMutation extends GraphQLQuery<
+    CreateQuantification$Mutation, CreateQuantificationArguments> {
+  CreateQuantificationMutation({required this.variables});
+
+  @override
+  final DocumentNode document = CREATE_QUANTIFICATION_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName =
+      CREATE_QUANTIFICATION_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final CreateQuantificationArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  CreateQuantification$Mutation parse(Map<String, dynamic> json) =>
+      CreateQuantification$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class DeleteQuantificationArguments extends JsonSerializable
+    with EquatableMixin {
+  DeleteQuantificationArguments({required this.id});
+
+  @override
+  factory DeleteQuantificationArguments.fromJson(Map<String, dynamic> json) =>
+      _$DeleteQuantificationArgumentsFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$DeleteQuantificationArgumentsToJson(this);
+}
+
+final DELETE_QUANTIFICATION_MUTATION_DOCUMENT_OPERATION_NAME =
+    'DeleteQuantification';
+final DELETE_QUANTIFICATION_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'DeleteQuantification'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'deleteQuantification'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'Quantification'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'Quantification'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'Quantification'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'name'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class DeleteQuantificationMutation extends GraphQLQuery<
+    DeleteQuantification$Mutation, DeleteQuantificationArguments> {
+  DeleteQuantificationMutation({required this.variables});
+
+  @override
+  final DocumentNode document = DELETE_QUANTIFICATION_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName =
+      DELETE_QUANTIFICATION_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final DeleteQuantificationArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  DeleteQuantification$Mutation parse(Map<String, dynamic> json) =>
+      DeleteQuantification$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class MergeQuantificationArguments extends JsonSerializable
+    with EquatableMixin {
+  MergeQuantificationArguments({required this.value});
+
+  @override
+  factory MergeQuantificationArguments.fromJson(Map<String, dynamic> json) =>
+      _$MergeQuantificationArgumentsFromJson(json);
+
+  late QuantificationInput value;
+
+  @override
+  List<Object?> get props => [value];
+  @override
+  Map<String, dynamic> toJson() => _$MergeQuantificationArgumentsToJson(this);
+}
+
+final MERGE_QUANTIFICATION_MUTATION_DOCUMENT_OPERATION_NAME =
+    'MergeQuantification';
+final MERGE_QUANTIFICATION_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'MergeQuantification'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'value')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'QuantificationInput'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'mergeQuantification'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'value'),
+            value: VariableNode(name: NameNode(value: 'value')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'Quantification'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'Quantification'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'Quantification'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'name'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class MergeQuantificationMutation extends GraphQLQuery<
+    MergeQuantification$Mutation, MergeQuantificationArguments> {
+  MergeQuantificationMutation({required this.variables});
+
+  @override
+  final DocumentNode document = MERGE_QUANTIFICATION_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName =
+      MERGE_QUANTIFICATION_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final MergeQuantificationArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  MergeQuantification$Mutation parse(Map<String, dynamic> json) =>
+      MergeQuantification$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetQuantificationArguments extends JsonSerializable with EquatableMixin {
+  GetQuantificationArguments({required this.id});
+
+  @override
+  factory GetQuantificationArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetQuantificationArgumentsFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$GetQuantificationArgumentsToJson(this);
+}
+
+final GET_QUANTIFICATION_QUERY_DOCUMENT_OPERATION_NAME = 'GetQuantification';
+final GET_QUANTIFICATION_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'GetQuantification'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'getQuantification'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'Quantification'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'Quantification'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'Quantification'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'name'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class GetQuantificationQuery
+    extends GraphQLQuery<GetQuantification$Query, GetQuantificationArguments> {
+  GetQuantificationQuery({required this.variables});
+
+  @override
+  final DocumentNode document = GET_QUANTIFICATION_QUERY_DOCUMENT;
+
+  @override
+  final String operationName = GET_QUANTIFICATION_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetQuantificationArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetQuantification$Query parse(Map<String, dynamic> json) =>
+      GetQuantification$Query.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class OnUpdatedQuantificationArguments extends JsonSerializable
+    with EquatableMixin {
+  OnUpdatedQuantificationArguments({required this.id});
+
+  @override
+  factory OnUpdatedQuantificationArguments.fromJson(
+          Map<String, dynamic> json) =>
+      _$OnUpdatedQuantificationArgumentsFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$OnUpdatedQuantificationArgumentsToJson(this);
+}
+
+final ON_UPDATED_QUANTIFICATION_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+    'OnUpdatedQuantification';
+final ON_UPDATED_QUANTIFICATION_SUBSCRIPTION_DOCUMENT =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.subscription,
+    name: NameNode(value: 'OnUpdatedQuantification'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'onUpdatedQuantification'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'Quantification'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'Quantification'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'Quantification'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'name'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class OnUpdatedQuantificationSubscription extends GraphQLQuery<
+    OnUpdatedQuantification$Subscription, OnUpdatedQuantificationArguments> {
+  OnUpdatedQuantificationSubscription({required this.variables});
+
+  @override
+  final DocumentNode document = ON_UPDATED_QUANTIFICATION_SUBSCRIPTION_DOCUMENT;
+
+  @override
+  final String operationName =
+      ON_UPDATED_QUANTIFICATION_SUBSCRIPTION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final OnUpdatedQuantificationArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  OnUpdatedQuantification$Subscription parse(Map<String, dynamic> json) =>
+      OnUpdatedQuantification$Subscription.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class OnDeletedQuantificationArguments extends JsonSerializable
+    with EquatableMixin {
+  OnDeletedQuantificationArguments({required this.id});
+
+  @override
+  factory OnDeletedQuantificationArguments.fromJson(
+          Map<String, dynamic> json) =>
+      _$OnDeletedQuantificationArgumentsFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$OnDeletedQuantificationArgumentsToJson(this);
+}
+
+final ON_DELETED_QUANTIFICATION_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+    'OnDeletedQuantification';
+final ON_DELETED_QUANTIFICATION_SUBSCRIPTION_DOCUMENT =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.subscription,
+    name: NameNode(value: 'OnDeletedQuantification'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'onDeletedQuantification'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'Quantification'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'Quantification'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'Quantification'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'name'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class OnDeletedQuantificationSubscription extends GraphQLQuery<
+    OnDeletedQuantification$Subscription, OnDeletedQuantificationArguments> {
+  OnDeletedQuantificationSubscription({required this.variables});
+
+  @override
+  final DocumentNode document = ON_DELETED_QUANTIFICATION_SUBSCRIPTION_DOCUMENT;
+
+  @override
+  final String operationName =
+      ON_DELETED_QUANTIFICATION_SUBSCRIPTION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final OnDeletedQuantificationArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  OnDeletedQuantification$Subscription parse(Map<String, dynamic> json) =>
+      OnDeletedQuantification$Subscription.fromJson(json);
+}
+
+final ON_CREATED_QUANTIFICATION_SUBSCRIPTION_DOCUMENT_OPERATION_NAME =
+    'OnCreatedQuantification';
+final ON_CREATED_QUANTIFICATION_SUBSCRIPTION_DOCUMENT =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.subscription,
+    name: NameNode(value: 'OnCreatedQuantification'),
+    variableDefinitions: [],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'onCreatedQuantification'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'Quantification'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'Quantification'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'Quantification'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'name'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class OnCreatedQuantificationSubscription extends GraphQLQuery<
+    OnCreatedQuantification$Subscription, JsonSerializable> {
+  OnCreatedQuantificationSubscription();
+
+  @override
+  final DocumentNode document = ON_CREATED_QUANTIFICATION_SUBSCRIPTION_DOCUMENT;
+
+  @override
+  final String operationName =
+      ON_CREATED_QUANTIFICATION_SUBSCRIPTION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  List<Object?> get props => [document, operationName];
+  @override
+  OnCreatedQuantification$Subscription parse(Map<String, dynamic> json) =>
+      OnCreatedQuantification$Subscription.fromJson(json);
 }

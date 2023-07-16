@@ -1,0 +1,5 @@
+query GetQuantification($id: ID!) {
+    getQuantification(id: $id) {
+        ...Quantification
+    }
+}
