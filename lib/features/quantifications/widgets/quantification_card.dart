@@ -85,6 +85,8 @@ class QuantificationCard
             loading: AppLoading.new,
           ),
         ),
+        // TODO add unit description and unit abbreviation to data model, e.g.
+        // const AppText(value: 'Unit: Carbon Dioxide Equivalent (CO₂-eq)')
       ],
     );
   }
