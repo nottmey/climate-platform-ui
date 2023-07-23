@@ -2,57 +2,79 @@ import 'package:climate_platform_ui/features/database_browser/pages/attribute_pa
 import 'package:climate_platform_ui/features/database_browser/pages/database_navigator_page.dart';
 import 'package:climate_platform_ui/features/database_browser/pages/entity_page.dart';
 import 'package:climate_platform_ui/features/dev/pages/dev_menu_page.dart';
+import 'package:climate_platform_ui/features/navigation/helpers/context_router_extension.dart';
 import 'package:climate_platform_ui/features/navigation/models/app_navigation_item.dart';
 import 'package:climate_platform_ui/features/navigation/pages/root_scaffold_page.dart';
 import 'package:climate_platform_ui/features/navigation/pages/tab_transition_page.dart';
 import 'package:climate_platform_ui/features/planetary_boundaries/pages/boundary_details_page.dart';
 import 'package:climate_platform_ui/features/planetary_boundaries/pages/planet_overview_page.dart';
+import 'package:climate_platform_ui/features/quantifications/pages/quantification_details_page.dart';
 import 'package:climate_platform_ui/features/theming/pages/showcase_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 const _overviewSegment = 'overview';
-const _overviewDetailsSegment = 'details';
+const _boundaryDetailsSegment = 'details';
+const _quantificationDetailsSegment = 'quantifications';
 const _databaseBrowserSegment = 'data';
 const _databaseEntitySegment = 'entity';
 const _databaseAttributeSegment = 'attribute';
 const _devMenuSegment = 'dev';
 const _showcaseSegment = 'showcase';
 
-const overviewPath = '/$_overviewSegment';
-const databaseBrowserPath = '/$_databaseBrowserSegment';
-const devMenuPath = '/$_devMenuSegment';
-const showcasePath = '/$_showcaseSegment';
+extension Routes on BuildContext {
+  void goToBoundaryDetails(String boundaryId) {
+    go('/$_overviewSegment/$_boundaryDetailsSegment/$boundaryId');
+  }
 
-String overviewDetailsPath(String id) =>
-    '$overviewPath/$_overviewDetailsSegment?id=$id';
+  void goToQuantificationDetails(String quantificationId) {
+    final state = GoRouterState.of(this);
+    final boundaryId = state.pathParameters['boundaryId']!;
+    go('/$_overviewSegment/$_boundaryDetailsSegment/$boundaryId/$_quantificationDetailsSegment/$quantificationId');
+  }
 
-String databaseEntityPath(String id) =>
-    '$databaseBrowserPath/$_databaseEntitySegment?id=$id';
+  void goToDatabaseEntityIfNew(String id) {
+    pushIfNew('/$_databaseBrowserSegment/$_databaseEntitySegment?id=$id');
+  }
 
-String databaseAttributePath(String id, String name) =>
-    '$databaseBrowserPath/$_databaseAttributeSegment?id=$id&name=$name';
+  void goToDatabaseAttributeIfNew(String id, String name) {
+    pushIfNew(
+      '/$_databaseBrowserSegment/$_databaseAttributeSegment?id=$id&name=$name',
+    );
+  }
+}
 
-const initialPath = overviewPath;
-
+// TODO fix back navigation gesture handling
 GoRouter newRouter() {
   final navigationItems = [
     AppNavigationItem(
       label: 'Overview',
       iconData: Icons.home,
       route: GoRoute(
-        path: overviewPath,
+        path: '/$_overviewSegment',
         pageBuilder: (context, state) => TabTransitionPage(
-          key: const ValueKey(overviewPath), // needed for animation
+          key: const ValueKey(_overviewSegment), // needed for animation
           child: const PlanetOverviewPage(),
         ),
         routes: [
           GoRoute(
-            path: _overviewDetailsSegment,
+            path: '$_boundaryDetailsSegment/:boundaryId',
             builder: (context, state) {
-              return BoundaryDetailsPage(id: state.queryParameters['id']!);
+              return BoundaryDetailsPage(
+                id: state.pathParameters['boundaryId']!,
+              );
             },
-          )
+            routes: [
+              GoRoute(
+                path: '$_quantificationDetailsSegment/:quantificationId',
+                builder: (context, state) {
+                  return QuantificationDetailsPage(
+                    id: state.pathParameters['quantificationId']!,
+                  );
+                },
+              )
+            ],
+          ),
         ],
       ),
     ),
@@ -60,22 +82,22 @@ GoRouter newRouter() {
       label: 'DB Browser',
       iconData: Icons.data_array,
       route: GoRoute(
-        path: databaseBrowserPath,
+        path: '/$_databaseBrowserSegment',
         pageBuilder: (context, state) => TabTransitionPage(
-          key: const ValueKey(databaseBrowserPath),
+          key: const ValueKey(_databaseBrowserSegment),
           child: const DatabaseBrowserPage(),
         ),
         routes: [
           GoRoute(
             path: _databaseEntitySegment,
             builder: (context, state) =>
-                EntityPage(id: state.queryParameters['id']!),
+                EntityPage(id: state.uri.queryParameters['id']!),
           ),
           GoRoute(
             path: _databaseAttributeSegment,
             builder: (context, state) => AttributePage(
-              id: state.queryParameters['id']!,
-              name: state.queryParameters['name']!,
+              id: state.uri.queryParameters['id']!,
+              name: state.uri.queryParameters['name']!,
             ),
           )
         ],
@@ -85,9 +107,9 @@ GoRouter newRouter() {
       label: 'Dev Menu',
       iconData: Icons.developer_mode,
       route: GoRoute(
-        path: devMenuPath,
+        path: '/$_devMenuSegment',
         pageBuilder: (context, state) => TabTransitionPage(
-          key: const ValueKey(devMenuPath), // needed for animation
+          key: const ValueKey(_devMenuSegment), // needed for animation
           child: const DevMenuPage(),
         ),
       ),
@@ -96,9 +118,9 @@ GoRouter newRouter() {
       label: 'Showcase',
       iconData: Icons.view_comfortable,
       route: GoRoute(
-        path: showcasePath,
+        path: '/$_showcaseSegment',
         pageBuilder: (context, state) => TabTransitionPage(
-          key: const ValueKey(showcasePath), // needed for animation
+          key: const ValueKey(_showcaseSegment), // needed for animation
           child: const ShowcasePage(),
         ),
       ),
@@ -108,7 +130,7 @@ GoRouter newRouter() {
   return GoRouter(
     initialLocation: '/',
     routes: [
-      GoRoute(path: '/', redirect: (_, __) => initialPath),
+      GoRoute(path: '/', redirect: (_, __) => '/$_overviewSegment'),
       ShellRoute(
         // may be able to keep state soon, when https://github.com/flutter/packages/pull/2650 is merged
         // then adapt to this example: https://github.com/tolo/stateful_books/blob/main/lib/src/screens/scaffold.dart

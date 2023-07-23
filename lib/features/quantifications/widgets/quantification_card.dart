@@ -9,6 +9,7 @@ import 'package:climate_platform_ui/features/quantifications/providers/quantific
 import 'package:climate_platform_ui/features/quantifications/providers/quantification_creations_sink.dart';
 import 'package:climate_platform_ui/features/quantifications/providers/quantifications_family.dart';
 import 'package:climate_platform_ui/features/theming/models/text_style_preset.dart';
+import 'package:climate_platform_ui/router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class QuantificationCard
@@ -24,7 +25,7 @@ class QuantificationCard
 
   @override
   void onTab(BuildContext context, String id) {
-    // TODO: implement onTab
+    context.goToQuantificationDetails(id);
   }
 
   @override

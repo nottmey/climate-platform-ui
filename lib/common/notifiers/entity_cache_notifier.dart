@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 enum _CacheState {
@@ -11,11 +13,21 @@ enum _CacheState {
   stale,
 }
 
+final _typePrefix = RegExp(r'^.*\$');
+String _shortenType(Type runtimeType) {
+  return runtimeType.toString().replaceAll(_typePrefix, '');
+}
+
 class _CacheEntry {
   final dynamic value;
   final _CacheState state;
 
   _CacheEntry(this.value, this.state);
+
+  @override
+  String toString() {
+    return '(${_shortenType(value.runtimeType)}, ${state.name})';
+  }
 }
 
 class EntityCacheNotifier extends StateNotifier<Map<String, _CacheEntry>> {
@@ -30,8 +42,9 @@ class EntityCacheNotifier extends StateNotifier<Map<String, _CacheEntry>> {
     }
   }
 
-  T? get<T>(String id) {
+  T? _get<T>(String id) {
     if (mounted) {
+      log('[$EntityCacheNotifier]: get<${_shortenType(T)}>($id) => ${state[id]}');
       return state[id]?.value as T?;
     } else {
       return null;
@@ -39,41 +52,34 @@ class EntityCacheNotifier extends StateNotifier<Map<String, _CacheEntry>> {
   }
 
   AsyncValue<T> getAsync<T>(String id) {
-    final value = get<T>(id);
+    final value = _get<T>(id);
     return value != null ? AsyncValue.data(value) : const AsyncValue.loading();
   }
 
-  void setOptimistic<T>(String id, T value) {
-    // TODO check performance
+  void _set<T>(String id, T value, _CacheState cacheState) {
     if (mounted) {
+      log('[$EntityCacheNotifier]: set<${_shortenType(T)}>($id, ${_shortenType(value.runtimeType)})');
+      // TODO check performance
       state = {
         ...state,
-        id: _CacheEntry(value, _CacheState.optimistic),
+        id: _CacheEntry(value, cacheState),
       };
     }
     // TODO evict stale data at some point
+  }
+
+  void setOptimistic<T>(String id, T value) {
+    _set(id, value, _CacheState.optimistic);
   }
 
   void setSynced<T>(String id, T value) {
-    // TODO check performance
-    if (mounted) {
-      state = {
-        ...state,
-        id: _CacheEntry(value, _CacheState.synced),
-      };
-    }
-    // TODO evict stale data at some point
+    _set(id, value, _CacheState.synced);
   }
 
   void setStale(String id) {
-    final value = get<dynamic>(id);
+    final value = _get<dynamic>(id);
     if (value != null) {
-      if (mounted) {
-        state = {
-          ...state,
-          id: _CacheEntry(value, _CacheState.stale),
-        };
-      }
+      _set(id, value, _CacheState.stale);
     }
   }
 }

@@ -10,7 +10,6 @@ import 'package:climate_platform_ui/features/planetary_boundaries/providers/plan
 import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_family.dart';
 import 'package:climate_platform_ui/features/theming/models/text_style_preset.dart';
 import 'package:climate_platform_ui/router.dart';
-import 'package:go_router/go_router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class PlanetaryBoundaryCard
@@ -26,7 +25,7 @@ class PlanetaryBoundaryCard
 
   @override
   void onTab(BuildContext context, String id) {
-    context.go(overviewDetailsPath(id));
+    context.goToBoundaryDetails(id);
   }
 
   @override

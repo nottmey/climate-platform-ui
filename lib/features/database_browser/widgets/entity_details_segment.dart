@@ -2,7 +2,6 @@ import 'package:climate_platform_ui/api/api.graphql.dart';
 import 'package:climate_platform_ui/common/widgets/app_card.dart';
 import 'package:climate_platform_ui/common/widgets/app_text.dart';
 import 'package:climate_platform_ui/common/widgets/app_widget.dart';
-import 'package:climate_platform_ui/features/navigation/helpers/context_router_extension.dart';
 import 'package:climate_platform_ui/features/theming/models/text_style_preset.dart';
 import 'package:climate_platform_ui/features/theming/utils/context_theme_extension.dart';
 import 'package:climate_platform_ui/features/theming/utils/spacing_utils_extension.dart';
@@ -33,7 +32,7 @@ class EntityDetailsSegment extends AppWidget {
   Widget buildEntityLink(BuildContext context, String id) {
     final theme = context.theme;
     return ElevatedButton(
-      onPressed: () => context.pushIfNew(databaseEntityPath(id)),
+      onPressed: () => context.goToDatabaseEntityIfNew(id),
       style: ElevatedButton.styleFrom(
         foregroundColor: theme.colorScheme.onPrimary,
         backgroundColor: theme.colorScheme.primary,
@@ -48,8 +47,8 @@ class EntityDetailsSegment extends AppWidget {
     EntityMixin$Attribute attribute,
   ) {
     return OutlinedButton(
-      onPressed: () => context
-          .pushIfNew(databaseAttributePath(attribute.id, attribute.name)),
+      onPressed: () =>
+          context.goToDatabaseAttributeIfNew(attribute.id, attribute.name),
       child: AppText(
         value: attribute.name,
         preset: TextStylePreset.labelMedium,
@@ -63,7 +62,7 @@ class EntityDetailsSegment extends AppWidget {
     final nameAttribute =
         entity.attributes.firstWhereOrNull((a) => a.name == ':db/ident');
     return AppCard(
-      onTab: () => context.pushIfNew(databaseEntityPath(entity.id)),
+      onTab: () => context.goToDatabaseEntityIfNew(entity.id),
       builder: (_) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

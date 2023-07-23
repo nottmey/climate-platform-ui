@@ -10,8 +10,6 @@ Stream<R> subscribe<T, U extends JsonSerializable, R>(
   GraphQLQuery<T, U> query,
   R? Function(T) getResult,
 ) {
-  final stopwatch = Stopwatch();
-  stopwatch.start();
   return getIt<ArtemisClient>(instanceName: InstanceName.wssClient)
       .stream(query)
       .map(throwResponseErrors)
@@ -19,13 +17,11 @@ Stream<R> subscribe<T, U extends JsonSerializable, R>(
       .where((result) => result != null)
       .map((result) => result!)
       .map((result) {
-    final elapsedMs = stopwatch.elapsedMilliseconds;
-    log('streamed ${query.variables ?? query.operationName} after ${elapsedMs}ms with value $result');
+    log('[GraphQL]: streamed ${query.variables ?? query.operationName} with value $result');
     return result;
   }).handleError((Object e, StackTrace st) {
-    final elapsedMs = stopwatch.elapsedMilliseconds;
     log(
-      'streamed with error ${query.variables ?? query.operationName} after ${elapsedMs}ms',
+      '[GraphQL]: streamed ${query.variables ?? query.operationName} with error $e',
       error: e,
       stackTrace: st,
     );

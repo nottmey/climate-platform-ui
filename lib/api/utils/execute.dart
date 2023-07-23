@@ -15,12 +15,12 @@ Future<T> execute<T, U extends JsonSerializable>(
       instanceName: InstanceName.httpsClient,
     ).execute(query).then(throwResponseErrors);
     stopwatch.stop();
-    log('executed ${query.variables ?? query.operationName} in ${stopwatch.elapsedMilliseconds}ms');
+    log('[GraphQL]: executed ${query.variables ?? query.operationName} in ${stopwatch.elapsedMilliseconds}ms');
     return result;
   } catch (e, st) {
     stopwatch.stop();
     log(
-      'executed with error ${query.variables ?? query.operationName} in ${stopwatch.elapsedMilliseconds}ms',
+      '[GraphQL]: executed ${query.variables ?? query.operationName} with error $e in ${stopwatch.elapsedMilliseconds}ms',
       error: e,
       stackTrace: st,
     );
