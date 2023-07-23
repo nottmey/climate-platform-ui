@@ -7,13 +7,16 @@ import 'package:climate_platform_ui/features/quantifications/providers/quantific
 import 'package:climate_platform_ui/features/quantifications/widgets/quantification_card.dart';
 
 class QuantificationListSliver extends AppWidget {
-  const QuantificationListSliver({super.key});
+  final String parentBoundaryId;
+
+  const QuantificationListSliver({super.key, required this.parentBoundaryId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AppPagedSliverList<String>(
       creationsProvider: quantificationCreationsProvider,
       fetchPage: (pageKey, pageSize) async {
+        // TODO use parentBoundaryId for query, via getPlanetaryBoundary -> quantifications(page)
         final data = await execute(
           GetQuantificationPageQuery(
             variables: GetQuantificationPageArguments(

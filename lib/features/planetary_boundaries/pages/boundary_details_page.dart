@@ -34,7 +34,7 @@ class BoundaryDetailsPage extends AppPageWidget {
               ),
         ),
       ),
-      const QuantificationListSliver(),
+      QuantificationListSliver(parentBoundaryId: id),
       SliverToBoxAdapter(
         child: QuantificationCard.creation(),
       ),
