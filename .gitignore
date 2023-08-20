@@ -15,8 +15,6 @@
 *.iml
 .idea/*
 !.idea/runConfigurations
-!.idea/misc.xml
-!.idea/modules.xml
 
 # Flutter/Dart/Pub related
 **/doc/api/
