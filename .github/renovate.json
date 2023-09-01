@@ -20,6 +20,10 @@
   "gitAuthor": "Local Renovate Bot <bot@renovateapp.com>",
   "packageRules": [
     {
+      "matchUpdateTypes": ["patch"],
+      "minimumReleaseAge": "0 days"
+    },
+    {
       "matchUpdateTypes": ["minor"],
       "minimumReleaseAge": "7 days"
     },
