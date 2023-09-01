@@ -1,0 +1,24 @@
+{
+  "extends": [
+    "config:recommended",
+    ":semanticCommits",
+    ":semanticCommitScopeDisabled"
+  ],
+  "dryRun": "full",
+  "onboarding": false,
+  "requireConfig": "optional",
+  "platform": "github",
+  "branchPrefix": "deps/",
+  "username": "local-renovate[bot]",
+  "gitAuthor": "Local Renovate Bot <bot@renovateapp.com>",
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor"],
+      "minimumReleaseAge": "7 days"
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "minimumReleaseAge": "21 days"
+    }
+  ]
+}
