@@ -12,7 +12,7 @@ on:
   issue_comment:
     types: [ edited ]
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '0 2,4 * * *'
 jobs:
   run:
     name: "Run"

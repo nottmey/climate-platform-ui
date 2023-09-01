@@ -11,6 +11,10 @@
     "fvm",
     "pub"
   ],
+  "automerge": true,
+  "assignees": [
+    "nottmey"
+  ],
   "prConcurrentLimit": 1,
   "onboarding": false,
   "requireConfig": "optional",
