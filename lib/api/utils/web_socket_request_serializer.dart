@@ -21,8 +21,8 @@ class WebSocketRequestSerializer extends RequestSerializer {
         'authorization': {
           'host': host,
           'x-api-key': apiKey,
-        }
-      }
+        },
+      },
     };
   }
 }

@@ -67,7 +67,7 @@ class AppDescriptionBlock extends AppWidget {
                             editingState.value = !editing;
                           },
                           child: AppText(value: editing ? 'Save' : 'Edit'),
-                        )
+                        ),
                       ],
                     ),
                   ],

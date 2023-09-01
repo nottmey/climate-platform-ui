@@ -34,7 +34,7 @@ class QuantificationCard
       'name': FormControl<String>(
         value: value?.name,
         validators: [Validators.required],
-      )
+      ),
     });
   }
 

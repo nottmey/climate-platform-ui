@@ -37,7 +37,7 @@ class RootScaffoldPage extends AppWidget {
                       selectedIndex: selectedIndex,
                       items: navigationItems,
                     ),
-                  Expanded(child: child)
+                  Expanded(child: child),
                 ],
               )
             : child,

@@ -34,7 +34,7 @@ class PlanetaryBoundaryCard
       'name': FormControl<String>(
         value: value?.name,
         validators: [Validators.required],
-      )
+      ),
     });
   }
 
