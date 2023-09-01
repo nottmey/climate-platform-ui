@@ -1,8 +1,8 @@
-import 'package:climate_platform_ui/common/widgets/app_card.dart';
-import 'package:climate_platform_ui/common/widgets/app_error.dart';
-import 'package:climate_platform_ui/common/widgets/app_loading.dart';
-import 'package:climate_platform_ui/common/widgets/app_text.dart';
-import 'package:climate_platform_ui/common/widgets/app_widget.dart';
+import 'package:climate/common/widgets/app_card.dart';
+import 'package:climate/common/widgets/app_error.dart';
+import 'package:climate/common/widgets/app_loading.dart';
+import 'package:climate/common/widgets/app_text.dart';
+import 'package:climate/common/widgets/app_widget.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

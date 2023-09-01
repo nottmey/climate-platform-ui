@@ -1,10 +1,10 @@
-import 'package:climate_platform_ui/api/api.graphql.dart';
-import 'package:climate_platform_ui/common/widgets/app_header_sliver.dart';
-import 'package:climate_platform_ui/common/widgets/app_loading.dart';
-import 'package:climate_platform_ui/common/widgets/app_page_widget.dart';
-import 'package:climate_platform_ui/common/widgets/app_text.dart';
-import 'package:climate_platform_ui/features/database_browser/providers/entity_provider_family.dart';
-import 'package:climate_platform_ui/features/database_browser/widgets/entity_details_segment.dart';
+import 'package:climate/api/api.graphql.dart';
+import 'package:climate/common/widgets/app_header_sliver.dart';
+import 'package:climate/common/widgets/app_loading.dart';
+import 'package:climate/common/widgets/app_page_widget.dart';
+import 'package:climate/common/widgets/app_text.dart';
+import 'package:climate/features/database_browser/providers/entity_provider_family.dart';
+import 'package:climate/features/database_browser/widgets/entity_details_segment.dart';
 import 'package:collection/collection.dart';
 
 class EntityPage extends AppPageWidget {

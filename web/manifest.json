@@ -1,6 +1,6 @@
 {
-    "name": "climate_platform_ui",
-    "short_name": "climate_platform_ui",
+    "name": "climate",
+    "short_name": "climate",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

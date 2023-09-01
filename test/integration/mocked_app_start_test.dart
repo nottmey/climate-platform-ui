@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:artemis/artemis.dart';
-import 'package:climate_platform_ui/api/api.graphql.dart';
-import 'package:climate_platform_ui/app.dart';
-import 'package:climate_platform_ui/get_it.dart';
+import 'package:climate/api/api.graphql.dart';
+import 'package:climate/app.dart';
+import 'package:climate/get_it.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';

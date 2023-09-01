@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:artemis/artemis.dart';
-import 'package:climate_platform_ui/api/utils/web_socket_request_serializer.dart';
-import 'package:climate_platform_ui/app.dart';
-import 'package:climate_platform_ui/get_it.dart';
+import 'package:climate/api/utils/web_socket_request_serializer.dart';
+import 'package:climate/app.dart';
+import 'package:climate/get_it.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -1,4 +1,4 @@
-import 'package:climate_platform_ui/common/widgets/app_widget.dart';
+import 'package:climate/common/widgets/app_widget.dart';
 
 class AppError extends AppWidget {
   final Object error;

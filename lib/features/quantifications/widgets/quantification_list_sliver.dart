@@ -1,10 +1,10 @@
-import 'package:climate_platform_ui/api/api.graphql.dart';
-import 'package:climate_platform_ui/api/utils/execute.dart';
-import 'package:climate_platform_ui/common/providers/entity_cache_provider.dart';
-import 'package:climate_platform_ui/common/widgets/app_paged_sliver_list.dart';
-import 'package:climate_platform_ui/common/widgets/app_widget.dart';
-import 'package:climate_platform_ui/features/quantifications/providers/quantification_creations_provider.dart';
-import 'package:climate_platform_ui/features/quantifications/widgets/quantification_card.dart';
+import 'package:climate/api/api.graphql.dart';
+import 'package:climate/api/utils/execute.dart';
+import 'package:climate/common/providers/entity_cache_provider.dart';
+import 'package:climate/common/widgets/app_paged_sliver_list.dart';
+import 'package:climate/common/widgets/app_widget.dart';
+import 'package:climate/features/quantifications/providers/quantification_creations_provider.dart';
+import 'package:climate/features/quantifications/widgets/quantification_card.dart';
 
 class QuantificationListSliver extends AppWidget {
   final String parentBoundaryId;

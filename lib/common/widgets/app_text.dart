@@ -1,5 +1,5 @@
-import 'package:climate_platform_ui/common/widgets/app_widget.dart';
-import 'package:climate_platform_ui/features/theming/models/text_style_preset.dart';
+import 'package:climate/common/widgets/app_widget.dart';
+import 'package:climate/features/theming/models/text_style_preset.dart';
 
 class AppText extends AppWidget {
   final String value;

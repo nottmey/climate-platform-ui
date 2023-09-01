@@ -1,4 +1,4 @@
-import 'package:climate_platform_ui/common/widgets/app_widget.dart';
+import 'package:climate/common/widgets/app_widget.dart';
 
 class AppLoading extends AppWidget {
   const AppLoading({super.key});

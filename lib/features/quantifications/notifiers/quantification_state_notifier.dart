@@ -1,7 +1,7 @@
-import 'package:climate_platform_ui/api/api.graphql.dart';
-import 'package:climate_platform_ui/api/utils/execute.dart';
-import 'package:climate_platform_ui/api/utils/subscribe.dart';
-import 'package:climate_platform_ui/common/notifiers/entity_state_notifier.dart';
+import 'package:climate/api/api.graphql.dart';
+import 'package:climate/api/utils/execute.dart';
+import 'package:climate/api/utils/subscribe.dart';
+import 'package:climate/common/notifiers/entity_state_notifier.dart';
 
 class _OptimisticUpdateResult with QuantificationMixin {}
 

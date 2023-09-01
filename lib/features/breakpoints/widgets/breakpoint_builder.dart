@@ -1,5 +1,5 @@
-import 'package:climate_platform_ui/common/widgets/app_widget.dart';
-import 'package:climate_platform_ui/features/breakpoints/models/window_size_class.dart';
+import 'package:climate/common/widgets/app_widget.dart';
+import 'package:climate/features/breakpoints/models/window_size_class.dart';
 
 class BreakpointBuilder extends AppWidget {
   final Widget Function(BuildContext, WindowSize) builder;

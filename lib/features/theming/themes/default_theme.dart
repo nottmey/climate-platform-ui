@@ -1,4 +1,4 @@
-import 'package:climate_platform_ui/features/theming/utils/spacing_utils_extension.dart';
+import 'package:climate/features/theming/utils/spacing_utils_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

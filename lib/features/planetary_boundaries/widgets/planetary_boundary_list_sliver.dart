@@ -1,10 +1,10 @@
-import 'package:climate_platform_ui/api/api.graphql.dart';
-import 'package:climate_platform_ui/api/utils/execute.dart';
-import 'package:climate_platform_ui/common/providers/entity_cache_provider.dart';
-import 'package:climate_platform_ui/common/widgets/app_paged_sliver_list.dart';
-import 'package:climate_platform_ui/common/widgets/app_widget.dart';
-import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_creations_provider.dart';
-import 'package:climate_platform_ui/features/planetary_boundaries/widgets/planetary_boundary_card.dart';
+import 'package:climate/api/api.graphql.dart';
+import 'package:climate/api/utils/execute.dart';
+import 'package:climate/common/providers/entity_cache_provider.dart';
+import 'package:climate/common/widgets/app_paged_sliver_list.dart';
+import 'package:climate/common/widgets/app_widget.dart';
+import 'package:climate/features/planetary_boundaries/providers/planetary_boundary_creations_provider.dart';
+import 'package:climate/features/planetary_boundaries/widgets/planetary_boundary_card.dart';
 
 class PlanetaryBoundaryListSliver extends AppWidget {
   const PlanetaryBoundaryListSliver({super.key});

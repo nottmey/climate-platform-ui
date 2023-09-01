@@ -1,4 +1,4 @@
-package app.nottmey.climate_platform_ui
+package org.climate
 
 import io.flutter.embedding.android.FlutterActivity
 

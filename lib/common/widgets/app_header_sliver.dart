@@ -1,6 +1,6 @@
-import 'package:climate_platform_ui/common/widgets/app_text.dart';
-import 'package:climate_platform_ui/features/theming/providers/theme_provider.dart';
-import 'package:climate_platform_ui/features/theming/themes/default_theme.dart';
+import 'package:climate/common/widgets/app_text.dart';
+import 'package:climate/features/theming/providers/theme_provider.dart';
+import 'package:climate/features/theming/themes/default_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

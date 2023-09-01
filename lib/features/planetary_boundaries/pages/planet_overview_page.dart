@@ -1,9 +1,9 @@
-import 'package:climate_platform_ui/common/widgets/app_card.dart';
-import 'package:climate_platform_ui/common/widgets/app_header_sliver.dart';
-import 'package:climate_platform_ui/common/widgets/app_page_widget.dart';
-import 'package:climate_platform_ui/common/widgets/app_text.dart';
-import 'package:climate_platform_ui/features/planetary_boundaries/widgets/planetary_boundary_card.dart';
-import 'package:climate_platform_ui/features/planetary_boundaries/widgets/planetary_boundary_list_sliver.dart';
+import 'package:climate/common/widgets/app_card.dart';
+import 'package:climate/common/widgets/app_header_sliver.dart';
+import 'package:climate/common/widgets/app_page_widget.dart';
+import 'package:climate/common/widgets/app_text.dart';
+import 'package:climate/features/planetary_boundaries/widgets/planetary_boundary_card.dart';
+import 'package:climate/features/planetary_boundaries/widgets/planetary_boundary_list_sliver.dart';
 
 class PlanetOverviewPage extends AppPageWidget {
   const PlanetOverviewPage({super.key});

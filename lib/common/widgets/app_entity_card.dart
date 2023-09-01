@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:climate_platform_ui/common/models/entity_state.dart';
-import 'package:climate_platform_ui/common/notifiers/entity_state_notifier.dart';
-import 'package:climate_platform_ui/common/widgets/app_card.dart';
-import 'package:climate_platform_ui/common/widgets/app_widget.dart';
-import 'package:climate_platform_ui/features/theming/utils/context_theme_extension.dart';
-import 'package:climate_platform_ui/features/theming/utils/spacing_utils_extension.dart';
+import 'package:climate/common/models/entity_state.dart';
+import 'package:climate/common/notifiers/entity_state_notifier.dart';
+import 'package:climate/common/widgets/app_card.dart';
+import 'package:climate/common/widgets/app_widget.dart';
+import 'package:climate/features/theming/utils/context_theme_extension.dart';
+import 'package:climate/features/theming/utils/spacing_utils_extension.dart';
 import 'package:gql_websocket_link/gql_websocket_link.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';

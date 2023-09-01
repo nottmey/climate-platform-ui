@@ -1,6 +1,6 @@
-import 'package:climate_platform_ui/common/widgets/app_header_sliver.dart';
-import 'package:climate_platform_ui/common/widgets/app_page_widget.dart';
-import 'package:climate_platform_ui/features/quantifications/providers/quantifications_family.dart';
+import 'package:climate/common/widgets/app_header_sliver.dart';
+import 'package:climate/common/widgets/app_page_widget.dart';
+import 'package:climate/features/quantifications/providers/quantifications_family.dart';
 
 class QuantificationDetailsPage extends AppPageWidget {
   final String id;

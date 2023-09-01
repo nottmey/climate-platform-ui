@@ -1,8 +1,8 @@
-import 'package:climate_platform_ui/api/api.graphql.dart';
-import 'package:climate_platform_ui/api/utils/execute.dart';
-import 'package:climate_platform_ui/common/widgets/app_paged_sliver_list.dart';
-import 'package:climate_platform_ui/common/widgets/app_widget.dart';
-import 'package:climate_platform_ui/features/database_browser/widgets/entity_details_segment.dart';
+import 'package:climate/api/api.graphql.dart';
+import 'package:climate/api/utils/execute.dart';
+import 'package:climate/common/widgets/app_paged_sliver_list.dart';
+import 'package:climate/common/widgets/app_widget.dart';
+import 'package:climate/features/database_browser/widgets/entity_details_segment.dart';
 
 class DatabaseEntityListSliver extends AppWidget {
   final List<String>? attributes;

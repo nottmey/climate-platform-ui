@@ -306,6 +306,188 @@ Map<String, dynamic> _$GetEntity$QueryToJson(GetEntity$Query instance) =>
       'getEntity': instance.getEntity?.toJson(),
     };
 
+MergeQuantification$Mutation$Quantification
+    _$MergeQuantification$Mutation$QuantificationFromJson(
+            Map<String, dynamic> json) =>
+        MergeQuantification$Mutation$Quantification()
+          ..id = json['id'] as String
+          ..name = json['name'] as String?;
+
+Map<String, dynamic> _$MergeQuantification$Mutation$QuantificationToJson(
+        MergeQuantification$Mutation$Quantification instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+    };
+
+MergeQuantification$Mutation _$MergeQuantification$MutationFromJson(
+        Map<String, dynamic> json) =>
+    MergeQuantification$Mutation()
+      ..mergeQuantification = json['mergeQuantification'] == null
+          ? null
+          : MergeQuantification$Mutation$Quantification.fromJson(
+              json['mergeQuantification'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$MergeQuantification$MutationToJson(
+        MergeQuantification$Mutation instance) =>
+    <String, dynamic>{
+      'mergeQuantification': instance.mergeQuantification?.toJson(),
+    };
+
+QuantificationInput _$QuantificationInputFromJson(Map<String, dynamic> json) =>
+    QuantificationInput(
+      id: json['id'] as String,
+      name: json['name'] as String?,
+    );
+
+Map<String, dynamic> _$QuantificationInputToJson(
+        QuantificationInput instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+    };
+
+DeleteQuantification$Mutation$Quantification
+    _$DeleteQuantification$Mutation$QuantificationFromJson(
+            Map<String, dynamic> json) =>
+        DeleteQuantification$Mutation$Quantification()
+          ..id = json['id'] as String
+          ..name = json['name'] as String?;
+
+Map<String, dynamic> _$DeleteQuantification$Mutation$QuantificationToJson(
+        DeleteQuantification$Mutation$Quantification instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+    };
+
+DeleteQuantification$Mutation _$DeleteQuantification$MutationFromJson(
+        Map<String, dynamic> json) =>
+    DeleteQuantification$Mutation()
+      ..deleteQuantification = json['deleteQuantification'] == null
+          ? null
+          : DeleteQuantification$Mutation$Quantification.fromJson(
+              json['deleteQuantification'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$DeleteQuantification$MutationToJson(
+        DeleteQuantification$Mutation instance) =>
+    <String, dynamic>{
+      'deleteQuantification': instance.deleteQuantification?.toJson(),
+    };
+
+GetQuantification$Query$Quantification
+    _$GetQuantification$Query$QuantificationFromJson(
+            Map<String, dynamic> json) =>
+        GetQuantification$Query$Quantification()
+          ..id = json['id'] as String
+          ..name = json['name'] as String?;
+
+Map<String, dynamic> _$GetQuantification$Query$QuantificationToJson(
+        GetQuantification$Query$Quantification instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+    };
+
+GetQuantification$Query _$GetQuantification$QueryFromJson(
+        Map<String, dynamic> json) =>
+    GetQuantification$Query()
+      ..getQuantification = json['getQuantification'] == null
+          ? null
+          : GetQuantification$Query$Quantification.fromJson(
+              json['getQuantification'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetQuantification$QueryToJson(
+        GetQuantification$Query instance) =>
+    <String, dynamic>{
+      'getQuantification': instance.getQuantification?.toJson(),
+    };
+
+OnUpdatedQuantification$Subscription$Quantification
+    _$OnUpdatedQuantification$Subscription$QuantificationFromJson(
+            Map<String, dynamic> json) =>
+        OnUpdatedQuantification$Subscription$Quantification()
+          ..id = json['id'] as String
+          ..name = json['name'] as String?;
+
+Map<String, dynamic>
+    _$OnUpdatedQuantification$Subscription$QuantificationToJson(
+            OnUpdatedQuantification$Subscription$Quantification instance) =>
+        <String, dynamic>{
+          'id': instance.id,
+          'name': instance.name,
+        };
+
+OnUpdatedQuantification$Subscription
+    _$OnUpdatedQuantification$SubscriptionFromJson(Map<String, dynamic> json) =>
+        OnUpdatedQuantification$Subscription()
+          ..onUpdatedQuantification = json['onUpdatedQuantification'] == null
+              ? null
+              : OnUpdatedQuantification$Subscription$Quantification.fromJson(
+                  json['onUpdatedQuantification'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$OnUpdatedQuantification$SubscriptionToJson(
+        OnUpdatedQuantification$Subscription instance) =>
+    <String, dynamic>{
+      'onUpdatedQuantification': instance.onUpdatedQuantification?.toJson(),
+    };
+
+OnDeletedQuantification$Subscription$Quantification
+    _$OnDeletedQuantification$Subscription$QuantificationFromJson(
+            Map<String, dynamic> json) =>
+        OnDeletedQuantification$Subscription$Quantification()
+          ..id = json['id'] as String
+          ..name = json['name'] as String?;
+
+Map<String, dynamic>
+    _$OnDeletedQuantification$Subscription$QuantificationToJson(
+            OnDeletedQuantification$Subscription$Quantification instance) =>
+        <String, dynamic>{
+          'id': instance.id,
+          'name': instance.name,
+        };
+
+OnDeletedQuantification$Subscription
+    _$OnDeletedQuantification$SubscriptionFromJson(Map<String, dynamic> json) =>
+        OnDeletedQuantification$Subscription()
+          ..onDeletedQuantification = json['onDeletedQuantification'] == null
+              ? null
+              : OnDeletedQuantification$Subscription$Quantification.fromJson(
+                  json['onDeletedQuantification'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$OnDeletedQuantification$SubscriptionToJson(
+        OnDeletedQuantification$Subscription instance) =>
+    <String, dynamic>{
+      'onDeletedQuantification': instance.onDeletedQuantification?.toJson(),
+    };
+
+CreateQuantification$Mutation$Quantification
+    _$CreateQuantification$Mutation$QuantificationFromJson(
+            Map<String, dynamic> json) =>
+        CreateQuantification$Mutation$Quantification()
+          ..id = json['id'] as String
+          ..name = json['name'] as String?;
+
+Map<String, dynamic> _$CreateQuantification$Mutation$QuantificationToJson(
+        CreateQuantification$Mutation$Quantification instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+    };
+
+CreateQuantification$Mutation _$CreateQuantification$MutationFromJson(
+        Map<String, dynamic> json) =>
+    CreateQuantification$Mutation()
+      ..createQuantification =
+          CreateQuantification$Mutation$Quantification.fromJson(
+              json['createQuantification'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$CreateQuantification$MutationToJson(
+        CreateQuantification$Mutation instance) =>
+    <String, dynamic>{
+      'createQuantification': instance.createQuantification.toJson(),
+    };
+
 GetQuantificationPage$Query$QuantificationListPage$PageInfo
     _$GetQuantificationPage$Query$QuantificationListPage$PageInfoFromJson(
             Map<String, dynamic> json) =>
@@ -368,6 +550,35 @@ Map<String, dynamic> _$GetQuantificationPage$QueryToJson(
         GetQuantificationPage$Query instance) =>
     <String, dynamic>{
       'listQuantification': instance.listQuantification.toJson(),
+    };
+
+OnCreatedQuantification$Subscription$Quantification
+    _$OnCreatedQuantification$Subscription$QuantificationFromJson(
+            Map<String, dynamic> json) =>
+        OnCreatedQuantification$Subscription$Quantification()
+          ..id = json['id'] as String
+          ..name = json['name'] as String?;
+
+Map<String, dynamic>
+    _$OnCreatedQuantification$Subscription$QuantificationToJson(
+            OnCreatedQuantification$Subscription$Quantification instance) =>
+        <String, dynamic>{
+          'id': instance.id,
+          'name': instance.name,
+        };
+
+OnCreatedQuantification$Subscription
+    _$OnCreatedQuantification$SubscriptionFromJson(Map<String, dynamic> json) =>
+        OnCreatedQuantification$Subscription()
+          ..onCreatedQuantification = json['onCreatedQuantification'] == null
+              ? null
+              : OnCreatedQuantification$Subscription$Quantification.fromJson(
+                  json['onCreatedQuantification'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$OnCreatedQuantification$SubscriptionToJson(
+        OnCreatedQuantification$Subscription instance) =>
+    <String, dynamic>{
+      'onCreatedQuantification': instance.onCreatedQuantification?.toJson(),
     };
 
 MergePlanetaryBoundary$Mutation$PlanetaryBoundary
@@ -678,217 +889,6 @@ Map<String, dynamic> _$GetPlanetaryBoundary$QueryToJson(
       'getPlanetaryBoundary': instance.getPlanetaryBoundary?.toJson(),
     };
 
-CreateQuantification$Mutation$Quantification
-    _$CreateQuantification$Mutation$QuantificationFromJson(
-            Map<String, dynamic> json) =>
-        CreateQuantification$Mutation$Quantification()
-          ..id = json['id'] as String
-          ..name = json['name'] as String?;
-
-Map<String, dynamic> _$CreateQuantification$Mutation$QuantificationToJson(
-        CreateQuantification$Mutation$Quantification instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-    };
-
-CreateQuantification$Mutation _$CreateQuantification$MutationFromJson(
-        Map<String, dynamic> json) =>
-    CreateQuantification$Mutation()
-      ..createQuantification =
-          CreateQuantification$Mutation$Quantification.fromJson(
-              json['createQuantification'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$CreateQuantification$MutationToJson(
-        CreateQuantification$Mutation instance) =>
-    <String, dynamic>{
-      'createQuantification': instance.createQuantification.toJson(),
-    };
-
-QuantificationInput _$QuantificationInputFromJson(Map<String, dynamic> json) =>
-    QuantificationInput(
-      id: json['id'] as String,
-      name: json['name'] as String?,
-    );
-
-Map<String, dynamic> _$QuantificationInputToJson(
-        QuantificationInput instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-    };
-
-DeleteQuantification$Mutation$Quantification
-    _$DeleteQuantification$Mutation$QuantificationFromJson(
-            Map<String, dynamic> json) =>
-        DeleteQuantification$Mutation$Quantification()
-          ..id = json['id'] as String
-          ..name = json['name'] as String?;
-
-Map<String, dynamic> _$DeleteQuantification$Mutation$QuantificationToJson(
-        DeleteQuantification$Mutation$Quantification instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-    };
-
-DeleteQuantification$Mutation _$DeleteQuantification$MutationFromJson(
-        Map<String, dynamic> json) =>
-    DeleteQuantification$Mutation()
-      ..deleteQuantification = json['deleteQuantification'] == null
-          ? null
-          : DeleteQuantification$Mutation$Quantification.fromJson(
-              json['deleteQuantification'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$DeleteQuantification$MutationToJson(
-        DeleteQuantification$Mutation instance) =>
-    <String, dynamic>{
-      'deleteQuantification': instance.deleteQuantification?.toJson(),
-    };
-
-MergeQuantification$Mutation$Quantification
-    _$MergeQuantification$Mutation$QuantificationFromJson(
-            Map<String, dynamic> json) =>
-        MergeQuantification$Mutation$Quantification()
-          ..id = json['id'] as String
-          ..name = json['name'] as String?;
-
-Map<String, dynamic> _$MergeQuantification$Mutation$QuantificationToJson(
-        MergeQuantification$Mutation$Quantification instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-    };
-
-MergeQuantification$Mutation _$MergeQuantification$MutationFromJson(
-        Map<String, dynamic> json) =>
-    MergeQuantification$Mutation()
-      ..mergeQuantification = json['mergeQuantification'] == null
-          ? null
-          : MergeQuantification$Mutation$Quantification.fromJson(
-              json['mergeQuantification'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$MergeQuantification$MutationToJson(
-        MergeQuantification$Mutation instance) =>
-    <String, dynamic>{
-      'mergeQuantification': instance.mergeQuantification?.toJson(),
-    };
-
-GetQuantification$Query$Quantification
-    _$GetQuantification$Query$QuantificationFromJson(
-            Map<String, dynamic> json) =>
-        GetQuantification$Query$Quantification()
-          ..id = json['id'] as String
-          ..name = json['name'] as String?;
-
-Map<String, dynamic> _$GetQuantification$Query$QuantificationToJson(
-        GetQuantification$Query$Quantification instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-    };
-
-GetQuantification$Query _$GetQuantification$QueryFromJson(
-        Map<String, dynamic> json) =>
-    GetQuantification$Query()
-      ..getQuantification = json['getQuantification'] == null
-          ? null
-          : GetQuantification$Query$Quantification.fromJson(
-              json['getQuantification'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$GetQuantification$QueryToJson(
-        GetQuantification$Query instance) =>
-    <String, dynamic>{
-      'getQuantification': instance.getQuantification?.toJson(),
-    };
-
-OnUpdatedQuantification$Subscription$Quantification
-    _$OnUpdatedQuantification$Subscription$QuantificationFromJson(
-            Map<String, dynamic> json) =>
-        OnUpdatedQuantification$Subscription$Quantification()
-          ..id = json['id'] as String
-          ..name = json['name'] as String?;
-
-Map<String, dynamic>
-    _$OnUpdatedQuantification$Subscription$QuantificationToJson(
-            OnUpdatedQuantification$Subscription$Quantification instance) =>
-        <String, dynamic>{
-          'id': instance.id,
-          'name': instance.name,
-        };
-
-OnUpdatedQuantification$Subscription
-    _$OnUpdatedQuantification$SubscriptionFromJson(Map<String, dynamic> json) =>
-        OnUpdatedQuantification$Subscription()
-          ..onUpdatedQuantification = json['onUpdatedQuantification'] == null
-              ? null
-              : OnUpdatedQuantification$Subscription$Quantification.fromJson(
-                  json['onUpdatedQuantification'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$OnUpdatedQuantification$SubscriptionToJson(
-        OnUpdatedQuantification$Subscription instance) =>
-    <String, dynamic>{
-      'onUpdatedQuantification': instance.onUpdatedQuantification?.toJson(),
-    };
-
-OnDeletedQuantification$Subscription$Quantification
-    _$OnDeletedQuantification$Subscription$QuantificationFromJson(
-            Map<String, dynamic> json) =>
-        OnDeletedQuantification$Subscription$Quantification()
-          ..id = json['id'] as String
-          ..name = json['name'] as String?;
-
-Map<String, dynamic>
-    _$OnDeletedQuantification$Subscription$QuantificationToJson(
-            OnDeletedQuantification$Subscription$Quantification instance) =>
-        <String, dynamic>{
-          'id': instance.id,
-          'name': instance.name,
-        };
-
-OnDeletedQuantification$Subscription
-    _$OnDeletedQuantification$SubscriptionFromJson(Map<String, dynamic> json) =>
-        OnDeletedQuantification$Subscription()
-          ..onDeletedQuantification = json['onDeletedQuantification'] == null
-              ? null
-              : OnDeletedQuantification$Subscription$Quantification.fromJson(
-                  json['onDeletedQuantification'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$OnDeletedQuantification$SubscriptionToJson(
-        OnDeletedQuantification$Subscription instance) =>
-    <String, dynamic>{
-      'onDeletedQuantification': instance.onDeletedQuantification?.toJson(),
-    };
-
-OnCreatedQuantification$Subscription$Quantification
-    _$OnCreatedQuantification$Subscription$QuantificationFromJson(
-            Map<String, dynamic> json) =>
-        OnCreatedQuantification$Subscription$Quantification()
-          ..id = json['id'] as String
-          ..name = json['name'] as String?;
-
-Map<String, dynamic>
-    _$OnCreatedQuantification$Subscription$QuantificationToJson(
-            OnCreatedQuantification$Subscription$Quantification instance) =>
-        <String, dynamic>{
-          'id': instance.id,
-          'name': instance.name,
-        };
-
-OnCreatedQuantification$Subscription
-    _$OnCreatedQuantification$SubscriptionFromJson(Map<String, dynamic> json) =>
-        OnCreatedQuantification$Subscription()
-          ..onCreatedQuantification = json['onCreatedQuantification'] == null
-              ? null
-              : OnCreatedQuantification$Subscription$Quantification.fromJson(
-                  json['onCreatedQuantification'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$OnCreatedQuantification$SubscriptionToJson(
-        OnCreatedQuantification$Subscription instance) =>
-    <String, dynamic>{
-      'onCreatedQuantification': instance.onCreatedQuantification?.toJson(),
-    };
-
 GetEntityPageArguments _$GetEntityPageArgumentsFromJson(
         Map<String, dynamic> json) =>
     GetEntityPageArguments(
@@ -915,6 +915,80 @@ GetEntityArguments _$GetEntityArgumentsFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$GetEntityArgumentsToJson(GetEntityArguments instance) =>
     <String, dynamic>{
       'id': instance.id,
+    };
+
+MergeQuantificationArguments _$MergeQuantificationArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    MergeQuantificationArguments(
+      value:
+          QuantificationInput.fromJson(json['value'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$MergeQuantificationArgumentsToJson(
+        MergeQuantificationArguments instance) =>
+    <String, dynamic>{
+      'value': instance.value.toJson(),
+    };
+
+DeleteQuantificationArguments _$DeleteQuantificationArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    DeleteQuantificationArguments(
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$DeleteQuantificationArgumentsToJson(
+        DeleteQuantificationArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+GetQuantificationArguments _$GetQuantificationArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetQuantificationArguments(
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$GetQuantificationArgumentsToJson(
+        GetQuantificationArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+OnUpdatedQuantificationArguments _$OnUpdatedQuantificationArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    OnUpdatedQuantificationArguments(
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$OnUpdatedQuantificationArgumentsToJson(
+        OnUpdatedQuantificationArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+OnDeletedQuantificationArguments _$OnDeletedQuantificationArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    OnDeletedQuantificationArguments(
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$OnDeletedQuantificationArgumentsToJson(
+        OnDeletedQuantificationArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+CreateQuantificationArguments _$CreateQuantificationArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    CreateQuantificationArguments(
+      value:
+          QuantificationInput.fromJson(json['value'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CreateQuantificationArgumentsToJson(
+        CreateQuantificationArguments instance) =>
+    <String, dynamic>{
+      'value': instance.value.toJson(),
     };
 
 GetQuantificationPageArguments _$GetQuantificationPageArgumentsFromJson(
@@ -1015,80 +1089,6 @@ GetPlanetaryBoundaryArguments _$GetPlanetaryBoundaryArgumentsFromJson(
 
 Map<String, dynamic> _$GetPlanetaryBoundaryArgumentsToJson(
         GetPlanetaryBoundaryArguments instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-    };
-
-CreateQuantificationArguments _$CreateQuantificationArgumentsFromJson(
-        Map<String, dynamic> json) =>
-    CreateQuantificationArguments(
-      value:
-          QuantificationInput.fromJson(json['value'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$CreateQuantificationArgumentsToJson(
-        CreateQuantificationArguments instance) =>
-    <String, dynamic>{
-      'value': instance.value.toJson(),
-    };
-
-DeleteQuantificationArguments _$DeleteQuantificationArgumentsFromJson(
-        Map<String, dynamic> json) =>
-    DeleteQuantificationArguments(
-      id: json['id'] as String,
-    );
-
-Map<String, dynamic> _$DeleteQuantificationArgumentsToJson(
-        DeleteQuantificationArguments instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-    };
-
-MergeQuantificationArguments _$MergeQuantificationArgumentsFromJson(
-        Map<String, dynamic> json) =>
-    MergeQuantificationArguments(
-      value:
-          QuantificationInput.fromJson(json['value'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$MergeQuantificationArgumentsToJson(
-        MergeQuantificationArguments instance) =>
-    <String, dynamic>{
-      'value': instance.value.toJson(),
-    };
-
-GetQuantificationArguments _$GetQuantificationArgumentsFromJson(
-        Map<String, dynamic> json) =>
-    GetQuantificationArguments(
-      id: json['id'] as String,
-    );
-
-Map<String, dynamic> _$GetQuantificationArgumentsToJson(
-        GetQuantificationArguments instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-    };
-
-OnUpdatedQuantificationArguments _$OnUpdatedQuantificationArgumentsFromJson(
-        Map<String, dynamic> json) =>
-    OnUpdatedQuantificationArguments(
-      id: json['id'] as String,
-    );
-
-Map<String, dynamic> _$OnUpdatedQuantificationArgumentsToJson(
-        OnUpdatedQuantificationArguments instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-    };
-
-OnDeletedQuantificationArguments _$OnDeletedQuantificationArgumentsFromJson(
-        Map<String, dynamic> json) =>
-    OnDeletedQuantificationArguments(
-      id: json['id'] as String,
-    );
-
-Map<String, dynamic> _$OnDeletedQuantificationArgumentsToJson(
-        OnDeletedQuantificationArguments instance) =>
     <String, dynamic>{
       'id': instance.id,
     };

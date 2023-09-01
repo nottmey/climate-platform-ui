@@ -1,15 +1,15 @@
-import 'package:climate_platform_ui/api/api.graphql.dart';
-import 'package:climate_platform_ui/common/models/entity_state.dart';
-import 'package:climate_platform_ui/common/widgets/app_entity_card.dart';
-import 'package:climate_platform_ui/common/widgets/app_error.dart';
-import 'package:climate_platform_ui/common/widgets/app_loading.dart';
-import 'package:climate_platform_ui/common/widgets/app_page_widget.dart';
-import 'package:climate_platform_ui/common/widgets/app_text.dart';
-import 'package:climate_platform_ui/features/quantifications/providers/quantification_creation_family.dart';
-import 'package:climate_platform_ui/features/quantifications/providers/quantification_creations_sink.dart';
-import 'package:climate_platform_ui/features/quantifications/providers/quantifications_family.dart';
-import 'package:climate_platform_ui/features/theming/models/text_style_preset.dart';
-import 'package:climate_platform_ui/router.dart';
+import 'package:climate/api/api.graphql.dart';
+import 'package:climate/common/models/entity_state.dart';
+import 'package:climate/common/widgets/app_entity_card.dart';
+import 'package:climate/common/widgets/app_error.dart';
+import 'package:climate/common/widgets/app_loading.dart';
+import 'package:climate/common/widgets/app_page_widget.dart';
+import 'package:climate/common/widgets/app_text.dart';
+import 'package:climate/features/quantifications/providers/quantification_creation_family.dart';
+import 'package:climate/features/quantifications/providers/quantification_creations_sink.dart';
+import 'package:climate/features/quantifications/providers/quantifications_family.dart';
+import 'package:climate/features/theming/models/text_style_preset.dart';
+import 'package:climate/router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class QuantificationCard

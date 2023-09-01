@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:climate_platform_ui/common/models/entity_state.dart';
-import 'package:climate_platform_ui/common/notifiers/entity_cache_notifier.dart';
+import 'package:climate/common/models/entity_state.dart';
+import 'package:climate/common/notifiers/entity_cache_notifier.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 abstract class EntityStateNotifier<T, I> extends StateNotifier<EntityState<T>> {

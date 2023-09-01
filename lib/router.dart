@@ -1,15 +1,15 @@
-import 'package:climate_platform_ui/features/database_browser/pages/attribute_page.dart';
-import 'package:climate_platform_ui/features/database_browser/pages/database_navigator_page.dart';
-import 'package:climate_platform_ui/features/database_browser/pages/entity_page.dart';
-import 'package:climate_platform_ui/features/dev/pages/dev_menu_page.dart';
-import 'package:climate_platform_ui/features/navigation/helpers/context_router_extension.dart';
-import 'package:climate_platform_ui/features/navigation/models/app_navigation_item.dart';
-import 'package:climate_platform_ui/features/navigation/pages/root_scaffold_page.dart';
-import 'package:climate_platform_ui/features/navigation/pages/tab_transition_page.dart';
-import 'package:climate_platform_ui/features/planetary_boundaries/pages/boundary_details_page.dart';
-import 'package:climate_platform_ui/features/planetary_boundaries/pages/planet_overview_page.dart';
-import 'package:climate_platform_ui/features/quantifications/pages/quantification_details_page.dart';
-import 'package:climate_platform_ui/features/theming/pages/showcase_page.dart';
+import 'package:climate/features/database_browser/pages/attribute_page.dart';
+import 'package:climate/features/database_browser/pages/database_navigator_page.dart';
+import 'package:climate/features/database_browser/pages/entity_page.dart';
+import 'package:climate/features/dev/pages/dev_menu_page.dart';
+import 'package:climate/features/navigation/helpers/context_router_extension.dart';
+import 'package:climate/features/navigation/models/app_navigation_item.dart';
+import 'package:climate/features/navigation/pages/root_scaffold_page.dart';
+import 'package:climate/features/navigation/pages/tab_transition_page.dart';
+import 'package:climate/features/planetary_boundaries/pages/boundary_details_page.dart';
+import 'package:climate/features/planetary_boundaries/pages/planet_overview_page.dart';
+import 'package:climate/features/quantifications/pages/quantification_details_page.dart';
+import 'package:climate/features/theming/pages/showcase_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

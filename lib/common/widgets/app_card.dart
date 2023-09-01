@@ -1,9 +1,9 @@
-import 'package:climate_platform_ui/common/utils/iterable_extension.dart';
-import 'package:climate_platform_ui/common/widgets/app_text.dart';
-import 'package:climate_platform_ui/common/widgets/app_widget.dart';
-import 'package:climate_platform_ui/features/theming/utils/context_theme_extension.dart';
-import 'package:climate_platform_ui/features/theming/utils/material_design_utils_extension.dart';
-import 'package:climate_platform_ui/features/theming/utils/spacing_utils_extension.dart';
+import 'package:climate/common/utils/iterable_extension.dart';
+import 'package:climate/common/widgets/app_text.dart';
+import 'package:climate/common/widgets/app_widget.dart';
+import 'package:climate/features/theming/utils/context_theme_extension.dart';
+import 'package:climate/features/theming/utils/material_design_utils_extension.dart';
+import 'package:climate/features/theming/utils/spacing_utils_extension.dart';
 
 enum AppCardPreset {
   elevated,

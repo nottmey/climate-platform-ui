@@ -1,8 +1,8 @@
 import 'package:async/async.dart';
-import 'package:climate_platform_ui/api/api.graphql.dart';
-import 'package:climate_platform_ui/api/utils/subscribe.dart';
-import 'package:climate_platform_ui/common/providers/entity_cache_provider.dart';
-import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_creations_sink.dart';
+import 'package:climate/api/api.graphql.dart';
+import 'package:climate/api/utils/subscribe.dart';
+import 'package:climate/common/providers/entity_cache_provider.dart';
+import 'package:climate/features/planetary_boundaries/providers/planetary_boundary_creations_sink.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final planetaryBoundaryCreationsProvider = StreamProvider<String>((ref) {

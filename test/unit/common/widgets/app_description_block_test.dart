@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:climate_platform_ui/common/widgets/app_description_block.dart';
-import 'package:climate_platform_ui/common/widgets/app_error.dart';
-import 'package:climate_platform_ui/common/widgets/app_loading.dart';
+import 'package:climate/common/widgets/app_description_block.dart';
+import 'package:climate/common/widgets/app_error.dart';
+import 'package:climate/common/widgets/app_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_test/flutter_test.dart';

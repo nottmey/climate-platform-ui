@@ -1,6 +1,6 @@
-import 'package:climate_platform_ui/common/widgets/app_text.dart';
-import 'package:climate_platform_ui/common/widgets/app_widget.dart';
-import 'package:climate_platform_ui/features/navigation/models/app_navigation_item.dart';
+import 'package:climate/common/widgets/app_text.dart';
+import 'package:climate/common/widgets/app_widget.dart';
+import 'package:climate/features/navigation/models/app_navigation_item.dart';
 import 'package:go_router/go_router.dart';
 
 class AppNavigationDrawer extends AppWidget {

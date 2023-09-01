@@ -1,10 +1,10 @@
-import 'package:climate_platform_ui/api/api.graphql.dart';
-import 'package:climate_platform_ui/common/widgets/app_description_block.dart';
-import 'package:climate_platform_ui/common/widgets/app_header_sliver.dart';
-import 'package:climate_platform_ui/common/widgets/app_page_widget.dart';
-import 'package:climate_platform_ui/features/planetary_boundaries/providers/planetary_boundary_family.dart';
-import 'package:climate_platform_ui/features/quantifications/widgets/quantification_card.dart';
-import 'package:climate_platform_ui/features/quantifications/widgets/quantification_list_sliver.dart';
+import 'package:climate/api/api.graphql.dart';
+import 'package:climate/common/widgets/app_description_block.dart';
+import 'package:climate/common/widgets/app_header_sliver.dart';
+import 'package:climate/common/widgets/app_page_widget.dart';
+import 'package:climate/features/planetary_boundaries/providers/planetary_boundary_family.dart';
+import 'package:climate/features/quantifications/widgets/quantification_card.dart';
+import 'package:climate/features/quantifications/widgets/quantification_list_sliver.dart';
 
 class BoundaryDetailsPage extends AppPageWidget {
   final String id;

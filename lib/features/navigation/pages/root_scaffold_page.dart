@@ -1,9 +1,9 @@
-import 'package:climate_platform_ui/common/widgets/app_widget.dart';
-import 'package:climate_platform_ui/features/breakpoints/utils/context_window_size_extension.dart';
-import 'package:climate_platform_ui/features/navigation/models/app_navigation_item.dart';
-import 'package:climate_platform_ui/features/navigation/widgets/app_bottom_navigation_bar.dart';
-import 'package:climate_platform_ui/features/navigation/widgets/app_navigation_drawer.dart';
-import 'package:climate_platform_ui/features/navigation/widgets/app_navigation_rail.dart';
+import 'package:climate/common/widgets/app_widget.dart';
+import 'package:climate/features/breakpoints/utils/context_window_size_extension.dart';
+import 'package:climate/features/navigation/models/app_navigation_item.dart';
+import 'package:climate/features/navigation/widgets/app_bottom_navigation_bar.dart';
+import 'package:climate/features/navigation/widgets/app_navigation_drawer.dart';
+import 'package:climate/features/navigation/widgets/app_navigation_rail.dart';
 
 class RootScaffoldPage extends AppWidget {
   final int selectedIndex;
