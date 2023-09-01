@@ -1,0 +1,6 @@
+# test with `lefthook run <hook-name>` e.g. `lefthook run pre-commit`
+
+commit-msg:
+  commands:
+    commitlint:
+      run: npx --yes commitlint --edit
