@@ -34,7 +34,7 @@ dependencies:
   gql_websocket_link:
   hooks_riverpod:
   http:
-  infinite_scroll_pagination: # sadly this seems to be no longer maintained
+  infinite_scroll_pagination:
   json_annotation:
   meta:
   reactive_forms:

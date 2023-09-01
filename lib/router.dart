@@ -72,7 +72,7 @@ GoRouter newRouter() {
                     id: state.pathParameters['quantificationId']!,
                   );
                 },
-              )
+              ),
             ],
           ),
         ],
@@ -99,7 +99,7 @@ GoRouter newRouter() {
               id: state.uri.queryParameters['id']!,
               name: state.uri.queryParameters['name']!,
             ),
-          )
+          ),
         ],
       ),
     ),

@@ -129,10 +129,10 @@ class EntityDetailsSegment extends AppWidget {
                 if (a is EntityMixin$Attribute$TupleAttribute)
                   buildValue(context, a.tuple),
                 if (a is EntityMixin$Attribute$MultiTupleAttribute)
-                  ...a.tuples.map((tuple) => buildValue(context, tuple))
+                  ...a.tuples.map((tuple) => buildValue(context, tuple)),
               ],
             );
-          })
+          }),
         ],
       ),
     );

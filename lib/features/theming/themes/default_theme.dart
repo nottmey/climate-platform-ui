@@ -49,7 +49,7 @@ const greenPalette = [
   Color(0xFF64732F),
   Color(0xFFCAD959),
   Color(0xFFB4BF60),
-  Color(0xFF252617)
+  Color(0xFF252617),
 ];
 
 const pastelPalette = [

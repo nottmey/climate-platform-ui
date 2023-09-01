@@ -66,7 +66,7 @@ Future<void> captureScreen(
     final finder = find.byWidgetPredicate((w) => true).first; // root
     var renderObject = finder.evaluate().single.renderObject!;
     while (!renderObject.isRepaintBoundary) {
-      renderObject = renderObject.parent! as RenderObject;
+      renderObject = renderObject.parent!;
     }
     assert(!renderObject.debugNeedsPaint, 'captured render object is ready');
     final layer = renderObject.debugLayer! as OffsetLayer;
