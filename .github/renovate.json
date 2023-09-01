@@ -1,9 +1,11 @@
 {
+  "repositories": ["nottmey/climate-platform-ui"],
   "extends": [
     "config:recommended",
     ":semanticCommits",
     ":semanticCommitScopeDisabled"
   ],
+  "prConcurrentLimit": 1,
   "dryRun": "full",
   "onboarding": false,
   "requireConfig": "optional",
