@@ -2,6 +2,9 @@ name: "Renovate"
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/renovate.json'
   pull_request:
     types: [ edited ]
   issues:
