@@ -12,14 +12,14 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.5.2
       - name: "Setup Empty .env.local"
         run: cp .env .env.local
       - name: "Determine Flutter Version"
         id: flutter-version
         run: echo "FLUTTER_VERSION=$(jq -r ".flutterSdkVersion" .fvm/fvm_config.json)" >> $GITHUB_OUTPUT
       - name: "Install Flutter"
-        uses: subosito/flutter-action@v2
+        uses: subosito/flutter-action@v2.10.0
         with:
           flutter-version: ${{ steps.flutter-version.outputs.FLUTTER_VERSION }}
           cache: true

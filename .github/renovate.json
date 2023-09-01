@@ -29,6 +29,12 @@
     {
       "matchUpdateTypes": ["major"],
       "minimumReleaseAge": "21 days"
+    },
+    {
+      "groupName": "GitHub Actions Dependencies",
+      "groupSlug": "github-actions",
+      "description": "Group all GitHub Actions Dependencies at a time into one PR.",
+      "matchManagers": ["github-actions"]
     }
   ]
 }
