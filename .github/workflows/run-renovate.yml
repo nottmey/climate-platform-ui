@@ -1,4 +1,5 @@
-name: Renovate
+name: "Renovate"
+
 on:
   push:
   workflow_dispatch:

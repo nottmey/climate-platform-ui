@@ -1,6 +1,9 @@
-on: push
+name: "Deployment"
 
-name: "Deploy All"
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   test-code:
@@ -30,6 +33,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage/lcov.info
           fail_ci_if_error: true
+
 #  submit-ios:
 #    name: "Submit iOS"
 #    runs-on: macos-latest
