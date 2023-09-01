@@ -1,10 +1,15 @@
 name: "Renovate"
 
 on:
-  push:
   workflow_dispatch:
-#  schedule:
-#    - cron: '*/15 * * * *'
+  pull_request:
+    types: [ edited ]
+  issues:
+    types: [ edited ]
+  issue_comment:
+    types: [ edited ]
+  schedule:
+    - cron: '0 2 * * *'
 jobs:
   run:
     name: "Run"
