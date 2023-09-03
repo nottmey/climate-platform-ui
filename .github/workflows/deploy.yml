@@ -11,41 +11,11 @@ jobs:
   test:
     name: "Test"
     uses: ./.github/workflows/test.yml
-  build:
+  deploy-web:
     needs: test
-    name: "Build"
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Checkout"
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
-      - name: "Setup Empty .env.local"
-        run: sed 's/APP_SYNC_API_KEY.*/APP_SYNC_API_KEY="${{ secrets.APP_SYNC_API_KEY }}"/' .env > .env.local
-      # TODO make this shared action between build and test
-      - name: "Determine Flutter Version"
-        id: flutter-version
-        run: echo "FLUTTER_VERSION=$(jq -r ".flutterSdkVersion" .fvm/fvm_config.json)" >> $GITHUB_OUTPUT
-      - name: "Install Flutter"
-        uses: subosito/flutter-action@v2.10.0
-        with:
-          flutter-version: ${{ steps.flutter-version.outputs.FLUTTER_VERSION }}
-          cache: true
-      - name: "Build web"
-        run: flutter build web --source-maps --base-href /${{ github.event.repository.name }}/
-      - name: "Upload Pages artifact"
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: build/web
-  deploy:
-    needs: build
-    name: "Deploy"
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: "Deploy to GitHub Pages"
-        id: deployment
-        uses: actions/deploy-pages@9dbe3824824f8a1377b8e298bafde1a50ede43e5 # v2.0.4
+    name: "Deploy Web"
+    uses: ./.github/workflows/deploy-web.yml
+  deploy-ios:
+    needs: test
+    name: "Deploy iOS"
+    uses: ./.github/workflows/deploy-ios.yml
