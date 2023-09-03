@@ -6,6 +6,12 @@ on:
     secrets:
       APP_SYNC_API_KEY:
         required: true
+      APP_STORE_CONNECT_ISSUER_ID:
+        required: true
+      APP_STORE_CONNECT_API_KEY_ID:
+        required: true
+      APP_STORE_CONNECT_API_KEY_FILE:
+        required: true
 
 jobs:
   build:
@@ -24,3 +30,19 @@ jobs:
         with:
           flutter-version: ${{ steps.flutter-version.outputs.FLUTTER_VERSION }}
           cache: true
+      - name: "Setup Xcode"
+        uses: maxim-lobanov/setup-xcode@v1.5.1
+        with:
+          xcode-version: latest-stable
+      - name: "Setup App Store Connect Api Key"
+        working-directory: ~/.private_keys
+        env:
+          # 1. `base64 -i AuthKey_<...>.p8 -o AuthKey_<...>.base64`
+          # 2. `pbcopy < AuthKey_<...>.base64` and paste without a newline
+          APP_STORE_CONNECT_API_KEY_FILE: ${{ secrets.APP_STORE_CONNECT_API_KEY_FILE }}
+        run: |
+          echo $APP_STORE_CONNECT_API_KEY_FILE | base64 --decode > AuthKey_${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}.p8
+      - name: "Build ipa"
+        run: flutter build ipa
+      - name: "Upload ipa"
+        run: xcrun altool --upload-app --type ios -f build/ios/ipa/*.ipa --apiKey ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }} --apiIssuer ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
