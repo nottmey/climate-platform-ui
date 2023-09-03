@@ -11,3 +11,43 @@ jobs:
   test:
     name: "Test"
     uses: ./.github/workflows/test.yml
+  build:
+    needs: test
+    name: "Build"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - name: "Setup Empty .env.local"
+        run: cp .env .env.local
+      # TODO make this shared action between build and test
+      - name: "Determine Flutter Version"
+        id: flutter-version
+        run: echo "FLUTTER_VERSION=$(jq -r ".flutterSdkVersion" .fvm/fvm_config.json)" >> $GITHUB_OUTPUT
+      - name: "Install Flutter"
+        uses: subosito/flutter-action@v2.10.0
+        with:
+          flutter-version: ${{ steps.flutter-version.outputs.FLUTTER_VERSION }}
+          cache: true
+      - name: "Install Dependencies"
+        run: flutter pub get
+      - name: "Build web"
+        run: flutter build web
+      - name: "Upload Pages artifact"
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: build/web
+  deploy:
+    needs: build
+    name: "Deploy"
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: "Deploy to GitHub Pages"
+        id: deployment
+        uses: actions/deploy-pages@v2.0.3
