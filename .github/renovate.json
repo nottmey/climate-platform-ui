@@ -1,5 +1,4 @@
 {
-  "repositories": ["nottmey/climate-platform-ui"],
   "extends": [
     "config:recommended",
     ":semanticCommits",
@@ -15,17 +14,9 @@
   "assignees": [
     "nottmey"
   ],
-  "prConcurrentLimit": 1,
-  "onboarding": false,
-  "requireConfig": "optional",
-  "platform": "github",
+  "prConcurrentLimit": 10,
   "branchPrefix": "deps/",
-  "gitAuthor": "Local Renovate Bot <bot@renovateapp.com>",
   "packageRules": [
-    {
-      "matchUpdateTypes": ["patch"],
-      "minimumReleaseAge": "0 days"
-    },
     {
       "matchUpdateTypes": ["minor"],
       "minimumReleaseAge": "7 days"
@@ -34,11 +25,5 @@
       "matchUpdateTypes": ["major"],
       "minimumReleaseAge": "21 days"
     },
-    {
-      "groupName": "GitHub Actions Dependencies",
-      "groupSlug": "github-actions",
-      "description": "Group all GitHub Actions Dependencies at a time into one PR.",
-      "matchManagers": ["github-actions"]
-    }
   ]
 }
