@@ -24,6 +24,6 @@
     {
       "matchUpdateTypes": ["major"],
       "minimumReleaseAge": "21 days"
-    },
+    }
   ]
 }
