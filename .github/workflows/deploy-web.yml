@@ -3,6 +3,9 @@ name: "Deploy Web"
 on:
   workflow_dispatch:
   workflow_call:
+    secrets:
+      APP_SYNC_API_KEY:
+        required: true
 
 jobs:
   build:
