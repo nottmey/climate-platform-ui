@@ -8,4 +8,4 @@ on:
 jobs:
   test:
     name: "Test"
-    uses: ./.github/workflows/test.yml@main
+    uses: ./.github/workflows/test.yml
