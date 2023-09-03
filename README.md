@@ -1,4 +1,4 @@
-[![Deploy All](https://github.com/nottmey/climate_platform_ui/actions/workflows/deploy-all.yml/badge.svg)](https://github.com/nottmey/climate_platform_ui/actions/workflows/deploy-all.yml)
+[![Deployment](https://github.com/nottmey/climate-platform-ui/actions/workflows/deploy.yml/badge.svg)](https://github.com/nottmey/climate-platform-ui/actions/workflows/deploy.yml)
 [![codecov](https://codecov.io/gh/nottmey/climate-platform-ui/graph/badge.svg?token=2EQFHSQVQM)](https://codecov.io/gh/nottmey/climate-platform-ui)
 
 "Work in Progress" prototype of a platform for visualizing and relating climate action data. Aiming to display e.g.
