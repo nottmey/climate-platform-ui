@@ -28,7 +28,7 @@ jobs:
       - name: "Run Tests"
         run: flutter test --coverage
       - name: "Upload Coverage Report to Codecov"
-        uses: codecov/codecov-action@v3.1.3
+        uses: codecov/codecov-action@eaaf4bedf32dbdc6b720b63067d99c4d77d6047d # v3.1.4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage/lcov.info
