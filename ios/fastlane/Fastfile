@@ -46,34 +46,37 @@ def store_secret(secret_name, secret_value)
   UI.success("Successfully set new value for secret #{secret_name}.")
 end
 
-platform :ios do
-  lane :ensure_certificate do |options|
-    # setup local keychain
-    keychain_path = File.expand_path("build.keychain")
-    keychain_password = ""
-    create_keychain(
-      path: keychain_path,
-      password: keychain_password,
-      default_keychain: true,
-      unlock: true,
-      timeout: 3600
-    )
-    # setup distribution certificate in keychain
-    certificate_id = get_certificates(
-      # TODO prevent logging of certificates content
-      # use force=true, if error happens because of expired certificate
-      keychain_path: keychain_path,
-      keychain_password: keychain_password
-    )
-    # upload resulting certificate key file to secrets
-    certificate_key_file = "#{certificate_id}.p12"
-    certificate_key_path = File.expand_path("../#{certificate_key_file}")
-    raise "distribution certificate private key missing" unless File.exist?(certificate_key_path)
-    certificate_key_content_hashed = sh("base64 -i #{certificate_key_path} | tr -d \\\\n", log: false)
-    store_secret('APP_STORE_DISTRIBUTION_CERT_ID', certificate_id)
-    store_secret('APP_STORE_DISTRIBUTION_CERT_KEY_FILE', certificate_key_content_hashed)
+def ensure_presence_of_valid_distribution_certificate()
+  # setup local keychain
+  keychain_path = File.expand_path("build.keychain")
+  keychain_password = ""
+  create_keychain(
+    path: keychain_path,
+    password: keychain_password,
+    default_keychain: true,
+    unlock: true,
+    timeout: 3600
+  )
+  # setup distribution certificate in keychain
+  certificate_id = get_certificates(
+    # TODO prevent logging of certificates content
+    # use force=true, if error happens because of expired certificate
+    keychain_path: keychain_path,
+    keychain_password: keychain_password
+  )
+  # upload resulting certificate key file to secrets
+  certificate_key_file = "#{certificate_id}.p12"
+  certificate_key_path = File.expand_path("../#{certificate_key_file}")
+  raise "distribution certificate private key missing" unless File.exist?(certificate_key_path)
+  certificate_key_content_hashed = sh("base64 -i #{certificate_key_path} | tr -d \\\\n", log: false)
+  store_secret('APP_STORE_DISTRIBUTION_CERT_ID', certificate_id)
+  store_secret('APP_STORE_DISTRIBUTION_CERT_KEY_FILE', certificate_key_content_hashed)
+end
 
-    puts "Success"
+platform :ios do
+  desc "Ensures that a valid distribution certificate is in keychain and backed up in secrets."
+  lane :ensure_certificate do |options|
+    ensure_presence_of_valid_distribution_certificate
   end
 
   desc "Requests, calculates and sets the next build version in the pubspec.yaml."
@@ -90,7 +93,46 @@ platform :ios do
     pubspec['version'] = next_combined_version
     File.open(pubspec_path, 'w') { |file| YAML.dump(pubspec, file) }
   end
-  lane :build do |options|
 
+  desc "Builds and signs the app."
+  lane :build do |options|
+    ensure_presence_of_valid_distribution_certificate
+    # always regenerate provisioning profile with current certificate
+    profile_uuid = get_provisioning_profile(force: true)
+    # disable automatic signing within pipeline (else it's great for devs)
+    update_code_signing_settings(
+      path: "Runner.xcodeproj",
+      targets: ["Runner"],
+      use_automatic_signing: false,
+      code_sign_identity: "iPhone Distribution",
+      profile_uuid: profile_uuid,
+    )
+
+    # if needed, also regenerate for additionally bundled extensions:
+    # ex_profile_uuid = get_provisioning_profile(app_identifier: "bundle.id.ExampleExtension", force: true)
+    # update_code_signing_settings(
+    #   path: "Runner.xcodeproj",
+    #   targets: ["ExampleExtension"],
+    #   use_automatic_signing: false,
+    #   code_sign_identity: "iPhone Distribution",
+    #   profile_uuid: ex_profile_uuid,
+    # )
+
+    # build app including symbols
+    build_app(
+      workspace: "Runner.xcworkspace",
+      scheme: "Runner",
+      configuration: "Release",
+      include_symbols: true
+    )
+  end
+
+  desc "Uploads app and manages submission."
+  lane :deploy do |options|
+    upload_to_testflight(
+      ipa: "Runner.ipa",
+      distribute_external: true,
+      groups: "Internal Testing, External Testing"
+    )
   end
 end
