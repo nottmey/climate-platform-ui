@@ -71,8 +71,6 @@ jobs:
       - name: "Setup next version in pubspec.yaml"
         working-directory: ios
         run: bundle exec fastlane set_next_version_in_pubspec
-      - name: "Disable Flutter Analytics"
-        run: flutter config --no-analytics
       - name: "Pre-Build via Flutter"
         # TODO try `flutter precache --ios` instead of `flutter build ios --release --no-codesign`
         run: flutter build ios --no-codesign --release
