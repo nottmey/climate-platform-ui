@@ -37,7 +37,7 @@ jobs:
           flutter-version: ${{ steps.flutter-version.outputs.FLUTTER_VERSION }}
           cache: true
       - name: "Setup Ruby"
-        uses: ruby/setup-ruby@v1.148
+        uses: ruby/setup-ruby@v1.148.0
         with:
           # using .ruby-version
           # installing gems automatically
