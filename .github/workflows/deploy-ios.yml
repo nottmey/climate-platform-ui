@@ -66,14 +66,14 @@ jobs:
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
         run: bundle exec fastlane set_next_version_in_pubspec
-      - name: "Pre-Build via Flutter"
-        run: flutter build ios --no-codesign --release
-      - name: "Build & Sign via Fastlane"
-        working-directory: ios
-        env:
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          SECRET_SETTING_TOKEN: ${{ secrets.SECRET_SETTING_TOKEN }}
-        run: bundle exec fastlane build
+#      - name: "Pre-Build via Flutter"
+#        run: flutter build ios --no-codesign --release
+#      - name: "Build & Sign via Fastlane"
+#        working-directory: ios
+#        env:
+#          GITHUB_REPOSITORY: ${{ github.repository }}
+#          SECRET_SETTING_TOKEN: ${{ secrets.SECRET_SETTING_TOKEN }}
+#        run: bundle exec fastlane build
       # TODO try `flutter precache --ios` instead of `flutter build ios --release --no-codesign`
 #      - name: "Build ipa"
 #        run: flutter build ipa

@@ -40,6 +40,8 @@ def store_secret(secret_name, secret_value)
     key_id: key_id,
     encrypted_value: encrypted_value
   })
+
+  UI.success("Successfully set new value for secret #{secret_name}.")
 end
 
 platform :ios do
@@ -68,6 +70,7 @@ platform :ios do
     certificate_key_path = File.expand_path("../#{certificate_key_file}")
     raise "distribution certificate private key missing" unless File.exist?(certificate_key_path)
     certificate_key_content_hashed = sh("base64 -i #{certificate_key_path} | tr -d \\\\n", log: false)
+    store_secret('APP_STORE_DISTRIBUTION_CERT_ID', certificate_id)
     store_secret('APP_STORE_DISTRIBUTION_CERT_KEY_FILE', certificate_key_content_hashed)
 
     puts "Success"
