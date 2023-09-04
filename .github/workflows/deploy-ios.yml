@@ -16,6 +16,10 @@ on:
         required: true
       APP_STORE_CONNECT_API_KEY_FILE:
         required: true
+      APP_STORE_DISTRIBUTION_CERT_ID:
+        required: true
+      APP_STORE_DISTRIBUTION_CERT_KEY_FILE:
+        required: true
       CODECOV_TOKEN:
         required: true
       SECRET_SETTING_TOKEN:
