@@ -4,8 +4,6 @@ on:
   workflow_dispatch:
   workflow_call:
     secrets:
-      CODECOV_TOKEN:
-        required: true
       APP_STORE_CONNECT_APPLE_ID:
         required: true
       APP_STORE_CONNECT_TEAM_ID:
@@ -15,6 +13,10 @@ on:
       APP_STORE_CONNECT_API_KEY_ID:
         required: true
       APP_STORE_CONNECT_API_KEY_FILE:
+        required: true
+      CODECOV_TOKEN:
+        required: true
+      SECRET_SETTING_TOKEN:
         required: true
   pull_request:
     branches:
@@ -84,3 +86,9 @@ jobs:
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
         run: bundle exec fastlane set_next_version_in_pubspec
+      - name: "Check certificates by ensuring validity"
+        working-directory: ios
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          SECRET_SETTING_TOKEN: ${{ secrets.SECRET_SETTING_TOKEN }}
+        run: bundle exec fastlane ensure_certificate

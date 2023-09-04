@@ -10,6 +10,9 @@
 #     https://docs.fastlane.tools/plugins/available-plugins
 
 require 'yaml'
+require 'rbnacl'
+require 'base64'
+require 'octokit'
 
 default_platform(:ios)
 
@@ -20,7 +23,29 @@ app_store_connect_api_key(
   key_filepath: File.expand_path("~/.private_keys/AuthKey_#{key_id}.p8")
 )
 
+def store_secret(secret_name, secret_value)
+  repo = ENV['GITHUB_REPOSITORY']
+  access_token = ENV['SECRET_SETTING_TOKEN']
+
+  client = Octokit::Client.new(:access_token => access_token)
+  public_key_response = client.get_actions_public_key(repo)
+  key_id = public_key_response['key_id']
+  decoded_key = Base64.decode64(public_key_response['key'])
+
+  box = RbNaCl::Boxes::Sealed.from_public_key(decoded_key)
+  encrypted_value = Base64.strict_encode64(box.encrypt(secret_value))
+
+  client.create_or_update_actions_secret(repo, secret_name, {
+    key_id: key_id,
+    encrypted_value: encrypted_value
+  })
+end
+
 platform :ios do
+  lane :ensure_certificate do |options|
+    store_secret('TEST_SECRET', 'HELLO WORLD!')
+  end
+
   desc "Requests, calculates and sets the next build version in the pubspec.yaml."
   lane :set_next_version_in_pubspec do |options|
     # TODO coordinate build number and version with android rollout
@@ -34,5 +59,8 @@ platform :ios do
     pubspec = YAML.load_file(pubspec_path)
     pubspec['version'] = next_combined_version
     File.open(pubspec_path, 'w') { |file| YAML.dump(pubspec, file) }
+  end
+  lane :build do |options|
+
   end
 end
