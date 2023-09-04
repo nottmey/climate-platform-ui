@@ -95,6 +95,7 @@ jobs:
           name: ios-dsym
           path: ios/Runner.app.dSYM.zip
   deploy:
+    needs: build
     name: "Deploy"
     runs-on: macos-latest
     environment:
@@ -128,7 +129,7 @@ jobs:
           mkdir ~/.private_keys
           echo $APP_STORE_CONNECT_API_KEY_FILE | base64 --decode > ~/.private_keys/AuthKey_${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}.p8
       - name: "Download ipa artifact"
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v3.0.2
         with:
           name: ios-ipa
       - name: "Deploy via Fastlane"
