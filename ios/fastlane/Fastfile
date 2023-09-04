@@ -15,6 +15,8 @@ require 'base64'
 require 'octokit'
 require 'spaceship'
 
+opt_out_usage
+
 default_platform(:ios)
 
 key_id = ENV["APP_STORE_CONNECT_API_KEY_ID"]
@@ -46,10 +48,6 @@ end
 
 platform :ios do
   lane :ensure_certificate do |options|
-    # distribution_certificates = Spaceship::ConnectAPI::Certificate.all(filter: {
-    #   certificateType: Spaceship::ConnectAPI::Certificate::CertificateType::DISTRIBUTION
-    # })
-
     # setup local keychain
     keychain_path = File.expand_path("build.keychain")
     keychain_password = ""
@@ -63,6 +61,7 @@ platform :ios do
     # setup distribution certificate in keychain
     certificate_id = get_certificates(
       # TODO prevent logging of certificates content
+      # use force=true, if error happens because of expired certificate
       keychain_path: keychain_path,
       keychain_password: keychain_password
     )
