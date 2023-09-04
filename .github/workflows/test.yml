@@ -33,5 +33,37 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage/lcov.info
           fail_ci_if_error: true
-
-# TODO test ruby/fastlane setup via set_next_version_in_pubspec, certificate validation, etc.
+  test-fastlane-ios:
+    name: "Fastlane for iOS"
+    runs-on: macos-latest
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/ios/Gemfile
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - name: "Setup Ruby"
+        uses: ruby/setup-ruby@250fcd6a742febb1123a77a841497ccaa8b9e939 # v1.152.0
+        with:
+          # using .ruby-version
+          # installing gems automatically
+          bundler-cache: true # requires BUNDLE_GEMFILE
+      - name: "Setup Xcode"
+        uses: maxim-lobanov/setup-xcode@v1.5.1
+        with:
+          xcode-version: latest-stable
+      - name: "Setup API Key"
+        env:
+          # 1. `base64 -i AuthKey_<...>.p8 -o AuthKey_<...>.base64`
+          # 2. `pbcopy < AuthKey_<...>.base64` and paste without a newline
+          APP_STORE_CONNECT_API_KEY_FILE: ${{ secrets.APP_STORE_CONNECT_API_KEY_FILE }}
+        run: |
+          mkdir ~/.private_keys
+          echo $APP_STORE_CONNECT_API_KEY_FILE | base64 --decode > ~/.private_keys/AuthKey_${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}.p8
+      - name: "Check whether App Store access works"
+        working-directory: ios
+        env:
+          APP_STORE_CONNECT_APPLE_ID: ${{ secrets.APP_STORE_CONNECT_APPLE_ID }}
+          APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+        run: bundle exec fastlane set_next_version_in_pubspec
