@@ -13,14 +13,15 @@ require 'yaml'
 require 'rbnacl'
 require 'base64'
 require 'octokit'
+require 'spaceship'
 
 default_platform(:ios)
 
-key_id = ENV["APP_STORE_CONNECT_API_KEY_ID"]
+key_id = "SPWMKYN65L"
 app_store_connect_api_key(
   key_id: key_id,
-  issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
-  key_filepath: File.expand_path("~/.private_keys/AuthKey_#{key_id}.p8")
+  issuer_id: "99a0496d-2c62-473d-b965-2abcf7292089",
+  key_filepath: File.expand_path("../AuthKey_#{key_id}.p8")
 )
 
 def store_secret(secret_name, secret_value)
@@ -43,7 +44,33 @@ end
 
 platform :ios do
   lane :ensure_certificate do |options|
-    store_secret('TEST_SECRET', 'HELLO WORLD!')
+    # distribution_certificates = Spaceship::ConnectAPI::Certificate.all(filter: {
+    #   certificateType: Spaceship::ConnectAPI::Certificate::CertificateType::DISTRIBUTION
+    # })
+
+    # setup local keychain
+    keychain_path = File.expand_path("build.keychain")
+    keychain_password = ""
+    create_keychain(
+      path: keychain_path,
+      password: keychain_password,
+      default_keychain: true,
+      unlock: true,
+      timeout: 3600
+    )
+    # setup distribution certificate in keychain
+    certificate_id = get_certificates(
+      keychain_path: keychain_path,
+      keychain_password: keychain_password
+    )
+    # upload resulting certificate key file to secrets
+    certificate_key_file = "#{certificate_id}.p12"
+    certificate_key_path = File.expand_path("../#{certificate_key_file}")
+    raise "distribution certificate private key missing" unless File.exist?(certificate_key_path)
+    certificate_key_content_hashed = sh("base64 -i #{certificate_key_path} | tr -d \\\\n")
+    store_secret('APP_STORE_DISTRIBUTION_CERT_KEY_FILE', certificate_key_content_hashed)
+
+    puts "Success"
   end
 
   desc "Requests, calculates and sets the next build version in the pubspec.yaml."
