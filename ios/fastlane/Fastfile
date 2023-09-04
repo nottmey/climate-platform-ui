@@ -62,6 +62,7 @@ platform :ios do
     )
     # setup distribution certificate in keychain
     certificate_id = get_certificates(
+      # TODO prevent logging of certificates content
       keychain_path: keychain_path,
       keychain_password: keychain_password
     )
