@@ -17,11 +17,11 @@ require 'spaceship'
 
 default_platform(:ios)
 
-key_id = "SPWMKYN65L"
+key_id = ENV["APP_STORE_CONNECT_API_KEY_ID"]
 app_store_connect_api_key(
   key_id: key_id,
-  issuer_id: "99a0496d-2c62-473d-b965-2abcf7292089",
-  key_filepath: File.expand_path("../AuthKey_#{key_id}.p8")
+  issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
+  key_filepath: File.expand_path("~/.private_keys/AuthKey_#{key_id}.p8")
 )
 
 def store_secret(secret_name, secret_value)
