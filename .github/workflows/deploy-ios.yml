@@ -31,7 +31,7 @@ jobs:
       - name: "Determine Flutter Version"
         id: flutter-version
         run: echo "FLUTTER_VERSION=$(jq -r ".flutterSdkVersion" .fvm/fvm_config.json)" >> $GITHUB_OUTPUT
-      - name: "Install Flutter"
+      - name: "Setup Flutter"
         uses: subosito/flutter-action@v2.10.0
         with:
           flutter-version: ${{ steps.flutter-version.outputs.FLUTTER_VERSION }}
@@ -46,7 +46,7 @@ jobs:
         uses: maxim-lobanov/setup-xcode@v1.5.1
         with:
           xcode-version: latest-stable
-      - name: "Setup API Key"
+      - name: "Setup API key"
         env:
           # 1. `base64 -i AuthKey_<...>.p8 -o AuthKey_<...>.base64`
           # 2. `pbcopy < AuthKey_<...>.base64` and paste without a newline
@@ -54,7 +54,7 @@ jobs:
         run: |
           mkdir ~/.private_keys
           echo $APP_STORE_CONNECT_API_KEY_FILE | base64 --decode > ~/.private_keys/AuthKey_${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}.p8
-      - name: "Determine Current iOS Build Version"
+      - name: "Setup next version in pubspec.yaml"
         working-directory: ios
         env:
           APP_STORE_CONNECT_APPLE_ID: ${{ secrets.APP_STORE_CONNECT_APPLE_ID }}
