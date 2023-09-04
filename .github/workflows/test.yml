@@ -33,3 +33,5 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage/lcov.info
           fail_ci_if_error: true
+
+# TODO test ruby/fastlane setup via set_next_version_in_pubspec, certificate validation, etc.

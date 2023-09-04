@@ -1,0 +1,5 @@
+# https://docs.fastlane.tools/advanced/#appfile
+# TODO app_identifier can be read from xcode
+app_identifier("org.climate")
+team_id(ENV["APP_STORE_CONNECT_TEAM_ID"])
+apple_id(ENV["APP_STORE_CONNECT_APPLE_ID"])

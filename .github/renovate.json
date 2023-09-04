@@ -8,7 +8,9 @@
   "enabledManagers": [
     "github-actions",
     "fvm",
-    "pub"
+    "pub",
+    "ruby-version",
+    "bundler"
   ],
   "automerge": true,
   "assignees": [
