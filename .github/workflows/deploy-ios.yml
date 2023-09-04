@@ -134,6 +134,7 @@ jobs:
         uses: actions/download-artifact@v3.0.2
         with:
           name: ios-ipa
+          path: ios
       - name: "Deploy via Fastlane"
         working-directory: ios
         run: bundle exec fastlane deploy
