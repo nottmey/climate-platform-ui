@@ -3,6 +3,19 @@ name: "Test"
 on:
   workflow_dispatch:
   workflow_call:
+    secrets:
+      CODECOV_TOKEN:
+        required: true
+      APP_STORE_CONNECT_APPLE_ID:
+        required: true
+      APP_STORE_CONNECT_TEAM_ID:
+        required: true
+      APP_STORE_CONNECT_ISSUER_ID:
+        required: true
+      APP_STORE_CONNECT_API_KEY_ID:
+        required: true
+      APP_STORE_CONNECT_API_KEY_FILE:
+        required: true
   pull_request:
     branches:
       - main

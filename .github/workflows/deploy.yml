@@ -11,6 +11,7 @@ jobs:
   test:
     name: "Test"
     uses: ./.github/workflows/test.yml
+    secrets: inherit
   deploy-web:
     needs: test
     name: "Deploy Web"
