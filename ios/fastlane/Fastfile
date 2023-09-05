@@ -46,7 +46,7 @@ def store_secret(secret_name, secret_value)
   UI.success("Successfully set new value for secret #{secret_name}.")
 end
 
-def ensure_presence_of_valid_distribution_certificate()
+def ensure_presence_of_valid_distribution_certificate
   # setup local keychain
   keychain_path = File.expand_path("build.keychain")
   keychain_password = ""
