@@ -8,8 +8,6 @@ on:
         required: true
       APP_STORE_CONNECT_APPLE_ID:
         required: true
-      APP_STORE_CONNECT_TEAM_ID:
-        required: true
       APP_STORE_CONNECT_ISSUER_ID:
         required: true
       APP_STORE_CONNECT_API_KEY_ID:
@@ -31,7 +29,6 @@ jobs:
     runs-on: macos-latest
     env:
       APP_STORE_CONNECT_APPLE_ID: ${{ secrets.APP_STORE_CONNECT_APPLE_ID }}
-      APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
       APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
       APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
       BUNDLE_GEMFILE: ${{ github.workspace }}/ios/Gemfile
@@ -102,7 +99,6 @@ jobs:
       url: https://testflight.apple.com/join/VNxf4EKg
     env:
       APP_STORE_CONNECT_APPLE_ID: ${{ secrets.APP_STORE_CONNECT_APPLE_ID }}
-      APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
       APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
       APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
       BUNDLE_GEMFILE: ${{ github.workspace }}/ios/Gemfile

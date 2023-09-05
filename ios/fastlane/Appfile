@@ -1,5 +1,9 @@
 # https://docs.fastlane.tools/advanced/#appfile
-# TODO app_identifier can be read from xcode
-app_identifier("org.climate")
-team_id(ENV["APP_STORE_CONNECT_TEAM_ID"])
+
+project = Xcodeproj::Project.open("../Runner.xcodeproj")
+target = project.targets.detect { |t| t.name == "Runner" }
+release_config = target.build_configurations.detect { |c| c.name == "Release" }
+
+app_identifier(release_config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'])
+team_id(release_config.build_settings['DEVELOPMENT_TEAM'])
 apple_id(ENV["APP_STORE_CONNECT_APPLE_ID"])
