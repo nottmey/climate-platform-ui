@@ -72,8 +72,7 @@ jobs:
         working-directory: ios
         run: bundle exec fastlane set_next_version_in_pubspec
       - name: "Pre-Build via Flutter"
-        # TODO try `flutter precache --ios` instead of `flutter build ios --release --no-codesign`
-        run: flutter build ios --no-codesign --release
+        run: flutter precache --ios # flutter build ios --no-codesign --release
       - name: "Setup distribution certificate key"
         working-directory: ios
         env:
