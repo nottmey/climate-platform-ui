@@ -4,6 +4,16 @@ on:
   workflow_dispatch:
   workflow_call:
   push:
+    paths:
+      - .fvm
+      - android
+      - assets
+      - ios
+      - lib
+      - web
+      - .env
+      - pubspec.lock
+      - pubspec.yaml
     branches:
       - main
 
