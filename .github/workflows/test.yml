@@ -52,7 +52,7 @@ jobs:
         id: run-tests
         run: flutter test --coverage --suppress-analytics --machine | tee test-report.json # --suppress-analytics needed to have a valid json
       - name: "Add test results to status check"
-        uses: phoenix-actions/test-reporting@v12
+        uses: phoenix-actions/test-reporting@v11
         if: always() && (steps.run-tests.outcome == 'failure' || steps.run-tests.outcome == 'success')
         with:
           reporter: dart-json
