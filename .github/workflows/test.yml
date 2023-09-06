@@ -47,7 +47,15 @@ jobs:
           flutter-version: ${{ steps.flutter-version.outputs.FLUTTER_VERSION }}
           cache: true
       - name: "Run Tests"
-        run: flutter test --coverage
+        id: run-tests
+        run: flutter test --coverage --machine > test-report.json
+      - name: "Add test results to status check"
+        uses: phoenix-actions/test-reporting@v11
+        if: always() && (steps.run-tests.outcome == 'failure' || steps.run-tests.outcome == 'success')
+        with:
+          reporter: dart-json
+          name: "Test Results: Flutter"
+          path: test-report.json
       - name: "Upload Coverage Report to Codecov"
         uses: codecov/codecov-action@eaaf4bedf32dbdc6b720b63067d99c4d77d6047d # v3.1.4
         with:
