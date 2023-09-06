@@ -48,7 +48,7 @@ jobs:
           cache: true
       - name: "Run Tests"
         id: run-tests
-        run: flutter test --coverage --machine
+        run: flutter test --coverage --suppress-analytics --machine > test-report.json # --suppress-analytics needed to have a valid json
       - name: "Add test results to status check"
         uses: phoenix-actions/test-reporting@v11
         if: always() && (steps.run-tests.outcome == 'failure' || steps.run-tests.outcome == 'success')
