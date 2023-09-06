@@ -13,6 +13,7 @@ concurrency:
 
 jobs:
   test:
+    if: ${{ github.actor != 'renovate[bot]' }}
     name: "Test"
     uses: ./.github/workflows/test.yml
     secrets: inherit
