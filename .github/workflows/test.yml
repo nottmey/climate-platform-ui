@@ -72,8 +72,6 @@ jobs:
       APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
       APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
       BUNDLE_GEMFILE: ${{ github.workspace }}/ios/Gemfile
-      GITHUB_REPOSITORY: ${{ github.repository }}
-      SECRET_SETTING_TOKEN: ${{ secrets.SECRET_SETTING_TOKEN }}
     steps:
       - name: "Checkout"
         uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
@@ -106,5 +104,8 @@ jobs:
         run: |
           echo $APP_STORE_DISTRIBUTION_CERT_KEY_FILE | base64 --decode > ${{ secrets.APP_STORE_DISTRIBUTION_CERT_ID }}.p12
       - name: "Check certificates by ensuring validity"
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          SECRET_SETTING_TOKEN: ${{ secrets.SECRET_SETTING_TOKEN }}
         working-directory: ios
         run: bundle exec fastlane ensure_certificate
