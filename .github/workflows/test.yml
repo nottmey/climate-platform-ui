@@ -131,5 +131,5 @@ jobs:
         run: |
           echo $GOOGLE_PLAY_CONSOLE_API_KEY_FILE | base64 --decode > ./android/play-store-credentials.json
       - name: "Check whether Play Store access works"
-        working-directory: ios
+        working-directory: android
         run: bundle exec fastlane ensure_correctness
