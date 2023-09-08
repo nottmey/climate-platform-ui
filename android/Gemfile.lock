@@ -152,14 +152,19 @@ GEM
     jwt (2.7.1)
     mini_magick (4.12.0)
     mini_mime (1.1.5)
+    mini_portile2 (2.8.4)
     multi_json (1.15.0)
     multipart-post (2.3.0)
     nanaimo (0.3.0)
     naturally (2.2.1)
+    nokogiri (1.15.4)
+      mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
     optparse (0.1.1)
     os (1.1.4)
     plist (3.7.0)
     public_suffix (5.0.3)
+    racc (1.7.1)
     rake (13.0.6)
     representable (3.2.0)
       declarative (< 0.1.0)
@@ -211,6 +216,7 @@ PLATFORMS
 
 DEPENDENCIES
   fastlane (= 2.214.0)
+  nokogiri (= 1.15.4)
 
 BUNDLED WITH
    2.4.19

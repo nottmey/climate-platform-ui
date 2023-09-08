@@ -1,4 +1,8 @@
 # https://docs.fastlane.tools/advanced/#appfile
 
+require 'nokogiri'
+
+manifest = File.open("../app/src/main/AndroidManifest.xml") { |f| Nokogiri::XML(f) }
+package_name(manifest.at_xpath("/manifest/@package"))
+
 json_key_file("play-store-credentials.json")
-package_name("org.climate")
