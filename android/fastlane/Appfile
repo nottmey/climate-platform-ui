@@ -1,0 +1,4 @@
+# https://docs.fastlane.tools/advanced/#appfile
+
+json_key_file("")
+package_name("org.climate")
