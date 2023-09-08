@@ -123,6 +123,13 @@ jobs:
           # using .ruby-version
           # installing gems automatically
           bundler-cache: true # requires BUNDLE_GEMFILE
+      - name: "Setup API key"
+        env:
+          # 1. `base64 -i play-store-credentials.json -o play-store-credentials.base64`
+          # 2. `pbcopy < play-store-credentials.base64` and paste without a newline
+          GOOGLE_PLAY_CONSOLE_API_KEY_FILE: ${{ secrets.GOOGLE_PLAY_CONSOLE_API_KEY_FILE }}
+        run: |
+          echo $GOOGLE_PLAY_CONSOLE_API_KEY_FILE | base64 --decode > ./android/play-store-credentials.json
       - name: "Check whether Play Store access works"
         working-directory: ios
         run: bundle exec fastlane ensure_correctness

@@ -1,4 +1,4 @@
 # https://docs.fastlane.tools/advanced/#appfile
 
-json_key_file("")
+json_key_file("play-store-credentials.json")
 package_name("org.climate")
