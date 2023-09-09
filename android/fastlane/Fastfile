@@ -10,12 +10,24 @@
 #     https://docs.fastlane.tools/plugins/available-plugins
 #
 
+opt_out_usage
+
 default_platform(:android)
+
+track = 'internal' # also possible: production, beta, alpha, internal
 
 platform :android do
   desc "Ensures that fastlane setup works and is setup correctly."
   lane :ensure_correctness do |options|
     validate_play_store_json_key
+  end
+
+  lane :set_next_version_in_pubspec do |options|
+    last_release_name = google_play_track_release_names(track: track)[0]
+    puts last_release_name
+
+    last_version_code = google_play_track_version_codes(track: track)[0]
+    puts last_version_code
   end
 
   # desc "Submit a new Beta Build to Crashlytics Beta"
