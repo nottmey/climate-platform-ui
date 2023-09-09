@@ -55,13 +55,13 @@ jobs:
 #      - name: "Setup next version in pubspec.yaml"
 #        working-directory: android
 #        run: bundle exec fastlane set_next_version_in_pubspec
-      - name: "Build appbundle"
+      - name: "Build aab file"
         run: flutter build appbundle --release
         # TODO maybe also build & upload apk for easier testing
-      - name: "Upload app artifact"
+      - name: "Upload aab artifact"
         uses: actions/upload-artifact@v3.1.3
         with:
-          name: android-abb
+          name: android-aab
           path: build/app/outputs/bundle/release/app-release.aab
   deploy:
     needs: build
