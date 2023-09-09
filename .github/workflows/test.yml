@@ -72,8 +72,6 @@ jobs:
       APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
       APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
       BUNDLE_GEMFILE: ${{ github.workspace }}/ios/Gemfile
-      GITHUB_REPOSITORY: ${{ github.repository }}
-      SECRET_SETTING_TOKEN: ${{ secrets.SECRET_SETTING_TOKEN }}
     steps:
       - name: "Checkout"
         uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
@@ -106,5 +104,32 @@ jobs:
         run: |
           echo $APP_STORE_DISTRIBUTION_CERT_KEY_FILE | base64 --decode > ${{ secrets.APP_STORE_DISTRIBUTION_CERT_ID }}.p12
       - name: "Check certificates by ensuring validity"
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          SECRET_SETTING_TOKEN: ${{ secrets.SECRET_SETTING_TOKEN }}
         working-directory: ios
         run: bundle exec fastlane ensure_certificate
+  test-fastlane-android:
+    name: "Fastlane for Android"
+    runs-on: ubuntu-latest
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/android/Gemfile
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - name: "Setup Ruby"
+        uses: ruby/setup-ruby@250fcd6a742febb1123a77a841497ccaa8b9e939 # v1.152.0
+        with:
+          # using .ruby-version
+          # installing gems automatically
+          bundler-cache: true # requires BUNDLE_GEMFILE
+      - name: "Setup API key"
+        env:
+          # 1. `base64 -i play-store-credentials.json -o play-store-credentials.base64`
+          # 2. `pbcopy < play-store-credentials.base64` and paste without a newline
+          GOOGLE_PLAY_CONSOLE_API_KEY_FILE: ${{ secrets.GOOGLE_PLAY_CONSOLE_API_KEY_FILE }}
+        run: |
+          echo $GOOGLE_PLAY_CONSOLE_API_KEY_FILE | base64 --decode > ./android/play-store-credentials.json
+      - name: "Check whether Play Store access works"
+        working-directory: android
+        run: bundle exec fastlane ensure_correctness

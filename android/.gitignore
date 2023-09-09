@@ -12,3 +12,9 @@ key.properties
 # IDE
 .idea/
 app/.idea/
+
+# fastlane
+/fastlane/report.xml
+/fastlane/README.md
+
+play-store-credentials.json

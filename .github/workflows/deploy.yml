@@ -23,7 +23,7 @@ concurrency:
 
 jobs:
   test:
-    if: ${{ github.actor != 'renovate[bot]' }}
+    if: ${{ github.actor != 'renovate[bot]' }} # don't deploy on renovate merge
     name: "Test"
     uses: ./.github/workflows/test.yml
     secrets: inherit
@@ -36,4 +36,9 @@ jobs:
     needs: test
     name: "Deploy iOS"
     uses: ./.github/workflows/deploy-ios.yml
+    secrets: inherit
+  deploy-android:
+    needs: test
+    name: "Deploy Android"
+    uses: ./.github/workflows/deploy-android.yml
     secrets: inherit
