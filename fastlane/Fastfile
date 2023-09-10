@@ -1,0 +1,47 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# For local execution fill your .env.local file and execute lanes like this:
+# bundle exec fastlane set_next_version --env local
+
+opt_out_usage
+
+play_console_track = 'internal' # also possible: production, beta, alpha, internal
+
+key_id = ENV["APP_STORE_CONNECT_API_KEY_ID"]
+app_store_connect_api_key(
+  key_id: key_id,
+  issuer_id: ENV["APP_STORE_CONNECT_ISSUER_ID"],
+  key_filepath: File.expand_path("~/.private_keys/AuthKey_#{key_id}.p8")
+)
+
+lane :set_next_version do |options|
+  # TODO allow increment (major, minor, patch) of version via options
+
+  # android
+  latest_android_version_code = google_play_track_version_codes(track: play_console_track)[0]
+  latest_android_release_name = google_play_track_release_names(track: play_console_track)[0]
+  latest_android_version = Gem::Version.new(latest_android_release_name)
+
+  # ios
+  latest_testflight_build_number = latest_testflight_build_number(initial_build_number: 0)
+  latest_testflight_version = lane_context[SharedValues::LATEST_TESTFLIGHT_VERSION]
+  latest_ios_version = Gem::Version.new(latest_testflight_version)
+
+  latest_build_number = latest_android_version_code > latest_testflight_build_number ? latest_android_version_code : latest_testflight_build_number
+  latest_version = latest_android_version > latest_ios_version ? latest_android_version : latest_ios_version
+
+  next_combined_version = "#{latest_version}+#{latest_build_number + 1}"
+  UI.success("Next combined build version is #{next_combined_version}.")
+
+  sh("yq -i '.version = \"#{next_combined_version}\"' ../pubspec.yaml")
+end
