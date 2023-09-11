@@ -30,7 +30,7 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
-      - name: "Setup Empty .env.local"
+      - name: "Setup empty .env.local"
         run: sed 's/APP_SYNC_API_KEY.*/APP_SYNC_API_KEY="${{ secrets.APP_SYNC_API_KEY }}"/' .env > .env.local
       - name: "Setup keystore properties"
         env:
