@@ -43,8 +43,10 @@ play_console_track = 'internal' # also possible: production, beta, alpha, intern
 key_id = ENV["APP_STORE_CONNECT_API_KEY_ID"]
 issuer_id = ENV["APP_STORE_CONNECT_ISSUER_ID"]
 key_filepath = File.expand_path("~/.private_keys/AuthKey_#{key_id}.p8")
-if key_id && File.exist?(key_filepath)
+if key_id && issuer_id && File.exist?(key_filepath)
   app_store_connect_api_key(key_id: key_id, issuer_id: issuer_id, key_filepath: key_filepath)
+elsif
+  UI.important("No iOS, key id, issuer id, or key file was found. Android lanes can still be used.")
 end
 
 lane :set_next_version do |options|
