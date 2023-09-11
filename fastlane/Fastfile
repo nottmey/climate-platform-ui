@@ -104,3 +104,46 @@ desc "Ensures that a valid distribution certificate is created, setup in keychai
 lane :ios_ensure_valid_distribution_certificate do |options|
   ios_ensure_presence_of_valid_distribution_certificate
 end
+
+desc "Builds and signs the app."
+lane :ios_build do |options|
+  ios_ensure_presence_of_valid_distribution_certificate
+  # always regenerate provisioning profile with current certificate
+  profile_uuid = get_provisioning_profile(force: true)
+  # disable automatic signing within pipeline (enabled just for easier development)
+  update_code_signing_settings(
+    path: "ios/Runner.xcodeproj",
+    targets: ["Runner"],
+    use_automatic_signing: false,
+    code_sign_identity: "iPhone Distribution",
+    profile_uuid: profile_uuid,
+  )
+
+  # if needed, also regenerate for additionally bundled extensions:
+  # ex_profile_uuid = get_provisioning_profile(app_identifier: "bundle.id.ExampleExtension", force: true)
+  # update_code_signing_settings(
+  #   path: "Runner.xcodeproj",
+  #   targets: ["ExampleExtension"],
+  #   use_automatic_signing: false,
+  #   code_sign_identity: "iPhone Distribution",
+  #   profile_uuid: ex_profile_uuid,
+  # )
+
+  # build app including symbols
+  build_app(
+    workspace: "ios/Runner.xcworkspace",
+    scheme: "Runner",
+    configuration: "Release",
+    include_symbols: true
+  )
+end
+
+desc "Uploads app and manages submission."
+lane :ios_deploy do |options|
+  upload_to_testflight(
+    ipa: "ios/Runner.ipa",
+    distribute_external: true,
+    groups: "External Testing",
+    changelog: "Happy Testing!"
+  )
+end
