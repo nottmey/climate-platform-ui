@@ -2,7 +2,17 @@ name: "Deploy Android"
 
 on:
   workflow_dispatch:
+    inputs:
+      next_version:
+        description: "Version to be used in pubspec.yaml"
+        type: string
+        required: true
   workflow_call:
+    inputs:
+      next_version:
+        description: "Version to be used in pubspec.yaml"
+        type: string
+        required: true
     secrets:
       ANDROID_APP_KEYSTORE_FILE:
         required: true

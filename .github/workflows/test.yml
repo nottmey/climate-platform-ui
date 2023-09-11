@@ -20,6 +20,10 @@ on:
         required: true
       SECRET_SETTING_TOKEN:
         required: true
+    outputs:
+      next_version:
+        description: "Version that could be used next without collision, determined while testing the fastlane setup."
+        value: ${{ jobs.test-fastlane.outputs.next_version }}
   pull_request:
     branches:
       - main
@@ -104,9 +108,9 @@ jobs:
         run: bundle exec fastlane set_next_version
       - name: "Read next version from pubspec.yaml"
         id: pubspec-version
-        run: echo "NEXT_VERSION=$(yq '.version' pubspec.yaml)" >> $GITHUB_OUTPUT
+        run: echo "next_version=$(yq '.version' pubspec.yaml)" >> $GITHUB_OUTPUT
     outputs:
-      NEXT_VERSION: ${{ steps.pubspec-version.outputs.NEXT_VERSION }}
+      next_version: ${{ steps.pubspec-version.outputs.next_version }}
   test-fastlane-ios:
     name: "Fastlane for iOS"
     runs-on: macos-latest

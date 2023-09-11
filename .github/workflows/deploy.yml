@@ -32,13 +32,19 @@ jobs:
     name: "Deploy Web"
     uses: ./.github/workflows/deploy-web.yml
     secrets: inherit
+    with:
+      next_version: ${{ needs.test.outputs.next_version }}
   deploy-ios:
     needs: test
     name: "Deploy iOS"
     uses: ./.github/workflows/deploy-ios.yml
     secrets: inherit
+    with:
+      next_version: ${{ needs.test.outputs.next_version }}
   deploy-android:
     needs: test
     name: "Deploy Android"
     uses: ./.github/workflows/deploy-android.yml
     secrets: inherit
+    with:
+      next_version: ${{ needs.test.outputs.next_version }}
