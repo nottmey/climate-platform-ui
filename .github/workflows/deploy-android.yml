@@ -55,7 +55,7 @@ jobs:
           flutter-version: ${{ steps.flutter-version.outputs.FLUTTER_VERSION }}
           cache: true
       - name: "Set build version"
-        run: yq -i '.version = "${{ inputs.next_version }}"' ../pubspec.yaml
+        run: yq -i '.version = "${{ inputs.next_version }}"' pubspec.yaml
       - name: "Build aab file"
         run: flutter build appbundle --release
         # TODO maybe also build & upload apk for easier testing

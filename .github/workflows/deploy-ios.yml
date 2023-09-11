@@ -72,7 +72,7 @@ jobs:
           mkdir ~/.private_keys
           echo $APP_STORE_CONNECT_API_KEY_FILE | base64 --decode > ~/.private_keys/AuthKey_${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}.p8
       - name: "Set build version"
-        run: yq -i '.version = "${{ inputs.next_version }}"' ../pubspec.yaml
+        run: yq -i '.version = "${{ inputs.next_version }}"' pubspec.yaml
       - name: "Pre-Build via Flutter"
         run: flutter build ios --no-codesign --release
       - name: "Setup distribution certificate key"
