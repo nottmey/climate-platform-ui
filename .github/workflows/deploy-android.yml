@@ -32,16 +32,6 @@ jobs:
         uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
       - name: "Setup Empty .env.local"
         run: sed 's/APP_SYNC_API_KEY.*/APP_SYNC_API_KEY="${{ secrets.APP_SYNC_API_KEY }}"/' .env > .env.local
-      - name: "Determine Flutter Version"
-        id: flutter-version
-        run: echo "FLUTTER_VERSION=$(jq -r ".flutterSdkVersion" .fvm/fvm_config.json)" >> $GITHUB_OUTPUT
-      - name: "Setup API key"
-        env:
-          # 1. `base64 -i play-store-credentials.json -o play-store-credentials.base64`
-          # 2. `pbcopy < play-store-credentials.base64` and paste without a newline
-          GOOGLE_PLAY_CONSOLE_API_KEY_FILE: ${{ secrets.GOOGLE_PLAY_CONSOLE_API_KEY_FILE }}
-        run: |
-          echo $GOOGLE_PLAY_CONSOLE_API_KEY_FILE | base64 --decode > ./android/play-store-credentials.json
       - name: "Setup keystore properties"
         env:
           # 1. `base64 -i key.properties -o key.base64`
@@ -56,15 +46,16 @@ jobs:
           ANDROID_APP_KEYSTORE_FILE: ${{ secrets.ANDROID_APP_KEYSTORE_FILE }}
         run: |
           echo $ANDROID_APP_KEYSTORE_FILE | base64 --decode > ./android/upload-keystore.jks
+      - name: "Determine Flutter Version"
+        id: flutter-version
+        run: echo "FLUTTER_VERSION=$(jq -r ".flutterSdkVersion" .fvm/fvm_config.json)" >> $GITHUB_OUTPUT
       - name: "Setup Flutter"
         uses: subosito/flutter-action@v2.10.0
         with:
           flutter-version: ${{ steps.flutter-version.outputs.FLUTTER_VERSION }}
           cache: true
-# TODO
-#      - name: "Setup next version in pubspec.yaml"
-#        working-directory: android
-#        run: bundle exec fastlane set_next_version_in_pubspec
+      - name: "Set build version"
+        run: yq -i '.version = "${{ inputs.next_version }}"' ../pubspec.yaml
       - name: "Build aab file"
         run: flutter build appbundle --release
         # TODO maybe also build & upload apk for easier testing
@@ -91,6 +82,13 @@ jobs:
           # using .ruby-version
           # installing gems automatically
           bundler-cache: true # requires BUNDLE_GEMFILE
+      - name: "Setup API key"
+        env:
+          # 1. `base64 -i play-store-credentials.json -o play-store-credentials.base64`
+          # 2. `pbcopy < play-store-credentials.base64` and paste without a newline
+          GOOGLE_PLAY_CONSOLE_API_KEY_FILE: ${{ secrets.GOOGLE_PLAY_CONSOLE_API_KEY_FILE }}
+        run: |
+          echo $GOOGLE_PLAY_CONSOLE_API_KEY_FILE | base64 --decode > ./android/play-store-credentials.json
 
 #      - name: "Download abb artifact"
 #        uses: actions/download-artifact@v3.0.2
