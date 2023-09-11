@@ -13,6 +13,9 @@
 # For local execution fill your .env.local file and execute lanes like this:
 # bundle exec fastlane set_next_version --env local
 
+require 'rbnacl'
+require 'octokit'
+
 def store_secret(secret_name, secret_value)
   repo = ENV['GITHUB_REPOSITORY']
   access_token = ENV['SECRET_SETTING_TOKEN']
