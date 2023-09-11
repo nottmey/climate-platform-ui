@@ -154,7 +154,7 @@ lane :android_deploy do |options|
   upload_to_play_store(
     track: play_console_track,
     release_status: "draft", # TODO set to 'completed' once beta review is passed
-    aab: '../app-release.aab',
+    aab: 'app-release.aab',
     skip_upload_metadata: true,
     skip_upload_changelogs: true,
     skip_upload_images: true,
