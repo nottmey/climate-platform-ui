@@ -75,25 +75,6 @@ def ensure_presence_of_valid_distribution_certificate
 end
 
 platform :ios do
-  desc "Ensures that a valid distribution certificate is in keychain and backed up in secrets."
-  lane :ensure_certificate do |options|
-    ensure_presence_of_valid_distribution_certificate
-  end
-
-  desc "Requests, calculates and sets the next build version in the pubspec.yaml."
-  lane :set_next_version_in_pubspec do |options|
-    latest_build_number = latest_testflight_build_number(initial_build_number: 0)
-    # TODO allow increment (major, minor, patch) of version via options
-    latest_version = lane_context[SharedValues::LATEST_TESTFLIGHT_VERSION]
-    next_combined_version = "#{latest_version}+#{latest_build_number + 1}"
-    UI.success("Next combined build version is #{next_combined_version}.")
-
-    pubspec_path = "../../pubspec.yaml"
-    pubspec = YAML.load_file(pubspec_path)
-    pubspec['version'] = next_combined_version
-    File.open(pubspec_path, 'w') { |file| YAML.dump(pubspec, file) }
-  end
-
   desc "Builds and signs the app."
   lane :build do |options|
     ensure_presence_of_valid_distribution_certificate

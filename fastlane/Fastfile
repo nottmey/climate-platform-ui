@@ -13,6 +13,26 @@
 # For local execution fill your .env.local file and execute lanes like this:
 # bundle exec fastlane set_next_version --env local
 
+def store_secret(secret_name, secret_value)
+  repo = ENV['GITHUB_REPOSITORY']
+  access_token = ENV['SECRET_SETTING_TOKEN']
+
+  client = Octokit::Client.new(:access_token => access_token)
+  public_key_response = client.get_actions_public_key(repo)
+  key_id = public_key_response['key_id']
+  decoded_key = Base64.decode64(public_key_response['key'])
+
+  box = RbNaCl::Boxes::Sealed.from_public_key(decoded_key)
+  encrypted_value = Base64.strict_encode64(box.encrypt(secret_value))
+
+  client.create_or_update_actions_secret(repo, secret_name, {
+    key_id: key_id,
+    encrypted_value: encrypted_value
+  })
+
+  UI.success("Successfully set new value for secret #{secret_name}.")
+end
+
 opt_out_usage
 
 play_console_track = 'internal' # also possible: production, beta, alpha, internal
@@ -46,4 +66,38 @@ lane :set_next_version do |options|
   # writing it to pubspec.yaml in a structure preserving manner, since we need
   # to write the result to a file anyway and it's the default source for a version anyway
   sh("yq -i '.version = \"#{next_combined_version}\"' ../pubspec.yaml")
+end
+
+def ios_ensure_presence_of_valid_distribution_certificate
+  # TODO check local dev usability
+
+  # setup keychain for ci
+  keychain_path = File.expand_path("build.keychain")
+  keychain_password = ""
+  create_keychain(
+    path: keychain_path,
+    password: keychain_password,
+    default_keychain: true,
+    unlock: true,
+    timeout: 3600
+  )
+  # setup distribution certificate in keychain
+  certificate_id = get_certificates(
+    # TODO prevent logging of certificates content
+    # use force=true, if error happens because of expired certificate
+    keychain_path: keychain_path,
+    keychain_password: keychain_password
+  )
+  # upload resulting certificate key file to secrets
+  certificate_key_file = "#{certificate_id}.p12"
+  certificate_key_path = File.expand_path("../#{certificate_key_file}")
+  raise "distribution certificate private key missing" unless File.exist?(certificate_key_path)
+  certificate_key_content_hashed = sh("base64 -i #{certificate_key_path} | tr -d \\\\n", log: false)
+  store_secret('APP_STORE_DISTRIBUTION_CERT_ID', certificate_id)
+  store_secret('APP_STORE_DISTRIBUTION_CERT_KEY_FILE', certificate_key_content_hashed)
+end
+
+desc "Ensures that a valid distribution certificate is created, setup in keychain and backed up in secrets."
+lane :ios_ensure_valid_distribution_certificate do |options|
+  ios_ensure_presence_of_valid_distribution_certificate
 end
