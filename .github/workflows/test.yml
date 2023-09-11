@@ -102,6 +102,11 @@ jobs:
           echo $GOOGLE_PLAY_CONSOLE_API_KEY_FILE | base64 --decode > ./android/play-store-credentials.json
       - name: "Check App & Play Store access by calculating next version"
         run: bundle exec fastlane set_next_version
+      - name: "Read next version from pubspec.yaml"
+        id: pubspec-version
+        run: echo "NEXT_VERSION=$(yq '.version' pubspec.yaml)" >> $GITHUB_OUTPUT
+    outputs:
+      NEXT_VERSION: ${{ steps.pubspec-version.outputs.NEXT_VERSION }}
   test-fastlane-ios:
     name: "Fastlane for iOS"
     runs-on: macos-latest
