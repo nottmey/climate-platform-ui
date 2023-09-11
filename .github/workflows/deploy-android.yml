@@ -68,9 +68,9 @@ jobs:
     needs: build
     name: "Deploy"
     runs-on: ubuntu-latest
-#    environment:
-#      name: TODO
-#      url: TODO
+    # environment:
+    #   name: TODO provide way to test android
+    #   url: TODO link it's url (testing the newest test artifact)
     env:
       BUNDLE_GEMFILE: ${{ github.workspace }}/Gemfile
     steps:
@@ -89,12 +89,9 @@ jobs:
           GOOGLE_PLAY_CONSOLE_API_KEY_FILE: ${{ secrets.GOOGLE_PLAY_CONSOLE_API_KEY_FILE }}
         run: |
           echo $GOOGLE_PLAY_CONSOLE_API_KEY_FILE | base64 --decode > ./android/play-store-credentials.json
-
-#      - name: "Download abb artifact"
-#        uses: actions/download-artifact@v3.0.2
-#        with:
-#          name: TODO
-#          path: TODO
-#      - name: "Deploy via Fastlane"
-#        working-directory: ios
-#        run: bundle exec fastlane deploy
+      - name: "Download abb artifact"
+        uses: actions/download-artifact@v3.0.2
+        with:
+          name: android-aab
+      - name: "Deploy via Fastlane"
+        run: bundle exec fastlane android_deploy
