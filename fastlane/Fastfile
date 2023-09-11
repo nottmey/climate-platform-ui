@@ -141,7 +141,7 @@ end
 desc "Uploads app and manages submission."
 lane :ios_deploy do |options|
   upload_to_testflight(
-    ipa: "ios/Runner.ipa",
+    ipa: "Runner.ipa",
     distribute_external: true,
     groups: "External Testing",
     changelog: "Happy Testing!"
