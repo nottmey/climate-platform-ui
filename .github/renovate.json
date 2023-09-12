@@ -16,7 +16,8 @@
   "assignees": [
     "nottmey"
   ],
-  "prConcurrentLimit": 10,
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 1,
   "branchPrefix": "deps/",
   "packageRules": [
     {
