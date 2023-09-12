@@ -61,7 +61,7 @@ dev_dependencies:
   lint: 2.1.2
   mockito: 5.4.2
   path: 1.8.3
-  platform: 3.1.0
+  platform: 3.1.2
   riverpod_generator: 2.2.3
 
 flutter:
