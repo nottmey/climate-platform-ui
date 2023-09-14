@@ -38,7 +38,7 @@ dependencies:
   json_annotation: 4.8.1
   meta: 1.9.1
   reactive_forms: 16.0.1
-  riverpod_annotation: 2.1.1
+  riverpod_annotation: 2.1.5
   uuid: 3.0.7
   web_socket_channel: 2.4.0
 
