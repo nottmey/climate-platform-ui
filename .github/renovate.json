@@ -21,12 +21,50 @@
   "branchPrefix": "deps/",
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor"],
+      "matchUpdateTypes": [
+        "minor"
+      ],
       "minimumReleaseAge": "7 days"
     },
     {
-      "matchUpdateTypes": ["major"],
+      "matchUpdateTypes": [
+        "major"
+      ],
       "minimumReleaseAge": "21 days"
+    },
+    {
+      "groupName": "freezed",
+      "matchManagers": [
+        "pub"
+      ],
+      "matchPackageNames": [
+        "freezed_annotation",
+        "freezed"
+      ]
+    },
+    {
+      "groupName": "riverpod",
+      "matchManagers": [
+        "pub"
+      ],
+      "matchPackageNames": [
+        "hooks_riverpod",
+        "riverpod_annotation",
+        "riverpod_generator"
+      ]
+    },
+    {
+      "groupName": "gql",
+      "matchManagers": [
+        "pub"
+      ],
+      "matchPackageNames": [
+        "artemis",
+        "web_socket_channel"
+      ],
+      "matchPackagePrefixes": [
+        "gql"
+      ]
     }
   ]
 }
