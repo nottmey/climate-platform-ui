@@ -3,7 +3,8 @@
     "config:recommended",
     ":semanticCommits",
     ":semanticCommitScopeDisabled",
-    ":dependencyDashboard"
+    ":dependencyDashboard",
+    ":semanticCommitTypeAll(chore)"
   ],
   "enabledManagers": [
     "github-actions",
