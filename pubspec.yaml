@@ -15,7 +15,7 @@ assets:
 dependencies:
   artemis: 7.13.0-beta.2
   async: 2.11.0
-  collection: 1.17.2
+  collection: 1.18.0
   equatable: 2.0.5
   flutter:
     sdk: flutter
