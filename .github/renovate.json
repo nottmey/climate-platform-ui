@@ -49,6 +49,7 @@
         "pub"
       ],
       "matchPackageNames": [
+        "flutter_hooks",
         "hooks_riverpod",
         "riverpod_annotation",
         "riverpod_generator"
