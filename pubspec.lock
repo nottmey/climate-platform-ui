@@ -428,10 +428,10 @@ packages:
     dependency: "direct main"
     description:
       name: gql_websocket_link
-      sha256: bb325ff05e16815c45600a5b56843a7f64fc04bb6a9690920fade70fc8080b0b
+      sha256: c246e18a6f19076ef2922f5611e60139278d876ee19081c824f84ee62c504cc6
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.4+1"
+    version: "1.1.0"
   graphs:
     dependency: transitive
     description:
