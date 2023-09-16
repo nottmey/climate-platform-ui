@@ -372,10 +372,10 @@ packages:
     dependency: "direct main"
     description:
       name: google_fonts
-      sha256: e20ff62b158b96f392bfc8afe29dee1503c94fbea2cbe8186fd59b756b8ae982
+      sha256: "0833bfcc1c32560ee51d381fcf1d6d6b35921e89afe852c12f83dc8c00b2e6bc"
       url: "https://pub.dev"
     source: hosted
-    version: "5.1.0"
+    version: "6.0.0"
   gql:
     dependency: "direct main"
     description:
@@ -393,7 +393,7 @@ packages:
     source: hosted
     version: "0.7.1"
   gql_dedupe_link:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: gql_dedupe_link
       sha256: "89681048cf956348e865da872a40081499b8c087fc84dd4d4b9c134bd70d27b3"
@@ -428,10 +428,10 @@ packages:
     dependency: "direct main"
     description:
       name: gql_websocket_link
-      sha256: bb325ff05e16815c45600a5b56843a7f64fc04bb6a9690920fade70fc8080b0b
+      sha256: c246e18a6f19076ef2922f5611e60139278d876ee19081c824f84ee62c504cc6
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.4+1"
+    version: "1.1.0"
   graphs:
     dependency: transitive
     description:

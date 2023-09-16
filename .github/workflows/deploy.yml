@@ -5,11 +5,11 @@ on:
   workflow_call:
   push:
     paths: # don't deploy on renovate merge, so pubspec & fvm files are not included
-      - android
-      - assets
-      - ios
-      - lib
-      - web
+      - "android/**"
+      - "assets/**"
+      - "ios/**"
+      - "lib/**"
+      - "web/**"
       - .env
     branches:
       - main
