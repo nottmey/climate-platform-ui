@@ -27,7 +27,6 @@ dependencies:
   go_router: 10.1.2
   google_fonts: 5.1.0
   gql: 0.14.0
-  gql_dedupe_link: 2.0.3+1
   gql_exec: 0.4.3
   gql_http_link: 0.4.5
   gql_link: 0.5.1

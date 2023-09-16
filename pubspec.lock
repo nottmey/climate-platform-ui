@@ -393,7 +393,7 @@ packages:
     source: hosted
     version: "0.7.1"
   gql_dedupe_link:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: gql_dedupe_link
       sha256: "89681048cf956348e865da872a40081499b8c087fc84dd4d4b9c134bd70d27b3"
