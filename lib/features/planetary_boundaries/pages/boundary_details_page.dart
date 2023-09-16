@@ -30,7 +30,11 @@ class BoundaryDetailsPage extends AppPageWidget {
             (state) => state.asyncEntity.whenData((value) => value.description),
           ),
           onSave: (value) => ref.read(provider.notifier).createOrMerge(
-                PlanetaryBoundaryInput(id: id, description: value),
+                PlanetaryBoundaryInput(
+                  id: id,
+                  description: value,
+                  quantifications: [],
+                ),
               ),
         ),
       ),

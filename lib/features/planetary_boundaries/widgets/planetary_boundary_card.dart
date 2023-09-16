@@ -40,7 +40,11 @@ class PlanetaryBoundaryCard
 
   @override
   PlanetaryBoundaryInput createInputFromForm(String id, FormGroup form) {
-    return PlanetaryBoundaryInput(id: id, name: form.value['name'] as String?);
+    return PlanetaryBoundaryInput(
+      id: id,
+      name: form.value['name'] as String?,
+      quantifications: [],
+    );
   }
 
   @override

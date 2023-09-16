@@ -421,6 +421,7 @@ class QuantificationInput extends JsonSerializable with EquatableMixin {
   QuantificationInput({
     required this.id,
     this.name,
+    required this.planetaryBoundaries,
   });
 
   factory QuantificationInput.fromJson(Map<String, dynamic> json) =>
@@ -430,10 +431,38 @@ class QuantificationInput extends JsonSerializable with EquatableMixin {
 
   String? name;
 
+  late List<PlanetaryBoundaryInput> planetaryBoundaries;
+
   @override
-  List<Object?> get props => [id, name];
+  List<Object?> get props => [id, name, planetaryBoundaries];
   @override
   Map<String, dynamic> toJson() => _$QuantificationInputToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class PlanetaryBoundaryInput extends JsonSerializable with EquatableMixin {
+  PlanetaryBoundaryInput({
+    this.description,
+    required this.id,
+    this.name,
+    required this.quantifications,
+  });
+
+  factory PlanetaryBoundaryInput.fromJson(Map<String, dynamic> json) =>
+      _$PlanetaryBoundaryInputFromJson(json);
+
+  String? description;
+
+  late String id;
+
+  String? name;
+
+  late List<QuantificationInput> quantifications;
+
+  @override
+  List<Object?> get props => [description, id, name, quantifications];
+  @override
+  Map<String, dynamic> toJson() => _$PlanetaryBoundaryInputToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -735,29 +764,6 @@ class MergePlanetaryBoundary$Mutation extends JsonSerializable
   @override
   Map<String, dynamic> toJson() =>
       _$MergePlanetaryBoundary$MutationToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class PlanetaryBoundaryInput extends JsonSerializable with EquatableMixin {
-  PlanetaryBoundaryInput({
-    this.description,
-    required this.id,
-    this.name,
-  });
-
-  factory PlanetaryBoundaryInput.fromJson(Map<String, dynamic> json) =>
-      _$PlanetaryBoundaryInputFromJson(json);
-
-  String? description;
-
-  late String id;
-
-  String? name;
-
-  @override
-  List<Object?> get props => [description, id, name];
-  @override
-  Map<String, dynamic> toJson() => _$PlanetaryBoundaryInputToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)

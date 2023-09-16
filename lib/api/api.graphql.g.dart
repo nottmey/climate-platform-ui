@@ -338,6 +338,10 @@ QuantificationInput _$QuantificationInputFromJson(Map<String, dynamic> json) =>
     QuantificationInput(
       id: json['id'] as String,
       name: json['name'] as String?,
+      planetaryBoundaries: (json['planetaryBoundaries'] as List<dynamic>)
+          .map(
+              (e) => PlanetaryBoundaryInput.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$QuantificationInputToJson(
@@ -345,6 +349,29 @@ Map<String, dynamic> _$QuantificationInputToJson(
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'planetaryBoundaries':
+          instance.planetaryBoundaries.map((e) => e.toJson()).toList(),
+    };
+
+PlanetaryBoundaryInput _$PlanetaryBoundaryInputFromJson(
+        Map<String, dynamic> json) =>
+    PlanetaryBoundaryInput(
+      description: json['description'] as String?,
+      id: json['id'] as String,
+      name: json['name'] as String?,
+      quantifications: (json['quantifications'] as List<dynamic>)
+          .map((e) => QuantificationInput.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$PlanetaryBoundaryInputToJson(
+        PlanetaryBoundaryInput instance) =>
+    <String, dynamic>{
+      'description': instance.description,
+      'id': instance.id,
+      'name': instance.name,
+      'quantifications':
+          instance.quantifications.map((e) => e.toJson()).toList(),
     };
 
 DeleteQuantification$Mutation$Quantification
@@ -609,22 +636,6 @@ Map<String, dynamic> _$MergePlanetaryBoundary$MutationToJson(
         MergePlanetaryBoundary$Mutation instance) =>
     <String, dynamic>{
       'mergePlanetaryBoundary': instance.mergePlanetaryBoundary?.toJson(),
-    };
-
-PlanetaryBoundaryInput _$PlanetaryBoundaryInputFromJson(
-        Map<String, dynamic> json) =>
-    PlanetaryBoundaryInput(
-      description: json['description'] as String?,
-      id: json['id'] as String,
-      name: json['name'] as String?,
-    );
-
-Map<String, dynamic> _$PlanetaryBoundaryInputToJson(
-        PlanetaryBoundaryInput instance) =>
-    <String, dynamic>{
-      'description': instance.description,
-      'id': instance.id,
-      'name': instance.name,
     };
 
 OnUpdatedPlanetaryBoundary$Subscription$PlanetaryBoundary

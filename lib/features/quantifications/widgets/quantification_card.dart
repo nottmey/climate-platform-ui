@@ -40,7 +40,11 @@ class QuantificationCard
 
   @override
   QuantificationInput createInputFromForm(String id, FormGroup form) {
-    return QuantificationInput(id: id, name: form.value['name'] as String?);
+    return QuantificationInput(
+      id: id,
+      name: form.value['name'] as String?,
+      planetaryBoundaries: [],
+    );
   }
 
   @override

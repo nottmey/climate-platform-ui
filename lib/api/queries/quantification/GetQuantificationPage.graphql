@@ -1,4 +1,10 @@
 query GetQuantificationPage($page: Int!, $size: Int!) {
+    # $parentBoundaryId: ID!,
+#    getPlanetaryBoundary(id: $parentBoundaryId) {
+#        id
+#        # TODO list planetary boundaries with page params
+#    }
+
     listQuantification(page: {number: $page, size: $size}) {
         info {
             ...PageInfo
