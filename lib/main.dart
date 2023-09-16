@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:gql_dedupe_link/gql_dedupe_link.dart';
 import 'package:gql_http_link/gql_http_link.dart';
 import 'package:gql_link/gql_link.dart';
 import 'package:gql_websocket_link/gql_websocket_link.dart';
@@ -49,8 +48,7 @@ Future<void> main() async {
       // TODO add graphql data cache, maybe shared between similar requests via normalized data
       Link.from([
         // TODO maybe helpful: https://github.com/gql-dart/gql/tree/master/links/gql_error_link
-        // https://github.com/gql-dart/gql/tree/master/links/gql_dedupe_link
-        DedupeLink(),
+        // TODO add when updated again, or build own one https://github.com/gql-dart/gql/tree/master/links/gql_dedupe_link
         // https://github.com/gql-dart/gql/tree/master/links/gql_http_link
         // not closed, because permanent
         HttpLink(
