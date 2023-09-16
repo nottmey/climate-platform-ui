@@ -46,6 +46,10 @@ dependency_overrides:
   # safe to do so, assuming libs don't cause breaking changes
   collection:
   file:
+  gql: # artemis is not updated
+  gql_exec: # artemis is not updated
+  gql_http_link: # artemis is not updated
+  gql_link: # artemis is not updated
   http:
   path:
 
