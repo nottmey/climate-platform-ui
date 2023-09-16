@@ -25,13 +25,15 @@
       "matchUpdateTypes": [
         "minor"
       ],
-      "minimumReleaseAge": "7 days"
+      "minimumReleaseAge": "7 days",
+      "prPriority": -1
     },
     {
       "matchUpdateTypes": [
         "major"
       ],
-      "minimumReleaseAge": "21 days"
+      "minimumReleaseAge": "21 days",
+      "prPriority": -2
     },
     {
       "groupName": "freezed",
@@ -41,7 +43,8 @@
       "matchPackageNames": [
         "freezed_annotation",
         "freezed"
-      ]
+      ],
+      "prPriority": -3
     },
     {
       "groupName": "riverpod",
