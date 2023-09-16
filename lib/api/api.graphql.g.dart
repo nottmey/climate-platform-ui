@@ -338,8 +338,8 @@ QuantificationInput _$QuantificationInputFromJson(Map<String, dynamic> json) =>
     QuantificationInput(
       id: json['id'] as String,
       name: json['name'] as String?,
-      planetaryBoundaries: (json['planetaryBoundaries'] as List<dynamic>)
-          .map(
+      planetaryBoundaries: (json['planetaryBoundaries'] as List<dynamic>?)
+          ?.map(
               (e) => PlanetaryBoundaryInput.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
@@ -350,7 +350,7 @@ Map<String, dynamic> _$QuantificationInputToJson(
       'id': instance.id,
       'name': instance.name,
       'planetaryBoundaries':
-          instance.planetaryBoundaries.map((e) => e.toJson()).toList(),
+          instance.planetaryBoundaries?.map((e) => e.toJson()).toList(),
     };
 
 PlanetaryBoundaryInput _$PlanetaryBoundaryInputFromJson(
@@ -359,8 +359,8 @@ PlanetaryBoundaryInput _$PlanetaryBoundaryInputFromJson(
       description: json['description'] as String?,
       id: json['id'] as String,
       name: json['name'] as String?,
-      quantifications: (json['quantifications'] as List<dynamic>)
-          .map((e) => QuantificationInput.fromJson(e as Map<String, dynamic>))
+      quantifications: (json['quantifications'] as List<dynamic>?)
+          ?.map((e) => QuantificationInput.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -371,7 +371,7 @@ Map<String, dynamic> _$PlanetaryBoundaryInputToJson(
       'id': instance.id,
       'name': instance.name,
       'quantifications':
-          instance.quantifications.map((e) => e.toJson()).toList(),
+          instance.quantifications?.map((e) => e.toJson()).toList(),
     };
 
 DeleteQuantification$Mutation$Quantification

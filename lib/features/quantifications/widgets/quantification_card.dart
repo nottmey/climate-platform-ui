@@ -43,7 +43,6 @@ class QuantificationCard
     return QuantificationInput(
       id: id,
       name: form.value['name'] as String?,
-      planetaryBoundaries: [],
     );
   }
 

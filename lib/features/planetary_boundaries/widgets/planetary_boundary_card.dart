@@ -43,7 +43,6 @@ class PlanetaryBoundaryCard
     return PlanetaryBoundaryInput(
       id: id,
       name: form.value['name'] as String?,
-      quantifications: [],
     );
   }
 

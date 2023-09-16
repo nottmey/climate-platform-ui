@@ -421,7 +421,7 @@ class QuantificationInput extends JsonSerializable with EquatableMixin {
   QuantificationInput({
     required this.id,
     this.name,
-    required this.planetaryBoundaries,
+    this.planetaryBoundaries,
   });
 
   factory QuantificationInput.fromJson(Map<String, dynamic> json) =>
@@ -431,7 +431,7 @@ class QuantificationInput extends JsonSerializable with EquatableMixin {
 
   String? name;
 
-  late List<PlanetaryBoundaryInput> planetaryBoundaries;
+  List<PlanetaryBoundaryInput>? planetaryBoundaries;
 
   @override
   List<Object?> get props => [id, name, planetaryBoundaries];
@@ -445,7 +445,7 @@ class PlanetaryBoundaryInput extends JsonSerializable with EquatableMixin {
     this.description,
     required this.id,
     this.name,
-    required this.quantifications,
+    this.quantifications,
   });
 
   factory PlanetaryBoundaryInput.fromJson(Map<String, dynamic> json) =>
@@ -457,7 +457,7 @@ class PlanetaryBoundaryInput extends JsonSerializable with EquatableMixin {
 
   String? name;
 
-  late List<QuantificationInput> quantifications;
+  List<QuantificationInput>? quantifications;
 
   @override
   List<Object?> get props => [description, id, name, quantifications];

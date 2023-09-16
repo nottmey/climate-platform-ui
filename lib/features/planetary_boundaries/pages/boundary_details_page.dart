@@ -33,7 +33,6 @@ class BoundaryDetailsPage extends AppPageWidget {
                 PlanetaryBoundaryInput(
                   id: id,
                   description: value,
-                  quantifications: [],
                 ),
               ),
         ),
