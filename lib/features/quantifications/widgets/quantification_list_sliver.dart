@@ -16,25 +16,22 @@ class QuantificationListSliver extends AppWidget {
     return AppPagedSliverList<String>(
       creationsProvider: quantificationCreationsProvider,
       fetchPage: (pageKey, pageSize) async {
-        // TODO use parentBoundaryId for query, via getPlanetaryBoundary -> quantifications(page)
+        // TODO simplify, paged list not needed
         final data = await execute(
           GetQuantificationPageQuery(
             variables: GetQuantificationPageArguments(
-              // parentBoundaryId: parentBoundaryId,
-              page: pageKey,
-              size: pageSize,
+              parentBoundaryId: parentBoundaryId,
             ),
           ),
         );
-        final page = data.listQuantification;
-        for (final value in page.values) {
+        final values = data.getPlanetaryBoundary?.quantifications ??
+            <GetQuantificationPage$Query$PlanetaryBoundary$Quantification>[];
+        for (final value in values) {
           // TODO not actually synced; items which are not directly mounted don't have a subscription running
           ref.read(entityCacheProvider.notifier).setSynced(value.id, value);
         }
         return AppPagedFetchResult(
-          newItems: page.values.map((value) => value.id).toList(),
-          nextPageKey: page.info.next,
-          nextPageSize: page.info.size,
+          newItems: values.map((value) => value.id).toList(),
         );
       },
       itemBuilder: (BuildContext context, item, int index) {

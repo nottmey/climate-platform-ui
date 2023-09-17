@@ -106,23 +106,24 @@ class _AppPagedSliverListState<T> extends ConsumerState<AppPagedSliverList<T>> {
       });
     }
 
+    final builderDelegate = PagedChildBuilderDelegate(
+      itemBuilder: widget.itemBuilder,
+      noItemsFoundIndicatorBuilder: (context) => const SizedBox.shrink(),
+    );
+
     final separatorBuilder = widget.separatorBuilder;
     if (separatorBuilder != null) {
       return PagedSliverList.separated(
         pagingController: controller,
         separatorBuilder: separatorBuilder,
-        builderDelegate: PagedChildBuilderDelegate(
-          itemBuilder: widget.itemBuilder,
-        ),
+        builderDelegate: builderDelegate,
+        shrinkWrapFirstPageIndicators: true,
       );
     } else {
       return PagedSliverList(
         pagingController: controller,
-        builderDelegate: PagedChildBuilderDelegate(
-          itemBuilder: (context, T item, index) {
-            return widget.itemBuilder(context, item, index);
-          },
-        ),
+        builderDelegate: builderDelegate,
+        shrinkWrapFirstPageIndicators: true,
       );
     }
   }

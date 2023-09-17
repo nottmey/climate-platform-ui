@@ -629,59 +629,40 @@ class CreateQuantification$Mutation extends JsonSerializable
 }
 
 @JsonSerializable(explicitToJson: true)
-class GetQuantificationPage$Query$QuantificationListPage$PageInfo
-    extends JsonSerializable with EquatableMixin, PageInfoMixin {
-  GetQuantificationPage$Query$QuantificationListPage$PageInfo();
-
-  factory GetQuantificationPage$Query$QuantificationListPage$PageInfo.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetQuantificationPage$Query$QuantificationListPage$PageInfoFromJson(
-          json);
-
-  @override
-  List<Object?> get props => [next, size];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$GetQuantificationPage$Query$QuantificationListPage$PageInfoToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetQuantificationPage$Query$QuantificationListPage$Quantification
+class GetQuantificationPage$Query$PlanetaryBoundary$Quantification
     extends JsonSerializable with EquatableMixin, QuantificationMixin {
-  GetQuantificationPage$Query$QuantificationListPage$Quantification();
+  GetQuantificationPage$Query$PlanetaryBoundary$Quantification();
 
-  factory GetQuantificationPage$Query$QuantificationListPage$Quantification.fromJson(
+  factory GetQuantificationPage$Query$PlanetaryBoundary$Quantification.fromJson(
           Map<String, dynamic> json) =>
-      _$GetQuantificationPage$Query$QuantificationListPage$QuantificationFromJson(
+      _$GetQuantificationPage$Query$PlanetaryBoundary$QuantificationFromJson(
           json);
 
   @override
   List<Object?> get props => [id, name];
   @override
   Map<String, dynamic> toJson() =>
-      _$GetQuantificationPage$Query$QuantificationListPage$QuantificationToJson(
+      _$GetQuantificationPage$Query$PlanetaryBoundary$QuantificationToJson(
           this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class GetQuantificationPage$Query$QuantificationListPage
-    extends JsonSerializable with EquatableMixin {
-  GetQuantificationPage$Query$QuantificationListPage();
+class GetQuantificationPage$Query$PlanetaryBoundary extends JsonSerializable
+    with EquatableMixin {
+  GetQuantificationPage$Query$PlanetaryBoundary();
 
-  factory GetQuantificationPage$Query$QuantificationListPage.fromJson(
+  factory GetQuantificationPage$Query$PlanetaryBoundary.fromJson(
           Map<String, dynamic> json) =>
-      _$GetQuantificationPage$Query$QuantificationListPageFromJson(json);
+      _$GetQuantificationPage$Query$PlanetaryBoundaryFromJson(json);
 
-  late GetQuantificationPage$Query$QuantificationListPage$PageInfo info;
-
-  late List<GetQuantificationPage$Query$QuantificationListPage$Quantification>
-      values;
+  List<GetQuantificationPage$Query$PlanetaryBoundary$Quantification>?
+      quantifications;
 
   @override
-  List<Object?> get props => [info, values];
+  List<Object?> get props => [quantifications];
   @override
   Map<String, dynamic> toJson() =>
-      _$GetQuantificationPage$Query$QuantificationListPageToJson(this);
+      _$GetQuantificationPage$Query$PlanetaryBoundaryToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -691,10 +672,10 @@ class GetQuantificationPage$Query extends JsonSerializable with EquatableMixin {
   factory GetQuantificationPage$Query.fromJson(Map<String, dynamic> json) =>
       _$GetQuantificationPage$QueryFromJson(json);
 
-  late GetQuantificationPage$Query$QuantificationListPage listQuantification;
+  GetQuantificationPage$Query$PlanetaryBoundary? getPlanetaryBoundary;
 
   @override
-  List<Object?> get props => [listQuantification];
+  List<Object?> get props => [getPlanetaryBoundary];
   @override
   Map<String, dynamic> toJson() => _$GetQuantificationPage$QueryToJson(this);
 }
@@ -2337,21 +2318,16 @@ class CreateQuantificationMutation extends GraphQLQuery<
 @JsonSerializable(explicitToJson: true)
 class GetQuantificationPageArguments extends JsonSerializable
     with EquatableMixin {
-  GetQuantificationPageArguments({
-    required this.page,
-    required this.size,
-  });
+  GetQuantificationPageArguments({required this.parentBoundaryId});
 
   @override
   factory GetQuantificationPageArguments.fromJson(Map<String, dynamic> json) =>
       _$GetQuantificationPageArgumentsFromJson(json);
 
-  late int page;
-
-  late int size;
+  late String parentBoundaryId;
 
   @override
-  List<Object?> get props => [page, size];
+  List<Object?> get props => [parentBoundaryId];
   @override
   Map<String, dynamic> toJson() => _$GetQuantificationPageArgumentsToJson(this);
 }
@@ -2364,60 +2340,30 @@ final GET_QUANTIFICATION_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
     name: NameNode(value: 'GetQuantificationPage'),
     variableDefinitions: [
       VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'page')),
+        variable: VariableNode(name: NameNode(value: 'parentBoundaryId')),
         type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
+          name: NameNode(value: 'ID'),
           isNonNull: true,
         ),
         defaultValue: DefaultValueNode(value: null),
         directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'size')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
+      )
     ],
     directives: [],
     selectionSet: SelectionSetNode(selections: [
       FieldNode(
-        name: NameNode(value: 'listQuantification'),
+        name: NameNode(value: 'getPlanetaryBoundary'),
         alias: null,
         arguments: [
           ArgumentNode(
-            name: NameNode(value: 'page'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'number'),
-                value: VariableNode(name: NameNode(value: 'page')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'size'),
-                value: VariableNode(name: NameNode(value: 'size')),
-              ),
-            ]),
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'parentBoundaryId')),
           )
         ],
         directives: [],
         selectionSet: SelectionSetNode(selections: [
           FieldNode(
-            name: NameNode(value: 'info'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'PageInfo'),
-                directives: [],
-              )
-            ]),
-          ),
-          FieldNode(
-            name: NameNode(value: 'values'),
+            name: NameNode(value: 'quantifications'),
             alias: null,
             arguments: [],
             directives: [],
@@ -2427,34 +2373,9 @@ final GET_QUANTIFICATION_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
                 directives: [],
               )
             ]),
-          ),
+          )
         ]),
       )
-    ]),
-  ),
-  FragmentDefinitionNode(
-    name: NameNode(value: 'PageInfo'),
-    typeCondition: TypeConditionNode(
-        on: NamedTypeNode(
-      name: NameNode(value: 'PageInfo'),
-      isNonNull: false,
-    )),
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'next'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'size'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
     ]),
   ),
   FragmentDefinitionNode(

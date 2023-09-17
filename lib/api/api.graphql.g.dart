@@ -515,68 +515,51 @@ Map<String, dynamic> _$CreateQuantification$MutationToJson(
       'createQuantification': instance.createQuantification.toJson(),
     };
 
-GetQuantificationPage$Query$QuantificationListPage$PageInfo
-    _$GetQuantificationPage$Query$QuantificationListPage$PageInfoFromJson(
+GetQuantificationPage$Query$PlanetaryBoundary$Quantification
+    _$GetQuantificationPage$Query$PlanetaryBoundary$QuantificationFromJson(
             Map<String, dynamic> json) =>
-        GetQuantificationPage$Query$QuantificationListPage$PageInfo()
-          ..next = json['next'] as int?
-          ..size = json['size'] as int;
-
-Map<String, dynamic>
-    _$GetQuantificationPage$Query$QuantificationListPage$PageInfoToJson(
-            GetQuantificationPage$Query$QuantificationListPage$PageInfo
-                instance) =>
-        <String, dynamic>{
-          'next': instance.next,
-          'size': instance.size,
-        };
-
-GetQuantificationPage$Query$QuantificationListPage$Quantification
-    _$GetQuantificationPage$Query$QuantificationListPage$QuantificationFromJson(
-            Map<String, dynamic> json) =>
-        GetQuantificationPage$Query$QuantificationListPage$Quantification()
+        GetQuantificationPage$Query$PlanetaryBoundary$Quantification()
           ..id = json['id'] as String
           ..name = json['name'] as String?;
 
 Map<String, dynamic>
-    _$GetQuantificationPage$Query$QuantificationListPage$QuantificationToJson(
-            GetQuantificationPage$Query$QuantificationListPage$Quantification
+    _$GetQuantificationPage$Query$PlanetaryBoundary$QuantificationToJson(
+            GetQuantificationPage$Query$PlanetaryBoundary$Quantification
                 instance) =>
         <String, dynamic>{
           'id': instance.id,
           'name': instance.name,
         };
 
-GetQuantificationPage$Query$QuantificationListPage
-    _$GetQuantificationPage$Query$QuantificationListPageFromJson(
+GetQuantificationPage$Query$PlanetaryBoundary
+    _$GetQuantificationPage$Query$PlanetaryBoundaryFromJson(
             Map<String, dynamic> json) =>
-        GetQuantificationPage$Query$QuantificationListPage()
-          ..info = GetQuantificationPage$Query$QuantificationListPage$PageInfo
-              .fromJson(json['info'] as Map<String, dynamic>)
-          ..values = (json['values'] as List<dynamic>)
-              .map((e) =>
-                  GetQuantificationPage$Query$QuantificationListPage$Quantification
+        GetQuantificationPage$Query$PlanetaryBoundary()
+          ..quantifications = (json['quantifications'] as List<dynamic>?)
+              ?.map((e) =>
+                  GetQuantificationPage$Query$PlanetaryBoundary$Quantification
                       .fromJson(e as Map<String, dynamic>))
               .toList();
 
-Map<String, dynamic> _$GetQuantificationPage$Query$QuantificationListPageToJson(
-        GetQuantificationPage$Query$QuantificationListPage instance) =>
+Map<String, dynamic> _$GetQuantificationPage$Query$PlanetaryBoundaryToJson(
+        GetQuantificationPage$Query$PlanetaryBoundary instance) =>
     <String, dynamic>{
-      'info': instance.info.toJson(),
-      'values': instance.values.map((e) => e.toJson()).toList(),
+      'quantifications':
+          instance.quantifications?.map((e) => e.toJson()).toList(),
     };
 
 GetQuantificationPage$Query _$GetQuantificationPage$QueryFromJson(
         Map<String, dynamic> json) =>
     GetQuantificationPage$Query()
-      ..listQuantification =
-          GetQuantificationPage$Query$QuantificationListPage.fromJson(
-              json['listQuantification'] as Map<String, dynamic>);
+      ..getPlanetaryBoundary = json['getPlanetaryBoundary'] == null
+          ? null
+          : GetQuantificationPage$Query$PlanetaryBoundary.fromJson(
+              json['getPlanetaryBoundary'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$GetQuantificationPage$QueryToJson(
         GetQuantificationPage$Query instance) =>
     <String, dynamic>{
-      'listQuantification': instance.listQuantification.toJson(),
+      'getPlanetaryBoundary': instance.getPlanetaryBoundary?.toJson(),
     };
 
 OnCreatedQuantification$Subscription$Quantification
@@ -1005,15 +988,13 @@ Map<String, dynamic> _$CreateQuantificationArgumentsToJson(
 GetQuantificationPageArguments _$GetQuantificationPageArgumentsFromJson(
         Map<String, dynamic> json) =>
     GetQuantificationPageArguments(
-      page: json['page'] as int,
-      size: json['size'] as int,
+      parentBoundaryId: json['parentBoundaryId'] as String,
     );
 
 Map<String, dynamic> _$GetQuantificationPageArgumentsToJson(
         GetQuantificationPageArguments instance) =>
     <String, dynamic>{
-      'page': instance.page,
-      'size': instance.size,
+      'parentBoundaryId': instance.parentBoundaryId,
     };
 
 MergePlanetaryBoundaryArguments _$MergePlanetaryBoundaryArgumentsFromJson(
