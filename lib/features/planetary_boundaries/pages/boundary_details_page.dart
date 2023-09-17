@@ -39,7 +39,7 @@ class BoundaryDetailsPage extends AppPageWidget {
       ),
       QuantificationListSliver(parentBoundaryId: id),
       SliverToBoxAdapter(
-        child: QuantificationCard.creation(),
+        child: QuantificationCard.creation(parentBoundaryId: id),
       ),
       SliverToBoxAdapter(
         child: SizedBox(height: MediaQuery.of(context).size.height / 4),

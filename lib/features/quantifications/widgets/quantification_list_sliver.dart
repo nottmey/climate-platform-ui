@@ -38,7 +38,10 @@ class QuantificationListSliver extends AppWidget {
         );
       },
       itemBuilder: (BuildContext context, item, int index) {
-        return QuantificationCard.display(displayId: item);
+        return QuantificationCard.display(
+          displayId: item,
+          parentBoundaryId: parentBoundaryId,
+        );
       },
     );
   }

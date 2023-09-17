@@ -14,14 +14,21 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 class QuantificationCard
     extends AppEntityCard<QuantificationMixin, QuantificationInput> {
-  QuantificationCard.creation({super.key})
-      : super.creation(
+  final String parentBoundaryId;
+
+  QuantificationCard.creation({
+    super.key,
+    required this.parentBoundaryId,
+  }) : super.creation(
           family: quantificationCreationFamily,
           creationsSink: quantificationCreationsSink,
         );
 
-  QuantificationCard.display({super.key, required super.displayId})
-      : super.display(family: quantificationFamily);
+  QuantificationCard.display({
+    super.key,
+    required super.displayId,
+    required this.parentBoundaryId,
+  }) : super.display(family: quantificationFamily);
 
   @override
   void onTab(BuildContext context, String id) {
@@ -43,6 +50,7 @@ class QuantificationCard
     return QuantificationInput(
       id: id,
       name: form.value['name'] as String?,
+      planetaryBoundaries: [PlanetaryBoundaryInput(id: parentBoundaryId)],
     );
   }
 
