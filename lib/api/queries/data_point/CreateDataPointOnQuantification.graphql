@@ -1,0 +1,13 @@
+mutation CreateDataPointOnQuantification(
+    $id: ID!,
+    $value: Float!,
+    $parentQuantificationId: ID!
+) {
+    createDataPoint(value: {
+        id: $id,
+        value: $value,
+        quantifications: [{id: $parentQuantificationId}]
+    }) {
+        ...DataPoint
+    }
+}

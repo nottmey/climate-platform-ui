@@ -64,6 +64,19 @@ type BooleanAttribute implements Attribute {
 }
 
 " generated, do not edit manually!"
+type DataPoint implements EntityBase {
+    id: ID!
+    quantifications: [Quantification!]
+    value: Float
+}
+
+" generated, do not edit manually!"
+type DataPointListPage {
+    info: PageInfo!
+    values: [DataPoint!]!
+}
+
+" generated, do not edit manually!"
 type DateTimeAttribute implements Attribute {
     dateTime: AWSDateTime!
     id: ID!
@@ -83,6 +96,13 @@ type EntityListPage {
 }
 
 " generated, do not edit manually!"
+type FloatAttribute implements Attribute {
+    float: Float!
+    id: ID!
+    name: String!
+}
+
+" generated, do not edit manually!"
 type MultiBooleanAttribute implements Attribute {
     booleans: [Boolean!]!
     id: ID!
@@ -92,6 +112,13 @@ type MultiBooleanAttribute implements Attribute {
 " generated, do not edit manually!"
 type MultiDateTimeAttribute implements Attribute {
     dateTimes: [AWSDateTime!]!
+    id: ID!
+    name: String!
+}
+
+" generated, do not edit manually!"
+type MultiFloatAttribute implements Attribute {
+    floats: [Float!]!
     id: ID!
     name: String!
 }
@@ -119,16 +146,22 @@ type MultiTupleAttribute implements Attribute {
 
 " generated, do not edit manually!"
 type Mutation {
+    createDataPoint(value: DataPointInput!): DataPoint!
     createPlanetaryBoundary(value: PlanetaryBoundaryInput!): PlanetaryBoundary!
     createQuantification(value: QuantificationInput!): Quantification!
+    deleteDataPoint(id: ID!): DataPoint
     deletePlanetaryBoundary(id: ID!): PlanetaryBoundary
     deleteQuantification(id: ID!): Quantification
+    mergeDataPoint(value: DataPointInput!): DataPoint
     mergePlanetaryBoundary(value: PlanetaryBoundaryInput!): PlanetaryBoundary
     mergeQuantification(value: QuantificationInput!): Quantification
+    publishCreatedDataPoint(value: DataPointInput!): DataPoint
     publishCreatedPlanetaryBoundary(value: PlanetaryBoundaryInput!): PlanetaryBoundary
     publishCreatedQuantification(value: QuantificationInput!): Quantification
+    publishDeletedDataPoint(value: DataPointInput!): DataPoint
     publishDeletedPlanetaryBoundary(value: PlanetaryBoundaryInput!): PlanetaryBoundary
     publishDeletedQuantification(value: QuantificationInput!): Quantification
+    publishUpdatedDataPoint(value: DataPointInput!): DataPoint
     publishUpdatedPlanetaryBoundary(value: PlanetaryBoundaryInput!): PlanetaryBoundary
     publishUpdatedQuantification(value: QuantificationInput!): Quantification
 }
@@ -159,6 +192,7 @@ type PlanetaryBoundaryListPage {
 
 " generated, do not edit manually!"
 type Quantification implements EntityBase {
+    dataPoints: [DataPoint!]
     id: ID!
     name: String
     planetaryBoundaries: [PlanetaryBoundary!]
@@ -172,9 +206,11 @@ type QuantificationListPage {
 
 " generated, do not edit manually!"
 type Query {
+    getDataPoint(id: ID!): DataPoint
     getEntity(id: ID!): Entity
     getPlanetaryBoundary(id: ID!): PlanetaryBoundary
     getQuantification(id: ID!): Quantification
+    listDataPoint(page: PageQuery): DataPointListPage!
     listEntity(filter: EntityFilter, page: PageQuery): EntityListPage!
     listPlanetaryBoundary(page: PageQuery): PlanetaryBoundaryListPage!
     listQuantification(page: PageQuery): QuantificationListPage!
@@ -196,10 +232,13 @@ type StringAttribute implements Attribute {
 
 " generated, do not edit manually!"
 type Subscription {
+    onCreatedDataPoint(id: ID, value: Float): DataPoint
     onCreatedPlanetaryBoundary(description: String, id: ID, name: String): PlanetaryBoundary
     onCreatedQuantification(id: ID, name: String): Quantification
+    onDeletedDataPoint(id: ID, value: Float): DataPoint
     onDeletedPlanetaryBoundary(description: String, id: ID, name: String): PlanetaryBoundary
     onDeletedQuantification(id: ID, name: String): Quantification
+    onUpdatedDataPoint(id: ID, value: Float): DataPoint
     onUpdatedPlanetaryBoundary(description: String, id: ID, name: String): PlanetaryBoundary
     onUpdatedQuantification(id: ID, name: String): Quantification
 }
@@ -216,6 +255,13 @@ scalar AWSDateTime
 
 "The `AWSJSON` scalar type provided by AWS AppSync, represents a JSON string that complies with [RFC 8259](https://tools.ietf.org/html/rfc8259).  Maps like \"**{\\\\\"upvotes\\\\\": 10}**\", lists like \"**[1,2,3]**\", and scalar values like \"**\\\\\"AWSJSON example string\\\\\"**\", \"**1**\", and \"**true**\" are accepted as valid JSON and will automatically be parsed and loaded in the resolver mapping templates as Maps, Lists, or Scalar values rather than as the literal input strings.  Invalid JSON strings like \"**{a: 1}**\", \"**{'a': 1}**\" and \"**Unquoted string**\" will throw GraphQL validation errors."
 scalar AWSJSON
+
+" generated, do not edit manually!"
+input DataPointInput {
+    id: ID!
+    quantifications: [QuantificationInput!]
+    value: Float
+}
 
 " generated, do not edit manually!"
 input EntityFilter {
@@ -238,6 +284,7 @@ input PlanetaryBoundaryInput {
 
 " generated, do not edit manually!"
 input QuantificationInput {
+    dataPoints: [DataPointInput!]
     id: ID!
     name: String
     planetaryBoundaries: [PlanetaryBoundaryInput!]

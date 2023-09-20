@@ -52,6 +52,8 @@ jobs:
           cache: true
       - name: "Pub Get"
         run: flutter pub get # so pub get doesn't clutter flutter test output
+        # TODO also run flutter analyze
+        # TODO also check if build_runner works
       - name: "Run Tests"
         id: run-tests
         run: flutter test --coverage --suppress-analytics --machine | tee test-report.json # --suppress-analytics needed to have a valid json

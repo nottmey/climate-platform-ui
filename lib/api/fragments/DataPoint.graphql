@@ -1,0 +1,4 @@
+fragment DataPoint on DataPoint {
+    id
+    value
+}

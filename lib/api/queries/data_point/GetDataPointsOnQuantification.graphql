@@ -1,0 +1,7 @@
+query GetDataPointsOnQuantification($parentQuantificationId: ID!) {
+    getQuantification(id: $parentQuantificationId) {
+        dataPoints {
+            ...DataPoint
+        }
+    }
+}

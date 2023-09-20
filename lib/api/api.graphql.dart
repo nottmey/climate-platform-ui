@@ -14,6 +14,10 @@ mixin EntityMixin {
   late String id;
   late List<EntityMixin$Attribute> attributes;
 }
+mixin DataPointMixin {
+  late String id;
+  double? value;
+}
 mixin QuantificationMixin {
   late String id;
   String? name;
@@ -385,6 +389,95 @@ class GetEntity$Query extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
+class CreateDataPointOnQuantification$Mutation$DataPoint
+    extends JsonSerializable with EquatableMixin, DataPointMixin {
+  CreateDataPointOnQuantification$Mutation$DataPoint();
+
+  factory CreateDataPointOnQuantification$Mutation$DataPoint.fromJson(
+          Map<String, dynamic> json) =>
+      _$CreateDataPointOnQuantification$Mutation$DataPointFromJson(json);
+
+  @override
+  List<Object?> get props => [id, value];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$CreateDataPointOnQuantification$Mutation$DataPointToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class CreateDataPointOnQuantification$Mutation extends JsonSerializable
+    with EquatableMixin {
+  CreateDataPointOnQuantification$Mutation();
+
+  factory CreateDataPointOnQuantification$Mutation.fromJson(
+          Map<String, dynamic> json) =>
+      _$CreateDataPointOnQuantification$MutationFromJson(json);
+
+  late CreateDataPointOnQuantification$Mutation$DataPoint createDataPoint;
+
+  @override
+  List<Object?> get props => [createDataPoint];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$CreateDataPointOnQuantification$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetDataPointsOnQuantification$Query$Quantification$DataPoint
+    extends JsonSerializable with EquatableMixin, DataPointMixin {
+  GetDataPointsOnQuantification$Query$Quantification$DataPoint();
+
+  factory GetDataPointsOnQuantification$Query$Quantification$DataPoint.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetDataPointsOnQuantification$Query$Quantification$DataPointFromJson(
+          json);
+
+  @override
+  List<Object?> get props => [id, value];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetDataPointsOnQuantification$Query$Quantification$DataPointToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetDataPointsOnQuantification$Query$Quantification
+    extends JsonSerializable with EquatableMixin {
+  GetDataPointsOnQuantification$Query$Quantification();
+
+  factory GetDataPointsOnQuantification$Query$Quantification.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetDataPointsOnQuantification$Query$QuantificationFromJson(json);
+
+  List<GetDataPointsOnQuantification$Query$Quantification$DataPoint>?
+      dataPoints;
+
+  @override
+  List<Object?> get props => [dataPoints];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetDataPointsOnQuantification$Query$QuantificationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetDataPointsOnQuantification$Query extends JsonSerializable
+    with EquatableMixin {
+  GetDataPointsOnQuantification$Query();
+
+  factory GetDataPointsOnQuantification$Query.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetDataPointsOnQuantification$QueryFromJson(json);
+
+  GetDataPointsOnQuantification$Query$Quantification? getQuantification;
+
+  @override
+  List<Object?> get props => [getQuantification];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetDataPointsOnQuantification$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class MergeQuantification$Mutation$Quantification extends JsonSerializable
     with EquatableMixin, QuantificationMixin {
   MergeQuantification$Mutation$Quantification();
@@ -419,6 +512,7 @@ class MergeQuantification$Mutation extends JsonSerializable
 @JsonSerializable(explicitToJson: true)
 class QuantificationInput extends JsonSerializable with EquatableMixin {
   QuantificationInput({
+    this.dataPoints,
     required this.id,
     this.name,
     this.planetaryBoundaries,
@@ -427,6 +521,8 @@ class QuantificationInput extends JsonSerializable with EquatableMixin {
   factory QuantificationInput.fromJson(Map<String, dynamic> json) =>
       _$QuantificationInputFromJson(json);
 
+  List<DataPointInput>? dataPoints;
+
   late String id;
 
   String? name;
@@ -434,9 +530,32 @@ class QuantificationInput extends JsonSerializable with EquatableMixin {
   List<PlanetaryBoundaryInput>? planetaryBoundaries;
 
   @override
-  List<Object?> get props => [id, name, planetaryBoundaries];
+  List<Object?> get props => [dataPoints, id, name, planetaryBoundaries];
   @override
   Map<String, dynamic> toJson() => _$QuantificationInputToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class DataPointInput extends JsonSerializable with EquatableMixin {
+  DataPointInput({
+    required this.id,
+    this.quantifications,
+    this.value,
+  });
+
+  factory DataPointInput.fromJson(Map<String, dynamic> json) =>
+      _$DataPointInputFromJson(json);
+
+  late String id;
+
+  List<QuantificationInput>? quantifications;
+
+  double? value;
+
+  @override
+  List<Object?> get props => [id, quantifications, value];
+  @override
+  Map<String, dynamic> toJson() => _$DataPointInputToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -1692,6 +1811,279 @@ class GetEntityQuery extends GraphQLQuery<GetEntity$Query, GetEntityArguments> {
   @override
   GetEntity$Query parse(Map<String, dynamic> json) =>
       GetEntity$Query.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class CreateDataPointOnQuantificationArguments extends JsonSerializable
+    with EquatableMixin {
+  CreateDataPointOnQuantificationArguments({
+    required this.id,
+    required this.value,
+    required this.parentQuantificationId,
+  });
+
+  @override
+  factory CreateDataPointOnQuantificationArguments.fromJson(
+          Map<String, dynamic> json) =>
+      _$CreateDataPointOnQuantificationArgumentsFromJson(json);
+
+  late String id;
+
+  late double value;
+
+  late String parentQuantificationId;
+
+  @override
+  List<Object?> get props => [id, value, parentQuantificationId];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$CreateDataPointOnQuantificationArgumentsToJson(this);
+}
+
+final CREATE_DATA_POINT_ON_QUANTIFICATION_MUTATION_DOCUMENT_OPERATION_NAME =
+    'CreateDataPointOnQuantification';
+final CREATE_DATA_POINT_ON_QUANTIFICATION_MUTATION_DOCUMENT =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'CreateDataPointOnQuantification'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'value')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Float'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'parentQuantificationId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'createDataPoint'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'value'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'id')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'value'),
+                value: VariableNode(name: NameNode(value: 'value')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'quantifications'),
+                value: ListValueNode(values: [
+                  ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'id'),
+                      value: VariableNode(
+                          name: NameNode(value: 'parentQuantificationId')),
+                    )
+                  ])
+                ]),
+              ),
+            ]),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'DataPoint'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'DataPoint'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'DataPoint'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'value'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class CreateDataPointOnQuantificationMutation extends GraphQLQuery<
+    CreateDataPointOnQuantification$Mutation,
+    CreateDataPointOnQuantificationArguments> {
+  CreateDataPointOnQuantificationMutation({required this.variables});
+
+  @override
+  final DocumentNode document =
+      CREATE_DATA_POINT_ON_QUANTIFICATION_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName =
+      CREATE_DATA_POINT_ON_QUANTIFICATION_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final CreateDataPointOnQuantificationArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  CreateDataPointOnQuantification$Mutation parse(Map<String, dynamic> json) =>
+      CreateDataPointOnQuantification$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetDataPointsOnQuantificationArguments extends JsonSerializable
+    with EquatableMixin {
+  GetDataPointsOnQuantificationArguments(
+      {required this.parentQuantificationId});
+
+  @override
+  factory GetDataPointsOnQuantificationArguments.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetDataPointsOnQuantificationArgumentsFromJson(json);
+
+  late String parentQuantificationId;
+
+  @override
+  List<Object?> get props => [parentQuantificationId];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetDataPointsOnQuantificationArgumentsToJson(this);
+}
+
+final GET_DATA_POINTS_ON_QUANTIFICATION_QUERY_DOCUMENT_OPERATION_NAME =
+    'GetDataPointsOnQuantification';
+final GET_DATA_POINTS_ON_QUANTIFICATION_QUERY_DOCUMENT =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'GetDataPointsOnQuantification'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'parentQuantificationId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'getQuantification'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value:
+                VariableNode(name: NameNode(value: 'parentQuantificationId')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'dataPoints'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'DataPoint'),
+                directives: [],
+              )
+            ]),
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'DataPoint'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'DataPoint'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'value'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class GetDataPointsOnQuantificationQuery extends GraphQLQuery<
+    GetDataPointsOnQuantification$Query,
+    GetDataPointsOnQuantificationArguments> {
+  GetDataPointsOnQuantificationQuery({required this.variables});
+
+  @override
+  final DocumentNode document =
+      GET_DATA_POINTS_ON_QUANTIFICATION_QUERY_DOCUMENT;
+
+  @override
+  final String operationName =
+      GET_DATA_POINTS_ON_QUANTIFICATION_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetDataPointsOnQuantificationArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetDataPointsOnQuantification$Query parse(Map<String, dynamic> json) =>
+      GetDataPointsOnQuantification$Query.fromJson(json);
 }
 
 @JsonSerializable(explicitToJson: true)

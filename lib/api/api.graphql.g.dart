@@ -306,6 +306,80 @@ Map<String, dynamic> _$GetEntity$QueryToJson(GetEntity$Query instance) =>
       'getEntity': instance.getEntity?.toJson(),
     };
 
+CreateDataPointOnQuantification$Mutation$DataPoint
+    _$CreateDataPointOnQuantification$Mutation$DataPointFromJson(
+            Map<String, dynamic> json) =>
+        CreateDataPointOnQuantification$Mutation$DataPoint()
+          ..id = json['id'] as String
+          ..value = (json['value'] as num?)?.toDouble();
+
+Map<String, dynamic> _$CreateDataPointOnQuantification$Mutation$DataPointToJson(
+        CreateDataPointOnQuantification$Mutation$DataPoint instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'value': instance.value,
+    };
+
+CreateDataPointOnQuantification$Mutation
+    _$CreateDataPointOnQuantification$MutationFromJson(
+            Map<String, dynamic> json) =>
+        CreateDataPointOnQuantification$Mutation()
+          ..createDataPoint =
+              CreateDataPointOnQuantification$Mutation$DataPoint.fromJson(
+                  json['createDataPoint'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$CreateDataPointOnQuantification$MutationToJson(
+        CreateDataPointOnQuantification$Mutation instance) =>
+    <String, dynamic>{
+      'createDataPoint': instance.createDataPoint.toJson(),
+    };
+
+GetDataPointsOnQuantification$Query$Quantification$DataPoint
+    _$GetDataPointsOnQuantification$Query$Quantification$DataPointFromJson(
+            Map<String, dynamic> json) =>
+        GetDataPointsOnQuantification$Query$Quantification$DataPoint()
+          ..id = json['id'] as String
+          ..value = (json['value'] as num?)?.toDouble();
+
+Map<String, dynamic>
+    _$GetDataPointsOnQuantification$Query$Quantification$DataPointToJson(
+            GetDataPointsOnQuantification$Query$Quantification$DataPoint
+                instance) =>
+        <String, dynamic>{
+          'id': instance.id,
+          'value': instance.value,
+        };
+
+GetDataPointsOnQuantification$Query$Quantification
+    _$GetDataPointsOnQuantification$Query$QuantificationFromJson(
+            Map<String, dynamic> json) =>
+        GetDataPointsOnQuantification$Query$Quantification()
+          ..dataPoints = (json['dataPoints'] as List<dynamic>?)
+              ?.map((e) =>
+                  GetDataPointsOnQuantification$Query$Quantification$DataPoint
+                      .fromJson(e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic> _$GetDataPointsOnQuantification$Query$QuantificationToJson(
+        GetDataPointsOnQuantification$Query$Quantification instance) =>
+    <String, dynamic>{
+      'dataPoints': instance.dataPoints?.map((e) => e.toJson()).toList(),
+    };
+
+GetDataPointsOnQuantification$Query
+    _$GetDataPointsOnQuantification$QueryFromJson(Map<String, dynamic> json) =>
+        GetDataPointsOnQuantification$Query()
+          ..getQuantification = json['getQuantification'] == null
+              ? null
+              : GetDataPointsOnQuantification$Query$Quantification.fromJson(
+                  json['getQuantification'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetDataPointsOnQuantification$QueryToJson(
+        GetDataPointsOnQuantification$Query instance) =>
+    <String, dynamic>{
+      'getQuantification': instance.getQuantification?.toJson(),
+    };
+
 MergeQuantification$Mutation$Quantification
     _$MergeQuantification$Mutation$QuantificationFromJson(
             Map<String, dynamic> json) =>
@@ -336,6 +410,9 @@ Map<String, dynamic> _$MergeQuantification$MutationToJson(
 
 QuantificationInput _$QuantificationInputFromJson(Map<String, dynamic> json) =>
     QuantificationInput(
+      dataPoints: (json['dataPoints'] as List<dynamic>?)
+          ?.map((e) => DataPointInput.fromJson(e as Map<String, dynamic>))
+          .toList(),
       id: json['id'] as String,
       name: json['name'] as String?,
       planetaryBoundaries: (json['planetaryBoundaries'] as List<dynamic>?)
@@ -347,10 +424,28 @@ QuantificationInput _$QuantificationInputFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$QuantificationInputToJson(
         QuantificationInput instance) =>
     <String, dynamic>{
+      'dataPoints': instance.dataPoints?.map((e) => e.toJson()).toList(),
       'id': instance.id,
       'name': instance.name,
       'planetaryBoundaries':
           instance.planetaryBoundaries?.map((e) => e.toJson()).toList(),
+    };
+
+DataPointInput _$DataPointInputFromJson(Map<String, dynamic> json) =>
+    DataPointInput(
+      id: json['id'] as String,
+      quantifications: (json['quantifications'] as List<dynamic>?)
+          ?.map((e) => QuantificationInput.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      value: (json['value'] as num?)?.toDouble(),
+    );
+
+Map<String, dynamic> _$DataPointInputToJson(DataPointInput instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'quantifications':
+          instance.quantifications?.map((e) => e.toJson()).toList(),
+      'value': instance.value,
     };
 
 PlanetaryBoundaryInput _$PlanetaryBoundaryInputFromJson(
@@ -909,6 +1004,36 @@ GetEntityArguments _$GetEntityArgumentsFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$GetEntityArgumentsToJson(GetEntityArguments instance) =>
     <String, dynamic>{
       'id': instance.id,
+    };
+
+CreateDataPointOnQuantificationArguments
+    _$CreateDataPointOnQuantificationArgumentsFromJson(
+            Map<String, dynamic> json) =>
+        CreateDataPointOnQuantificationArguments(
+          id: json['id'] as String,
+          value: (json['value'] as num).toDouble(),
+          parentQuantificationId: json['parentQuantificationId'] as String,
+        );
+
+Map<String, dynamic> _$CreateDataPointOnQuantificationArgumentsToJson(
+        CreateDataPointOnQuantificationArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'value': instance.value,
+      'parentQuantificationId': instance.parentQuantificationId,
+    };
+
+GetDataPointsOnQuantificationArguments
+    _$GetDataPointsOnQuantificationArgumentsFromJson(
+            Map<String, dynamic> json) =>
+        GetDataPointsOnQuantificationArguments(
+          parentQuantificationId: json['parentQuantificationId'] as String,
+        );
+
+Map<String, dynamic> _$GetDataPointsOnQuantificationArgumentsToJson(
+        GetDataPointsOnQuantificationArguments instance) =>
+    <String, dynamic>{
+      'parentQuantificationId': instance.parentQuantificationId,
     };
 
 MergeQuantificationArguments _$MergeQuantificationArgumentsFromJson(
