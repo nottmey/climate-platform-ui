@@ -44,12 +44,13 @@ dependencies:
 dependency_overrides:
   # leaving out version causes upgrade to use the newest version
   # safe to do so, assuming libs don't cause breaking changes
+  analyzer: ^6.0.0 # mockito is not updated yet
   collection:
   file:
-  gql: # artemis is not updated
-  gql_exec: # artemis is not updated
-  gql_http_link: # artemis is not updated
-  gql_link: # artemis is not updated
+  gql: # artemis is not updated yet
+  gql_exec: # artemis is not updated yet
+  gql_http_link: # artemis is not updated yet
+  gql_link: # artemis is not updated yet
   http:
   path:
 
