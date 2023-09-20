@@ -148,6 +148,7 @@ type PlanetaryBoundary implements EntityBase {
     description: String
     id: ID!
     name: String
+    quantifications: [Quantification!]
 }
 
 " generated, do not edit manually!"
@@ -160,6 +161,7 @@ type PlanetaryBoundaryListPage {
 type Quantification implements EntityBase {
     id: ID!
     name: String
+    planetaryBoundaries: [PlanetaryBoundary!]
 }
 
 " generated, do not edit manually!"
@@ -231,10 +233,12 @@ input PlanetaryBoundaryInput {
     description: String
     id: ID!
     name: String
+    quantifications: [QuantificationInput!]
 }
 
 " generated, do not edit manually!"
 input QuantificationInput {
     id: ID!
     name: String
+    planetaryBoundaries: [PlanetaryBoundaryInput!]
 }

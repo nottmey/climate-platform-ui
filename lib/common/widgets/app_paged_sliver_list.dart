@@ -42,7 +42,7 @@ class _AppPagedSliverListState<T> extends ConsumerState<AppPagedSliverList<T>> {
 
   late int currentPageSize;
   Set<T> currentItems = {};
-  bool completed = false;
+  bool noNextPage = false;
 
   @override
   void initState() {
@@ -54,7 +54,8 @@ class _AppPagedSliverListState<T> extends ConsumerState<AppPagedSliverList<T>> {
   }
 
   void setCompleted(PagingStatus status) {
-    completed = status == PagingStatus.completed;
+    noNextPage =
+        status == PagingStatus.completed || status == PagingStatus.noItemsFound;
   }
 
   Future<void> fetchPage(int pageKey) async {
@@ -96,7 +97,7 @@ class _AppPagedSliverListState<T> extends ConsumerState<AppPagedSliverList<T>> {
     final creationsProvider = widget.creationsProvider;
     if (creationsProvider != null) {
       ref.listen(creationsProvider, (prev, next) {
-        if (completed && mounted && next.hasValue) {
+        if (noNextPage && mounted && next.hasValue) {
           final value = next.value as T;
           if (!currentItems.contains(value)) {
             currentItems.add(value);
@@ -106,23 +107,24 @@ class _AppPagedSliverListState<T> extends ConsumerState<AppPagedSliverList<T>> {
       });
     }
 
+    final builderDelegate = PagedChildBuilderDelegate(
+      itemBuilder: widget.itemBuilder,
+      noItemsFoundIndicatorBuilder: (context) => const SizedBox.shrink(),
+    );
+
     final separatorBuilder = widget.separatorBuilder;
     if (separatorBuilder != null) {
       return PagedSliverList.separated(
         pagingController: controller,
         separatorBuilder: separatorBuilder,
-        builderDelegate: PagedChildBuilderDelegate(
-          itemBuilder: widget.itemBuilder,
-        ),
+        builderDelegate: builderDelegate,
+        shrinkWrapFirstPageIndicators: true,
       );
     } else {
       return PagedSliverList(
         pagingController: controller,
-        builderDelegate: PagedChildBuilderDelegate(
-          itemBuilder: (context, T item, index) {
-            return widget.itemBuilder(context, item, index);
-          },
-        ),
+        builderDelegate: builderDelegate,
+        shrinkWrapFirstPageIndicators: true,
       );
     }
   }

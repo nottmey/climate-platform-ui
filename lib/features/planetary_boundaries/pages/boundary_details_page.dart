@@ -30,13 +30,16 @@ class BoundaryDetailsPage extends AppPageWidget {
             (state) => state.asyncEntity.whenData((value) => value.description),
           ),
           onSave: (value) => ref.read(provider.notifier).createOrMerge(
-                PlanetaryBoundaryInput(id: id, description: value),
+                PlanetaryBoundaryInput(
+                  id: id,
+                  description: value,
+                ),
               ),
         ),
       ),
       QuantificationListSliver(parentBoundaryId: id),
       SliverToBoxAdapter(
-        child: QuantificationCard.creation(),
+        child: QuantificationCard.creation(parentBoundaryId: id),
       ),
       SliverToBoxAdapter(
         child: SizedBox(height: MediaQuery.of(context).size.height / 4),

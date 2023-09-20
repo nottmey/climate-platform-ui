@@ -1,10 +1,8 @@
-query GetQuantificationPage($page: Int!, $size: Int!) {
-    listQuantification(page: {number: $page, size: $size}) {
-        info {
-            ...PageInfo
-        }
-        values {
+query GetQuantificationPage($parentBoundaryId: ID!) {
+    getPlanetaryBoundary(id: $parentBoundaryId) {
+        quantifications {
             ...Quantification
         }
+        # TODO maybe paging needed? maybe use upwards compatible `quantificationsPage($page, $size)`
     }
 }
