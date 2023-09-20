@@ -151,6 +151,8 @@ lane :ios_deploy do |options|
 end
 
 lane :android_deploy do |options|
+  ENV['SUPPLY_UPLOAD_MAX_RETRIES']='5' # solves flakiness on googles side
+
   upload_to_play_store(
     track: play_console_track,
     release_status: "draft", # TODO set to 'completed' once beta review is passed
