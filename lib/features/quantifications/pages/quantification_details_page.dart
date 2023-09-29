@@ -18,7 +18,8 @@ class QuantificationDetailsPage extends AppPageWidget {
 
   @override
   List<Widget> buildSlivers(BuildContext context, WidgetRef ref) {
-    final asyncDataPoints = ref.watch(quantificationDataPointsFamily(id));
+    final dataPointsProvider = quantificationDataPointsFamily(id);
+    final asyncDataPoints = ref.watch(dataPointsProvider);
     return [
       AppHeaderSliver(
         titleProvider: quantificationFamily(id).select(
@@ -34,7 +35,25 @@ class QuantificationDetailsPage extends AppPageWidget {
             data: (result) {
               return Column(
                 children: (result.getQuantification?.dataPoints ?? [])
-                    .map((e) => Text('Data Point: ${e.value?.ceil()}'))
+                    .map(
+                      (e) => Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Data Point: ${e.value?.ceil()}'),
+                          TextButton(
+                            onPressed: () async {
+                              await execute(
+                                DeleteDataPointMutation(
+                                  variables: DeleteDataPointArguments(id: e.id),
+                                ),
+                              );
+                              ref.invalidate(dataPointsProvider);
+                            },
+                            child: const Icon(Icons.delete),
+                          ),
+                        ],
+                      ),
+                    )
                     .toList(),
               );
             },
@@ -55,7 +74,7 @@ class QuantificationDetailsPage extends AppPageWidget {
                   ),
                 ),
               );
-              ref.invalidate(quantificationDataPointsFamily(id));
+              ref.invalidate(dataPointsProvider);
             },
           ),
         ),

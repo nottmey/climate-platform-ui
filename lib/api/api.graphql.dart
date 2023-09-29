@@ -1147,6 +1147,37 @@ class GetPlanetaryBoundary$Query extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
+class DeleteDataPoint$Mutation$DataPoint extends JsonSerializable
+    with EquatableMixin, DataPointMixin {
+  DeleteDataPoint$Mutation$DataPoint();
+
+  factory DeleteDataPoint$Mutation$DataPoint.fromJson(
+          Map<String, dynamic> json) =>
+      _$DeleteDataPoint$Mutation$DataPointFromJson(json);
+
+  @override
+  List<Object?> get props => [id, value];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$DeleteDataPoint$Mutation$DataPointToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class DeleteDataPoint$Mutation extends JsonSerializable with EquatableMixin {
+  DeleteDataPoint$Mutation();
+
+  factory DeleteDataPoint$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$DeleteDataPoint$MutationFromJson(json);
+
+  DeleteDataPoint$Mutation$DataPoint? deleteDataPoint;
+
+  @override
+  List<Object?> get props => [deleteDataPoint];
+  @override
+  Map<String, dynamic> toJson() => _$DeleteDataPoint$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class GetEntityPageArguments extends JsonSerializable with EquatableMixin {
   GetEntityPageArguments({
     this.filter,
@@ -3817,4 +3848,105 @@ class GetPlanetaryBoundaryQuery extends GraphQLQuery<GetPlanetaryBoundary$Query,
   @override
   GetPlanetaryBoundary$Query parse(Map<String, dynamic> json) =>
       GetPlanetaryBoundary$Query.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class DeleteDataPointArguments extends JsonSerializable with EquatableMixin {
+  DeleteDataPointArguments({required this.id});
+
+  @override
+  factory DeleteDataPointArguments.fromJson(Map<String, dynamic> json) =>
+      _$DeleteDataPointArgumentsFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$DeleteDataPointArgumentsToJson(this);
+}
+
+final DELETE_DATA_POINT_MUTATION_DOCUMENT_OPERATION_NAME = 'DeleteDataPoint';
+final DELETE_DATA_POINT_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'DeleteDataPoint'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'deleteDataPoint'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'DataPoint'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'DataPoint'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'DataPoint'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'value'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class DeleteDataPointMutation
+    extends GraphQLQuery<DeleteDataPoint$Mutation, DeleteDataPointArguments> {
+  DeleteDataPointMutation({required this.variables});
+
+  @override
+  final DocumentNode document = DELETE_DATA_POINT_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName =
+      DELETE_DATA_POINT_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final DeleteDataPointArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  DeleteDataPoint$Mutation parse(Map<String, dynamic> json) =>
+      DeleteDataPoint$Mutation.fromJson(json);
 }

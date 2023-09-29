@@ -978,6 +978,33 @@ Map<String, dynamic> _$GetPlanetaryBoundary$QueryToJson(
       'getPlanetaryBoundary': instance.getPlanetaryBoundary?.toJson(),
     };
 
+DeleteDataPoint$Mutation$DataPoint _$DeleteDataPoint$Mutation$DataPointFromJson(
+        Map<String, dynamic> json) =>
+    DeleteDataPoint$Mutation$DataPoint()
+      ..id = json['id'] as String
+      ..value = (json['value'] as num?)?.toDouble();
+
+Map<String, dynamic> _$DeleteDataPoint$Mutation$DataPointToJson(
+        DeleteDataPoint$Mutation$DataPoint instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'value': instance.value,
+    };
+
+DeleteDataPoint$Mutation _$DeleteDataPoint$MutationFromJson(
+        Map<String, dynamic> json) =>
+    DeleteDataPoint$Mutation()
+      ..deleteDataPoint = json['deleteDataPoint'] == null
+          ? null
+          : DeleteDataPoint$Mutation$DataPoint.fromJson(
+              json['deleteDataPoint'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$DeleteDataPoint$MutationToJson(
+        DeleteDataPoint$Mutation instance) =>
+    <String, dynamic>{
+      'deleteDataPoint': instance.deleteDataPoint?.toJson(),
+    };
+
 GetEntityPageArguments _$GetEntityPageArgumentsFromJson(
         Map<String, dynamic> json) =>
     GetEntityPageArguments(
@@ -1206,6 +1233,18 @@ GetPlanetaryBoundaryArguments _$GetPlanetaryBoundaryArgumentsFromJson(
 
 Map<String, dynamic> _$GetPlanetaryBoundaryArgumentsToJson(
         GetPlanetaryBoundaryArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+DeleteDataPointArguments _$DeleteDataPointArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    DeleteDataPointArguments(
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$DeleteDataPointArgumentsToJson(
+        DeleteDataPointArguments instance) =>
     <String, dynamic>{
       'id': instance.id,
     };

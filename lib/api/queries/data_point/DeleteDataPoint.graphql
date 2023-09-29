@@ -1,0 +1,5 @@
+mutation DeleteDataPoint($id: ID!) {
+    deleteDataPoint(id: $id) {
+        ...DataPoint
+    }
+}
