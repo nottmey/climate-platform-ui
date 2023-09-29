@@ -38,13 +38,13 @@ class EntityPage extends AppPageWidget {
 
     return [
       asyncEntity.when(
-        loading: () => const AppHeaderSliver(title: ''),
-        error: (e, st) => const AppHeaderSliver(title: ''),
+        loading: () => const AppHeaderSliver(titleFallback: ''),
+        error: (e, st) => const AppHeaderSliver(titleFallback: ''),
         data: (entity) {
           final nameAttribute =
               entity.attributes.firstWhereOrNull((a) => a.name == ':db/ident');
           return AppHeaderSliver(
-            title: nameAttribute != null &&
+            titleFallback: nameAttribute != null &&
                     nameAttribute is EntityMixin$Attribute$StringAttribute
                 ? 'Entity ${nameAttribute.string}'
                 : 'Entity ${entity.id}',

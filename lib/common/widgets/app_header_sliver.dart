@@ -5,19 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AppHeaderSliver extends ConsumerWidget {
-  final String? title;
-  final ProviderListenable<AsyncValue<String?>>? provider;
+  final String? titleFallback;
+  final ProviderListenable<AsyncValue<String?>>? titleProvider;
 
   const AppHeaderSliver({
     super.key,
-    this.title,
-    this.provider,
+    this.titleFallback,
+    this.titleProvider,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final asyncTitle =
-        provider != null ? ref.watch(provider!) : AsyncValue.data(title);
+    final asyncTitle = titleProvider != null
+        ? ref.watch(titleProvider!)
+        : AsyncValue.data(titleFallback);
     return SliverAppBar.large(
       title: AppText(
         value: asyncTitle.when(

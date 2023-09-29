@@ -15,7 +15,7 @@ class ShowcasePage extends AppPageWidget {
     final theme = context.theme;
     final colorScheme = theme.colorScheme;
     return [
-      const AppHeaderSliver(title: 'Theme Showcase'),
+      const AppHeaderSliver(titleFallback: 'Theme Showcase'),
       SliverToBoxAdapter(
         child: SelectionArea(
           child: Row(

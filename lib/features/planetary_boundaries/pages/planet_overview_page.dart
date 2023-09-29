@@ -11,7 +11,7 @@ class PlanetOverviewPage extends AppPageWidget {
   @override
   List<Widget> buildSlivers(BuildContext context, WidgetRef ref) {
     return [
-      const AppHeaderSliver(title: 'Planetary Boundaries'),
+      const AppHeaderSliver(titleFallback: 'Planetary Boundaries'),
       SliverToBoxAdapter(
         child: AppCard(
           preset: AppCardPreset.filled,

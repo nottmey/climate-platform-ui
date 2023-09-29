@@ -11,7 +11,7 @@ class DatabaseBrowserPage extends AppPageWidget {
   List<Widget> buildSlivers(BuildContext context, WidgetRef ref) {
     final theme = context.theme;
     return [
-      const AppHeaderSliver(title: 'DB Browser'),
+      const AppHeaderSliver(titleFallback: 'DB Browser'),
       theme.spacedSliverSizedBox(height: 2),
       const DatabaseEntityListSliver(),
       theme.spacedSliverSizedBox(height: 2),

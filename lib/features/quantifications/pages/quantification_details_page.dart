@@ -15,7 +15,7 @@ class QuantificationDetailsPage extends AppPageWidget {
     final provider = quantificationFamily(id);
     return [
       AppHeaderSliver(
-        provider: provider.select(
+        titleProvider: provider.select(
           (state) => state.asyncEntity.whenData((value) => value.name),
         ),
       ),

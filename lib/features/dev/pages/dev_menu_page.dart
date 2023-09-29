@@ -7,7 +7,7 @@ class DevMenuPage extends AppPageWidget {
   @override
   List<Widget> buildSlivers(BuildContext context, WidgetRef ref) {
     return [
-      const AppHeaderSliver(title: 'Dev Menu'),
+      const AppHeaderSliver(titleFallback: 'Dev Menu'),
     ];
   }
 }

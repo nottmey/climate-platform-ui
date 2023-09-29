@@ -18,7 +18,7 @@ class AttributePage extends AppPageWidget {
   List<Widget> buildSlivers(BuildContext context, WidgetRef ref) {
     final theme = context.theme;
     return [
-      AppHeaderSliver(title: 'Attribute $name'),
+      AppHeaderSliver(titleFallback: 'Attribute $name'),
       theme.spacedSliverSizedBox(height: 2),
       DatabaseEntityListSliver(attributes: [id]),
       theme.spacedSliverSizedBox(height: 2),

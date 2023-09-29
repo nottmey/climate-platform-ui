@@ -20,7 +20,7 @@ class BoundaryDetailsPage extends AppPageWidget {
 
     return [
       AppHeaderSliver(
-        provider: provider.select(
+        titleProvider: provider.select(
           (state) => state.asyncEntity.whenData((value) => value.name),
         ),
       ),
