@@ -1005,6 +1005,31 @@ Map<String, dynamic> _$DeleteDataPoint$MutationToJson(
       'deleteDataPoint': instance.deleteDataPoint?.toJson(),
     };
 
+GetDataPoint$Query$DataPoint _$GetDataPoint$Query$DataPointFromJson(
+        Map<String, dynamic> json) =>
+    GetDataPoint$Query$DataPoint()
+      ..id = json['id'] as String
+      ..value = (json['value'] as num?)?.toDouble();
+
+Map<String, dynamic> _$GetDataPoint$Query$DataPointToJson(
+        GetDataPoint$Query$DataPoint instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'value': instance.value,
+    };
+
+GetDataPoint$Query _$GetDataPoint$QueryFromJson(Map<String, dynamic> json) =>
+    GetDataPoint$Query()
+      ..getDataPoint = json['getDataPoint'] == null
+          ? null
+          : GetDataPoint$Query$DataPoint.fromJson(
+              json['getDataPoint'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetDataPoint$QueryToJson(GetDataPoint$Query instance) =>
+    <String, dynamic>{
+      'getDataPoint': instance.getDataPoint?.toJson(),
+    };
+
 GetEntityPageArguments _$GetEntityPageArgumentsFromJson(
         Map<String, dynamic> json) =>
     GetEntityPageArguments(
@@ -1245,6 +1270,18 @@ DeleteDataPointArguments _$DeleteDataPointArgumentsFromJson(
 
 Map<String, dynamic> _$DeleteDataPointArgumentsToJson(
         DeleteDataPointArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+GetDataPointArguments _$GetDataPointArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetDataPointArguments(
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$GetDataPointArgumentsToJson(
+        GetDataPointArguments instance) =>
     <String, dynamic>{
       'id': instance.id,
     };

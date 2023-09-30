@@ -1178,6 +1178,35 @@ class DeleteDataPoint$Mutation extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
+class GetDataPoint$Query$DataPoint extends JsonSerializable
+    with EquatableMixin, DataPointMixin {
+  GetDataPoint$Query$DataPoint();
+
+  factory GetDataPoint$Query$DataPoint.fromJson(Map<String, dynamic> json) =>
+      _$GetDataPoint$Query$DataPointFromJson(json);
+
+  @override
+  List<Object?> get props => [id, value];
+  @override
+  Map<String, dynamic> toJson() => _$GetDataPoint$Query$DataPointToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetDataPoint$Query extends JsonSerializable with EquatableMixin {
+  GetDataPoint$Query();
+
+  factory GetDataPoint$Query.fromJson(Map<String, dynamic> json) =>
+      _$GetDataPoint$QueryFromJson(json);
+
+  GetDataPoint$Query$DataPoint? getDataPoint;
+
+  @override
+  List<Object?> get props => [getDataPoint];
+  @override
+  Map<String, dynamic> toJson() => _$GetDataPoint$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class GetEntityPageArguments extends JsonSerializable with EquatableMixin {
   GetEntityPageArguments({
     this.filter,
@@ -3949,4 +3978,104 @@ class DeleteDataPointMutation
   @override
   DeleteDataPoint$Mutation parse(Map<String, dynamic> json) =>
       DeleteDataPoint$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetDataPointArguments extends JsonSerializable with EquatableMixin {
+  GetDataPointArguments({required this.id});
+
+  @override
+  factory GetDataPointArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetDataPointArgumentsFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$GetDataPointArgumentsToJson(this);
+}
+
+final GET_DATA_POINT_QUERY_DOCUMENT_OPERATION_NAME = 'GetDataPoint';
+final GET_DATA_POINT_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'GetDataPoint'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'getDataPoint'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'DataPoint'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'DataPoint'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'DataPoint'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'value'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+]);
+
+class GetDataPointQuery
+    extends GraphQLQuery<GetDataPoint$Query, GetDataPointArguments> {
+  GetDataPointQuery({required this.variables});
+
+  @override
+  final DocumentNode document = GET_DATA_POINT_QUERY_DOCUMENT;
+
+  @override
+  final String operationName = GET_DATA_POINT_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetDataPointArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetDataPoint$Query parse(Map<String, dynamic> json) =>
+      GetDataPoint$Query.fromJson(json);
 }

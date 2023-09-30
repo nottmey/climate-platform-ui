@@ -7,6 +7,7 @@ import 'package:climate/common/widgets/app_header_sliver.dart';
 import 'package:climate/common/widgets/app_page_widget.dart';
 import 'package:climate/features/data_points/providers/quantification_data_points_family.dart';
 import 'package:climate/features/quantifications/providers/quantifications_family.dart';
+import 'package:climate/router.dart';
 
 class QuantificationDetailsPage extends AppPageWidget {
   final String id;
@@ -32,19 +33,27 @@ class QuantificationDetailsPage extends AppPageWidget {
             skipLoadingOnRefresh: false,
             loading: () => const Text('loading'),
             error: (e, st) => Text('error $e'),
-            data: (result) {
+            data: (dataPoints) {
               return Column(
-                children: (result.getQuantification?.dataPoints ?? [])
+                children: (dataPoints ?? [])
                     .map(
-                      (e) => Row(
+                      (dataPoint) => Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Data Point: ${e.value?.ceil()}'),
+                          TextButton(
+                            onPressed: () {
+                              context.goToDataPointDetails(dataPoint.id);
+                            },
+                            child: const Icon(Icons.info_outlined),
+                          ),
+                          Text('Data Point: ${dataPoint.value?.ceil()}'),
                           TextButton(
                             onPressed: () async {
                               await execute(
                                 DeleteDataPointMutation(
-                                  variables: DeleteDataPointArguments(id: e.id),
+                                  variables: DeleteDataPointArguments(
+                                    id: dataPoint.id,
+                                  ),
                                 ),
                               );
                               ref.invalidate(dataPointsProvider);
@@ -78,7 +87,7 @@ class QuantificationDetailsPage extends AppPageWidget {
             },
           ),
         ),
-      )
+      ),
     ];
   }
 }

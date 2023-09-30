@@ -1,0 +1,5 @@
+query GetDataPoint($id: ID!) {
+    getDataPoint(id: $id) {
+        ...DataPoint
+    }
+}

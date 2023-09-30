@@ -1,3 +1,4 @@
+import 'package:climate/features/data_points/pages/data_point_details_page.dart';
 import 'package:climate/features/database_browser/pages/attribute_page.dart';
 import 'package:climate/features/database_browser/pages/database_navigator_page.dart';
 import 'package:climate/features/database_browser/pages/entity_page.dart';
@@ -16,6 +17,7 @@ import 'package:go_router/go_router.dart';
 const _overviewSegment = 'overview';
 const _boundaryDetailsSegment = 'details';
 const _quantificationDetailsSegment = 'quantifications';
+const _dataPointDetailsSegment = 'datapoints';
 const _databaseBrowserSegment = 'data';
 const _databaseEntitySegment = 'entity';
 const _databaseAttributeSegment = 'attribute';
@@ -31,6 +33,15 @@ extension Routes on BuildContext {
     final state = GoRouterState.of(this);
     final boundaryId = state.pathParameters['boundaryId']!;
     go('/$_overviewSegment/$_boundaryDetailsSegment/$boundaryId/$_quantificationDetailsSegment/$quantificationId');
+  }
+
+  void goToDataPointDetails(String dataPointId) {
+    final state = GoRouterState.of(this);
+    final boundaryId = state.pathParameters['boundaryId'];
+    final quantificationId = state.pathParameters['quantificationId'];
+    go(
+      '/$_overviewSegment/$_boundaryDetailsSegment/$boundaryId/$_quantificationDetailsSegment/$quantificationId/$_dataPointDetailsSegment/$dataPointId',
+    );
   }
 
   void goToDatabaseEntityIfNew(String id) {
@@ -72,6 +83,16 @@ GoRouter newRouter() {
                     id: state.pathParameters['quantificationId']!,
                   );
                 },
+                routes: [
+                  GoRoute(
+                    path: '$_dataPointDetailsSegment/:dataPointId',
+                    builder: (context, state) {
+                      return DataPointDetailsPage(
+                        id: state.pathParameters['dataPointId']!,
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),
