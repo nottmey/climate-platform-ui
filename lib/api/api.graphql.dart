@@ -6,17 +6,8 @@ import 'package:equatable/equatable.dart';
 import 'package:gql/ast.dart';
 part 'api.graphql.g.dart';
 
-mixin PageInfoMixin {
-  int? next;
-  late int size;
-}
-mixin EntityMixin {
+mixin BreakdownMixin {
   late String id;
-  late List<EntityMixin$Attribute> attributes;
-}
-mixin DataPointMixin {
-  late String id;
-  double? value;
 }
 mixin QuantificationMixin {
   late String id;
@@ -27,454 +18,52 @@ mixin PlanetaryBoundaryMixin {
   String? name;
   String? description;
 }
-
-@JsonSerializable(explicitToJson: true)
-class GetEntityPage$Query$EntityListPage$PageInfo extends JsonSerializable
-    with EquatableMixin, PageInfoMixin {
-  GetEntityPage$Query$EntityListPage$PageInfo();
-
-  factory GetEntityPage$Query$EntityListPage$PageInfo.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetEntityPage$Query$EntityListPage$PageInfoFromJson(json);
-
-  @override
-  List<Object?> get props => [next, size];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$GetEntityPage$Query$EntityListPage$PageInfoToJson(this);
+mixin PageInfoMixin {
+  int? next;
+  late int size;
 }
-
-@JsonSerializable(explicitToJson: true)
-class GetEntityPage$Query$EntityListPage$Entity extends JsonSerializable
-    with EquatableMixin, EntityMixin {
-  GetEntityPage$Query$EntityListPage$Entity();
-
-  factory GetEntityPage$Query$EntityListPage$Entity.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetEntityPage$Query$EntityListPage$EntityFromJson(json);
-
-  @override
-  List<Object?> get props => [id, attributes];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$GetEntityPage$Query$EntityListPage$EntityToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetEntityPage$Query$EntityListPage extends JsonSerializable
-    with EquatableMixin {
-  GetEntityPage$Query$EntityListPage();
-
-  factory GetEntityPage$Query$EntityListPage.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetEntityPage$Query$EntityListPageFromJson(json);
-
-  late GetEntityPage$Query$EntityListPage$PageInfo info;
-
-  late List<GetEntityPage$Query$EntityListPage$Entity> values;
-
-  @override
-  List<Object?> get props => [info, values];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$GetEntityPage$Query$EntityListPageToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetEntityPage$Query extends JsonSerializable with EquatableMixin {
-  GetEntityPage$Query();
-
-  factory GetEntityPage$Query.fromJson(Map<String, dynamic> json) =>
-      _$GetEntityPage$QueryFromJson(json);
-
-  late GetEntityPage$Query$EntityListPage listEntity;
-
-  @override
-  List<Object?> get props => [listEntity];
-  @override
-  Map<String, dynamic> toJson() => _$GetEntityPage$QueryToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class EntityMixin$Attribute$StringAttribute extends EntityMixin$Attribute
-    with EquatableMixin {
-  EntityMixin$Attribute$StringAttribute();
-
-  factory EntityMixin$Attribute$StringAttribute.fromJson(
-          Map<String, dynamic> json) =>
-      _$EntityMixin$Attribute$StringAttributeFromJson(json);
-
-  late String string;
-
-  @override
-  List<Object?> get props => [string];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$EntityMixin$Attribute$StringAttributeToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class EntityMixin$Attribute$BooleanAttribute extends EntityMixin$Attribute
-    with EquatableMixin {
-  EntityMixin$Attribute$BooleanAttribute();
-
-  factory EntityMixin$Attribute$BooleanAttribute.fromJson(
-          Map<String, dynamic> json) =>
-      _$EntityMixin$Attribute$BooleanAttributeFromJson(json);
-
-  late bool boolean;
-
-  @override
-  List<Object?> get props => [boolean];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$EntityMixin$Attribute$BooleanAttributeToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class EntityMixin$Attribute$DateTimeAttribute extends EntityMixin$Attribute
-    with EquatableMixin {
-  EntityMixin$Attribute$DateTimeAttribute();
-
-  factory EntityMixin$Attribute$DateTimeAttribute.fromJson(
-          Map<String, dynamic> json) =>
-      _$EntityMixin$Attribute$DateTimeAttributeFromJson(json);
-
-  late DateTime dateTime;
-
-  @override
-  List<Object?> get props => [dateTime];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$EntityMixin$Attribute$DateTimeAttributeToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class EntityMixin$Attribute$ReferenceAttribute extends EntityMixin$Attribute
-    with EquatableMixin {
-  EntityMixin$Attribute$ReferenceAttribute();
-
-  factory EntityMixin$Attribute$ReferenceAttribute.fromJson(
-          Map<String, dynamic> json) =>
-      _$EntityMixin$Attribute$ReferenceAttributeFromJson(json);
-
-  late String ref;
-
-  @override
-  List<Object?> get props => [ref];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$EntityMixin$Attribute$ReferenceAttributeToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class EntityMixin$Attribute$TupleAttribute extends EntityMixin$Attribute
-    with EquatableMixin {
-  EntityMixin$Attribute$TupleAttribute();
-
-  factory EntityMixin$Attribute$TupleAttribute.fromJson(
-          Map<String, dynamic> json) =>
-      _$EntityMixin$Attribute$TupleAttributeFromJson(json);
-
-  late String tuple;
-
-  @override
-  List<Object?> get props => [tuple];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$EntityMixin$Attribute$TupleAttributeToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class EntityMixin$Attribute$MultiStringAttribute extends EntityMixin$Attribute
-    with EquatableMixin {
-  EntityMixin$Attribute$MultiStringAttribute();
-
-  factory EntityMixin$Attribute$MultiStringAttribute.fromJson(
-          Map<String, dynamic> json) =>
-      _$EntityMixin$Attribute$MultiStringAttributeFromJson(json);
-
-  late List<String> strings;
-
-  @override
-  List<Object?> get props => [strings];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$EntityMixin$Attribute$MultiStringAttributeToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class EntityMixin$Attribute$MultiBooleanAttribute extends EntityMixin$Attribute
-    with EquatableMixin {
-  EntityMixin$Attribute$MultiBooleanAttribute();
-
-  factory EntityMixin$Attribute$MultiBooleanAttribute.fromJson(
-          Map<String, dynamic> json) =>
-      _$EntityMixin$Attribute$MultiBooleanAttributeFromJson(json);
-
-  late List<bool> booleans;
-
-  @override
-  List<Object?> get props => [booleans];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$EntityMixin$Attribute$MultiBooleanAttributeToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class EntityMixin$Attribute$MultiDateTimeAttribute extends EntityMixin$Attribute
-    with EquatableMixin {
-  EntityMixin$Attribute$MultiDateTimeAttribute();
-
-  factory EntityMixin$Attribute$MultiDateTimeAttribute.fromJson(
-          Map<String, dynamic> json) =>
-      _$EntityMixin$Attribute$MultiDateTimeAttributeFromJson(json);
-
-  late List<DateTime> dateTimes;
-
-  @override
-  List<Object?> get props => [dateTimes];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$EntityMixin$Attribute$MultiDateTimeAttributeToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class EntityMixin$Attribute$MultiReferenceAttribute
-    extends EntityMixin$Attribute with EquatableMixin {
-  EntityMixin$Attribute$MultiReferenceAttribute();
-
-  factory EntityMixin$Attribute$MultiReferenceAttribute.fromJson(
-          Map<String, dynamic> json) =>
-      _$EntityMixin$Attribute$MultiReferenceAttributeFromJson(json);
-
-  late List<String> refs;
-
-  @override
-  List<Object?> get props => [refs];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$EntityMixin$Attribute$MultiReferenceAttributeToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class EntityMixin$Attribute$MultiTupleAttribute extends EntityMixin$Attribute
-    with EquatableMixin {
-  EntityMixin$Attribute$MultiTupleAttribute();
-
-  factory EntityMixin$Attribute$MultiTupleAttribute.fromJson(
-          Map<String, dynamic> json) =>
-      _$EntityMixin$Attribute$MultiTupleAttributeFromJson(json);
-
-  late List<String> tuples;
-
-  @override
-  List<Object?> get props => [tuples];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$EntityMixin$Attribute$MultiTupleAttributeToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class EntityMixin$Attribute extends JsonSerializable with EquatableMixin {
-  EntityMixin$Attribute();
-
-  factory EntityMixin$Attribute.fromJson(Map<String, dynamic> json) {
-    switch (json['__typename'].toString()) {
-      case r'StringAttribute':
-        return EntityMixin$Attribute$StringAttribute.fromJson(json);
-      case r'BooleanAttribute':
-        return EntityMixin$Attribute$BooleanAttribute.fromJson(json);
-      case r'DateTimeAttribute':
-        return EntityMixin$Attribute$DateTimeAttribute.fromJson(json);
-      case r'ReferenceAttribute':
-        return EntityMixin$Attribute$ReferenceAttribute.fromJson(json);
-      case r'TupleAttribute':
-        return EntityMixin$Attribute$TupleAttribute.fromJson(json);
-      case r'MultiStringAttribute':
-        return EntityMixin$Attribute$MultiStringAttribute.fromJson(json);
-      case r'MultiBooleanAttribute':
-        return EntityMixin$Attribute$MultiBooleanAttribute.fromJson(json);
-      case r'MultiDateTimeAttribute':
-        return EntityMixin$Attribute$MultiDateTimeAttribute.fromJson(json);
-      case r'MultiReferenceAttribute':
-        return EntityMixin$Attribute$MultiReferenceAttribute.fromJson(json);
-      case r'MultiTupleAttribute':
-        return EntityMixin$Attribute$MultiTupleAttribute.fromJson(json);
-      default:
-    }
-    return _$EntityMixin$AttributeFromJson(json);
-  }
-
-  @JsonKey(name: '__typename')
-  String? $$typename;
-
+mixin DataPointMixin {
   late String id;
-
-  late String name;
-
-  @override
-  List<Object?> get props => [$$typename, id, name];
-  @override
-  Map<String, dynamic> toJson() {
-    switch ($$typename) {
-      case r'StringAttribute':
-        return (this as EntityMixin$Attribute$StringAttribute).toJson();
-      case r'BooleanAttribute':
-        return (this as EntityMixin$Attribute$BooleanAttribute).toJson();
-      case r'DateTimeAttribute':
-        return (this as EntityMixin$Attribute$DateTimeAttribute).toJson();
-      case r'ReferenceAttribute':
-        return (this as EntityMixin$Attribute$ReferenceAttribute).toJson();
-      case r'TupleAttribute':
-        return (this as EntityMixin$Attribute$TupleAttribute).toJson();
-      case r'MultiStringAttribute':
-        return (this as EntityMixin$Attribute$MultiStringAttribute).toJson();
-      case r'MultiBooleanAttribute':
-        return (this as EntityMixin$Attribute$MultiBooleanAttribute).toJson();
-      case r'MultiDateTimeAttribute':
-        return (this as EntityMixin$Attribute$MultiDateTimeAttribute).toJson();
-      case r'MultiReferenceAttribute':
-        return (this as EntityMixin$Attribute$MultiReferenceAttribute).toJson();
-      case r'MultiTupleAttribute':
-        return (this as EntityMixin$Attribute$MultiTupleAttribute).toJson();
-      default:
-    }
-    return _$EntityMixin$AttributeToJson(this);
-  }
+  double? value;
+  List<DataPointMixin$Breakdown>? breakdowns;
+}
+mixin EntityMixin {
+  late String id;
+  late List<EntityMixin$Attribute> attributes;
 }
 
 @JsonSerializable(explicitToJson: true)
-class EntityFilter extends JsonSerializable with EquatableMixin {
-  EntityFilter({this.attributes});
+class CreateBreakdownOnDataPoint$Mutation$Breakdown extends JsonSerializable
+    with EquatableMixin, BreakdownMixin {
+  CreateBreakdownOnDataPoint$Mutation$Breakdown();
 
-  factory EntityFilter.fromJson(Map<String, dynamic> json) =>
-      _$EntityFilterFromJson(json);
-
-  List<String>? attributes;
-
-  @override
-  List<Object?> get props => [attributes];
-  @override
-  Map<String, dynamic> toJson() => _$EntityFilterToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetEntity$Query$Entity extends JsonSerializable
-    with EquatableMixin, EntityMixin {
-  GetEntity$Query$Entity();
-
-  factory GetEntity$Query$Entity.fromJson(Map<String, dynamic> json) =>
-      _$GetEntity$Query$EntityFromJson(json);
-
-  @override
-  List<Object?> get props => [id, attributes];
-  @override
-  Map<String, dynamic> toJson() => _$GetEntity$Query$EntityToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetEntity$Query extends JsonSerializable with EquatableMixin {
-  GetEntity$Query();
-
-  factory GetEntity$Query.fromJson(Map<String, dynamic> json) =>
-      _$GetEntity$QueryFromJson(json);
-
-  GetEntity$Query$Entity? getEntity;
-
-  @override
-  List<Object?> get props => [getEntity];
-  @override
-  Map<String, dynamic> toJson() => _$GetEntity$QueryToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class CreateDataPointOnQuantification$Mutation$DataPoint
-    extends JsonSerializable with EquatableMixin, DataPointMixin {
-  CreateDataPointOnQuantification$Mutation$DataPoint();
-
-  factory CreateDataPointOnQuantification$Mutation$DataPoint.fromJson(
+  factory CreateBreakdownOnDataPoint$Mutation$Breakdown.fromJson(
           Map<String, dynamic> json) =>
-      _$CreateDataPointOnQuantification$Mutation$DataPointFromJson(json);
+      _$CreateBreakdownOnDataPoint$Mutation$BreakdownFromJson(json);
 
   @override
-  List<Object?> get props => [id, value];
+  List<Object?> get props => [id];
   @override
   Map<String, dynamic> toJson() =>
-      _$CreateDataPointOnQuantification$Mutation$DataPointToJson(this);
+      _$CreateBreakdownOnDataPoint$Mutation$BreakdownToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class CreateDataPointOnQuantification$Mutation extends JsonSerializable
+class CreateBreakdownOnDataPoint$Mutation extends JsonSerializable
     with EquatableMixin {
-  CreateDataPointOnQuantification$Mutation();
+  CreateBreakdownOnDataPoint$Mutation();
 
-  factory CreateDataPointOnQuantification$Mutation.fromJson(
+  factory CreateBreakdownOnDataPoint$Mutation.fromJson(
           Map<String, dynamic> json) =>
-      _$CreateDataPointOnQuantification$MutationFromJson(json);
+      _$CreateBreakdownOnDataPoint$MutationFromJson(json);
 
-  late CreateDataPointOnQuantification$Mutation$DataPoint createDataPoint;
+  late CreateBreakdownOnDataPoint$Mutation$Breakdown createBreakdown;
 
   @override
-  List<Object?> get props => [createDataPoint];
+  List<Object?> get props => [createBreakdown];
   @override
   Map<String, dynamic> toJson() =>
-      _$CreateDataPointOnQuantification$MutationToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetDataPointsOnQuantification$Query$Quantification$DataPoint
-    extends JsonSerializable with EquatableMixin, DataPointMixin {
-  GetDataPointsOnQuantification$Query$Quantification$DataPoint();
-
-  factory GetDataPointsOnQuantification$Query$Quantification$DataPoint.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetDataPointsOnQuantification$Query$Quantification$DataPointFromJson(
-          json);
-
-  @override
-  List<Object?> get props => [id, value];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$GetDataPointsOnQuantification$Query$Quantification$DataPointToJson(
-          this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetDataPointsOnQuantification$Query$Quantification
-    extends JsonSerializable with EquatableMixin {
-  GetDataPointsOnQuantification$Query$Quantification();
-
-  factory GetDataPointsOnQuantification$Query$Quantification.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetDataPointsOnQuantification$Query$QuantificationFromJson(json);
-
-  List<GetDataPointsOnQuantification$Query$Quantification$DataPoint>?
-      dataPoints;
-
-  @override
-  List<Object?> get props => [dataPoints];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$GetDataPointsOnQuantification$Query$QuantificationToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetDataPointsOnQuantification$Query extends JsonSerializable
-    with EquatableMixin {
-  GetDataPointsOnQuantification$Query();
-
-  factory GetDataPointsOnQuantification$Query.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetDataPointsOnQuantification$QueryFromJson(json);
-
-  GetDataPointsOnQuantification$Query$Quantification? getQuantification;
-
-  @override
-  List<Object?> get props => [getQuantification];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$GetDataPointsOnQuantification$QueryToJson(this);
+      _$CreateBreakdownOnDataPoint$MutationToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -538,6 +127,8 @@ class QuantificationInput extends JsonSerializable with EquatableMixin {
 @JsonSerializable(explicitToJson: true)
 class DataPointInput extends JsonSerializable with EquatableMixin {
   DataPointInput({
+    this.breakdowns,
+    this.compositions,
     required this.id,
     this.quantifications,
     this.value,
@@ -546,6 +137,10 @@ class DataPointInput extends JsonSerializable with EquatableMixin {
   factory DataPointInput.fromJson(Map<String, dynamic> json) =>
       _$DataPointInputFromJson(json);
 
+  List<BreakdownInput>? breakdowns;
+
+  List<BreakdownInput>? compositions;
+
   late String id;
 
   List<QuantificationInput>? quantifications;
@@ -553,9 +148,33 @@ class DataPointInput extends JsonSerializable with EquatableMixin {
   double? value;
 
   @override
-  List<Object?> get props => [id, quantifications, value];
+  List<Object?> get props =>
+      [breakdowns, compositions, id, quantifications, value];
   @override
   Map<String, dynamic> toJson() => _$DataPointInputToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class BreakdownInput extends JsonSerializable with EquatableMixin {
+  BreakdownInput({
+    this.components,
+    required this.id,
+    this.parent,
+  });
+
+  factory BreakdownInput.fromJson(Map<String, dynamic> json) =>
+      _$BreakdownInputFromJson(json);
+
+  List<DataPointInput>? components;
+
+  late String id;
+
+  DataPointInput? parent;
+
+  @override
+  List<Object?> get props => [components, id, parent];
+  @override
+  Map<String, dynamic> toJson() => _$BreakdownInputToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -1147,6 +766,139 @@ class GetPlanetaryBoundary$Query extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
+class GetDataPoint$Query$DataPoint extends JsonSerializable
+    with EquatableMixin, DataPointMixin {
+  GetDataPoint$Query$DataPoint();
+
+  factory GetDataPoint$Query$DataPoint.fromJson(Map<String, dynamic> json) =>
+      _$GetDataPoint$Query$DataPointFromJson(json);
+
+  @override
+  List<Object?> get props => [id, value, breakdowns];
+  @override
+  Map<String, dynamic> toJson() => _$GetDataPoint$Query$DataPointToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetDataPoint$Query extends JsonSerializable with EquatableMixin {
+  GetDataPoint$Query();
+
+  factory GetDataPoint$Query.fromJson(Map<String, dynamic> json) =>
+      _$GetDataPoint$QueryFromJson(json);
+
+  GetDataPoint$Query$DataPoint? getDataPoint;
+
+  @override
+  List<Object?> get props => [getDataPoint];
+  @override
+  Map<String, dynamic> toJson() => _$GetDataPoint$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class DataPointMixin$Breakdown extends JsonSerializable with EquatableMixin {
+  DataPointMixin$Breakdown();
+
+  factory DataPointMixin$Breakdown.fromJson(Map<String, dynamic> json) =>
+      _$DataPointMixin$BreakdownFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$DataPointMixin$BreakdownToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class CreateDataPointOnQuantification$Mutation$DataPoint
+    extends JsonSerializable with EquatableMixin, DataPointMixin {
+  CreateDataPointOnQuantification$Mutation$DataPoint();
+
+  factory CreateDataPointOnQuantification$Mutation$DataPoint.fromJson(
+          Map<String, dynamic> json) =>
+      _$CreateDataPointOnQuantification$Mutation$DataPointFromJson(json);
+
+  @override
+  List<Object?> get props => [id, value, breakdowns];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$CreateDataPointOnQuantification$Mutation$DataPointToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class CreateDataPointOnQuantification$Mutation extends JsonSerializable
+    with EquatableMixin {
+  CreateDataPointOnQuantification$Mutation();
+
+  factory CreateDataPointOnQuantification$Mutation.fromJson(
+          Map<String, dynamic> json) =>
+      _$CreateDataPointOnQuantification$MutationFromJson(json);
+
+  late CreateDataPointOnQuantification$Mutation$DataPoint createDataPoint;
+
+  @override
+  List<Object?> get props => [createDataPoint];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$CreateDataPointOnQuantification$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetDataPointsOnQuantification$Query$Quantification$DataPoint
+    extends JsonSerializable with EquatableMixin, DataPointMixin {
+  GetDataPointsOnQuantification$Query$Quantification$DataPoint();
+
+  factory GetDataPointsOnQuantification$Query$Quantification$DataPoint.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetDataPointsOnQuantification$Query$Quantification$DataPointFromJson(
+          json);
+
+  @override
+  List<Object?> get props => [id, value, breakdowns];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetDataPointsOnQuantification$Query$Quantification$DataPointToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetDataPointsOnQuantification$Query$Quantification
+    extends JsonSerializable with EquatableMixin {
+  GetDataPointsOnQuantification$Query$Quantification();
+
+  factory GetDataPointsOnQuantification$Query$Quantification.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetDataPointsOnQuantification$Query$QuantificationFromJson(json);
+
+  List<GetDataPointsOnQuantification$Query$Quantification$DataPoint>?
+      dataPoints;
+
+  @override
+  List<Object?> get props => [dataPoints];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetDataPointsOnQuantification$Query$QuantificationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetDataPointsOnQuantification$Query extends JsonSerializable
+    with EquatableMixin {
+  GetDataPointsOnQuantification$Query();
+
+  factory GetDataPointsOnQuantification$Query.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetDataPointsOnQuantification$QueryFromJson(json);
+
+  GetDataPointsOnQuantification$Query$Quantification? getQuantification;
+
+  @override
+  List<Object?> get props => [getQuantification];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetDataPointsOnQuantification$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class DeleteDataPoint$Mutation$DataPoint extends JsonSerializable
     with EquatableMixin, DataPointMixin {
   DeleteDataPoint$Mutation$DataPoint();
@@ -1156,7 +908,7 @@ class DeleteDataPoint$Mutation$DataPoint extends JsonSerializable
       _$DeleteDataPoint$Mutation$DataPointFromJson(json);
 
   @override
-  List<Object?> get props => [id, value];
+  List<Object?> get props => [id, value, breakdowns];
   @override
   Map<String, dynamic> toJson() =>
       _$DeleteDataPoint$Mutation$DataPointToJson(this);
@@ -1178,735 +930,396 @@ class DeleteDataPoint$Mutation extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
-class GetDataPoint$Query$DataPoint extends JsonSerializable
-    with EquatableMixin, DataPointMixin {
-  GetDataPoint$Query$DataPoint();
+class GetEntityPage$Query$EntityListPage$PageInfo extends JsonSerializable
+    with EquatableMixin, PageInfoMixin {
+  GetEntityPage$Query$EntityListPage$PageInfo();
 
-  factory GetDataPoint$Query$DataPoint.fromJson(Map<String, dynamic> json) =>
-      _$GetDataPoint$Query$DataPointFromJson(json);
-
-  @override
-  List<Object?> get props => [id, value];
-  @override
-  Map<String, dynamic> toJson() => _$GetDataPoint$Query$DataPointToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetDataPoint$Query extends JsonSerializable with EquatableMixin {
-  GetDataPoint$Query();
-
-  factory GetDataPoint$Query.fromJson(Map<String, dynamic> json) =>
-      _$GetDataPoint$QueryFromJson(json);
-
-  GetDataPoint$Query$DataPoint? getDataPoint;
-
-  @override
-  List<Object?> get props => [getDataPoint];
-  @override
-  Map<String, dynamic> toJson() => _$GetDataPoint$QueryToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetEntityPageArguments extends JsonSerializable with EquatableMixin {
-  GetEntityPageArguments({
-    this.filter,
-    required this.page,
-    required this.size,
-  });
-
-  @override
-  factory GetEntityPageArguments.fromJson(Map<String, dynamic> json) =>
-      _$GetEntityPageArgumentsFromJson(json);
-
-  final EntityFilter? filter;
-
-  late int page;
-
-  late int size;
-
-  @override
-  List<Object?> get props => [filter, page, size];
-  @override
-  Map<String, dynamic> toJson() => _$GetEntityPageArgumentsToJson(this);
-}
-
-final GET_ENTITY_PAGE_QUERY_DOCUMENT_OPERATION_NAME = 'GetEntityPage';
-final GET_ENTITY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.query,
-    name: NameNode(value: 'GetEntityPage'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'filter')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'EntityFilter'),
-          isNonNull: false,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'page')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'size')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'listEntity'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'filter'),
-            value: VariableNode(name: NameNode(value: 'filter')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'page'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'number'),
-                value: VariableNode(name: NameNode(value: 'page')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'size'),
-                value: VariableNode(name: NameNode(value: 'size')),
-              ),
-            ]),
-          ),
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'info'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'PageInfo'),
-                directives: [],
-              )
-            ]),
-          ),
-          FieldNode(
-            name: NameNode(value: 'values'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'Entity'),
-                directives: [],
-              )
-            ]),
-          ),
-        ]),
-      )
-    ]),
-  ),
-  FragmentDefinitionNode(
-    name: NameNode(value: 'PageInfo'),
-    typeCondition: TypeConditionNode(
-        on: NamedTypeNode(
-      name: NameNode(value: 'PageInfo'),
-      isNonNull: false,
-    )),
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'next'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'size'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  FragmentDefinitionNode(
-    name: NameNode(value: 'Entity'),
-    typeCondition: TypeConditionNode(
-        on: NamedTypeNode(
-      name: NameNode(value: 'Entity'),
-      isNonNull: false,
-    )),
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'attributes'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'name'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'StringAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'string'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'BooleanAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'boolean'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'DateTimeAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'dateTime'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'ReferenceAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'ref'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'TupleAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'tuple'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'MultiStringAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'strings'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'MultiBooleanAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'booleans'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'MultiDateTimeAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'dateTimes'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'MultiReferenceAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'refs'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'MultiTupleAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'tuples'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-        ]),
-      ),
-    ]),
-  ),
-]);
-
-class GetEntityPageQuery
-    extends GraphQLQuery<GetEntityPage$Query, GetEntityPageArguments> {
-  GetEntityPageQuery({required this.variables});
-
-  @override
-  final DocumentNode document = GET_ENTITY_PAGE_QUERY_DOCUMENT;
-
-  @override
-  final String operationName = GET_ENTITY_PAGE_QUERY_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final GetEntityPageArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  GetEntityPage$Query parse(Map<String, dynamic> json) =>
-      GetEntityPage$Query.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetEntityArguments extends JsonSerializable with EquatableMixin {
-  GetEntityArguments({required this.id});
-
-  @override
-  factory GetEntityArguments.fromJson(Map<String, dynamic> json) =>
-      _$GetEntityArgumentsFromJson(json);
-
-  late String id;
-
-  @override
-  List<Object?> get props => [id];
-  @override
-  Map<String, dynamic> toJson() => _$GetEntityArgumentsToJson(this);
-}
-
-final GET_ENTITY_QUERY_DOCUMENT_OPERATION_NAME = 'GetEntity';
-final GET_ENTITY_QUERY_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.query,
-    name: NameNode(value: 'GetEntity'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'id')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'ID'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'getEntity'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'id'),
-            value: VariableNode(name: NameNode(value: 'id')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Entity'),
-            directives: [],
-          )
-        ]),
-      )
-    ]),
-  ),
-  FragmentDefinitionNode(
-    name: NameNode(value: 'Entity'),
-    typeCondition: TypeConditionNode(
-        on: NamedTypeNode(
-      name: NameNode(value: 'Entity'),
-      isNonNull: false,
-    )),
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'attributes'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'name'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'StringAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'string'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'BooleanAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'boolean'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'DateTimeAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'dateTime'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'ReferenceAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'ref'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'TupleAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'tuple'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'MultiStringAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'strings'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'MultiBooleanAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'booleans'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'MultiDateTimeAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'dateTimes'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'MultiReferenceAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'refs'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-          InlineFragmentNode(
-            typeCondition: TypeConditionNode(
-                on: NamedTypeNode(
-              name: NameNode(value: 'MultiTupleAttribute'),
-              isNonNull: false,
-            )),
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'tuples'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              )
-            ]),
-          ),
-        ]),
-      ),
-    ]),
-  ),
-]);
-
-class GetEntityQuery extends GraphQLQuery<GetEntity$Query, GetEntityArguments> {
-  GetEntityQuery({required this.variables});
-
-  @override
-  final DocumentNode document = GET_ENTITY_QUERY_DOCUMENT;
-
-  @override
-  final String operationName = GET_ENTITY_QUERY_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final GetEntityArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  GetEntity$Query parse(Map<String, dynamic> json) =>
-      GetEntity$Query.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
-class CreateDataPointOnQuantificationArguments extends JsonSerializable
-    with EquatableMixin {
-  CreateDataPointOnQuantificationArguments({
-    required this.id,
-    required this.value,
-    required this.parentQuantificationId,
-  });
-
-  @override
-  factory CreateDataPointOnQuantificationArguments.fromJson(
+  factory GetEntityPage$Query$EntityListPage$PageInfo.fromJson(
           Map<String, dynamic> json) =>
-      _$CreateDataPointOnQuantificationArgumentsFromJson(json);
-
-  late String id;
-
-  late double value;
-
-  late String parentQuantificationId;
+      _$GetEntityPage$Query$EntityListPage$PageInfoFromJson(json);
 
   @override
-  List<Object?> get props => [id, value, parentQuantificationId];
+  List<Object?> get props => [next, size];
   @override
   Map<String, dynamic> toJson() =>
-      _$CreateDataPointOnQuantificationArgumentsToJson(this);
+      _$GetEntityPage$Query$EntityListPage$PageInfoToJson(this);
 }
 
-final CREATE_DATA_POINT_ON_QUANTIFICATION_MUTATION_DOCUMENT_OPERATION_NAME =
-    'CreateDataPointOnQuantification';
-final CREATE_DATA_POINT_ON_QUANTIFICATION_MUTATION_DOCUMENT =
+@JsonSerializable(explicitToJson: true)
+class GetEntityPage$Query$EntityListPage$Entity extends JsonSerializable
+    with EquatableMixin, EntityMixin {
+  GetEntityPage$Query$EntityListPage$Entity();
+
+  factory GetEntityPage$Query$EntityListPage$Entity.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetEntityPage$Query$EntityListPage$EntityFromJson(json);
+
+  @override
+  List<Object?> get props => [id, attributes];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetEntityPage$Query$EntityListPage$EntityToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetEntityPage$Query$EntityListPage extends JsonSerializable
+    with EquatableMixin {
+  GetEntityPage$Query$EntityListPage();
+
+  factory GetEntityPage$Query$EntityListPage.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetEntityPage$Query$EntityListPageFromJson(json);
+
+  late GetEntityPage$Query$EntityListPage$PageInfo info;
+
+  late List<GetEntityPage$Query$EntityListPage$Entity> values;
+
+  @override
+  List<Object?> get props => [info, values];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetEntityPage$Query$EntityListPageToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetEntityPage$Query extends JsonSerializable with EquatableMixin {
+  GetEntityPage$Query();
+
+  factory GetEntityPage$Query.fromJson(Map<String, dynamic> json) =>
+      _$GetEntityPage$QueryFromJson(json);
+
+  late GetEntityPage$Query$EntityListPage listEntity;
+
+  @override
+  List<Object?> get props => [listEntity];
+  @override
+  Map<String, dynamic> toJson() => _$GetEntityPage$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$StringAttribute extends EntityMixin$Attribute
+    with EquatableMixin {
+  EntityMixin$Attribute$StringAttribute();
+
+  factory EntityMixin$Attribute$StringAttribute.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$StringAttributeFromJson(json);
+
+  late String string;
+
+  @override
+  List<Object?> get props => [string];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$StringAttributeToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$BooleanAttribute extends EntityMixin$Attribute
+    with EquatableMixin {
+  EntityMixin$Attribute$BooleanAttribute();
+
+  factory EntityMixin$Attribute$BooleanAttribute.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$BooleanAttributeFromJson(json);
+
+  late bool boolean;
+
+  @override
+  List<Object?> get props => [boolean];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$BooleanAttributeToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$DateTimeAttribute extends EntityMixin$Attribute
+    with EquatableMixin {
+  EntityMixin$Attribute$DateTimeAttribute();
+
+  factory EntityMixin$Attribute$DateTimeAttribute.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$DateTimeAttributeFromJson(json);
+
+  late DateTime dateTime;
+
+  @override
+  List<Object?> get props => [dateTime];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$DateTimeAttributeToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$ReferenceAttribute extends EntityMixin$Attribute
+    with EquatableMixin {
+  EntityMixin$Attribute$ReferenceAttribute();
+
+  factory EntityMixin$Attribute$ReferenceAttribute.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$ReferenceAttributeFromJson(json);
+
+  late String ref;
+
+  @override
+  List<Object?> get props => [ref];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$ReferenceAttributeToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$TupleAttribute extends EntityMixin$Attribute
+    with EquatableMixin {
+  EntityMixin$Attribute$TupleAttribute();
+
+  factory EntityMixin$Attribute$TupleAttribute.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$TupleAttributeFromJson(json);
+
+  late String tuple;
+
+  @override
+  List<Object?> get props => [tuple];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$TupleAttributeToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$MultiStringAttribute extends EntityMixin$Attribute
+    with EquatableMixin {
+  EntityMixin$Attribute$MultiStringAttribute();
+
+  factory EntityMixin$Attribute$MultiStringAttribute.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$MultiStringAttributeFromJson(json);
+
+  late List<String> strings;
+
+  @override
+  List<Object?> get props => [strings];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$MultiStringAttributeToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$MultiBooleanAttribute extends EntityMixin$Attribute
+    with EquatableMixin {
+  EntityMixin$Attribute$MultiBooleanAttribute();
+
+  factory EntityMixin$Attribute$MultiBooleanAttribute.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$MultiBooleanAttributeFromJson(json);
+
+  late List<bool> booleans;
+
+  @override
+  List<Object?> get props => [booleans];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$MultiBooleanAttributeToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$MultiDateTimeAttribute extends EntityMixin$Attribute
+    with EquatableMixin {
+  EntityMixin$Attribute$MultiDateTimeAttribute();
+
+  factory EntityMixin$Attribute$MultiDateTimeAttribute.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$MultiDateTimeAttributeFromJson(json);
+
+  late List<DateTime> dateTimes;
+
+  @override
+  List<Object?> get props => [dateTimes];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$MultiDateTimeAttributeToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$MultiReferenceAttribute
+    extends EntityMixin$Attribute with EquatableMixin {
+  EntityMixin$Attribute$MultiReferenceAttribute();
+
+  factory EntityMixin$Attribute$MultiReferenceAttribute.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$MultiReferenceAttributeFromJson(json);
+
+  late List<String> refs;
+
+  @override
+  List<Object?> get props => [refs];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$MultiReferenceAttributeToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute$MultiTupleAttribute extends EntityMixin$Attribute
+    with EquatableMixin {
+  EntityMixin$Attribute$MultiTupleAttribute();
+
+  factory EntityMixin$Attribute$MultiTupleAttribute.fromJson(
+          Map<String, dynamic> json) =>
+      _$EntityMixin$Attribute$MultiTupleAttributeFromJson(json);
+
+  late List<String> tuples;
+
+  @override
+  List<Object?> get props => [tuples];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$EntityMixin$Attribute$MultiTupleAttributeToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class EntityMixin$Attribute extends JsonSerializable with EquatableMixin {
+  EntityMixin$Attribute();
+
+  factory EntityMixin$Attribute.fromJson(Map<String, dynamic> json) {
+    switch (json['__typename'].toString()) {
+      case r'StringAttribute':
+        return EntityMixin$Attribute$StringAttribute.fromJson(json);
+      case r'BooleanAttribute':
+        return EntityMixin$Attribute$BooleanAttribute.fromJson(json);
+      case r'DateTimeAttribute':
+        return EntityMixin$Attribute$DateTimeAttribute.fromJson(json);
+      case r'ReferenceAttribute':
+        return EntityMixin$Attribute$ReferenceAttribute.fromJson(json);
+      case r'TupleAttribute':
+        return EntityMixin$Attribute$TupleAttribute.fromJson(json);
+      case r'MultiStringAttribute':
+        return EntityMixin$Attribute$MultiStringAttribute.fromJson(json);
+      case r'MultiBooleanAttribute':
+        return EntityMixin$Attribute$MultiBooleanAttribute.fromJson(json);
+      case r'MultiDateTimeAttribute':
+        return EntityMixin$Attribute$MultiDateTimeAttribute.fromJson(json);
+      case r'MultiReferenceAttribute':
+        return EntityMixin$Attribute$MultiReferenceAttribute.fromJson(json);
+      case r'MultiTupleAttribute':
+        return EntityMixin$Attribute$MultiTupleAttribute.fromJson(json);
+      default:
+    }
+    return _$EntityMixin$AttributeFromJson(json);
+  }
+
+  @JsonKey(name: '__typename')
+  String? $$typename;
+
+  late String id;
+
+  late String name;
+
+  @override
+  List<Object?> get props => [$$typename, id, name];
+  @override
+  Map<String, dynamic> toJson() {
+    switch ($$typename) {
+      case r'StringAttribute':
+        return (this as EntityMixin$Attribute$StringAttribute).toJson();
+      case r'BooleanAttribute':
+        return (this as EntityMixin$Attribute$BooleanAttribute).toJson();
+      case r'DateTimeAttribute':
+        return (this as EntityMixin$Attribute$DateTimeAttribute).toJson();
+      case r'ReferenceAttribute':
+        return (this as EntityMixin$Attribute$ReferenceAttribute).toJson();
+      case r'TupleAttribute':
+        return (this as EntityMixin$Attribute$TupleAttribute).toJson();
+      case r'MultiStringAttribute':
+        return (this as EntityMixin$Attribute$MultiStringAttribute).toJson();
+      case r'MultiBooleanAttribute':
+        return (this as EntityMixin$Attribute$MultiBooleanAttribute).toJson();
+      case r'MultiDateTimeAttribute':
+        return (this as EntityMixin$Attribute$MultiDateTimeAttribute).toJson();
+      case r'MultiReferenceAttribute':
+        return (this as EntityMixin$Attribute$MultiReferenceAttribute).toJson();
+      case r'MultiTupleAttribute':
+        return (this as EntityMixin$Attribute$MultiTupleAttribute).toJson();
+      default:
+    }
+    return _$EntityMixin$AttributeToJson(this);
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class EntityFilter extends JsonSerializable with EquatableMixin {
+  EntityFilter({this.attributes});
+
+  factory EntityFilter.fromJson(Map<String, dynamic> json) =>
+      _$EntityFilterFromJson(json);
+
+  List<String>? attributes;
+
+  @override
+  List<Object?> get props => [attributes];
+  @override
+  Map<String, dynamic> toJson() => _$EntityFilterToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetEntity$Query$Entity extends JsonSerializable
+    with EquatableMixin, EntityMixin {
+  GetEntity$Query$Entity();
+
+  factory GetEntity$Query$Entity.fromJson(Map<String, dynamic> json) =>
+      _$GetEntity$Query$EntityFromJson(json);
+
+  @override
+  List<Object?> get props => [id, attributes];
+  @override
+  Map<String, dynamic> toJson() => _$GetEntity$Query$EntityToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetEntity$Query extends JsonSerializable with EquatableMixin {
+  GetEntity$Query();
+
+  factory GetEntity$Query.fromJson(Map<String, dynamic> json) =>
+      _$GetEntity$QueryFromJson(json);
+
+  GetEntity$Query$Entity? getEntity;
+
+  @override
+  List<Object?> get props => [getEntity];
+  @override
+  Map<String, dynamic> toJson() => _$GetEntity$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class CreateBreakdownOnDataPointArguments extends JsonSerializable
+    with EquatableMixin {
+  CreateBreakdownOnDataPointArguments({
+    required this.id,
+    required this.parentDataPointId,
+  });
+
+  @override
+  factory CreateBreakdownOnDataPointArguments.fromJson(
+          Map<String, dynamic> json) =>
+      _$CreateBreakdownOnDataPointArgumentsFromJson(json);
+
+  late String id;
+
+  late String parentDataPointId;
+
+  @override
+  List<Object?> get props => [id, parentDataPointId];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$CreateBreakdownOnDataPointArgumentsToJson(this);
+}
+
+final CREATE_BREAKDOWN_ON_DATA_POINT_MUTATION_DOCUMENT_OPERATION_NAME =
+    'CreateBreakdownOnDataPoint';
+final CREATE_BREAKDOWN_ON_DATA_POINT_MUTATION_DOCUMENT =
     DocumentNode(definitions: [
   OperationDefinitionNode(
     type: OperationType.mutation,
-    name: NameNode(value: 'CreateDataPointOnQuantification'),
+    name: NameNode(value: 'CreateBreakdownOnDataPoint'),
     variableDefinitions: [
       VariableDefinitionNode(
         variable: VariableNode(name: NameNode(value: 'id')),
@@ -1918,16 +1331,7 @@ final CREATE_DATA_POINT_ON_QUANTIFICATION_MUTATION_DOCUMENT =
         directives: [],
       ),
       VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'value')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Float'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'parentQuantificationId')),
+        variable: VariableNode(name: NameNode(value: 'parentDataPointId')),
         type: NamedTypeNode(
           name: NameNode(value: 'ID'),
           isNonNull: true,
@@ -1939,7 +1343,7 @@ final CREATE_DATA_POINT_ON_QUANTIFICATION_MUTATION_DOCUMENT =
     directives: [],
     selectionSet: SelectionSetNode(selections: [
       FieldNode(
-        name: NameNode(value: 'createDataPoint'),
+        name: NameNode(value: 'createBreakdown'),
         alias: null,
         arguments: [
           ArgumentNode(
@@ -1950,19 +1354,13 @@ final CREATE_DATA_POINT_ON_QUANTIFICATION_MUTATION_DOCUMENT =
                 value: VariableNode(name: NameNode(value: 'id')),
               ),
               ObjectFieldNode(
-                name: NameNode(value: 'value'),
-                value: VariableNode(name: NameNode(value: 'value')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'quantifications'),
-                value: ListValueNode(values: [
-                  ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: 'id'),
-                      value: VariableNode(
-                          name: NameNode(value: 'parentQuantificationId')),
-                    )
-                  ])
+                name: NameNode(value: 'parent'),
+                value: ObjectValueNode(fields: [
+                  ObjectFieldNode(
+                    name: NameNode(value: 'id'),
+                    value: VariableNode(
+                        name: NameNode(value: 'parentDataPointId')),
+                  )
                 ]),
               ),
             ]),
@@ -1971,7 +1369,7 @@ final CREATE_DATA_POINT_ON_QUANTIFICATION_MUTATION_DOCUMENT =
         directives: [],
         selectionSet: SelectionSetNode(selections: [
           FragmentSpreadNode(
-            name: NameNode(value: 'DataPoint'),
+            name: NameNode(value: 'Breakdown'),
             directives: [],
           )
         ]),
@@ -1979,10 +1377,10 @@ final CREATE_DATA_POINT_ON_QUANTIFICATION_MUTATION_DOCUMENT =
     ]),
   ),
   FragmentDefinitionNode(
-    name: NameNode(value: 'DataPoint'),
+    name: NameNode(value: 'Breakdown'),
     typeCondition: TypeConditionNode(
         on: NamedTypeNode(
-      name: NameNode(value: 'DataPoint'),
+      name: NameNode(value: 'Breakdown'),
       isNonNull: false,
     )),
     directives: [],
@@ -1993,157 +1391,31 @@ final CREATE_DATA_POINT_ON_QUANTIFICATION_MUTATION_DOCUMENT =
         arguments: [],
         directives: [],
         selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'value'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
+      )
     ]),
   ),
 ]);
 
-class CreateDataPointOnQuantificationMutation extends GraphQLQuery<
-    CreateDataPointOnQuantification$Mutation,
-    CreateDataPointOnQuantificationArguments> {
-  CreateDataPointOnQuantificationMutation({required this.variables});
+class CreateBreakdownOnDataPointMutation extends GraphQLQuery<
+    CreateBreakdownOnDataPoint$Mutation, CreateBreakdownOnDataPointArguments> {
+  CreateBreakdownOnDataPointMutation({required this.variables});
 
   @override
   final DocumentNode document =
-      CREATE_DATA_POINT_ON_QUANTIFICATION_MUTATION_DOCUMENT;
+      CREATE_BREAKDOWN_ON_DATA_POINT_MUTATION_DOCUMENT;
 
   @override
   final String operationName =
-      CREATE_DATA_POINT_ON_QUANTIFICATION_MUTATION_DOCUMENT_OPERATION_NAME;
+      CREATE_BREAKDOWN_ON_DATA_POINT_MUTATION_DOCUMENT_OPERATION_NAME;
 
   @override
-  final CreateDataPointOnQuantificationArguments variables;
+  final CreateBreakdownOnDataPointArguments variables;
 
   @override
   List<Object?> get props => [document, operationName, variables];
   @override
-  CreateDataPointOnQuantification$Mutation parse(Map<String, dynamic> json) =>
-      CreateDataPointOnQuantification$Mutation.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetDataPointsOnQuantificationArguments extends JsonSerializable
-    with EquatableMixin {
-  GetDataPointsOnQuantificationArguments(
-      {required this.parentQuantificationId});
-
-  @override
-  factory GetDataPointsOnQuantificationArguments.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetDataPointsOnQuantificationArgumentsFromJson(json);
-
-  late String parentQuantificationId;
-
-  @override
-  List<Object?> get props => [parentQuantificationId];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$GetDataPointsOnQuantificationArgumentsToJson(this);
-}
-
-final GET_DATA_POINTS_ON_QUANTIFICATION_QUERY_DOCUMENT_OPERATION_NAME =
-    'GetDataPointsOnQuantification';
-final GET_DATA_POINTS_ON_QUANTIFICATION_QUERY_DOCUMENT =
-    DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.query,
-    name: NameNode(value: 'GetDataPointsOnQuantification'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'parentQuantificationId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'ID'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'getQuantification'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'id'),
-            value:
-                VariableNode(name: NameNode(value: 'parentQuantificationId')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'dataPoints'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'DataPoint'),
-                directives: [],
-              )
-            ]),
-          )
-        ]),
-      )
-    ]),
-  ),
-  FragmentDefinitionNode(
-    name: NameNode(value: 'DataPoint'),
-    typeCondition: TypeConditionNode(
-        on: NamedTypeNode(
-      name: NameNode(value: 'DataPoint'),
-      isNonNull: false,
-    )),
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'value'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-]);
-
-class GetDataPointsOnQuantificationQuery extends GraphQLQuery<
-    GetDataPointsOnQuantification$Query,
-    GetDataPointsOnQuantificationArguments> {
-  GetDataPointsOnQuantificationQuery({required this.variables});
-
-  @override
-  final DocumentNode document =
-      GET_DATA_POINTS_ON_QUANTIFICATION_QUERY_DOCUMENT;
-
-  @override
-  final String operationName =
-      GET_DATA_POINTS_ON_QUANTIFICATION_QUERY_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final GetDataPointsOnQuantificationArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  GetDataPointsOnQuantification$Query parse(Map<String, dynamic> json) =>
-      GetDataPointsOnQuantification$Query.fromJson(json);
+  CreateBreakdownOnDataPoint$Mutation parse(Map<String, dynamic> json) =>
+      CreateBreakdownOnDataPoint$Mutation.fromJson(json);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -3880,107 +3152,6 @@ class GetPlanetaryBoundaryQuery extends GraphQLQuery<GetPlanetaryBoundary$Query,
 }
 
 @JsonSerializable(explicitToJson: true)
-class DeleteDataPointArguments extends JsonSerializable with EquatableMixin {
-  DeleteDataPointArguments({required this.id});
-
-  @override
-  factory DeleteDataPointArguments.fromJson(Map<String, dynamic> json) =>
-      _$DeleteDataPointArgumentsFromJson(json);
-
-  late String id;
-
-  @override
-  List<Object?> get props => [id];
-  @override
-  Map<String, dynamic> toJson() => _$DeleteDataPointArgumentsToJson(this);
-}
-
-final DELETE_DATA_POINT_MUTATION_DOCUMENT_OPERATION_NAME = 'DeleteDataPoint';
-final DELETE_DATA_POINT_MUTATION_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'DeleteDataPoint'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'id')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'ID'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'deleteDataPoint'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'id'),
-            value: VariableNode(name: NameNode(value: 'id')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'DataPoint'),
-            directives: [],
-          )
-        ]),
-      )
-    ]),
-  ),
-  FragmentDefinitionNode(
-    name: NameNode(value: 'DataPoint'),
-    typeCondition: TypeConditionNode(
-        on: NamedTypeNode(
-      name: NameNode(value: 'DataPoint'),
-      isNonNull: false,
-    )),
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'value'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-]);
-
-class DeleteDataPointMutation
-    extends GraphQLQuery<DeleteDataPoint$Mutation, DeleteDataPointArguments> {
-  DeleteDataPointMutation({required this.variables});
-
-  @override
-  final DocumentNode document = DELETE_DATA_POINT_MUTATION_DOCUMENT;
-
-  @override
-  final String operationName =
-      DELETE_DATA_POINT_MUTATION_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final DeleteDataPointArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  DeleteDataPoint$Mutation parse(Map<String, dynamic> json) =>
-      DeleteDataPoint$Mutation.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
 class GetDataPointArguments extends JsonSerializable with EquatableMixin {
   GetDataPointArguments({required this.id});
 
@@ -4056,6 +3227,21 @@ final GET_DATA_POINT_QUERY_DOCUMENT = DocumentNode(definitions: [
         directives: [],
         selectionSet: null,
       ),
+      FieldNode(
+        name: NameNode(value: 'breakdowns'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
     ]),
   ),
 ]);
@@ -4078,4 +3264,1090 @@ class GetDataPointQuery
   @override
   GetDataPoint$Query parse(Map<String, dynamic> json) =>
       GetDataPoint$Query.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class CreateDataPointOnQuantificationArguments extends JsonSerializable
+    with EquatableMixin {
+  CreateDataPointOnQuantificationArguments({
+    required this.id,
+    required this.value,
+    required this.parentQuantificationId,
+  });
+
+  @override
+  factory CreateDataPointOnQuantificationArguments.fromJson(
+          Map<String, dynamic> json) =>
+      _$CreateDataPointOnQuantificationArgumentsFromJson(json);
+
+  late String id;
+
+  late double value;
+
+  late String parentQuantificationId;
+
+  @override
+  List<Object?> get props => [id, value, parentQuantificationId];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$CreateDataPointOnQuantificationArgumentsToJson(this);
+}
+
+final CREATE_DATA_POINT_ON_QUANTIFICATION_MUTATION_DOCUMENT_OPERATION_NAME =
+    'CreateDataPointOnQuantification';
+final CREATE_DATA_POINT_ON_QUANTIFICATION_MUTATION_DOCUMENT =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'CreateDataPointOnQuantification'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'value')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Float'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'parentQuantificationId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'createDataPoint'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'value'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'id')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'value'),
+                value: VariableNode(name: NameNode(value: 'value')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'quantifications'),
+                value: ListValueNode(values: [
+                  ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'id'),
+                      value: VariableNode(
+                          name: NameNode(value: 'parentQuantificationId')),
+                    )
+                  ])
+                ]),
+              ),
+            ]),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'DataPoint'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'DataPoint'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'DataPoint'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'value'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'breakdowns'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+    ]),
+  ),
+]);
+
+class CreateDataPointOnQuantificationMutation extends GraphQLQuery<
+    CreateDataPointOnQuantification$Mutation,
+    CreateDataPointOnQuantificationArguments> {
+  CreateDataPointOnQuantificationMutation({required this.variables});
+
+  @override
+  final DocumentNode document =
+      CREATE_DATA_POINT_ON_QUANTIFICATION_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName =
+      CREATE_DATA_POINT_ON_QUANTIFICATION_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final CreateDataPointOnQuantificationArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  CreateDataPointOnQuantification$Mutation parse(Map<String, dynamic> json) =>
+      CreateDataPointOnQuantification$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetDataPointsOnQuantificationArguments extends JsonSerializable
+    with EquatableMixin {
+  GetDataPointsOnQuantificationArguments(
+      {required this.parentQuantificationId});
+
+  @override
+  factory GetDataPointsOnQuantificationArguments.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetDataPointsOnQuantificationArgumentsFromJson(json);
+
+  late String parentQuantificationId;
+
+  @override
+  List<Object?> get props => [parentQuantificationId];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetDataPointsOnQuantificationArgumentsToJson(this);
+}
+
+final GET_DATA_POINTS_ON_QUANTIFICATION_QUERY_DOCUMENT_OPERATION_NAME =
+    'GetDataPointsOnQuantification';
+final GET_DATA_POINTS_ON_QUANTIFICATION_QUERY_DOCUMENT =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'GetDataPointsOnQuantification'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'parentQuantificationId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'getQuantification'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value:
+                VariableNode(name: NameNode(value: 'parentQuantificationId')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'dataPoints'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'DataPoint'),
+                directives: [],
+              )
+            ]),
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'DataPoint'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'DataPoint'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'value'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'breakdowns'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+    ]),
+  ),
+]);
+
+class GetDataPointsOnQuantificationQuery extends GraphQLQuery<
+    GetDataPointsOnQuantification$Query,
+    GetDataPointsOnQuantificationArguments> {
+  GetDataPointsOnQuantificationQuery({required this.variables});
+
+  @override
+  final DocumentNode document =
+      GET_DATA_POINTS_ON_QUANTIFICATION_QUERY_DOCUMENT;
+
+  @override
+  final String operationName =
+      GET_DATA_POINTS_ON_QUANTIFICATION_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetDataPointsOnQuantificationArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetDataPointsOnQuantification$Query parse(Map<String, dynamic> json) =>
+      GetDataPointsOnQuantification$Query.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class DeleteDataPointArguments extends JsonSerializable with EquatableMixin {
+  DeleteDataPointArguments({required this.id});
+
+  @override
+  factory DeleteDataPointArguments.fromJson(Map<String, dynamic> json) =>
+      _$DeleteDataPointArgumentsFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$DeleteDataPointArgumentsToJson(this);
+}
+
+final DELETE_DATA_POINT_MUTATION_DOCUMENT_OPERATION_NAME = 'DeleteDataPoint';
+final DELETE_DATA_POINT_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'DeleteDataPoint'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'deleteDataPoint'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'DataPoint'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'DataPoint'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'DataPoint'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'value'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'breakdowns'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+    ]),
+  ),
+]);
+
+class DeleteDataPointMutation
+    extends GraphQLQuery<DeleteDataPoint$Mutation, DeleteDataPointArguments> {
+  DeleteDataPointMutation({required this.variables});
+
+  @override
+  final DocumentNode document = DELETE_DATA_POINT_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName =
+      DELETE_DATA_POINT_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final DeleteDataPointArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  DeleteDataPoint$Mutation parse(Map<String, dynamic> json) =>
+      DeleteDataPoint$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetEntityPageArguments extends JsonSerializable with EquatableMixin {
+  GetEntityPageArguments({
+    this.filter,
+    required this.page,
+    required this.size,
+  });
+
+  @override
+  factory GetEntityPageArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetEntityPageArgumentsFromJson(json);
+
+  final EntityFilter? filter;
+
+  late int page;
+
+  late int size;
+
+  @override
+  List<Object?> get props => [filter, page, size];
+  @override
+  Map<String, dynamic> toJson() => _$GetEntityPageArgumentsToJson(this);
+}
+
+final GET_ENTITY_PAGE_QUERY_DOCUMENT_OPERATION_NAME = 'GetEntityPage';
+final GET_ENTITY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'GetEntityPage'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'filter')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'EntityFilter'),
+          isNonNull: false,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'page')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'size')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Int'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'listEntity'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'filter'),
+            value: VariableNode(name: NameNode(value: 'filter')),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'page'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'number'),
+                value: VariableNode(name: NameNode(value: 'page')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'size'),
+                value: VariableNode(name: NameNode(value: 'size')),
+              ),
+            ]),
+          ),
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'info'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'PageInfo'),
+                directives: [],
+              )
+            ]),
+          ),
+          FieldNode(
+            name: NameNode(value: 'values'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FragmentSpreadNode(
+                name: NameNode(value: 'Entity'),
+                directives: [],
+              )
+            ]),
+          ),
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'PageInfo'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'PageInfo'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'next'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'size'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'Entity'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'Entity'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'attributes'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'name'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'StringAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'string'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'BooleanAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'boolean'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'DateTimeAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'dateTime'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'ReferenceAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'ref'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'TupleAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'tuple'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'MultiStringAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'strings'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'MultiBooleanAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'booleans'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'MultiDateTimeAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'dateTimes'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'MultiReferenceAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'refs'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'MultiTupleAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'tuples'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+        ]),
+      ),
+    ]),
+  ),
+]);
+
+class GetEntityPageQuery
+    extends GraphQLQuery<GetEntityPage$Query, GetEntityPageArguments> {
+  GetEntityPageQuery({required this.variables});
+
+  @override
+  final DocumentNode document = GET_ENTITY_PAGE_QUERY_DOCUMENT;
+
+  @override
+  final String operationName = GET_ENTITY_PAGE_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetEntityPageArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetEntityPage$Query parse(Map<String, dynamic> json) =>
+      GetEntityPage$Query.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetEntityArguments extends JsonSerializable with EquatableMixin {
+  GetEntityArguments({required this.id});
+
+  @override
+  factory GetEntityArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetEntityArgumentsFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$GetEntityArgumentsToJson(this);
+}
+
+final GET_ENTITY_QUERY_DOCUMENT_OPERATION_NAME = 'GetEntity';
+final GET_ENTITY_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'GetEntity'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'getEntity'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'Entity'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'Entity'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'Entity'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'attributes'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          FieldNode(
+            name: NameNode(value: 'name'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'StringAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'string'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'BooleanAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'boolean'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'DateTimeAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'dateTime'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'ReferenceAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'ref'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'TupleAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'tuple'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'MultiStringAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'strings'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'MultiBooleanAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'booleans'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'MultiDateTimeAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'dateTimes'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'MultiReferenceAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'refs'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+          InlineFragmentNode(
+            typeCondition: TypeConditionNode(
+                on: NamedTypeNode(
+              name: NameNode(value: 'MultiTupleAttribute'),
+              isNonNull: false,
+            )),
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                name: NameNode(value: 'tuples'),
+                alias: null,
+                arguments: [],
+                directives: [],
+                selectionSet: null,
+              )
+            ]),
+          ),
+        ]),
+      ),
+    ]),
+  ),
+]);
+
+class GetEntityQuery extends GraphQLQuery<GetEntity$Query, GetEntityArguments> {
+  GetEntityQuery({required this.variables});
+
+  @override
+  final DocumentNode document = GET_ENTITY_QUERY_DOCUMENT;
+
+  @override
+  final String operationName = GET_ENTITY_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetEntityArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetEntity$Query parse(Map<String, dynamic> json) =>
+      GetEntity$Query.fromJson(json);
 }

@@ -64,7 +64,22 @@ type BooleanAttribute implements Attribute {
 }
 
 " generated, do not edit manually!"
+type Breakdown implements EntityBase {
+    components: [DataPoint!]
+    id: ID!
+    parent: DataPoint
+}
+
+" generated, do not edit manually!"
+type BreakdownListPage {
+    info: PageInfo!
+    values: [Breakdown!]!
+}
+
+" generated, do not edit manually!"
 type DataPoint implements EntityBase {
+    breakdowns: [Breakdown!]
+    compositions: [Breakdown!]
     id: ID!
     quantifications: [Quantification!]
     value: Float
@@ -146,21 +161,27 @@ type MultiTupleAttribute implements Attribute {
 
 " generated, do not edit manually!"
 type Mutation {
+    createBreakdown(value: BreakdownInput!): Breakdown!
     createDataPoint(value: DataPointInput!): DataPoint!
     createPlanetaryBoundary(value: PlanetaryBoundaryInput!): PlanetaryBoundary!
     createQuantification(value: QuantificationInput!): Quantification!
+    deleteBreakdown(id: ID!): Breakdown
     deleteDataPoint(id: ID!): DataPoint
     deletePlanetaryBoundary(id: ID!): PlanetaryBoundary
     deleteQuantification(id: ID!): Quantification
+    mergeBreakdown(value: BreakdownInput!): Breakdown
     mergeDataPoint(value: DataPointInput!): DataPoint
     mergePlanetaryBoundary(value: PlanetaryBoundaryInput!): PlanetaryBoundary
     mergeQuantification(value: QuantificationInput!): Quantification
+    publishCreatedBreakdown(value: BreakdownInput!): Breakdown
     publishCreatedDataPoint(value: DataPointInput!): DataPoint
     publishCreatedPlanetaryBoundary(value: PlanetaryBoundaryInput!): PlanetaryBoundary
     publishCreatedQuantification(value: QuantificationInput!): Quantification
+    publishDeletedBreakdown(value: BreakdownInput!): Breakdown
     publishDeletedDataPoint(value: DataPointInput!): DataPoint
     publishDeletedPlanetaryBoundary(value: PlanetaryBoundaryInput!): PlanetaryBoundary
     publishDeletedQuantification(value: QuantificationInput!): Quantification
+    publishUpdatedBreakdown(value: BreakdownInput!): Breakdown
     publishUpdatedDataPoint(value: DataPointInput!): DataPoint
     publishUpdatedPlanetaryBoundary(value: PlanetaryBoundaryInput!): PlanetaryBoundary
     publishUpdatedQuantification(value: QuantificationInput!): Quantification
@@ -206,10 +227,12 @@ type QuantificationListPage {
 
 " generated, do not edit manually!"
 type Query {
+    getBreakdown(id: ID!): Breakdown
     getDataPoint(id: ID!): DataPoint
     getEntity(id: ID!): Entity
     getPlanetaryBoundary(id: ID!): PlanetaryBoundary
     getQuantification(id: ID!): Quantification
+    listBreakdown(page: PageQuery): BreakdownListPage!
     listDataPoint(page: PageQuery): DataPointListPage!
     listEntity(filter: EntityFilter, page: PageQuery): EntityListPage!
     listPlanetaryBoundary(page: PageQuery): PlanetaryBoundaryListPage!
@@ -232,12 +255,15 @@ type StringAttribute implements Attribute {
 
 " generated, do not edit manually!"
 type Subscription {
+    onCreatedBreakdown(id: ID): Breakdown
     onCreatedDataPoint(id: ID, value: Float): DataPoint
     onCreatedPlanetaryBoundary(description: String, id: ID, name: String): PlanetaryBoundary
     onCreatedQuantification(id: ID, name: String): Quantification
+    onDeletedBreakdown(id: ID): Breakdown
     onDeletedDataPoint(id: ID, value: Float): DataPoint
     onDeletedPlanetaryBoundary(description: String, id: ID, name: String): PlanetaryBoundary
     onDeletedQuantification(id: ID, name: String): Quantification
+    onUpdatedBreakdown(id: ID): Breakdown
     onUpdatedDataPoint(id: ID, value: Float): DataPoint
     onUpdatedPlanetaryBoundary(description: String, id: ID, name: String): PlanetaryBoundary
     onUpdatedQuantification(id: ID, name: String): Quantification
@@ -257,7 +283,16 @@ scalar AWSDateTime
 scalar AWSJSON
 
 " generated, do not edit manually!"
+input BreakdownInput {
+    components: [DataPointInput!]
+    id: ID!
+    parent: DataPointInput
+}
+
+" generated, do not edit manually!"
 input DataPointInput {
+    breakdowns: [BreakdownInput!]
+    compositions: [BreakdownInput!]
     id: ID!
     quantifications: [QuantificationInput!]
     value: Float

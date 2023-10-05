@@ -6,378 +6,29 @@ part of 'api.graphql.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetEntityPage$Query$EntityListPage$PageInfo
-    _$GetEntityPage$Query$EntityListPage$PageInfoFromJson(
+CreateBreakdownOnDataPoint$Mutation$Breakdown
+    _$CreateBreakdownOnDataPoint$Mutation$BreakdownFromJson(
             Map<String, dynamic> json) =>
-        GetEntityPage$Query$EntityListPage$PageInfo()
-          ..next = json['next'] as int?
-          ..size = json['size'] as int;
+        CreateBreakdownOnDataPoint$Mutation$Breakdown()
+          ..id = json['id'] as String;
 
-Map<String, dynamic> _$GetEntityPage$Query$EntityListPage$PageInfoToJson(
-        GetEntityPage$Query$EntityListPage$PageInfo instance) =>
-    <String, dynamic>{
-      'next': instance.next,
-      'size': instance.size,
-    };
-
-GetEntityPage$Query$EntityListPage$Entity
-    _$GetEntityPage$Query$EntityListPage$EntityFromJson(
-            Map<String, dynamic> json) =>
-        GetEntityPage$Query$EntityListPage$Entity()
-          ..id = json['id'] as String
-          ..attributes = (json['attributes'] as List<dynamic>)
-              .map((e) =>
-                  EntityMixin$Attribute.fromJson(e as Map<String, dynamic>))
-              .toList();
-
-Map<String, dynamic> _$GetEntityPage$Query$EntityListPage$EntityToJson(
-        GetEntityPage$Query$EntityListPage$Entity instance) =>
+Map<String, dynamic> _$CreateBreakdownOnDataPoint$Mutation$BreakdownToJson(
+        CreateBreakdownOnDataPoint$Mutation$Breakdown instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'attributes': instance.attributes.map((e) => e.toJson()).toList(),
     };
 
-GetEntityPage$Query$EntityListPage _$GetEntityPage$Query$EntityListPageFromJson(
-        Map<String, dynamic> json) =>
-    GetEntityPage$Query$EntityListPage()
-      ..info = GetEntityPage$Query$EntityListPage$PageInfo.fromJson(
-          json['info'] as Map<String, dynamic>)
-      ..values = (json['values'] as List<dynamic>)
-          .map((e) => GetEntityPage$Query$EntityListPage$Entity.fromJson(
-              e as Map<String, dynamic>))
-          .toList();
+CreateBreakdownOnDataPoint$Mutation
+    _$CreateBreakdownOnDataPoint$MutationFromJson(Map<String, dynamic> json) =>
+        CreateBreakdownOnDataPoint$Mutation()
+          ..createBreakdown =
+              CreateBreakdownOnDataPoint$Mutation$Breakdown.fromJson(
+                  json['createBreakdown'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$GetEntityPage$Query$EntityListPageToJson(
-        GetEntityPage$Query$EntityListPage instance) =>
+Map<String, dynamic> _$CreateBreakdownOnDataPoint$MutationToJson(
+        CreateBreakdownOnDataPoint$Mutation instance) =>
     <String, dynamic>{
-      'info': instance.info.toJson(),
-      'values': instance.values.map((e) => e.toJson()).toList(),
-    };
-
-GetEntityPage$Query _$GetEntityPage$QueryFromJson(Map<String, dynamic> json) =>
-    GetEntityPage$Query()
-      ..listEntity = GetEntityPage$Query$EntityListPage.fromJson(
-          json['listEntity'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$GetEntityPage$QueryToJson(
-        GetEntityPage$Query instance) =>
-    <String, dynamic>{
-      'listEntity': instance.listEntity.toJson(),
-    };
-
-EntityMixin$Attribute$StringAttribute
-    _$EntityMixin$Attribute$StringAttributeFromJson(
-            Map<String, dynamic> json) =>
-        EntityMixin$Attribute$StringAttribute()
-          ..$$typename = json['__typename'] as String?
-          ..id = json['id'] as String
-          ..name = json['name'] as String
-          ..string = json['string'] as String;
-
-Map<String, dynamic> _$EntityMixin$Attribute$StringAttributeToJson(
-        EntityMixin$Attribute$StringAttribute instance) =>
-    <String, dynamic>{
-      '__typename': instance.$$typename,
-      'id': instance.id,
-      'name': instance.name,
-      'string': instance.string,
-    };
-
-EntityMixin$Attribute$BooleanAttribute
-    _$EntityMixin$Attribute$BooleanAttributeFromJson(
-            Map<String, dynamic> json) =>
-        EntityMixin$Attribute$BooleanAttribute()
-          ..$$typename = json['__typename'] as String?
-          ..id = json['id'] as String
-          ..name = json['name'] as String
-          ..boolean = json['boolean'] as bool;
-
-Map<String, dynamic> _$EntityMixin$Attribute$BooleanAttributeToJson(
-        EntityMixin$Attribute$BooleanAttribute instance) =>
-    <String, dynamic>{
-      '__typename': instance.$$typename,
-      'id': instance.id,
-      'name': instance.name,
-      'boolean': instance.boolean,
-    };
-
-EntityMixin$Attribute$DateTimeAttribute
-    _$EntityMixin$Attribute$DateTimeAttributeFromJson(
-            Map<String, dynamic> json) =>
-        EntityMixin$Attribute$DateTimeAttribute()
-          ..$$typename = json['__typename'] as String?
-          ..id = json['id'] as String
-          ..name = json['name'] as String
-          ..dateTime = DateTime.parse(json['dateTime'] as String);
-
-Map<String, dynamic> _$EntityMixin$Attribute$DateTimeAttributeToJson(
-        EntityMixin$Attribute$DateTimeAttribute instance) =>
-    <String, dynamic>{
-      '__typename': instance.$$typename,
-      'id': instance.id,
-      'name': instance.name,
-      'dateTime': instance.dateTime.toIso8601String(),
-    };
-
-EntityMixin$Attribute$ReferenceAttribute
-    _$EntityMixin$Attribute$ReferenceAttributeFromJson(
-            Map<String, dynamic> json) =>
-        EntityMixin$Attribute$ReferenceAttribute()
-          ..$$typename = json['__typename'] as String?
-          ..id = json['id'] as String
-          ..name = json['name'] as String
-          ..ref = json['ref'] as String;
-
-Map<String, dynamic> _$EntityMixin$Attribute$ReferenceAttributeToJson(
-        EntityMixin$Attribute$ReferenceAttribute instance) =>
-    <String, dynamic>{
-      '__typename': instance.$$typename,
-      'id': instance.id,
-      'name': instance.name,
-      'ref': instance.ref,
-    };
-
-EntityMixin$Attribute$TupleAttribute
-    _$EntityMixin$Attribute$TupleAttributeFromJson(Map<String, dynamic> json) =>
-        EntityMixin$Attribute$TupleAttribute()
-          ..$$typename = json['__typename'] as String?
-          ..id = json['id'] as String
-          ..name = json['name'] as String
-          ..tuple = json['tuple'] as String;
-
-Map<String, dynamic> _$EntityMixin$Attribute$TupleAttributeToJson(
-        EntityMixin$Attribute$TupleAttribute instance) =>
-    <String, dynamic>{
-      '__typename': instance.$$typename,
-      'id': instance.id,
-      'name': instance.name,
-      'tuple': instance.tuple,
-    };
-
-EntityMixin$Attribute$MultiStringAttribute
-    _$EntityMixin$Attribute$MultiStringAttributeFromJson(
-            Map<String, dynamic> json) =>
-        EntityMixin$Attribute$MultiStringAttribute()
-          ..$$typename = json['__typename'] as String?
-          ..id = json['id'] as String
-          ..name = json['name'] as String
-          ..strings = (json['strings'] as List<dynamic>)
-              .map((e) => e as String)
-              .toList();
-
-Map<String, dynamic> _$EntityMixin$Attribute$MultiStringAttributeToJson(
-        EntityMixin$Attribute$MultiStringAttribute instance) =>
-    <String, dynamic>{
-      '__typename': instance.$$typename,
-      'id': instance.id,
-      'name': instance.name,
-      'strings': instance.strings,
-    };
-
-EntityMixin$Attribute$MultiBooleanAttribute
-    _$EntityMixin$Attribute$MultiBooleanAttributeFromJson(
-            Map<String, dynamic> json) =>
-        EntityMixin$Attribute$MultiBooleanAttribute()
-          ..$$typename = json['__typename'] as String?
-          ..id = json['id'] as String
-          ..name = json['name'] as String
-          ..booleans = (json['booleans'] as List<dynamic>)
-              .map((e) => e as bool)
-              .toList();
-
-Map<String, dynamic> _$EntityMixin$Attribute$MultiBooleanAttributeToJson(
-        EntityMixin$Attribute$MultiBooleanAttribute instance) =>
-    <String, dynamic>{
-      '__typename': instance.$$typename,
-      'id': instance.id,
-      'name': instance.name,
-      'booleans': instance.booleans,
-    };
-
-EntityMixin$Attribute$MultiDateTimeAttribute
-    _$EntityMixin$Attribute$MultiDateTimeAttributeFromJson(
-            Map<String, dynamic> json) =>
-        EntityMixin$Attribute$MultiDateTimeAttribute()
-          ..$$typename = json['__typename'] as String?
-          ..id = json['id'] as String
-          ..name = json['name'] as String
-          ..dateTimes = (json['dateTimes'] as List<dynamic>)
-              .map((e) => DateTime.parse(e as String))
-              .toList();
-
-Map<String, dynamic> _$EntityMixin$Attribute$MultiDateTimeAttributeToJson(
-        EntityMixin$Attribute$MultiDateTimeAttribute instance) =>
-    <String, dynamic>{
-      '__typename': instance.$$typename,
-      'id': instance.id,
-      'name': instance.name,
-      'dateTimes': instance.dateTimes.map((e) => e.toIso8601String()).toList(),
-    };
-
-EntityMixin$Attribute$MultiReferenceAttribute
-    _$EntityMixin$Attribute$MultiReferenceAttributeFromJson(
-            Map<String, dynamic> json) =>
-        EntityMixin$Attribute$MultiReferenceAttribute()
-          ..$$typename = json['__typename'] as String?
-          ..id = json['id'] as String
-          ..name = json['name'] as String
-          ..refs =
-              (json['refs'] as List<dynamic>).map((e) => e as String).toList();
-
-Map<String, dynamic> _$EntityMixin$Attribute$MultiReferenceAttributeToJson(
-        EntityMixin$Attribute$MultiReferenceAttribute instance) =>
-    <String, dynamic>{
-      '__typename': instance.$$typename,
-      'id': instance.id,
-      'name': instance.name,
-      'refs': instance.refs,
-    };
-
-EntityMixin$Attribute$MultiTupleAttribute
-    _$EntityMixin$Attribute$MultiTupleAttributeFromJson(
-            Map<String, dynamic> json) =>
-        EntityMixin$Attribute$MultiTupleAttribute()
-          ..$$typename = json['__typename'] as String?
-          ..id = json['id'] as String
-          ..name = json['name'] as String
-          ..tuples = (json['tuples'] as List<dynamic>)
-              .map((e) => e as String)
-              .toList();
-
-Map<String, dynamic> _$EntityMixin$Attribute$MultiTupleAttributeToJson(
-        EntityMixin$Attribute$MultiTupleAttribute instance) =>
-    <String, dynamic>{
-      '__typename': instance.$$typename,
-      'id': instance.id,
-      'name': instance.name,
-      'tuples': instance.tuples,
-    };
-
-EntityMixin$Attribute _$EntityMixin$AttributeFromJson(
-        Map<String, dynamic> json) =>
-    EntityMixin$Attribute()
-      ..$$typename = json['__typename'] as String?
-      ..id = json['id'] as String
-      ..name = json['name'] as String;
-
-Map<String, dynamic> _$EntityMixin$AttributeToJson(
-        EntityMixin$Attribute instance) =>
-    <String, dynamic>{
-      '__typename': instance.$$typename,
-      'id': instance.id,
-      'name': instance.name,
-    };
-
-EntityFilter _$EntityFilterFromJson(Map<String, dynamic> json) => EntityFilter(
-      attributes: (json['attributes'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-    );
-
-Map<String, dynamic> _$EntityFilterToJson(EntityFilter instance) =>
-    <String, dynamic>{
-      'attributes': instance.attributes,
-    };
-
-GetEntity$Query$Entity _$GetEntity$Query$EntityFromJson(
-        Map<String, dynamic> json) =>
-    GetEntity$Query$Entity()
-      ..id = json['id'] as String
-      ..attributes = (json['attributes'] as List<dynamic>)
-          .map((e) => EntityMixin$Attribute.fromJson(e as Map<String, dynamic>))
-          .toList();
-
-Map<String, dynamic> _$GetEntity$Query$EntityToJson(
-        GetEntity$Query$Entity instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'attributes': instance.attributes.map((e) => e.toJson()).toList(),
-    };
-
-GetEntity$Query _$GetEntity$QueryFromJson(Map<String, dynamic> json) =>
-    GetEntity$Query()
-      ..getEntity = json['getEntity'] == null
-          ? null
-          : GetEntity$Query$Entity.fromJson(
-              json['getEntity'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$GetEntity$QueryToJson(GetEntity$Query instance) =>
-    <String, dynamic>{
-      'getEntity': instance.getEntity?.toJson(),
-    };
-
-CreateDataPointOnQuantification$Mutation$DataPoint
-    _$CreateDataPointOnQuantification$Mutation$DataPointFromJson(
-            Map<String, dynamic> json) =>
-        CreateDataPointOnQuantification$Mutation$DataPoint()
-          ..id = json['id'] as String
-          ..value = (json['value'] as num?)?.toDouble();
-
-Map<String, dynamic> _$CreateDataPointOnQuantification$Mutation$DataPointToJson(
-        CreateDataPointOnQuantification$Mutation$DataPoint instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'value': instance.value,
-    };
-
-CreateDataPointOnQuantification$Mutation
-    _$CreateDataPointOnQuantification$MutationFromJson(
-            Map<String, dynamic> json) =>
-        CreateDataPointOnQuantification$Mutation()
-          ..createDataPoint =
-              CreateDataPointOnQuantification$Mutation$DataPoint.fromJson(
-                  json['createDataPoint'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$CreateDataPointOnQuantification$MutationToJson(
-        CreateDataPointOnQuantification$Mutation instance) =>
-    <String, dynamic>{
-      'createDataPoint': instance.createDataPoint.toJson(),
-    };
-
-GetDataPointsOnQuantification$Query$Quantification$DataPoint
-    _$GetDataPointsOnQuantification$Query$Quantification$DataPointFromJson(
-            Map<String, dynamic> json) =>
-        GetDataPointsOnQuantification$Query$Quantification$DataPoint()
-          ..id = json['id'] as String
-          ..value = (json['value'] as num?)?.toDouble();
-
-Map<String, dynamic>
-    _$GetDataPointsOnQuantification$Query$Quantification$DataPointToJson(
-            GetDataPointsOnQuantification$Query$Quantification$DataPoint
-                instance) =>
-        <String, dynamic>{
-          'id': instance.id,
-          'value': instance.value,
-        };
-
-GetDataPointsOnQuantification$Query$Quantification
-    _$GetDataPointsOnQuantification$Query$QuantificationFromJson(
-            Map<String, dynamic> json) =>
-        GetDataPointsOnQuantification$Query$Quantification()
-          ..dataPoints = (json['dataPoints'] as List<dynamic>?)
-              ?.map((e) =>
-                  GetDataPointsOnQuantification$Query$Quantification$DataPoint
-                      .fromJson(e as Map<String, dynamic>))
-              .toList();
-
-Map<String, dynamic> _$GetDataPointsOnQuantification$Query$QuantificationToJson(
-        GetDataPointsOnQuantification$Query$Quantification instance) =>
-    <String, dynamic>{
-      'dataPoints': instance.dataPoints?.map((e) => e.toJson()).toList(),
-    };
-
-GetDataPointsOnQuantification$Query
-    _$GetDataPointsOnQuantification$QueryFromJson(Map<String, dynamic> json) =>
-        GetDataPointsOnQuantification$Query()
-          ..getQuantification = json['getQuantification'] == null
-              ? null
-              : GetDataPointsOnQuantification$Query$Quantification.fromJson(
-                  json['getQuantification'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$GetDataPointsOnQuantification$QueryToJson(
-        GetDataPointsOnQuantification$Query instance) =>
-    <String, dynamic>{
-      'getQuantification': instance.getQuantification?.toJson(),
+      'createBreakdown': instance.createBreakdown.toJson(),
     };
 
 MergeQuantification$Mutation$Quantification
@@ -433,6 +84,12 @@ Map<String, dynamic> _$QuantificationInputToJson(
 
 DataPointInput _$DataPointInputFromJson(Map<String, dynamic> json) =>
     DataPointInput(
+      breakdowns: (json['breakdowns'] as List<dynamic>?)
+          ?.map((e) => BreakdownInput.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      compositions: (json['compositions'] as List<dynamic>?)
+          ?.map((e) => BreakdownInput.fromJson(e as Map<String, dynamic>))
+          .toList(),
       id: json['id'] as String,
       quantifications: (json['quantifications'] as List<dynamic>?)
           ?.map((e) => QuantificationInput.fromJson(e as Map<String, dynamic>))
@@ -442,10 +99,30 @@ DataPointInput _$DataPointInputFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$DataPointInputToJson(DataPointInput instance) =>
     <String, dynamic>{
+      'breakdowns': instance.breakdowns?.map((e) => e.toJson()).toList(),
+      'compositions': instance.compositions?.map((e) => e.toJson()).toList(),
       'id': instance.id,
       'quantifications':
           instance.quantifications?.map((e) => e.toJson()).toList(),
       'value': instance.value,
+    };
+
+BreakdownInput _$BreakdownInputFromJson(Map<String, dynamic> json) =>
+    BreakdownInput(
+      components: (json['components'] as List<dynamic>?)
+          ?.map((e) => DataPointInput.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      id: json['id'] as String,
+      parent: json['parent'] == null
+          ? null
+          : DataPointInput.fromJson(json['parent'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$BreakdownInputToJson(BreakdownInput instance) =>
+    <String, dynamic>{
+      'components': instance.components?.map((e) => e.toJson()).toList(),
+      'id': instance.id,
+      'parent': instance.parent?.toJson(),
     };
 
 PlanetaryBoundaryInput _$PlanetaryBoundaryInputFromJson(
@@ -978,17 +655,146 @@ Map<String, dynamic> _$GetPlanetaryBoundary$QueryToJson(
       'getPlanetaryBoundary': instance.getPlanetaryBoundary?.toJson(),
     };
 
+GetDataPoint$Query$DataPoint _$GetDataPoint$Query$DataPointFromJson(
+        Map<String, dynamic> json) =>
+    GetDataPoint$Query$DataPoint()
+      ..id = json['id'] as String
+      ..value = (json['value'] as num?)?.toDouble()
+      ..breakdowns = (json['breakdowns'] as List<dynamic>?)
+          ?.map((e) =>
+              DataPointMixin$Breakdown.fromJson(e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetDataPoint$Query$DataPointToJson(
+        GetDataPoint$Query$DataPoint instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'value': instance.value,
+      'breakdowns': instance.breakdowns?.map((e) => e.toJson()).toList(),
+    };
+
+GetDataPoint$Query _$GetDataPoint$QueryFromJson(Map<String, dynamic> json) =>
+    GetDataPoint$Query()
+      ..getDataPoint = json['getDataPoint'] == null
+          ? null
+          : GetDataPoint$Query$DataPoint.fromJson(
+              json['getDataPoint'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetDataPoint$QueryToJson(GetDataPoint$Query instance) =>
+    <String, dynamic>{
+      'getDataPoint': instance.getDataPoint?.toJson(),
+    };
+
+DataPointMixin$Breakdown _$DataPointMixin$BreakdownFromJson(
+        Map<String, dynamic> json) =>
+    DataPointMixin$Breakdown()..id = json['id'] as String;
+
+Map<String, dynamic> _$DataPointMixin$BreakdownToJson(
+        DataPointMixin$Breakdown instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+CreateDataPointOnQuantification$Mutation$DataPoint
+    _$CreateDataPointOnQuantification$Mutation$DataPointFromJson(
+            Map<String, dynamic> json) =>
+        CreateDataPointOnQuantification$Mutation$DataPoint()
+          ..id = json['id'] as String
+          ..value = (json['value'] as num?)?.toDouble()
+          ..breakdowns = (json['breakdowns'] as List<dynamic>?)
+              ?.map((e) =>
+                  DataPointMixin$Breakdown.fromJson(e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic> _$CreateDataPointOnQuantification$Mutation$DataPointToJson(
+        CreateDataPointOnQuantification$Mutation$DataPoint instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'value': instance.value,
+      'breakdowns': instance.breakdowns?.map((e) => e.toJson()).toList(),
+    };
+
+CreateDataPointOnQuantification$Mutation
+    _$CreateDataPointOnQuantification$MutationFromJson(
+            Map<String, dynamic> json) =>
+        CreateDataPointOnQuantification$Mutation()
+          ..createDataPoint =
+              CreateDataPointOnQuantification$Mutation$DataPoint.fromJson(
+                  json['createDataPoint'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$CreateDataPointOnQuantification$MutationToJson(
+        CreateDataPointOnQuantification$Mutation instance) =>
+    <String, dynamic>{
+      'createDataPoint': instance.createDataPoint.toJson(),
+    };
+
+GetDataPointsOnQuantification$Query$Quantification$DataPoint
+    _$GetDataPointsOnQuantification$Query$Quantification$DataPointFromJson(
+            Map<String, dynamic> json) =>
+        GetDataPointsOnQuantification$Query$Quantification$DataPoint()
+          ..id = json['id'] as String
+          ..value = (json['value'] as num?)?.toDouble()
+          ..breakdowns = (json['breakdowns'] as List<dynamic>?)
+              ?.map((e) =>
+                  DataPointMixin$Breakdown.fromJson(e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic>
+    _$GetDataPointsOnQuantification$Query$Quantification$DataPointToJson(
+            GetDataPointsOnQuantification$Query$Quantification$DataPoint
+                instance) =>
+        <String, dynamic>{
+          'id': instance.id,
+          'value': instance.value,
+          'breakdowns': instance.breakdowns?.map((e) => e.toJson()).toList(),
+        };
+
+GetDataPointsOnQuantification$Query$Quantification
+    _$GetDataPointsOnQuantification$Query$QuantificationFromJson(
+            Map<String, dynamic> json) =>
+        GetDataPointsOnQuantification$Query$Quantification()
+          ..dataPoints = (json['dataPoints'] as List<dynamic>?)
+              ?.map((e) =>
+                  GetDataPointsOnQuantification$Query$Quantification$DataPoint
+                      .fromJson(e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic> _$GetDataPointsOnQuantification$Query$QuantificationToJson(
+        GetDataPointsOnQuantification$Query$Quantification instance) =>
+    <String, dynamic>{
+      'dataPoints': instance.dataPoints?.map((e) => e.toJson()).toList(),
+    };
+
+GetDataPointsOnQuantification$Query
+    _$GetDataPointsOnQuantification$QueryFromJson(Map<String, dynamic> json) =>
+        GetDataPointsOnQuantification$Query()
+          ..getQuantification = json['getQuantification'] == null
+              ? null
+              : GetDataPointsOnQuantification$Query$Quantification.fromJson(
+                  json['getQuantification'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetDataPointsOnQuantification$QueryToJson(
+        GetDataPointsOnQuantification$Query instance) =>
+    <String, dynamic>{
+      'getQuantification': instance.getQuantification?.toJson(),
+    };
+
 DeleteDataPoint$Mutation$DataPoint _$DeleteDataPoint$Mutation$DataPointFromJson(
         Map<String, dynamic> json) =>
     DeleteDataPoint$Mutation$DataPoint()
       ..id = json['id'] as String
-      ..value = (json['value'] as num?)?.toDouble();
+      ..value = (json['value'] as num?)?.toDouble()
+      ..breakdowns = (json['breakdowns'] as List<dynamic>?)
+          ?.map((e) =>
+              DataPointMixin$Breakdown.fromJson(e as Map<String, dynamic>))
+          .toList();
 
 Map<String, dynamic> _$DeleteDataPoint$Mutation$DataPointToJson(
         DeleteDataPoint$Mutation$DataPoint instance) =>
     <String, dynamic>{
       'id': instance.id,
       'value': instance.value,
+      'breakdowns': instance.breakdowns?.map((e) => e.toJson()).toList(),
     };
 
 DeleteDataPoint$Mutation _$DeleteDataPoint$MutationFromJson(
@@ -1005,87 +811,318 @@ Map<String, dynamic> _$DeleteDataPoint$MutationToJson(
       'deleteDataPoint': instance.deleteDataPoint?.toJson(),
     };
 
-GetDataPoint$Query$DataPoint _$GetDataPoint$Query$DataPointFromJson(
-        Map<String, dynamic> json) =>
-    GetDataPoint$Query$DataPoint()
-      ..id = json['id'] as String
-      ..value = (json['value'] as num?)?.toDouble();
+GetEntityPage$Query$EntityListPage$PageInfo
+    _$GetEntityPage$Query$EntityListPage$PageInfoFromJson(
+            Map<String, dynamic> json) =>
+        GetEntityPage$Query$EntityListPage$PageInfo()
+          ..next = json['next'] as int?
+          ..size = json['size'] as int;
 
-Map<String, dynamic> _$GetDataPoint$Query$DataPointToJson(
-        GetDataPoint$Query$DataPoint instance) =>
+Map<String, dynamic> _$GetEntityPage$Query$EntityListPage$PageInfoToJson(
+        GetEntityPage$Query$EntityListPage$PageInfo instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'value': instance.value,
-    };
-
-GetDataPoint$Query _$GetDataPoint$QueryFromJson(Map<String, dynamic> json) =>
-    GetDataPoint$Query()
-      ..getDataPoint = json['getDataPoint'] == null
-          ? null
-          : GetDataPoint$Query$DataPoint.fromJson(
-              json['getDataPoint'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$GetDataPoint$QueryToJson(GetDataPoint$Query instance) =>
-    <String, dynamic>{
-      'getDataPoint': instance.getDataPoint?.toJson(),
-    };
-
-GetEntityPageArguments _$GetEntityPageArgumentsFromJson(
-        Map<String, dynamic> json) =>
-    GetEntityPageArguments(
-      filter: json['filter'] == null
-          ? null
-          : EntityFilter.fromJson(json['filter'] as Map<String, dynamic>),
-      page: json['page'] as int,
-      size: json['size'] as int,
-    );
-
-Map<String, dynamic> _$GetEntityPageArgumentsToJson(
-        GetEntityPageArguments instance) =>
-    <String, dynamic>{
-      'filter': instance.filter?.toJson(),
-      'page': instance.page,
+      'next': instance.next,
       'size': instance.size,
     };
 
-GetEntityArguments _$GetEntityArgumentsFromJson(Map<String, dynamic> json) =>
-    GetEntityArguments(
-      id: json['id'] as String,
+GetEntityPage$Query$EntityListPage$Entity
+    _$GetEntityPage$Query$EntityListPage$EntityFromJson(
+            Map<String, dynamic> json) =>
+        GetEntityPage$Query$EntityListPage$Entity()
+          ..id = json['id'] as String
+          ..attributes = (json['attributes'] as List<dynamic>)
+              .map((e) =>
+                  EntityMixin$Attribute.fromJson(e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic> _$GetEntityPage$Query$EntityListPage$EntityToJson(
+        GetEntityPage$Query$EntityListPage$Entity instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'attributes': instance.attributes.map((e) => e.toJson()).toList(),
+    };
+
+GetEntityPage$Query$EntityListPage _$GetEntityPage$Query$EntityListPageFromJson(
+        Map<String, dynamic> json) =>
+    GetEntityPage$Query$EntityListPage()
+      ..info = GetEntityPage$Query$EntityListPage$PageInfo.fromJson(
+          json['info'] as Map<String, dynamic>)
+      ..values = (json['values'] as List<dynamic>)
+          .map((e) => GetEntityPage$Query$EntityListPage$Entity.fromJson(
+              e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetEntityPage$Query$EntityListPageToJson(
+        GetEntityPage$Query$EntityListPage instance) =>
+    <String, dynamic>{
+      'info': instance.info.toJson(),
+      'values': instance.values.map((e) => e.toJson()).toList(),
+    };
+
+GetEntityPage$Query _$GetEntityPage$QueryFromJson(Map<String, dynamic> json) =>
+    GetEntityPage$Query()
+      ..listEntity = GetEntityPage$Query$EntityListPage.fromJson(
+          json['listEntity'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetEntityPage$QueryToJson(
+        GetEntityPage$Query instance) =>
+    <String, dynamic>{
+      'listEntity': instance.listEntity.toJson(),
+    };
+
+EntityMixin$Attribute$StringAttribute
+    _$EntityMixin$Attribute$StringAttributeFromJson(
+            Map<String, dynamic> json) =>
+        EntityMixin$Attribute$StringAttribute()
+          ..$$typename = json['__typename'] as String?
+          ..id = json['id'] as String
+          ..name = json['name'] as String
+          ..string = json['string'] as String;
+
+Map<String, dynamic> _$EntityMixin$Attribute$StringAttributeToJson(
+        EntityMixin$Attribute$StringAttribute instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'name': instance.name,
+      'string': instance.string,
+    };
+
+EntityMixin$Attribute$BooleanAttribute
+    _$EntityMixin$Attribute$BooleanAttributeFromJson(
+            Map<String, dynamic> json) =>
+        EntityMixin$Attribute$BooleanAttribute()
+          ..$$typename = json['__typename'] as String?
+          ..id = json['id'] as String
+          ..name = json['name'] as String
+          ..boolean = json['boolean'] as bool;
+
+Map<String, dynamic> _$EntityMixin$Attribute$BooleanAttributeToJson(
+        EntityMixin$Attribute$BooleanAttribute instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'name': instance.name,
+      'boolean': instance.boolean,
+    };
+
+EntityMixin$Attribute$DateTimeAttribute
+    _$EntityMixin$Attribute$DateTimeAttributeFromJson(
+            Map<String, dynamic> json) =>
+        EntityMixin$Attribute$DateTimeAttribute()
+          ..$$typename = json['__typename'] as String?
+          ..id = json['id'] as String
+          ..name = json['name'] as String
+          ..dateTime = DateTime.parse(json['dateTime'] as String);
+
+Map<String, dynamic> _$EntityMixin$Attribute$DateTimeAttributeToJson(
+        EntityMixin$Attribute$DateTimeAttribute instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'name': instance.name,
+      'dateTime': instance.dateTime.toIso8601String(),
+    };
+
+EntityMixin$Attribute$ReferenceAttribute
+    _$EntityMixin$Attribute$ReferenceAttributeFromJson(
+            Map<String, dynamic> json) =>
+        EntityMixin$Attribute$ReferenceAttribute()
+          ..$$typename = json['__typename'] as String?
+          ..id = json['id'] as String
+          ..name = json['name'] as String
+          ..ref = json['ref'] as String;
+
+Map<String, dynamic> _$EntityMixin$Attribute$ReferenceAttributeToJson(
+        EntityMixin$Attribute$ReferenceAttribute instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'name': instance.name,
+      'ref': instance.ref,
+    };
+
+EntityMixin$Attribute$TupleAttribute
+    _$EntityMixin$Attribute$TupleAttributeFromJson(Map<String, dynamic> json) =>
+        EntityMixin$Attribute$TupleAttribute()
+          ..$$typename = json['__typename'] as String?
+          ..id = json['id'] as String
+          ..name = json['name'] as String
+          ..tuple = json['tuple'] as String;
+
+Map<String, dynamic> _$EntityMixin$Attribute$TupleAttributeToJson(
+        EntityMixin$Attribute$TupleAttribute instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'name': instance.name,
+      'tuple': instance.tuple,
+    };
+
+EntityMixin$Attribute$MultiStringAttribute
+    _$EntityMixin$Attribute$MultiStringAttributeFromJson(
+            Map<String, dynamic> json) =>
+        EntityMixin$Attribute$MultiStringAttribute()
+          ..$$typename = json['__typename'] as String?
+          ..id = json['id'] as String
+          ..name = json['name'] as String
+          ..strings = (json['strings'] as List<dynamic>)
+              .map((e) => e as String)
+              .toList();
+
+Map<String, dynamic> _$EntityMixin$Attribute$MultiStringAttributeToJson(
+        EntityMixin$Attribute$MultiStringAttribute instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'name': instance.name,
+      'strings': instance.strings,
+    };
+
+EntityMixin$Attribute$MultiBooleanAttribute
+    _$EntityMixin$Attribute$MultiBooleanAttributeFromJson(
+            Map<String, dynamic> json) =>
+        EntityMixin$Attribute$MultiBooleanAttribute()
+          ..$$typename = json['__typename'] as String?
+          ..id = json['id'] as String
+          ..name = json['name'] as String
+          ..booleans = (json['booleans'] as List<dynamic>)
+              .map((e) => e as bool)
+              .toList();
+
+Map<String, dynamic> _$EntityMixin$Attribute$MultiBooleanAttributeToJson(
+        EntityMixin$Attribute$MultiBooleanAttribute instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'name': instance.name,
+      'booleans': instance.booleans,
+    };
+
+EntityMixin$Attribute$MultiDateTimeAttribute
+    _$EntityMixin$Attribute$MultiDateTimeAttributeFromJson(
+            Map<String, dynamic> json) =>
+        EntityMixin$Attribute$MultiDateTimeAttribute()
+          ..$$typename = json['__typename'] as String?
+          ..id = json['id'] as String
+          ..name = json['name'] as String
+          ..dateTimes = (json['dateTimes'] as List<dynamic>)
+              .map((e) => DateTime.parse(e as String))
+              .toList();
+
+Map<String, dynamic> _$EntityMixin$Attribute$MultiDateTimeAttributeToJson(
+        EntityMixin$Attribute$MultiDateTimeAttribute instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'name': instance.name,
+      'dateTimes': instance.dateTimes.map((e) => e.toIso8601String()).toList(),
+    };
+
+EntityMixin$Attribute$MultiReferenceAttribute
+    _$EntityMixin$Attribute$MultiReferenceAttributeFromJson(
+            Map<String, dynamic> json) =>
+        EntityMixin$Attribute$MultiReferenceAttribute()
+          ..$$typename = json['__typename'] as String?
+          ..id = json['id'] as String
+          ..name = json['name'] as String
+          ..refs =
+              (json['refs'] as List<dynamic>).map((e) => e as String).toList();
+
+Map<String, dynamic> _$EntityMixin$Attribute$MultiReferenceAttributeToJson(
+        EntityMixin$Attribute$MultiReferenceAttribute instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'name': instance.name,
+      'refs': instance.refs,
+    };
+
+EntityMixin$Attribute$MultiTupleAttribute
+    _$EntityMixin$Attribute$MultiTupleAttributeFromJson(
+            Map<String, dynamic> json) =>
+        EntityMixin$Attribute$MultiTupleAttribute()
+          ..$$typename = json['__typename'] as String?
+          ..id = json['id'] as String
+          ..name = json['name'] as String
+          ..tuples = (json['tuples'] as List<dynamic>)
+              .map((e) => e as String)
+              .toList();
+
+Map<String, dynamic> _$EntityMixin$Attribute$MultiTupleAttributeToJson(
+        EntityMixin$Attribute$MultiTupleAttribute instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'name': instance.name,
+      'tuples': instance.tuples,
+    };
+
+EntityMixin$Attribute _$EntityMixin$AttributeFromJson(
+        Map<String, dynamic> json) =>
+    EntityMixin$Attribute()
+      ..$$typename = json['__typename'] as String?
+      ..id = json['id'] as String
+      ..name = json['name'] as String;
+
+Map<String, dynamic> _$EntityMixin$AttributeToJson(
+        EntityMixin$Attribute instance) =>
+    <String, dynamic>{
+      '__typename': instance.$$typename,
+      'id': instance.id,
+      'name': instance.name,
+    };
+
+EntityFilter _$EntityFilterFromJson(Map<String, dynamic> json) => EntityFilter(
+      attributes: (json['attributes'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
     );
 
-Map<String, dynamic> _$GetEntityArgumentsToJson(GetEntityArguments instance) =>
+Map<String, dynamic> _$EntityFilterToJson(EntityFilter instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      'attributes': instance.attributes,
     };
 
-CreateDataPointOnQuantificationArguments
-    _$CreateDataPointOnQuantificationArgumentsFromJson(
-            Map<String, dynamic> json) =>
-        CreateDataPointOnQuantificationArguments(
+GetEntity$Query$Entity _$GetEntity$Query$EntityFromJson(
+        Map<String, dynamic> json) =>
+    GetEntity$Query$Entity()
+      ..id = json['id'] as String
+      ..attributes = (json['attributes'] as List<dynamic>)
+          .map((e) => EntityMixin$Attribute.fromJson(e as Map<String, dynamic>))
+          .toList();
+
+Map<String, dynamic> _$GetEntity$Query$EntityToJson(
+        GetEntity$Query$Entity instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'attributes': instance.attributes.map((e) => e.toJson()).toList(),
+    };
+
+GetEntity$Query _$GetEntity$QueryFromJson(Map<String, dynamic> json) =>
+    GetEntity$Query()
+      ..getEntity = json['getEntity'] == null
+          ? null
+          : GetEntity$Query$Entity.fromJson(
+              json['getEntity'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetEntity$QueryToJson(GetEntity$Query instance) =>
+    <String, dynamic>{
+      'getEntity': instance.getEntity?.toJson(),
+    };
+
+CreateBreakdownOnDataPointArguments
+    _$CreateBreakdownOnDataPointArgumentsFromJson(Map<String, dynamic> json) =>
+        CreateBreakdownOnDataPointArguments(
           id: json['id'] as String,
-          value: (json['value'] as num).toDouble(),
-          parentQuantificationId: json['parentQuantificationId'] as String,
+          parentDataPointId: json['parentDataPointId'] as String,
         );
 
-Map<String, dynamic> _$CreateDataPointOnQuantificationArgumentsToJson(
-        CreateDataPointOnQuantificationArguments instance) =>
+Map<String, dynamic> _$CreateBreakdownOnDataPointArgumentsToJson(
+        CreateBreakdownOnDataPointArguments instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'value': instance.value,
-      'parentQuantificationId': instance.parentQuantificationId,
-    };
-
-GetDataPointsOnQuantificationArguments
-    _$GetDataPointsOnQuantificationArgumentsFromJson(
-            Map<String, dynamic> json) =>
-        GetDataPointsOnQuantificationArguments(
-          parentQuantificationId: json['parentQuantificationId'] as String,
-        );
-
-Map<String, dynamic> _$GetDataPointsOnQuantificationArgumentsToJson(
-        GetDataPointsOnQuantificationArguments instance) =>
-    <String, dynamic>{
-      'parentQuantificationId': instance.parentQuantificationId,
+      'parentDataPointId': instance.parentDataPointId,
     };
 
 MergeQuantificationArguments _$MergeQuantificationArgumentsFromJson(
@@ -1262,6 +1299,48 @@ Map<String, dynamic> _$GetPlanetaryBoundaryArgumentsToJson(
       'id': instance.id,
     };
 
+GetDataPointArguments _$GetDataPointArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetDataPointArguments(
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$GetDataPointArgumentsToJson(
+        GetDataPointArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+CreateDataPointOnQuantificationArguments
+    _$CreateDataPointOnQuantificationArgumentsFromJson(
+            Map<String, dynamic> json) =>
+        CreateDataPointOnQuantificationArguments(
+          id: json['id'] as String,
+          value: (json['value'] as num).toDouble(),
+          parentQuantificationId: json['parentQuantificationId'] as String,
+        );
+
+Map<String, dynamic> _$CreateDataPointOnQuantificationArgumentsToJson(
+        CreateDataPointOnQuantificationArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'value': instance.value,
+      'parentQuantificationId': instance.parentQuantificationId,
+    };
+
+GetDataPointsOnQuantificationArguments
+    _$GetDataPointsOnQuantificationArgumentsFromJson(
+            Map<String, dynamic> json) =>
+        GetDataPointsOnQuantificationArguments(
+          parentQuantificationId: json['parentQuantificationId'] as String,
+        );
+
+Map<String, dynamic> _$GetDataPointsOnQuantificationArgumentsToJson(
+        GetDataPointsOnQuantificationArguments instance) =>
+    <String, dynamic>{
+      'parentQuantificationId': instance.parentQuantificationId,
+    };
+
 DeleteDataPointArguments _$DeleteDataPointArgumentsFromJson(
         Map<String, dynamic> json) =>
     DeleteDataPointArguments(
@@ -1274,14 +1353,30 @@ Map<String, dynamic> _$DeleteDataPointArgumentsToJson(
       'id': instance.id,
     };
 
-GetDataPointArguments _$GetDataPointArgumentsFromJson(
+GetEntityPageArguments _$GetEntityPageArgumentsFromJson(
         Map<String, dynamic> json) =>
-    GetDataPointArguments(
+    GetEntityPageArguments(
+      filter: json['filter'] == null
+          ? null
+          : EntityFilter.fromJson(json['filter'] as Map<String, dynamic>),
+      page: json['page'] as int,
+      size: json['size'] as int,
+    );
+
+Map<String, dynamic> _$GetEntityPageArgumentsToJson(
+        GetEntityPageArguments instance) =>
+    <String, dynamic>{
+      'filter': instance.filter?.toJson(),
+      'page': instance.page,
+      'size': instance.size,
+    };
+
+GetEntityArguments _$GetEntityArgumentsFromJson(Map<String, dynamic> json) =>
+    GetEntityArguments(
       id: json['id'] as String,
     );
 
-Map<String, dynamic> _$GetDataPointArgumentsToJson(
-        GetDataPointArguments instance) =>
+Map<String, dynamic> _$GetEntityArgumentsToJson(GetEntityArguments instance) =>
     <String, dynamic>{
       'id': instance.id,
     };

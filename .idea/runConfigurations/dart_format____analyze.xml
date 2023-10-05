@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="flutter format &amp;&amp; lintfix" type="ShConfigurationType">
-    <option name="SCRIPT_TEXT" value="fvm flutter format lib test &amp;&amp; fvm dart fix --apply" />
+  <configuration default="false" name="dart format &amp;&amp; analyze" type="ShConfigurationType">
+    <option name="SCRIPT_TEXT" value="fvm dart format lib test &amp;&amp; fvm flutter analyze lib test" />
     <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
     <option name="SCRIPT_PATH" value="" />
     <option name="SCRIPT_OPTIONS" value="" />

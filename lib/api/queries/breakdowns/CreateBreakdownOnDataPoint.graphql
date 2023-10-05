@@ -1,0 +1,11 @@
+mutation CreateBreakdownOnDataPoint(
+    $id: ID!,
+    $parentDataPointId: ID!,
+) {
+    createBreakdown(value: {
+        id: $id,
+        parent: {id: $parentDataPointId}
+    }) {
+        ...Breakdown
+    }
+}
