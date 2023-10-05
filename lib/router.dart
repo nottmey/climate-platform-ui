@@ -26,22 +26,15 @@ const _showcaseSegment = 'showcase';
 
 extension Routes on BuildContext {
   void goToBoundaryDetails(String boundaryId) {
-    go('/$_overviewSegment/$_boundaryDetailsSegment/$boundaryId');
+    push('/$_overviewSegment/$_boundaryDetailsSegment/$boundaryId');
   }
 
   void goToQuantificationDetails(String quantificationId) {
-    final state = GoRouterState.of(this);
-    final boundaryId = state.pathParameters['boundaryId']!;
-    go('/$_overviewSegment/$_boundaryDetailsSegment/$boundaryId/$_quantificationDetailsSegment/$quantificationId');
+    push('/$_overviewSegment/$_quantificationDetailsSegment/$quantificationId');
   }
 
   void goToDataPointDetails(String dataPointId) {
-    final state = GoRouterState.of(this);
-    final boundaryId = state.pathParameters['boundaryId'];
-    final quantificationId = state.pathParameters['quantificationId'];
-    go(
-      '/$_overviewSegment/$_boundaryDetailsSegment/$boundaryId/$_quantificationDetailsSegment/$quantificationId/$_dataPointDetailsSegment/$dataPointId',
-    );
+    push('/$_overviewSegment/$_dataPointDetailsSegment/$dataPointId');
   }
 
   void goToDatabaseEntityIfNew(String id) {
@@ -75,26 +68,22 @@ GoRouter newRouter() {
                 id: state.pathParameters['boundaryId']!,
               );
             },
-            routes: [
-              GoRoute(
-                path: '$_quantificationDetailsSegment/:quantificationId',
-                builder: (context, state) {
-                  return QuantificationDetailsPage(
-                    id: state.pathParameters['quantificationId']!,
-                  );
-                },
-                routes: [
-                  GoRoute(
-                    path: '$_dataPointDetailsSegment/:dataPointId',
-                    builder: (context, state) {
-                      return DataPointDetailsPage(
-                        id: state.pathParameters['dataPointId']!,
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ],
+          ),
+          GoRoute(
+            path: '$_quantificationDetailsSegment/:quantificationId',
+            builder: (context, state) {
+              return QuantificationDetailsPage(
+                id: state.pathParameters['quantificationId']!,
+              );
+            },
+          ),
+          GoRoute(
+            path: '$_dataPointDetailsSegment/:dataPointId',
+            builder: (context, state) {
+              return DataPointDetailsPage(
+                id: state.pathParameters['dataPointId']!,
+              );
+            },
           ),
         ],
       ),

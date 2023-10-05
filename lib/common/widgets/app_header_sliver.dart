@@ -2,6 +2,7 @@ import 'package:climate/common/widgets/app_text.dart';
 import 'package:climate/features/theming/providers/theme_provider.dart';
 import 'package:climate/features/theming/themes/default_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AppHeaderSliver extends ConsumerWidget {
@@ -30,6 +31,12 @@ class AppHeaderSliver extends ConsumerWidget {
       ),
       pinned: true,
       actions: [
+        // debug back button
+        IconButton(
+          onPressed: context.canPop() ? () => context.pop() : null,
+          icon: const Icon(Icons.undo),
+        ),
+        // debug switch theme button
         IconButton(
           onPressed: () {
             ref.read(themeProvider.notifier).update((state) {
