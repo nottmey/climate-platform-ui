@@ -1,0 +1,5 @@
+mutation DeleteBreakdown($id: ID!) {
+    deleteBreakdown(id: $id) {
+        ...Breakdown
+    }
+}

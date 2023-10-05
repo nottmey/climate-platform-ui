@@ -38,8 +38,35 @@ class DataPointDetailsPage extends AppPageWidget {
           child: Column(
             children:
                 (ref.watch(dataPointProvider).valueOrNull?.breakdowns ?? [])
-                    .map((e) => Text('Breakdown: ${e.id}'))
-                    .toList(),
+                    .map((e) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      // TODO add go to breakdown details page
+                    },
+                    icon: const Icon(Icons.info_outlined),
+                  ),
+                  Expanded(
+                    child: Text(
+                      'Breakdown: ${e.id}',
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () async {
+                      await execute(
+                        DeleteBreakdownMutation(
+                          variables: DeleteBreakdownArguments(id: e.id),
+                        ),
+                      );
+                      ref.invalidate(dataPointProvider);
+                    },
+                    icon: const Icon(Icons.delete),
+                  ),
+                ],
+              );
+            }).toList(),
           ),
         ),
       ),

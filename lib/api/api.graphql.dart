@@ -1290,6 +1290,37 @@ class GetEntity$Query extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
+class DeleteBreakdown$Mutation$Breakdown extends JsonSerializable
+    with EquatableMixin, BreakdownMixin {
+  DeleteBreakdown$Mutation$Breakdown();
+
+  factory DeleteBreakdown$Mutation$Breakdown.fromJson(
+          Map<String, dynamic> json) =>
+      _$DeleteBreakdown$Mutation$BreakdownFromJson(json);
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$DeleteBreakdown$Mutation$BreakdownToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class DeleteBreakdown$Mutation extends JsonSerializable with EquatableMixin {
+  DeleteBreakdown$Mutation();
+
+  factory DeleteBreakdown$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$DeleteBreakdown$MutationFromJson(json);
+
+  DeleteBreakdown$Mutation$Breakdown? deleteBreakdown;
+
+  @override
+  List<Object?> get props => [deleteBreakdown];
+  @override
+  Map<String, dynamic> toJson() => _$DeleteBreakdown$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class CreateBreakdownOnDataPointArguments extends JsonSerializable
     with EquatableMixin {
   CreateBreakdownOnDataPointArguments({
@@ -4350,4 +4381,98 @@ class GetEntityQuery extends GraphQLQuery<GetEntity$Query, GetEntityArguments> {
   @override
   GetEntity$Query parse(Map<String, dynamic> json) =>
       GetEntity$Query.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class DeleteBreakdownArguments extends JsonSerializable with EquatableMixin {
+  DeleteBreakdownArguments({required this.id});
+
+  @override
+  factory DeleteBreakdownArguments.fromJson(Map<String, dynamic> json) =>
+      _$DeleteBreakdownArgumentsFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$DeleteBreakdownArgumentsToJson(this);
+}
+
+final DELETE_BREAKDOWN_MUTATION_DOCUMENT_OPERATION_NAME = 'DeleteBreakdown';
+final DELETE_BREAKDOWN_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'DeleteBreakdown'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'deleteBreakdown'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'Breakdown'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'Breakdown'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'Breakdown'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      )
+    ]),
+  ),
+]);
+
+class DeleteBreakdownMutation
+    extends GraphQLQuery<DeleteBreakdown$Mutation, DeleteBreakdownArguments> {
+  DeleteBreakdownMutation({required this.variables});
+
+  @override
+  final DocumentNode document = DELETE_BREAKDOWN_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName =
+      DELETE_BREAKDOWN_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final DeleteBreakdownArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  DeleteBreakdown$Mutation parse(Map<String, dynamic> json) =>
+      DeleteBreakdown$Mutation.fromJson(json);
 }
