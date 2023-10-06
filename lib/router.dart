@@ -1,3 +1,4 @@
+import 'package:climate/features/breakdowns/pages/breakdown_details_page.dart';
 import 'package:climate/features/data_points/pages/data_point_details_page.dart';
 import 'package:climate/features/database_browser/pages/attribute_page.dart';
 import 'package:climate/features/database_browser/pages/database_navigator_page.dart';
@@ -18,6 +19,7 @@ const _overviewSegment = 'overview';
 const _boundaryDetailsSegment = 'details';
 const _quantificationDetailsSegment = 'quantifications';
 const _dataPointDetailsSegment = 'datapoints';
+const _breakdownDetailsSegment = 'breakdowns';
 const _databaseBrowserSegment = 'data';
 const _databaseEntitySegment = 'entity';
 const _databaseAttributeSegment = 'attribute';
@@ -35,6 +37,10 @@ extension Routes on BuildContext {
 
   void goToDataPointDetails(String dataPointId) {
     push('/$_overviewSegment/$_dataPointDetailsSegment/$dataPointId');
+  }
+
+  void goToBreakdownDetails(String breakdownId) {
+    push('/$_overviewSegment/$_breakdownDetailsSegment/$breakdownId');
   }
 
   void goToDatabaseEntityIfNew(String id) {
@@ -82,6 +88,14 @@ GoRouter newRouter() {
             builder: (context, state) {
               return DataPointDetailsPage(
                 id: state.pathParameters['dataPointId']!,
+              );
+            },
+          ),
+          GoRoute(
+            path: '$_breakdownDetailsSegment/:breakdownId',
+            builder: (context, state) {
+              return BreakdownDetailsPage(
+                id: state.pathParameters['breakdownId']!,
               );
             },
           ),

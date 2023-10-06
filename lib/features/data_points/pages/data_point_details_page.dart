@@ -4,6 +4,7 @@ import 'package:climate/common/utils/generate_id.dart';
 import 'package:climate/common/widgets/app_header_sliver.dart';
 import 'package:climate/common/widgets/app_page_widget.dart';
 import 'package:climate/features/data_points/providers/data_point_family.dart';
+import 'package:climate/router.dart';
 
 class DataPointDetailsPage extends AppPageWidget {
   final String id;
@@ -38,26 +39,26 @@ class DataPointDetailsPage extends AppPageWidget {
           child: Column(
             children:
                 (ref.watch(dataPointProvider).valueOrNull?.breakdowns ?? [])
-                    .map((e) {
+                    .map((breakdown) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
                     onPressed: () {
-                      // TODO add go to breakdown details page
+                      context.goToBreakdownDetails(breakdown.id);
                     },
                     icon: const Icon(Icons.info_outlined),
                   ),
                   Expanded(
                     child: Text(
-                      'Breakdown: ${e.id}',
+                      'Breakdown: ${breakdown.id}',
                     ),
                   ),
                   IconButton(
                     onPressed: () async {
                       await execute(
                         DeleteBreakdownMutation(
-                          variables: DeleteBreakdownArguments(id: e.id),
+                          variables: DeleteBreakdownArguments(id: breakdown.id),
                         ),
                       );
                       ref.invalidate(dataPointProvider);

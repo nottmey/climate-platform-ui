@@ -1,0 +1,5 @@
+query GetBreakdown($id: ID!) {
+    getBreakdown(id: $id) {
+        ...Breakdown
+    }
+}

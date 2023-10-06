@@ -1135,6 +1135,28 @@ Map<String, dynamic> _$DeleteBreakdown$MutationToJson(
       'deleteBreakdown': instance.deleteBreakdown?.toJson(),
     };
 
+GetBreakdown$Query$Breakdown _$GetBreakdown$Query$BreakdownFromJson(
+        Map<String, dynamic> json) =>
+    GetBreakdown$Query$Breakdown()..id = json['id'] as String;
+
+Map<String, dynamic> _$GetBreakdown$Query$BreakdownToJson(
+        GetBreakdown$Query$Breakdown instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+GetBreakdown$Query _$GetBreakdown$QueryFromJson(Map<String, dynamic> json) =>
+    GetBreakdown$Query()
+      ..getBreakdown = json['getBreakdown'] == null
+          ? null
+          : GetBreakdown$Query$Breakdown.fromJson(
+              json['getBreakdown'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetBreakdown$QueryToJson(GetBreakdown$Query instance) =>
+    <String, dynamic>{
+      'getBreakdown': instance.getBreakdown?.toJson(),
+    };
+
 CreateBreakdownOnDataPointArguments
     _$CreateBreakdownOnDataPointArgumentsFromJson(Map<String, dynamic> json) =>
         CreateBreakdownOnDataPointArguments(
@@ -1413,6 +1435,18 @@ DeleteBreakdownArguments _$DeleteBreakdownArgumentsFromJson(
 
 Map<String, dynamic> _$DeleteBreakdownArgumentsToJson(
         DeleteBreakdownArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+GetBreakdownArguments _$GetBreakdownArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    GetBreakdownArguments(
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$GetBreakdownArgumentsToJson(
+        GetBreakdownArguments instance) =>
     <String, dynamic>{
       'id': instance.id,
     };

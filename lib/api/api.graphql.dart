@@ -1321,6 +1321,35 @@ class DeleteBreakdown$Mutation extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
+class GetBreakdown$Query$Breakdown extends JsonSerializable
+    with EquatableMixin, BreakdownMixin {
+  GetBreakdown$Query$Breakdown();
+
+  factory GetBreakdown$Query$Breakdown.fromJson(Map<String, dynamic> json) =>
+      _$GetBreakdown$Query$BreakdownFromJson(json);
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$GetBreakdown$Query$BreakdownToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetBreakdown$Query extends JsonSerializable with EquatableMixin {
+  GetBreakdown$Query();
+
+  factory GetBreakdown$Query.fromJson(Map<String, dynamic> json) =>
+      _$GetBreakdown$QueryFromJson(json);
+
+  GetBreakdown$Query$Breakdown? getBreakdown;
+
+  @override
+  List<Object?> get props => [getBreakdown];
+  @override
+  Map<String, dynamic> toJson() => _$GetBreakdown$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class CreateBreakdownOnDataPointArguments extends JsonSerializable
     with EquatableMixin {
   CreateBreakdownOnDataPointArguments({
@@ -4475,4 +4504,97 @@ class DeleteBreakdownMutation
   @override
   DeleteBreakdown$Mutation parse(Map<String, dynamic> json) =>
       DeleteBreakdown$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetBreakdownArguments extends JsonSerializable with EquatableMixin {
+  GetBreakdownArguments({required this.id});
+
+  @override
+  factory GetBreakdownArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetBreakdownArgumentsFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$GetBreakdownArgumentsToJson(this);
+}
+
+final GET_BREAKDOWN_QUERY_DOCUMENT_OPERATION_NAME = 'GetBreakdown';
+final GET_BREAKDOWN_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'GetBreakdown'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'getBreakdown'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'Breakdown'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'Breakdown'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'Breakdown'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      )
+    ]),
+  ),
+]);
+
+class GetBreakdownQuery
+    extends GraphQLQuery<GetBreakdown$Query, GetBreakdownArguments> {
+  GetBreakdownQuery({required this.variables});
+
+  @override
+  final DocumentNode document = GET_BREAKDOWN_QUERY_DOCUMENT;
+
+  @override
+  final String operationName = GET_BREAKDOWN_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetBreakdownArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetBreakdown$Query parse(Map<String, dynamic> json) =>
+      GetBreakdown$Query.fromJson(json);
 }
