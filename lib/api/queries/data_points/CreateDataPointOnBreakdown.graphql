@@ -1,0 +1,13 @@
+mutation CreateDataPointOnBreakdown(
+    $id: ID!,
+    $value: Float!,
+    $parentBreakdownId: ID!
+) {
+    createDataPoint(value: {
+        id: $id,
+        value: $value,
+        compositions: [{id: $parentBreakdownId}]
+    }) {
+        ...DataPoint
+    }
+}

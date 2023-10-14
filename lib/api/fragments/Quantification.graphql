@@ -1,4 +1,12 @@
 fragment Quantification on Quantification {
     id
     name
+    # children
+    dataPoints {
+        id
+    }
+    # parents
+    planetaryBoundaries {
+        id
+    }
 }

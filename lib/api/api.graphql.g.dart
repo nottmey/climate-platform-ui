@@ -10,12 +10,22 @@ CreateBreakdownOnDataPoint$Mutation$Breakdown
     _$CreateBreakdownOnDataPoint$Mutation$BreakdownFromJson(
             Map<String, dynamic> json) =>
         CreateBreakdownOnDataPoint$Mutation$Breakdown()
-          ..id = json['id'] as String;
+          ..id = json['id'] as String
+          ..components = (json['components'] as List<dynamic>?)
+              ?.map((e) =>
+                  BreakdownMixin$DataPoint.fromJson(e as Map<String, dynamic>))
+              .toList()
+          ..parent = json['parent'] == null
+              ? null
+              : BreakdownMixin$DataPoint.fromJson(
+                  json['parent'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$CreateBreakdownOnDataPoint$Mutation$BreakdownToJson(
         CreateBreakdownOnDataPoint$Mutation$Breakdown instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'components': instance.components?.map((e) => e.toJson()).toList(),
+      'parent': instance.parent?.toJson(),
     };
 
 CreateBreakdownOnDataPoint$Mutation
@@ -31,18 +41,40 @@ Map<String, dynamic> _$CreateBreakdownOnDataPoint$MutationToJson(
       'createBreakdown': instance.createBreakdown.toJson(),
     };
 
+BreakdownMixin$DataPoint _$BreakdownMixin$DataPointFromJson(
+        Map<String, dynamic> json) =>
+    BreakdownMixin$DataPoint()..id = json['id'] as String;
+
+Map<String, dynamic> _$BreakdownMixin$DataPointToJson(
+        BreakdownMixin$DataPoint instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
 MergeQuantification$Mutation$Quantification
     _$MergeQuantification$Mutation$QuantificationFromJson(
             Map<String, dynamic> json) =>
         MergeQuantification$Mutation$Quantification()
           ..id = json['id'] as String
-          ..name = json['name'] as String?;
+          ..name = json['name'] as String?
+          ..dataPoints = (json['dataPoints'] as List<dynamic>?)
+              ?.map((e) => QuantificationMixin$DataPoint.fromJson(
+                  e as Map<String, dynamic>))
+              .toList()
+          ..planetaryBoundaries =
+              (json['planetaryBoundaries'] as List<dynamic>?)
+                  ?.map((e) => QuantificationMixin$PlanetaryBoundary.fromJson(
+                      e as Map<String, dynamic>))
+                  .toList();
 
 Map<String, dynamic> _$MergeQuantification$Mutation$QuantificationToJson(
         MergeQuantification$Mutation$Quantification instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'dataPoints': instance.dataPoints?.map((e) => e.toJson()).toList(),
+      'planetaryBoundaries':
+          instance.planetaryBoundaries?.map((e) => e.toJson()).toList(),
     };
 
 MergeQuantification$Mutation _$MergeQuantification$MutationFromJson(
@@ -57,6 +89,27 @@ Map<String, dynamic> _$MergeQuantification$MutationToJson(
         MergeQuantification$Mutation instance) =>
     <String, dynamic>{
       'mergeQuantification': instance.mergeQuantification?.toJson(),
+    };
+
+QuantificationMixin$DataPoint _$QuantificationMixin$DataPointFromJson(
+        Map<String, dynamic> json) =>
+    QuantificationMixin$DataPoint()..id = json['id'] as String;
+
+Map<String, dynamic> _$QuantificationMixin$DataPointToJson(
+        QuantificationMixin$DataPoint instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+QuantificationMixin$PlanetaryBoundary
+    _$QuantificationMixin$PlanetaryBoundaryFromJson(
+            Map<String, dynamic> json) =>
+        QuantificationMixin$PlanetaryBoundary()..id = json['id'] as String;
+
+Map<String, dynamic> _$QuantificationMixin$PlanetaryBoundaryToJson(
+        QuantificationMixin$PlanetaryBoundary instance) =>
+    <String, dynamic>{
+      'id': instance.id,
     };
 
 QuantificationInput _$QuantificationInputFromJson(Map<String, dynamic> json) =>
@@ -151,13 +204,25 @@ DeleteQuantification$Mutation$Quantification
             Map<String, dynamic> json) =>
         DeleteQuantification$Mutation$Quantification()
           ..id = json['id'] as String
-          ..name = json['name'] as String?;
+          ..name = json['name'] as String?
+          ..dataPoints = (json['dataPoints'] as List<dynamic>?)
+              ?.map((e) => QuantificationMixin$DataPoint.fromJson(
+                  e as Map<String, dynamic>))
+              .toList()
+          ..planetaryBoundaries =
+              (json['planetaryBoundaries'] as List<dynamic>?)
+                  ?.map((e) => QuantificationMixin$PlanetaryBoundary.fromJson(
+                      e as Map<String, dynamic>))
+                  .toList();
 
 Map<String, dynamic> _$DeleteQuantification$Mutation$QuantificationToJson(
         DeleteQuantification$Mutation$Quantification instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'dataPoints': instance.dataPoints?.map((e) => e.toJson()).toList(),
+      'planetaryBoundaries':
+          instance.planetaryBoundaries?.map((e) => e.toJson()).toList(),
     };
 
 DeleteQuantification$Mutation _$DeleteQuantification$MutationFromJson(
@@ -179,13 +244,25 @@ GetQuantification$Query$Quantification
             Map<String, dynamic> json) =>
         GetQuantification$Query$Quantification()
           ..id = json['id'] as String
-          ..name = json['name'] as String?;
+          ..name = json['name'] as String?
+          ..dataPoints = (json['dataPoints'] as List<dynamic>?)
+              ?.map((e) => QuantificationMixin$DataPoint.fromJson(
+                  e as Map<String, dynamic>))
+              .toList()
+          ..planetaryBoundaries =
+              (json['planetaryBoundaries'] as List<dynamic>?)
+                  ?.map((e) => QuantificationMixin$PlanetaryBoundary.fromJson(
+                      e as Map<String, dynamic>))
+                  .toList();
 
 Map<String, dynamic> _$GetQuantification$Query$QuantificationToJson(
         GetQuantification$Query$Quantification instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'dataPoints': instance.dataPoints?.map((e) => e.toJson()).toList(),
+      'planetaryBoundaries':
+          instance.planetaryBoundaries?.map((e) => e.toJson()).toList(),
     };
 
 GetQuantification$Query _$GetQuantification$QueryFromJson(
@@ -207,7 +284,16 @@ OnUpdatedQuantification$Subscription$Quantification
             Map<String, dynamic> json) =>
         OnUpdatedQuantification$Subscription$Quantification()
           ..id = json['id'] as String
-          ..name = json['name'] as String?;
+          ..name = json['name'] as String?
+          ..dataPoints = (json['dataPoints'] as List<dynamic>?)
+              ?.map((e) => QuantificationMixin$DataPoint.fromJson(
+                  e as Map<String, dynamic>))
+              .toList()
+          ..planetaryBoundaries =
+              (json['planetaryBoundaries'] as List<dynamic>?)
+                  ?.map((e) => QuantificationMixin$PlanetaryBoundary.fromJson(
+                      e as Map<String, dynamic>))
+                  .toList();
 
 Map<String, dynamic>
     _$OnUpdatedQuantification$Subscription$QuantificationToJson(
@@ -215,6 +301,9 @@ Map<String, dynamic>
         <String, dynamic>{
           'id': instance.id,
           'name': instance.name,
+          'dataPoints': instance.dataPoints?.map((e) => e.toJson()).toList(),
+          'planetaryBoundaries':
+              instance.planetaryBoundaries?.map((e) => e.toJson()).toList(),
         };
 
 OnUpdatedQuantification$Subscription
@@ -236,7 +325,16 @@ OnDeletedQuantification$Subscription$Quantification
             Map<String, dynamic> json) =>
         OnDeletedQuantification$Subscription$Quantification()
           ..id = json['id'] as String
-          ..name = json['name'] as String?;
+          ..name = json['name'] as String?
+          ..dataPoints = (json['dataPoints'] as List<dynamic>?)
+              ?.map((e) => QuantificationMixin$DataPoint.fromJson(
+                  e as Map<String, dynamic>))
+              .toList()
+          ..planetaryBoundaries =
+              (json['planetaryBoundaries'] as List<dynamic>?)
+                  ?.map((e) => QuantificationMixin$PlanetaryBoundary.fromJson(
+                      e as Map<String, dynamic>))
+                  .toList();
 
 Map<String, dynamic>
     _$OnDeletedQuantification$Subscription$QuantificationToJson(
@@ -244,6 +342,9 @@ Map<String, dynamic>
         <String, dynamic>{
           'id': instance.id,
           'name': instance.name,
+          'dataPoints': instance.dataPoints?.map((e) => e.toJson()).toList(),
+          'planetaryBoundaries':
+              instance.planetaryBoundaries?.map((e) => e.toJson()).toList(),
         };
 
 OnDeletedQuantification$Subscription
@@ -265,13 +366,25 @@ CreateQuantification$Mutation$Quantification
             Map<String, dynamic> json) =>
         CreateQuantification$Mutation$Quantification()
           ..id = json['id'] as String
-          ..name = json['name'] as String?;
+          ..name = json['name'] as String?
+          ..dataPoints = (json['dataPoints'] as List<dynamic>?)
+              ?.map((e) => QuantificationMixin$DataPoint.fromJson(
+                  e as Map<String, dynamic>))
+              .toList()
+          ..planetaryBoundaries =
+              (json['planetaryBoundaries'] as List<dynamic>?)
+                  ?.map((e) => QuantificationMixin$PlanetaryBoundary.fromJson(
+                      e as Map<String, dynamic>))
+                  .toList();
 
 Map<String, dynamic> _$CreateQuantification$Mutation$QuantificationToJson(
         CreateQuantification$Mutation$Quantification instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'dataPoints': instance.dataPoints?.map((e) => e.toJson()).toList(),
+      'planetaryBoundaries':
+          instance.planetaryBoundaries?.map((e) => e.toJson()).toList(),
     };
 
 CreateQuantification$Mutation _$CreateQuantification$MutationFromJson(
@@ -292,7 +405,16 @@ GetQuantificationPage$Query$PlanetaryBoundary$Quantification
             Map<String, dynamic> json) =>
         GetQuantificationPage$Query$PlanetaryBoundary$Quantification()
           ..id = json['id'] as String
-          ..name = json['name'] as String?;
+          ..name = json['name'] as String?
+          ..dataPoints = (json['dataPoints'] as List<dynamic>?)
+              ?.map((e) => QuantificationMixin$DataPoint.fromJson(
+                  e as Map<String, dynamic>))
+              .toList()
+          ..planetaryBoundaries =
+              (json['planetaryBoundaries'] as List<dynamic>?)
+                  ?.map((e) => QuantificationMixin$PlanetaryBoundary.fromJson(
+                      e as Map<String, dynamic>))
+                  .toList();
 
 Map<String, dynamic>
     _$GetQuantificationPage$Query$PlanetaryBoundary$QuantificationToJson(
@@ -301,6 +423,9 @@ Map<String, dynamic>
         <String, dynamic>{
           'id': instance.id,
           'name': instance.name,
+          'dataPoints': instance.dataPoints?.map((e) => e.toJson()).toList(),
+          'planetaryBoundaries':
+              instance.planetaryBoundaries?.map((e) => e.toJson()).toList(),
         };
 
 GetQuantificationPage$Query$PlanetaryBoundary
@@ -339,7 +464,16 @@ OnCreatedQuantification$Subscription$Quantification
             Map<String, dynamic> json) =>
         OnCreatedQuantification$Subscription$Quantification()
           ..id = json['id'] as String
-          ..name = json['name'] as String?;
+          ..name = json['name'] as String?
+          ..dataPoints = (json['dataPoints'] as List<dynamic>?)
+              ?.map((e) => QuantificationMixin$DataPoint.fromJson(
+                  e as Map<String, dynamic>))
+              .toList()
+          ..planetaryBoundaries =
+              (json['planetaryBoundaries'] as List<dynamic>?)
+                  ?.map((e) => QuantificationMixin$PlanetaryBoundary.fromJson(
+                      e as Map<String, dynamic>))
+                  .toList();
 
 Map<String, dynamic>
     _$OnCreatedQuantification$Subscription$QuantificationToJson(
@@ -347,6 +481,9 @@ Map<String, dynamic>
         <String, dynamic>{
           'id': instance.id,
           'name': instance.name,
+          'dataPoints': instance.dataPoints?.map((e) => e.toJson()).toList(),
+          'planetaryBoundaries':
+              instance.planetaryBoundaries?.map((e) => e.toJson()).toList(),
         };
 
 OnCreatedQuantification$Subscription
@@ -369,7 +506,11 @@ MergePlanetaryBoundary$Mutation$PlanetaryBoundary
         MergePlanetaryBoundary$Mutation$PlanetaryBoundary()
           ..id = json['id'] as String
           ..name = json['name'] as String?
-          ..description = json['description'] as String?;
+          ..description = json['description'] as String?
+          ..quantifications = (json['quantifications'] as List<dynamic>?)
+              ?.map((e) => PlanetaryBoundaryMixin$Quantification.fromJson(
+                  e as Map<String, dynamic>))
+              .toList();
 
 Map<String, dynamic> _$MergePlanetaryBoundary$Mutation$PlanetaryBoundaryToJson(
         MergePlanetaryBoundary$Mutation$PlanetaryBoundary instance) =>
@@ -377,6 +518,8 @@ Map<String, dynamic> _$MergePlanetaryBoundary$Mutation$PlanetaryBoundaryToJson(
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,
+      'quantifications':
+          instance.quantifications?.map((e) => e.toJson()).toList(),
     };
 
 MergePlanetaryBoundary$Mutation _$MergePlanetaryBoundary$MutationFromJson(
@@ -393,13 +536,28 @@ Map<String, dynamic> _$MergePlanetaryBoundary$MutationToJson(
       'mergePlanetaryBoundary': instance.mergePlanetaryBoundary?.toJson(),
     };
 
+PlanetaryBoundaryMixin$Quantification
+    _$PlanetaryBoundaryMixin$QuantificationFromJson(
+            Map<String, dynamic> json) =>
+        PlanetaryBoundaryMixin$Quantification()..id = json['id'] as String;
+
+Map<String, dynamic> _$PlanetaryBoundaryMixin$QuantificationToJson(
+        PlanetaryBoundaryMixin$Quantification instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
 OnUpdatedPlanetaryBoundary$Subscription$PlanetaryBoundary
     _$OnUpdatedPlanetaryBoundary$Subscription$PlanetaryBoundaryFromJson(
             Map<String, dynamic> json) =>
         OnUpdatedPlanetaryBoundary$Subscription$PlanetaryBoundary()
           ..id = json['id'] as String
           ..name = json['name'] as String?
-          ..description = json['description'] as String?;
+          ..description = json['description'] as String?
+          ..quantifications = (json['quantifications'] as List<dynamic>?)
+              ?.map((e) => PlanetaryBoundaryMixin$Quantification.fromJson(
+                  e as Map<String, dynamic>))
+              .toList();
 
 Map<String,
     dynamic> _$OnUpdatedPlanetaryBoundary$Subscription$PlanetaryBoundaryToJson(
@@ -408,6 +566,8 @@ Map<String,
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,
+      'quantifications':
+          instance.quantifications?.map((e) => e.toJson()).toList(),
     };
 
 OnUpdatedPlanetaryBoundary$Subscription
@@ -434,7 +594,11 @@ CreatePlanetaryBoundary$Mutation$PlanetaryBoundary
         CreatePlanetaryBoundary$Mutation$PlanetaryBoundary()
           ..id = json['id'] as String
           ..name = json['name'] as String?
-          ..description = json['description'] as String?;
+          ..description = json['description'] as String?
+          ..quantifications = (json['quantifications'] as List<dynamic>?)
+              ?.map((e) => PlanetaryBoundaryMixin$Quantification.fromJson(
+                  e as Map<String, dynamic>))
+              .toList();
 
 Map<String, dynamic> _$CreatePlanetaryBoundary$Mutation$PlanetaryBoundaryToJson(
         CreatePlanetaryBoundary$Mutation$PlanetaryBoundary instance) =>
@@ -442,6 +606,8 @@ Map<String, dynamic> _$CreatePlanetaryBoundary$Mutation$PlanetaryBoundaryToJson(
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,
+      'quantifications':
+          instance.quantifications?.map((e) => e.toJson()).toList(),
     };
 
 CreatePlanetaryBoundary$Mutation _$CreatePlanetaryBoundary$MutationFromJson(
@@ -463,7 +629,11 @@ OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundary
         OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundary()
           ..id = json['id'] as String
           ..name = json['name'] as String?
-          ..description = json['description'] as String?;
+          ..description = json['description'] as String?
+          ..quantifications = (json['quantifications'] as List<dynamic>?)
+              ?.map((e) => PlanetaryBoundaryMixin$Quantification.fromJson(
+                  e as Map<String, dynamic>))
+              .toList();
 
 Map<String,
     dynamic> _$OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundaryToJson(
@@ -472,6 +642,8 @@ Map<String,
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,
+      'quantifications':
+          instance.quantifications?.map((e) => e.toJson()).toList(),
     };
 
 OnDeletedPlanetaryBoundary$Subscription
@@ -498,7 +670,11 @@ DeletePlanetaryBoundary$Mutation$PlanetaryBoundary
         DeletePlanetaryBoundary$Mutation$PlanetaryBoundary()
           ..id = json['id'] as String
           ..name = json['name'] as String?
-          ..description = json['description'] as String?;
+          ..description = json['description'] as String?
+          ..quantifications = (json['quantifications'] as List<dynamic>?)
+              ?.map((e) => PlanetaryBoundaryMixin$Quantification.fromJson(
+                  e as Map<String, dynamic>))
+              .toList();
 
 Map<String, dynamic> _$DeletePlanetaryBoundary$Mutation$PlanetaryBoundaryToJson(
         DeletePlanetaryBoundary$Mutation$PlanetaryBoundary instance) =>
@@ -506,6 +682,8 @@ Map<String, dynamic> _$DeletePlanetaryBoundary$Mutation$PlanetaryBoundaryToJson(
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,
+      'quantifications':
+          instance.quantifications?.map((e) => e.toJson()).toList(),
     };
 
 DeletePlanetaryBoundary$Mutation _$DeletePlanetaryBoundary$MutationFromJson(
@@ -528,7 +706,11 @@ OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundary
         OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundary()
           ..id = json['id'] as String
           ..name = json['name'] as String?
-          ..description = json['description'] as String?;
+          ..description = json['description'] as String?
+          ..quantifications = (json['quantifications'] as List<dynamic>?)
+              ?.map((e) => PlanetaryBoundaryMixin$Quantification.fromJson(
+                  e as Map<String, dynamic>))
+              .toList();
 
 Map<String,
     dynamic> _$OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundaryToJson(
@@ -537,6 +719,8 @@ Map<String,
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,
+      'quantifications':
+          instance.quantifications?.map((e) => e.toJson()).toList(),
     };
 
 OnCreatedPlanetaryBoundary$Subscription
@@ -579,7 +763,11 @@ GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PlanetaryBoundary
         GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PlanetaryBoundary()
           ..id = json['id'] as String
           ..name = json['name'] as String?
-          ..description = json['description'] as String?;
+          ..description = json['description'] as String?
+          ..quantifications = (json['quantifications'] as List<dynamic>?)
+              ?.map((e) => PlanetaryBoundaryMixin$Quantification.fromJson(
+                  e as Map<String, dynamic>))
+              .toList();
 
 Map<String, dynamic>
     _$GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PlanetaryBoundaryToJson(
@@ -589,6 +777,8 @@ Map<String, dynamic>
           'id': instance.id,
           'name': instance.name,
           'description': instance.description,
+          'quantifications':
+              instance.quantifications?.map((e) => e.toJson()).toList(),
         };
 
 GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage
@@ -631,7 +821,11 @@ GetPlanetaryBoundary$Query$PlanetaryBoundary
         GetPlanetaryBoundary$Query$PlanetaryBoundary()
           ..id = json['id'] as String
           ..name = json['name'] as String?
-          ..description = json['description'] as String?;
+          ..description = json['description'] as String?
+          ..quantifications = (json['quantifications'] as List<dynamic>?)
+              ?.map((e) => PlanetaryBoundaryMixin$Quantification.fromJson(
+                  e as Map<String, dynamic>))
+              .toList();
 
 Map<String, dynamic> _$GetPlanetaryBoundary$Query$PlanetaryBoundaryToJson(
         GetPlanetaryBoundary$Query$PlanetaryBoundary instance) =>
@@ -639,6 +833,8 @@ Map<String, dynamic> _$GetPlanetaryBoundary$Query$PlanetaryBoundaryToJson(
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,
+      'quantifications':
+          instance.quantifications?.map((e) => e.toJson()).toList(),
     };
 
 GetPlanetaryBoundary$Query _$GetPlanetaryBoundary$QueryFromJson(
@@ -663,6 +859,14 @@ GetDataPoint$Query$DataPoint _$GetDataPoint$Query$DataPointFromJson(
       ..breakdowns = (json['breakdowns'] as List<dynamic>?)
           ?.map((e) =>
               DataPointMixin$Breakdown.fromJson(e as Map<String, dynamic>))
+          .toList()
+      ..compositions = (json['compositions'] as List<dynamic>?)
+          ?.map((e) =>
+              DataPointMixin$Breakdown.fromJson(e as Map<String, dynamic>))
+          .toList()
+      ..quantifications = (json['quantifications'] as List<dynamic>?)
+          ?.map((e) =>
+              DataPointMixin$Quantification.fromJson(e as Map<String, dynamic>))
           .toList();
 
 Map<String, dynamic> _$GetDataPoint$Query$DataPointToJson(
@@ -671,6 +875,9 @@ Map<String, dynamic> _$GetDataPoint$Query$DataPointToJson(
       'id': instance.id,
       'value': instance.value,
       'breakdowns': instance.breakdowns?.map((e) => e.toJson()).toList(),
+      'compositions': instance.compositions?.map((e) => e.toJson()).toList(),
+      'quantifications':
+          instance.quantifications?.map((e) => e.toJson()).toList(),
     };
 
 GetDataPoint$Query _$GetDataPoint$QueryFromJson(Map<String, dynamic> json) =>
@@ -695,6 +902,16 @@ Map<String, dynamic> _$DataPointMixin$BreakdownToJson(
       'id': instance.id,
     };
 
+DataPointMixin$Quantification _$DataPointMixin$QuantificationFromJson(
+        Map<String, dynamic> json) =>
+    DataPointMixin$Quantification()..id = json['id'] as String;
+
+Map<String, dynamic> _$DataPointMixin$QuantificationToJson(
+        DataPointMixin$Quantification instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
 CreateDataPointOnQuantification$Mutation$DataPoint
     _$CreateDataPointOnQuantification$Mutation$DataPointFromJson(
             Map<String, dynamic> json) =>
@@ -704,6 +921,14 @@ CreateDataPointOnQuantification$Mutation$DataPoint
           ..breakdowns = (json['breakdowns'] as List<dynamic>?)
               ?.map((e) =>
                   DataPointMixin$Breakdown.fromJson(e as Map<String, dynamic>))
+              .toList()
+          ..compositions = (json['compositions'] as List<dynamic>?)
+              ?.map((e) =>
+                  DataPointMixin$Breakdown.fromJson(e as Map<String, dynamic>))
+              .toList()
+          ..quantifications = (json['quantifications'] as List<dynamic>?)
+              ?.map((e) => DataPointMixin$Quantification.fromJson(
+                  e as Map<String, dynamic>))
               .toList();
 
 Map<String, dynamic> _$CreateDataPointOnQuantification$Mutation$DataPointToJson(
@@ -712,6 +937,9 @@ Map<String, dynamic> _$CreateDataPointOnQuantification$Mutation$DataPointToJson(
       'id': instance.id,
       'value': instance.value,
       'breakdowns': instance.breakdowns?.map((e) => e.toJson()).toList(),
+      'compositions': instance.compositions?.map((e) => e.toJson()).toList(),
+      'quantifications':
+          instance.quantifications?.map((e) => e.toJson()).toList(),
     };
 
 CreateDataPointOnQuantification$Mutation
@@ -737,6 +965,14 @@ GetDataPointsOnQuantification$Query$Quantification$DataPoint
           ..breakdowns = (json['breakdowns'] as List<dynamic>?)
               ?.map((e) =>
                   DataPointMixin$Breakdown.fromJson(e as Map<String, dynamic>))
+              .toList()
+          ..compositions = (json['compositions'] as List<dynamic>?)
+              ?.map((e) =>
+                  DataPointMixin$Breakdown.fromJson(e as Map<String, dynamic>))
+              .toList()
+          ..quantifications = (json['quantifications'] as List<dynamic>?)
+              ?.map((e) => DataPointMixin$Quantification.fromJson(
+                  e as Map<String, dynamic>))
               .toList();
 
 Map<String, dynamic>
@@ -747,6 +983,10 @@ Map<String, dynamic>
           'id': instance.id,
           'value': instance.value,
           'breakdowns': instance.breakdowns?.map((e) => e.toJson()).toList(),
+          'compositions':
+              instance.compositions?.map((e) => e.toJson()).toList(),
+          'quantifications':
+              instance.quantifications?.map((e) => e.toJson()).toList(),
         };
 
 GetDataPointsOnQuantification$Query$Quantification
@@ -787,6 +1027,14 @@ DeleteDataPoint$Mutation$DataPoint _$DeleteDataPoint$Mutation$DataPointFromJson(
       ..breakdowns = (json['breakdowns'] as List<dynamic>?)
           ?.map((e) =>
               DataPointMixin$Breakdown.fromJson(e as Map<String, dynamic>))
+          .toList()
+      ..compositions = (json['compositions'] as List<dynamic>?)
+          ?.map((e) =>
+              DataPointMixin$Breakdown.fromJson(e as Map<String, dynamic>))
+          .toList()
+      ..quantifications = (json['quantifications'] as List<dynamic>?)
+          ?.map((e) =>
+              DataPointMixin$Quantification.fromJson(e as Map<String, dynamic>))
           .toList();
 
 Map<String, dynamic> _$DeleteDataPoint$Mutation$DataPointToJson(
@@ -795,6 +1043,9 @@ Map<String, dynamic> _$DeleteDataPoint$Mutation$DataPointToJson(
       'id': instance.id,
       'value': instance.value,
       'breakdowns': instance.breakdowns?.map((e) => e.toJson()).toList(),
+      'compositions': instance.compositions?.map((e) => e.toJson()).toList(),
+      'quantifications':
+          instance.quantifications?.map((e) => e.toJson()).toList(),
     };
 
 DeleteDataPoint$Mutation _$DeleteDataPoint$MutationFromJson(
@@ -1113,12 +1364,23 @@ Map<String, dynamic> _$GetEntity$QueryToJson(GetEntity$Query instance) =>
 
 DeleteBreakdown$Mutation$Breakdown _$DeleteBreakdown$Mutation$BreakdownFromJson(
         Map<String, dynamic> json) =>
-    DeleteBreakdown$Mutation$Breakdown()..id = json['id'] as String;
+    DeleteBreakdown$Mutation$Breakdown()
+      ..id = json['id'] as String
+      ..components = (json['components'] as List<dynamic>?)
+          ?.map((e) =>
+              BreakdownMixin$DataPoint.fromJson(e as Map<String, dynamic>))
+          .toList()
+      ..parent = json['parent'] == null
+          ? null
+          : BreakdownMixin$DataPoint.fromJson(
+              json['parent'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$DeleteBreakdown$Mutation$BreakdownToJson(
         DeleteBreakdown$Mutation$Breakdown instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'components': instance.components?.map((e) => e.toJson()).toList(),
+      'parent': instance.parent?.toJson(),
     };
 
 DeleteBreakdown$Mutation _$DeleteBreakdown$MutationFromJson(
@@ -1137,12 +1399,23 @@ Map<String, dynamic> _$DeleteBreakdown$MutationToJson(
 
 GetBreakdown$Query$Breakdown _$GetBreakdown$Query$BreakdownFromJson(
         Map<String, dynamic> json) =>
-    GetBreakdown$Query$Breakdown()..id = json['id'] as String;
+    GetBreakdown$Query$Breakdown()
+      ..id = json['id'] as String
+      ..components = (json['components'] as List<dynamic>?)
+          ?.map((e) =>
+              BreakdownMixin$DataPoint.fromJson(e as Map<String, dynamic>))
+          .toList()
+      ..parent = json['parent'] == null
+          ? null
+          : BreakdownMixin$DataPoint.fromJson(
+              json['parent'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$GetBreakdown$Query$BreakdownToJson(
         GetBreakdown$Query$Breakdown instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'components': instance.components?.map((e) => e.toJson()).toList(),
+      'parent': instance.parent?.toJson(),
     };
 
 GetBreakdown$Query _$GetBreakdown$QueryFromJson(Map<String, dynamic> json) =>
@@ -1155,6 +1428,49 @@ GetBreakdown$Query _$GetBreakdown$QueryFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$GetBreakdown$QueryToJson(GetBreakdown$Query instance) =>
     <String, dynamic>{
       'getBreakdown': instance.getBreakdown?.toJson(),
+    };
+
+CreateDataPointOnBreakdown$Mutation$DataPoint
+    _$CreateDataPointOnBreakdown$Mutation$DataPointFromJson(
+            Map<String, dynamic> json) =>
+        CreateDataPointOnBreakdown$Mutation$DataPoint()
+          ..id = json['id'] as String
+          ..value = (json['value'] as num?)?.toDouble()
+          ..breakdowns = (json['breakdowns'] as List<dynamic>?)
+              ?.map((e) =>
+                  DataPointMixin$Breakdown.fromJson(e as Map<String, dynamic>))
+              .toList()
+          ..compositions = (json['compositions'] as List<dynamic>?)
+              ?.map((e) =>
+                  DataPointMixin$Breakdown.fromJson(e as Map<String, dynamic>))
+              .toList()
+          ..quantifications = (json['quantifications'] as List<dynamic>?)
+              ?.map((e) => DataPointMixin$Quantification.fromJson(
+                  e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic> _$CreateDataPointOnBreakdown$Mutation$DataPointToJson(
+        CreateDataPointOnBreakdown$Mutation$DataPoint instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'value': instance.value,
+      'breakdowns': instance.breakdowns?.map((e) => e.toJson()).toList(),
+      'compositions': instance.compositions?.map((e) => e.toJson()).toList(),
+      'quantifications':
+          instance.quantifications?.map((e) => e.toJson()).toList(),
+    };
+
+CreateDataPointOnBreakdown$Mutation
+    _$CreateDataPointOnBreakdown$MutationFromJson(Map<String, dynamic> json) =>
+        CreateDataPointOnBreakdown$Mutation()
+          ..createDataPoint =
+              CreateDataPointOnBreakdown$Mutation$DataPoint.fromJson(
+                  json['createDataPoint'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$CreateDataPointOnBreakdown$MutationToJson(
+        CreateDataPointOnBreakdown$Mutation instance) =>
+    <String, dynamic>{
+      'createDataPoint': instance.createDataPoint.toJson(),
     };
 
 CreateBreakdownOnDataPointArguments
@@ -1449,4 +1765,20 @@ Map<String, dynamic> _$GetBreakdownArgumentsToJson(
         GetBreakdownArguments instance) =>
     <String, dynamic>{
       'id': instance.id,
+    };
+
+CreateDataPointOnBreakdownArguments
+    _$CreateDataPointOnBreakdownArgumentsFromJson(Map<String, dynamic> json) =>
+        CreateDataPointOnBreakdownArguments(
+          id: json['id'] as String,
+          value: (json['value'] as num).toDouble(),
+          parentBreakdownId: json['parentBreakdownId'] as String,
+        );
+
+Map<String, dynamic> _$CreateDataPointOnBreakdownArgumentsToJson(
+        CreateDataPointOnBreakdownArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'value': instance.value,
+      'parentBreakdownId': instance.parentBreakdownId,
     };

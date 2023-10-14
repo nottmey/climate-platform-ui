@@ -27,7 +27,8 @@ class AppHeaderSliver extends ConsumerWidget {
           error: (e, st) => '<Error>',
           loading: () => '...',
         ),
-        overflow: TextOverflow.visible,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
       ),
       pinned: true,
       actions: [

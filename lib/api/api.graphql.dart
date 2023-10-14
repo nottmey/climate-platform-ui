@@ -8,15 +8,20 @@ part 'api.graphql.g.dart';
 
 mixin BreakdownMixin {
   late String id;
+  List<BreakdownMixin$DataPoint>? components;
+  BreakdownMixin$DataPoint? parent;
 }
 mixin QuantificationMixin {
   late String id;
   String? name;
+  List<QuantificationMixin$DataPoint>? dataPoints;
+  List<QuantificationMixin$PlanetaryBoundary>? planetaryBoundaries;
 }
 mixin PlanetaryBoundaryMixin {
   late String id;
   String? name;
   String? description;
+  List<PlanetaryBoundaryMixin$Quantification>? quantifications;
 }
 mixin PageInfoMixin {
   int? next;
@@ -26,6 +31,8 @@ mixin DataPointMixin {
   late String id;
   double? value;
   List<DataPointMixin$Breakdown>? breakdowns;
+  List<DataPointMixin$Breakdown>? compositions;
+  List<DataPointMixin$Quantification>? quantifications;
 }
 mixin EntityMixin {
   late String id;
@@ -42,7 +49,7 @@ class CreateBreakdownOnDataPoint$Mutation$Breakdown extends JsonSerializable
       _$CreateBreakdownOnDataPoint$Mutation$BreakdownFromJson(json);
 
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [id, components, parent];
   @override
   Map<String, dynamic> toJson() =>
       _$CreateBreakdownOnDataPoint$Mutation$BreakdownToJson(this);
@@ -67,6 +74,21 @@ class CreateBreakdownOnDataPoint$Mutation extends JsonSerializable
 }
 
 @JsonSerializable(explicitToJson: true)
+class BreakdownMixin$DataPoint extends JsonSerializable with EquatableMixin {
+  BreakdownMixin$DataPoint();
+
+  factory BreakdownMixin$DataPoint.fromJson(Map<String, dynamic> json) =>
+      _$BreakdownMixin$DataPointFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$BreakdownMixin$DataPointToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class MergeQuantification$Mutation$Quantification extends JsonSerializable
     with EquatableMixin, QuantificationMixin {
   MergeQuantification$Mutation$Quantification();
@@ -76,7 +98,7 @@ class MergeQuantification$Mutation$Quantification extends JsonSerializable
       _$MergeQuantification$Mutation$QuantificationFromJson(json);
 
   @override
-  List<Object?> get props => [id, name];
+  List<Object?> get props => [id, name, dataPoints, planetaryBoundaries];
   @override
   Map<String, dynamic> toJson() =>
       _$MergeQuantification$Mutation$QuantificationToJson(this);
@@ -96,6 +118,40 @@ class MergeQuantification$Mutation extends JsonSerializable
   List<Object?> get props => [mergeQuantification];
   @override
   Map<String, dynamic> toJson() => _$MergeQuantification$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class QuantificationMixin$DataPoint extends JsonSerializable
+    with EquatableMixin {
+  QuantificationMixin$DataPoint();
+
+  factory QuantificationMixin$DataPoint.fromJson(Map<String, dynamic> json) =>
+      _$QuantificationMixin$DataPointFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$QuantificationMixin$DataPointToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class QuantificationMixin$PlanetaryBoundary extends JsonSerializable
+    with EquatableMixin {
+  QuantificationMixin$PlanetaryBoundary();
+
+  factory QuantificationMixin$PlanetaryBoundary.fromJson(
+          Map<String, dynamic> json) =>
+      _$QuantificationMixin$PlanetaryBoundaryFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$QuantificationMixin$PlanetaryBoundaryToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -213,7 +269,7 @@ class DeleteQuantification$Mutation$Quantification extends JsonSerializable
       _$DeleteQuantification$Mutation$QuantificationFromJson(json);
 
   @override
-  List<Object?> get props => [id, name];
+  List<Object?> get props => [id, name, dataPoints, planetaryBoundaries];
   @override
   Map<String, dynamic> toJson() =>
       _$DeleteQuantification$Mutation$QuantificationToJson(this);
@@ -245,7 +301,7 @@ class GetQuantification$Query$Quantification extends JsonSerializable
       _$GetQuantification$Query$QuantificationFromJson(json);
 
   @override
-  List<Object?> get props => [id, name];
+  List<Object?> get props => [id, name, dataPoints, planetaryBoundaries];
   @override
   Map<String, dynamic> toJson() =>
       _$GetQuantification$Query$QuantificationToJson(this);
@@ -276,7 +332,7 @@ class OnUpdatedQuantification$Subscription$Quantification
       _$OnUpdatedQuantification$Subscription$QuantificationFromJson(json);
 
   @override
-  List<Object?> get props => [id, name];
+  List<Object?> get props => [id, name, dataPoints, planetaryBoundaries];
   @override
   Map<String, dynamic> toJson() =>
       _$OnUpdatedQuantification$Subscription$QuantificationToJson(this);
@@ -310,7 +366,7 @@ class OnDeletedQuantification$Subscription$Quantification
       _$OnDeletedQuantification$Subscription$QuantificationFromJson(json);
 
   @override
-  List<Object?> get props => [id, name];
+  List<Object?> get props => [id, name, dataPoints, planetaryBoundaries];
   @override
   Map<String, dynamic> toJson() =>
       _$OnDeletedQuantification$Subscription$QuantificationToJson(this);
@@ -344,7 +400,7 @@ class CreateQuantification$Mutation$Quantification extends JsonSerializable
       _$CreateQuantification$Mutation$QuantificationFromJson(json);
 
   @override
-  List<Object?> get props => [id, name];
+  List<Object?> get props => [id, name, dataPoints, planetaryBoundaries];
   @override
   Map<String, dynamic> toJson() =>
       _$CreateQuantification$Mutation$QuantificationToJson(this);
@@ -377,7 +433,7 @@ class GetQuantificationPage$Query$PlanetaryBoundary$Quantification
           json);
 
   @override
-  List<Object?> get props => [id, name];
+  List<Object?> get props => [id, name, dataPoints, planetaryBoundaries];
   @override
   Map<String, dynamic> toJson() =>
       _$GetQuantificationPage$Query$PlanetaryBoundary$QuantificationToJson(
@@ -428,7 +484,7 @@ class OnCreatedQuantification$Subscription$Quantification
       _$OnCreatedQuantification$Subscription$QuantificationFromJson(json);
 
   @override
-  List<Object?> get props => [id, name];
+  List<Object?> get props => [id, name, dataPoints, planetaryBoundaries];
   @override
   Map<String, dynamic> toJson() =>
       _$OnCreatedQuantification$Subscription$QuantificationToJson(this);
@@ -462,7 +518,7 @@ class MergePlanetaryBoundary$Mutation$PlanetaryBoundary extends JsonSerializable
       _$MergePlanetaryBoundary$Mutation$PlanetaryBoundaryFromJson(json);
 
   @override
-  List<Object?> get props => [id, name, description];
+  List<Object?> get props => [id, name, description, quantifications];
   @override
   Map<String, dynamic> toJson() =>
       _$MergePlanetaryBoundary$Mutation$PlanetaryBoundaryToJson(this);
@@ -486,6 +542,24 @@ class MergePlanetaryBoundary$Mutation extends JsonSerializable
 }
 
 @JsonSerializable(explicitToJson: true)
+class PlanetaryBoundaryMixin$Quantification extends JsonSerializable
+    with EquatableMixin {
+  PlanetaryBoundaryMixin$Quantification();
+
+  factory PlanetaryBoundaryMixin$Quantification.fromJson(
+          Map<String, dynamic> json) =>
+      _$PlanetaryBoundaryMixin$QuantificationFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$PlanetaryBoundaryMixin$QuantificationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class OnUpdatedPlanetaryBoundary$Subscription$PlanetaryBoundary
     extends JsonSerializable with EquatableMixin, PlanetaryBoundaryMixin {
   OnUpdatedPlanetaryBoundary$Subscription$PlanetaryBoundary();
@@ -495,7 +569,7 @@ class OnUpdatedPlanetaryBoundary$Subscription$PlanetaryBoundary
       _$OnUpdatedPlanetaryBoundary$Subscription$PlanetaryBoundaryFromJson(json);
 
   @override
-  List<Object?> get props => [id, name, description];
+  List<Object?> get props => [id, name, description, quantifications];
   @override
   Map<String, dynamic> toJson() =>
       _$OnUpdatedPlanetaryBoundary$Subscription$PlanetaryBoundaryToJson(this);
@@ -530,7 +604,7 @@ class CreatePlanetaryBoundary$Mutation$PlanetaryBoundary
       _$CreatePlanetaryBoundary$Mutation$PlanetaryBoundaryFromJson(json);
 
   @override
-  List<Object?> get props => [id, name, description];
+  List<Object?> get props => [id, name, description, quantifications];
   @override
   Map<String, dynamic> toJson() =>
       _$CreatePlanetaryBoundary$Mutation$PlanetaryBoundaryToJson(this);
@@ -565,7 +639,7 @@ class OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundary
       _$OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundaryFromJson(json);
 
   @override
-  List<Object?> get props => [id, name, description];
+  List<Object?> get props => [id, name, description, quantifications];
   @override
   Map<String, dynamic> toJson() =>
       _$OnDeletedPlanetaryBoundary$Subscription$PlanetaryBoundaryToJson(this);
@@ -600,7 +674,7 @@ class DeletePlanetaryBoundary$Mutation$PlanetaryBoundary
       _$DeletePlanetaryBoundary$Mutation$PlanetaryBoundaryFromJson(json);
 
   @override
-  List<Object?> get props => [id, name, description];
+  List<Object?> get props => [id, name, description, quantifications];
   @override
   Map<String, dynamic> toJson() =>
       _$DeletePlanetaryBoundary$Mutation$PlanetaryBoundaryToJson(this);
@@ -634,7 +708,7 @@ class OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundary
       _$OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundaryFromJson(json);
 
   @override
-  List<Object?> get props => [id, name, description];
+  List<Object?> get props => [id, name, description, quantifications];
   @override
   Map<String, dynamic> toJson() =>
       _$OnCreatedPlanetaryBoundary$Subscription$PlanetaryBoundaryToJson(this);
@@ -688,7 +762,7 @@ class GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PlanetaryBoundary
           json);
 
   @override
-  List<Object?> get props => [id, name, description];
+  List<Object?> get props => [id, name, description, quantifications];
   @override
   Map<String, dynamic> toJson() =>
       _$GetPlanetaryBoundaryPage$Query$PlanetaryBoundaryListPage$PlanetaryBoundaryToJson(
@@ -744,7 +818,7 @@ class GetPlanetaryBoundary$Query$PlanetaryBoundary extends JsonSerializable
       _$GetPlanetaryBoundary$Query$PlanetaryBoundaryFromJson(json);
 
   @override
-  List<Object?> get props => [id, name, description];
+  List<Object?> get props => [id, name, description, quantifications];
   @override
   Map<String, dynamic> toJson() =>
       _$GetPlanetaryBoundary$Query$PlanetaryBoundaryToJson(this);
@@ -774,7 +848,8 @@ class GetDataPoint$Query$DataPoint extends JsonSerializable
       _$GetDataPoint$Query$DataPointFromJson(json);
 
   @override
-  List<Object?> get props => [id, value, breakdowns];
+  List<Object?> get props =>
+      [id, value, breakdowns, compositions, quantifications];
   @override
   Map<String, dynamic> toJson() => _$GetDataPoint$Query$DataPointToJson(this);
 }
@@ -810,6 +885,22 @@ class DataPointMixin$Breakdown extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
+class DataPointMixin$Quantification extends JsonSerializable
+    with EquatableMixin {
+  DataPointMixin$Quantification();
+
+  factory DataPointMixin$Quantification.fromJson(Map<String, dynamic> json) =>
+      _$DataPointMixin$QuantificationFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$DataPointMixin$QuantificationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class CreateDataPointOnQuantification$Mutation$DataPoint
     extends JsonSerializable with EquatableMixin, DataPointMixin {
   CreateDataPointOnQuantification$Mutation$DataPoint();
@@ -819,7 +910,8 @@ class CreateDataPointOnQuantification$Mutation$DataPoint
       _$CreateDataPointOnQuantification$Mutation$DataPointFromJson(json);
 
   @override
-  List<Object?> get props => [id, value, breakdowns];
+  List<Object?> get props =>
+      [id, value, breakdowns, compositions, quantifications];
   @override
   Map<String, dynamic> toJson() =>
       _$CreateDataPointOnQuantification$Mutation$DataPointToJson(this);
@@ -854,7 +946,8 @@ class GetDataPointsOnQuantification$Query$Quantification$DataPoint
           json);
 
   @override
-  List<Object?> get props => [id, value, breakdowns];
+  List<Object?> get props =>
+      [id, value, breakdowns, compositions, quantifications];
   @override
   Map<String, dynamic> toJson() =>
       _$GetDataPointsOnQuantification$Query$Quantification$DataPointToJson(
@@ -908,7 +1001,8 @@ class DeleteDataPoint$Mutation$DataPoint extends JsonSerializable
       _$DeleteDataPoint$Mutation$DataPointFromJson(json);
 
   @override
-  List<Object?> get props => [id, value, breakdowns];
+  List<Object?> get props =>
+      [id, value, breakdowns, compositions, quantifications];
   @override
   Map<String, dynamic> toJson() =>
       _$DeleteDataPoint$Mutation$DataPointToJson(this);
@@ -1299,7 +1393,7 @@ class DeleteBreakdown$Mutation$Breakdown extends JsonSerializable
       _$DeleteBreakdown$Mutation$BreakdownFromJson(json);
 
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [id, components, parent];
   @override
   Map<String, dynamic> toJson() =>
       _$DeleteBreakdown$Mutation$BreakdownToJson(this);
@@ -1329,7 +1423,7 @@ class GetBreakdown$Query$Breakdown extends JsonSerializable
       _$GetBreakdown$Query$BreakdownFromJson(json);
 
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [id, components, parent];
   @override
   Map<String, dynamic> toJson() => _$GetBreakdown$Query$BreakdownToJson(this);
 }
@@ -1347,6 +1441,41 @@ class GetBreakdown$Query extends JsonSerializable with EquatableMixin {
   List<Object?> get props => [getBreakdown];
   @override
   Map<String, dynamic> toJson() => _$GetBreakdown$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class CreateDataPointOnBreakdown$Mutation$DataPoint extends JsonSerializable
+    with EquatableMixin, DataPointMixin {
+  CreateDataPointOnBreakdown$Mutation$DataPoint();
+
+  factory CreateDataPointOnBreakdown$Mutation$DataPoint.fromJson(
+          Map<String, dynamic> json) =>
+      _$CreateDataPointOnBreakdown$Mutation$DataPointFromJson(json);
+
+  @override
+  List<Object?> get props =>
+      [id, value, breakdowns, compositions, quantifications];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$CreateDataPointOnBreakdown$Mutation$DataPointToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class CreateDataPointOnBreakdown$Mutation extends JsonSerializable
+    with EquatableMixin {
+  CreateDataPointOnBreakdown$Mutation();
+
+  factory CreateDataPointOnBreakdown$Mutation.fromJson(
+          Map<String, dynamic> json) =>
+      _$CreateDataPointOnBreakdown$MutationFromJson(json);
+
+  late CreateDataPointOnBreakdown$Mutation$DataPoint createDataPoint;
+
+  @override
+  List<Object?> get props => [createDataPoint];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$CreateDataPointOnBreakdown$MutationToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -1451,7 +1580,37 @@ final CREATE_BREAKDOWN_ON_DATA_POINT_MUTATION_DOCUMENT =
         arguments: [],
         directives: [],
         selectionSet: null,
-      )
+      ),
+      FieldNode(
+        name: NameNode(value: 'components'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'parent'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
     ]),
   ),
 ]);
@@ -1556,6 +1715,36 @@ final MERGE_QUANTIFICATION_MUTATION_DOCUMENT = DocumentNode(definitions: [
         directives: [],
         selectionSet: null,
       ),
+      FieldNode(
+        name: NameNode(value: 'dataPoints'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'planetaryBoundaries'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
     ]),
   ),
 ]);
@@ -1659,6 +1848,36 @@ final DELETE_QUANTIFICATION_MUTATION_DOCUMENT = DocumentNode(definitions: [
         directives: [],
         selectionSet: null,
       ),
+      FieldNode(
+        name: NameNode(value: 'dataPoints'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'planetaryBoundaries'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
     ]),
   ),
 ]);
@@ -1759,6 +1978,36 @@ final GET_QUANTIFICATION_QUERY_DOCUMENT = DocumentNode(definitions: [
         arguments: [],
         directives: [],
         selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'dataPoints'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'planetaryBoundaries'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
       ),
     ]),
   ),
@@ -1864,6 +2113,36 @@ final ON_UPDATED_QUANTIFICATION_SUBSCRIPTION_DOCUMENT =
         arguments: [],
         directives: [],
         selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'dataPoints'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'planetaryBoundaries'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
       ),
     ]),
   ),
@@ -1971,6 +2250,36 @@ final ON_DELETED_QUANTIFICATION_SUBSCRIPTION_DOCUMENT =
         directives: [],
         selectionSet: null,
       ),
+      FieldNode(
+        name: NameNode(value: 'dataPoints'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'planetaryBoundaries'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
     ]),
   ),
 ]);
@@ -2073,6 +2382,36 @@ final CREATE_QUANTIFICATION_MUTATION_DOCUMENT = DocumentNode(definitions: [
         arguments: [],
         directives: [],
         selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'dataPoints'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'planetaryBoundaries'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
       ),
     ]),
   ),
@@ -2185,6 +2524,36 @@ final GET_QUANTIFICATION_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
         directives: [],
         selectionSet: null,
       ),
+      FieldNode(
+        name: NameNode(value: 'dataPoints'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'planetaryBoundaries'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
     ]),
   ),
 ]);
@@ -2256,6 +2625,36 @@ final ON_CREATED_QUANTIFICATION_SUBSCRIPTION_DOCUMENT =
         arguments: [],
         directives: [],
         selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'dataPoints'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'planetaryBoundaries'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
       ),
     ]),
   ),
@@ -2364,6 +2763,21 @@ final MERGE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT = DocumentNode(definitions: [
         arguments: [],
         directives: [],
         selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'quantifications'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
       ),
     ]),
   ),
@@ -2477,6 +2891,21 @@ final ON_UPDATED_PLANETARY_BOUNDARY_SUBSCRIPTION_DOCUMENT =
         arguments: [],
         directives: [],
         selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'quantifications'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
       ),
     ]),
   ),
@@ -2592,6 +3021,21 @@ final CREATE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT = DocumentNode(definitions: [
         directives: [],
         selectionSet: null,
       ),
+      FieldNode(
+        name: NameNode(value: 'quantifications'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
     ]),
   ),
 ]);
@@ -2704,6 +3148,21 @@ final ON_DELETED_PLANETARY_BOUNDARY_SUBSCRIPTION_DOCUMENT =
         arguments: [],
         directives: [],
         selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'quantifications'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
       ),
     ]),
   ),
@@ -2819,6 +3278,21 @@ final DELETE_PLANETARY_BOUNDARY_MUTATION_DOCUMENT = DocumentNode(definitions: [
         directives: [],
         selectionSet: null,
       ),
+      FieldNode(
+        name: NameNode(value: 'quantifications'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
     ]),
   ),
 ]);
@@ -2897,6 +3371,21 @@ final ON_CREATED_PLANETARY_BOUNDARY_SUBSCRIPTION_DOCUMENT =
         arguments: [],
         directives: [],
         selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'quantifications'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
       ),
     ]),
   ),
@@ -3076,6 +3565,21 @@ final GET_PLANETARY_BOUNDARY_PAGE_QUERY_DOCUMENT = DocumentNode(definitions: [
         directives: [],
         selectionSet: null,
       ),
+      FieldNode(
+        name: NameNode(value: 'quantifications'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
     ]),
   ),
 ]);
@@ -3186,6 +3690,21 @@ final GET_PLANETARY_BOUNDARY_QUERY_DOCUMENT = DocumentNode(definitions: [
         directives: [],
         selectionSet: null,
       ),
+      FieldNode(
+        name: NameNode(value: 'quantifications'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
     ]),
   ),
 ]);
@@ -3289,6 +3808,36 @@ final GET_DATA_POINT_QUERY_DOCUMENT = DocumentNode(definitions: [
       ),
       FieldNode(
         name: NameNode(value: 'breakdowns'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'compositions'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'quantifications'),
         alias: null,
         arguments: [],
         directives: [],
@@ -3469,6 +4018,36 @@ final CREATE_DATA_POINT_ON_QUANTIFICATION_MUTATION_DOCUMENT =
           )
         ]),
       ),
+      FieldNode(
+        name: NameNode(value: 'compositions'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'quantifications'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
     ]),
   ),
 ]);
@@ -3602,6 +4181,36 @@ final GET_DATA_POINTS_ON_QUANTIFICATION_QUERY_DOCUMENT =
           )
         ]),
       ),
+      FieldNode(
+        name: NameNode(value: 'compositions'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'quantifications'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
     ]),
   ),
 ]);
@@ -3707,6 +4316,36 @@ final DELETE_DATA_POINT_MUTATION_DOCUMENT = DocumentNode(definitions: [
       ),
       FieldNode(
         name: NameNode(value: 'breakdowns'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'compositions'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'quantifications'),
         alias: null,
         arguments: [],
         directives: [],
@@ -4480,7 +5119,37 @@ final DELETE_BREAKDOWN_MUTATION_DOCUMENT = DocumentNode(definitions: [
         arguments: [],
         directives: [],
         selectionSet: null,
-      )
+      ),
+      FieldNode(
+        name: NameNode(value: 'components'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'parent'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
     ]),
   ),
 ]);
@@ -4574,7 +5243,37 @@ final GET_BREAKDOWN_QUERY_DOCUMENT = DocumentNode(definitions: [
         arguments: [],
         directives: [],
         selectionSet: null,
-      )
+      ),
+      FieldNode(
+        name: NameNode(value: 'components'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'parent'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
     ]),
   ),
 ]);
@@ -4597,4 +5296,203 @@ class GetBreakdownQuery
   @override
   GetBreakdown$Query parse(Map<String, dynamic> json) =>
       GetBreakdown$Query.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class CreateDataPointOnBreakdownArguments extends JsonSerializable
+    with EquatableMixin {
+  CreateDataPointOnBreakdownArguments({
+    required this.id,
+    required this.value,
+    required this.parentBreakdownId,
+  });
+
+  @override
+  factory CreateDataPointOnBreakdownArguments.fromJson(
+          Map<String, dynamic> json) =>
+      _$CreateDataPointOnBreakdownArgumentsFromJson(json);
+
+  late String id;
+
+  late double value;
+
+  late String parentBreakdownId;
+
+  @override
+  List<Object?> get props => [id, value, parentBreakdownId];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$CreateDataPointOnBreakdownArgumentsToJson(this);
+}
+
+final CREATE_DATA_POINT_ON_BREAKDOWN_MUTATION_DOCUMENT_OPERATION_NAME =
+    'CreateDataPointOnBreakdown';
+final CREATE_DATA_POINT_ON_BREAKDOWN_MUTATION_DOCUMENT =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'CreateDataPointOnBreakdown'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'value')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Float'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'parentBreakdownId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'createDataPoint'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'value'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'id')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'value'),
+                value: VariableNode(name: NameNode(value: 'value')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'compositions'),
+                value: ListValueNode(values: [
+                  ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'id'),
+                      value: VariableNode(
+                          name: NameNode(value: 'parentBreakdownId')),
+                    )
+                  ])
+                ]),
+              ),
+            ]),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'DataPoint'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'DataPoint'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'DataPoint'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'value'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'breakdowns'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'compositions'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'quantifications'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+    ]),
+  ),
+]);
+
+class CreateDataPointOnBreakdownMutation extends GraphQLQuery<
+    CreateDataPointOnBreakdown$Mutation, CreateDataPointOnBreakdownArguments> {
+  CreateDataPointOnBreakdownMutation({required this.variables});
+
+  @override
+  final DocumentNode document =
+      CREATE_DATA_POINT_ON_BREAKDOWN_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName =
+      CREATE_DATA_POINT_ON_BREAKDOWN_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final CreateDataPointOnBreakdownArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  CreateDataPointOnBreakdown$Mutation parse(Map<String, dynamic> json) =>
+      CreateDataPointOnBreakdown$Mutation.fromJson(json);
 }

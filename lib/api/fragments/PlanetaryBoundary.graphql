@@ -2,4 +2,8 @@ fragment PlanetaryBoundary on PlanetaryBoundary {
     id
     name
     description
+    # children
+    quantifications {
+        id
+    }
 }

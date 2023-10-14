@@ -1,3 +1,11 @@
 fragment Breakdown on Breakdown {
     id
+    # children
+    components {
+        id
+    }
+    # parent
+    parent {
+        id
+    }
 }

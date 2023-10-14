@@ -1,7 +1,15 @@
 fragment DataPoint on DataPoint {
     id
     value
+    # children
     breakdowns {
+        id
+    }
+    # parents
+    compositions {
+        id
+    }
+    quantifications {
         id
     }
 }
