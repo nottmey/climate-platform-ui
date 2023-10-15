@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'utils/local_file_comparator_with_threshold.dart';
 
-const goldenMaximumDiffThreshold = 0.005;
+const goldenMaximumDiffThreshold = 0.001;
 
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   if (goldenFileComparator is LocalFileComparator) {
