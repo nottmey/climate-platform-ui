@@ -1,7 +1,11 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:amplify_authenticator/amplify_authenticator.dart';
+import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:artemis/artemis.dart';
+import 'package:climate/amplifyconfiguration.dart';
 import 'package:climate/api/utils/web_socket_request_serializer.dart';
 import 'package:climate/app.dart';
 import 'package:climate/get_it.dart';
@@ -110,5 +114,22 @@ Future<void> main() async {
     ),
   );
 
-  runApp(const ProviderScope(child: App()));
+  final authPlugin = AmplifyAuthCognito();
+  await Amplify.addPlugin(authPlugin);
+
+  try {
+    await Amplify.configure(amplifyconfig);
+  } on AmplifyAlreadyConfiguredException {
+    safePrint(
+      'Tried to reconfigure Amplify; this can occur when your app restarts on Android.',
+    );
+  }
+
+  runApp(
+    ProviderScope(
+      child: Authenticator(
+        child: const App(),
+      ),
+    ),
+  );
 }

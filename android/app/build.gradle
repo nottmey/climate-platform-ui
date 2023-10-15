@@ -50,7 +50,7 @@ android {
 
     defaultConfig {
         applicationId "org.climate" // keep package in sync
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 24 // amplify requirement
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

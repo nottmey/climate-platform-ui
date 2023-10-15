@@ -47,6 +47,15 @@
       "prPriority": -3
     },
     {
+      "groupName": "amplify",
+      "matchManagers": [
+        "pub"
+      ],
+      "matchPackagePrefixes": [
+        "amplify"
+      ]
+    },
+    {
       "groupName": "riverpod",
       "matchManagers": [
         "pub"

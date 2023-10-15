@@ -1,0 +1,32 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-climate-dev-102904-authRole",
+      "UnauthRoleArn": "arn:aws:iam::118776085668:role/amplify-climate-dev-102904-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::118776085668:role/amplify-climate-dev-102904-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-climate-dev-102904-deployment",
+      "UnauthRoleName": "amplify-climate-dev-102904-unauthRole",
+      "StackName": "amplify-climate-dev-102904",
+      "StackId": "arn:aws:cloudformation:eu-central-1:118776085668:stack/amplify-climate-dev-102904/e7216160-6b34-11ee-a7e1-0ae259fe34d1",
+      "AmplifyAppId": "dap26s67vewr1",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-climate-dev-102904-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "climate256838aa": {
+          "googleClientId": "123051437848-toiiahin4qh8culaouqevdstvj2pe4hf.apps.googleusercontent.com",
+          "appleAppId": "org.climate"
+        },
+        "userPoolGroups": {}
+      },
+      "function": {
+        "climate256838aaPostConfirmation": {
+          "GROUP": "Users",
+          "deploymentBucketName": "amplify-climate-dev-102904-deployment",
+          "s3Key": "amplify-builds/climate256838aaPostConfirmation-317662646f795452416e-build.zip"
+        }
+      }
+    }
+  }
+}

@@ -1,19 +1,25 @@
+import 'package:amplify_authenticator/amplify_authenticator.dart';
 import 'package:climate/features/breakdowns/pages/breakdown_details_page.dart';
 import 'package:climate/features/data_points/pages/data_point_details_page.dart';
 import 'package:climate/features/database_browser/pages/attribute_page.dart';
 import 'package:climate/features/database_browser/pages/database_navigator_page.dart';
 import 'package:climate/features/database_browser/pages/entity_page.dart';
-import 'package:climate/features/dev/pages/dev_menu_page.dart';
 import 'package:climate/features/navigation/helpers/context_router_extension.dart';
 import 'package:climate/features/navigation/models/app_navigation_item.dart';
 import 'package:climate/features/navigation/pages/root_scaffold_page.dart';
 import 'package:climate/features/navigation/pages/tab_transition_page.dart';
 import 'package:climate/features/planetary_boundaries/pages/boundary_details_page.dart';
 import 'package:climate/features/planetary_boundaries/pages/planet_overview_page.dart';
+import 'package:climate/features/profile/pages/profile_page.dart';
 import 'package:climate/features/quantifications/pages/quantification_details_page.dart';
 import 'package:climate/features/theming/pages/showcase_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
+// Test iOS Simulator with `xcrun simctl openurl booted climate://ignored-domain.com/overview`
+// Test Android with `adb shell am start -a android.intent.action.VIEW -c android.intent.category.BROWSABLE -d climate://ignored-domain.com/overview`
+// URLs with empty domain are also ok, e.g. `climate:///overview`
+// URLs with fragment path are also ok, e.g. `climate:///#overview` or `climate:///#/overview`
 
 const _overviewSegment = 'overview';
 const _boundaryDetailsSegment = 'details';
@@ -23,7 +29,7 @@ const _breakdownDetailsSegment = 'breakdowns';
 const _databaseBrowserSegment = 'data';
 const _databaseEntitySegment = 'entity';
 const _databaseAttributeSegment = 'attribute';
-const _devMenuSegment = 'dev';
+const _profileSegment = 'profile';
 const _showcaseSegment = 'showcase';
 
 extension Routes on BuildContext {
@@ -128,17 +134,6 @@ GoRouter newRouter() {
       ),
     ),
     AppNavigationItem(
-      label: 'Dev Menu',
-      iconData: Icons.developer_mode,
-      route: GoRoute(
-        path: '/$_devMenuSegment',
-        pageBuilder: (context, state) => TabTransitionPage(
-          key: const ValueKey(_devMenuSegment), // needed for animation
-          child: const DevMenuPage(),
-        ),
-      ),
-    ),
-    AppNavigationItem(
       label: 'Showcase',
       iconData: Icons.view_comfortable,
       route: GoRoute(
@@ -146,6 +141,17 @@ GoRouter newRouter() {
         pageBuilder: (context, state) => TabTransitionPage(
           key: const ValueKey(_showcaseSegment), // needed for animation
           child: const ShowcasePage(),
+        ),
+      ),
+    ),
+    AppNavigationItem(
+      label: 'Profile',
+      iconData: Icons.person,
+      route: GoRoute(
+        path: '/$_profileSegment',
+        pageBuilder: (context, state) => TabTransitionPage(
+          key: const ValueKey(_profileSegment), // needed for animation
+          child: const AuthenticatedView(child: ProfilePage()),
         ),
       ),
     ),

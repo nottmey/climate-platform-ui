@@ -1,0 +1,108 @@
+{
+  "auth": {
+    "climate256838aa": {
+      "customAuth": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "climate256838aaPostConfirmation",
+          "triggerProvider": "Cognito"
+        }
+      ],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [
+          "GOOGLE",
+          "APPLE"
+        ],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    },
+    "userPoolGroups": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId",
+            "AppClientIDWeb",
+            "AppClientID",
+            "IdentityPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "climate256838aa"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito-UserPool-Groups"
+    }
+  },
+  "function": {
+    "climate256838aaPostConfirmation": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_auth_climate256838aa_appleAppId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "climate256838aa"
+        }
+      ]
+    },
+    "AMPLIFY_auth_climate256838aa_googleClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "climate256838aa"
+        }
+      ]
+    },
+    "AMPLIFY_function_climate256838aaPostConfirmation_GROUP": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "climate256838aaPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_climate256838aaPostConfirmation_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "climate256838aaPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_climate256838aaPostConfirmation_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "climate256838aaPostConfirmation"
+        }
+      ]
+    }
+  }
+}
