@@ -11,6 +11,7 @@ analyzer:
   exclude:
     - lib/api/api.graphql.dart
     - lib/api/api.graphql.g.dart
+    - lib/amplifyconfiguration.dart
 
 # all: https://dart-lang.github.io/linter/lints/index.html
 linter:

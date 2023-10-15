@@ -4,27 +4,6 @@ import 'dart:ui';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-class SafeArea implements WindowPadding {
-  @override
-  final double bottom;
-
-  @override
-  final double left;
-
-  @override
-  final double right;
-
-  @override
-  final double top;
-
-  const SafeArea({
-    this.bottom = 0,
-    this.left = 0,
-    this.right = 0,
-    this.top = 0,
-  });
-}
-
 /// Allows you to capture a screenshot of the current testing state.
 ///
 /// Troubleshooting:
@@ -37,7 +16,7 @@ Future<void> captureScreen(
   String name, {
   // default: iPhone 14
   Size deviceSize = const Size(390, 844),
-  SafeArea deviceSafeArea = const SafeArea(bottom: 34, top: 47),
+  FakeViewPadding deviceSafeArea = const FakeViewPadding(bottom: 34, top: 47),
   double devicePixelRatio = 2.0,
   double textScaleFactor = 1.0,
   Brightness brightness = Brightness.light,
@@ -49,16 +28,14 @@ Future<void> captureScreen(
     final file = File.fromUri(fileUri);
 
     await tester.binding.setSurfaceSize(deviceSize);
-    tester.binding.window.physicalSizeTestValue = Size(
+    tester.view.devicePixelRatio = devicePixelRatio;
+    tester.view.physicalSize = Size(
       deviceSize.width * devicePixelRatio,
       deviceSize.height * devicePixelRatio,
     );
-    tester.binding.window.devicePixelRatioTestValue = devicePixelRatio;
-    tester.binding.window.platformDispatcher.textScaleFactorTestValue =
-        textScaleFactor;
-    tester.binding.window.platformDispatcher.platformBrightnessTestValue =
-        brightness;
-    tester.binding.window.paddingTestValue = deviceSafeArea;
+    tester.view.padding = deviceSafeArea;
+    tester.platformDispatcher.textScaleFactorTestValue = textScaleFactor;
+    tester.platformDispatcher.platformBrightnessTestValue = brightness;
     // needs 2 pumps afterwards
     await tester.pump();
     await tester.pump();
@@ -86,9 +63,7 @@ Future<void> captureScreen(
     } else {
       await tester.runAsync(writeImageToFile);
     }
-  } catch (e) {
-    rethrow;
   } finally {
-    tester.binding.window.clearAllTestValues();
+    tester.platformDispatcher.clearAllTestValues();
   }
 }
