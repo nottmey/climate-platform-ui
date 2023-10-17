@@ -125,10 +125,10 @@ packages:
     dependency: "direct main"
     description:
       name: artemis
-      sha256: "696b16c9ee7934d76ca18267973355620669bdc5a3cc62d116e8e7c86ef8f31b"
+      sha256: "06a268b75948a9822572f65280cc679bfe889bf84fa02283ed75470670d2a3e0"
       url: "https://pub.dev"
     source: hosted
-    version: "7.13.0-beta.2"
+    version: "7.13.1"
   async:
     dependency: "direct main"
     description:
