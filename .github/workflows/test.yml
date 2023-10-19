@@ -39,7 +39,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: "Checkout"
-        uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4.0.0
+        uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # v4.0.0
       - name: "Setup empty .env.local"
         run: cp .env .env.local
       - name: "Determine Flutter Version"
@@ -80,7 +80,7 @@ jobs:
       BUNDLE_GEMFILE: ${{ github.workspace }}/Gemfile
     steps:
       - name: "Checkout"
-        uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4.0.0
+        uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # v4.0.0
       - name: "Setup Ruby"
         uses: ruby/setup-ruby@52b8784594ec115fd17094752708121dc5dabb47 # v1.154.0
         with:
