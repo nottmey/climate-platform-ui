@@ -33,8 +33,48 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  analyze-flutter:
+    name: "Analyze Flutter"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - name: "Setup empty .env.local"
+        run: cp .env .env.local
+      - name: "Determine Flutter Version"
+        id: flutter-version
+        run: echo "FLUTTER_VERSION=$(jq -r ".flutterSdkVersion" .fvm/fvm_config.json)" >> $GITHUB_OUTPUT
+      - name: "Install Flutter"
+        uses: subosito/flutter-action@v2.10.0
+        with:
+          flutter-version: ${{ steps.flutter-version.outputs.FLUTTER_VERSION }}
+          cache: true
+      - name: "Analyze code"
+        run: flutter analyze
+  test-code-gen:
+    name: "Test code gen"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - name: "Setup empty .env.local"
+        run: cp .env .env.local
+      - name: "Determine Flutter Version"
+        id: flutter-version
+        run: echo "FLUTTER_VERSION=$(jq -r ".flutterSdkVersion" .fvm/fvm_config.json)" >> $GITHUB_OUTPUT
+      - name: "Install Flutter"
+        uses: subosito/flutter-action@v2.10.0
+        with:
+          flutter-version: ${{ steps.flutter-version.outputs.FLUTTER_VERSION }}
+          cache: true
+      - name: "Check code generation"
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+      - name: "Verify files unchanged"
+        uses: tj-actions/verify-changed-files@v16
+        with:
+          fail-if-changed: true
   test-flutter:
-    name: "Flutter"
+    name: "Test Flutter"
     runs-on: macos-latest
     timeout-minutes: 10
 #    permissions:
@@ -65,14 +105,6 @@ jobs:
 #        run: amplify pull --restore --envName dev --debug --yes
       - name: "Check dependencies"
         run: flutter pub get # so pub get doesn't clutter flutter test output
-      - name: "Analyze code" # TODO could be done in parallel to testing
-        run: flutter analyze
-      - name: "Check code generation" # TODO could be done in parallel to testing
-        run: flutter pub run build_runner build --delete-conflicting-outputs
-      - name: "Verify files unchanged" # TODO could be done in parallel to testing
-        uses: tj-actions/verify-changed-files@v16
-        with:
-          fail-if-changed: true
       - name: "Run Tests"
         id: run-tests
         run: flutter test --coverage --suppress-analytics --machine | tee test-report.json # --suppress-analytics needed to have a valid json
@@ -90,7 +122,7 @@ jobs:
           files: ./coverage/lcov.info
           fail_ci_if_error: true
   test-fastlane:
-    name: "Fastlane"
+    name: "Test Fastlane"
     runs-on: macos-latest
     env:
       APP_STORE_CONNECT_APPLE_ID: ${{ secrets.APP_STORE_CONNECT_APPLE_ID }}
