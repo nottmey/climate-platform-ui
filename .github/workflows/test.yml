@@ -50,10 +50,20 @@ jobs:
         with:
           flutter-version: ${{ steps.flutter-version.outputs.FLUTTER_VERSION }}
           cache: true
-      - name: "Pub Get"
+      - name: "Install Amplify"
+        run: curl -sL https://aws-amplify.github.io/amplify-cli/install | bash && $SHELL
+      - name: "Init Amplify"
+        run: amplify init --envName dev
+      - name: "Check dependencies"
         run: flutter pub get # so pub get doesn't clutter flutter test output
-        # TODO also run flutter analyze
-        # TODO also check if build_runner works
+      - name: "Analyze code" # TODO could be done in parallel to testing
+        run: flutter analyze
+      - name: "Check code generation" # TODO could be done in parallel to testing
+        run: flutter pub run build_runner build
+      - name: "Verify files unchanged" # TODO could be done in parallel to testing
+        uses: tj-actions/verify-changed-files@v16
+        with:
+          fail-if-changed: true
       - name: "Run Tests"
         id: run-tests
         run: flutter test --coverage --suppress-analytics --machine | tee test-report.json # --suppress-analytics needed to have a valid json
