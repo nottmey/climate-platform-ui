@@ -51,7 +51,7 @@ jobs:
           flutter-version: ${{ steps.flutter-version.outputs.FLUTTER_VERSION }}
           cache: true
       - name: "Install Amplify"
-        run: curl -sL https://aws-amplify.github.io/amplify-cli/install | bash && $SHELL
+        run: npm install -g @aws-amplify/cli
       - name: "Init Amplify"
         run: amplify init --envName dev
       - name: "Check dependencies"
