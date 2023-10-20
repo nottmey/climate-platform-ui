@@ -33,10 +33,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test-flutter:
-    name: "Flutter"
-    runs-on: macos-latest
-    timeout-minutes: 10
+  analyze-flutter:
+    name: "Analyze Flutter"
+    runs-on: ubuntu-latest
     steps:
       - name: "Checkout"
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
@@ -50,20 +49,62 @@ jobs:
         with:
           flutter-version: ${{ steps.flutter-version.outputs.FLUTTER_VERSION }}
           cache: true
-      - name: "Install Amplify"
-        run: npm install -g @aws-amplify/cli
-      - name: "Init Amplify"
-        run: amplify init --envName dev
-      - name: "Check dependencies"
-        run: flutter pub get # so pub get doesn't clutter flutter test output
-      - name: "Analyze code" # TODO could be done in parallel to testing
+      - name: "Analyze code"
         run: flutter analyze
-      - name: "Check code generation" # TODO could be done in parallel to testing
-        run: flutter pub run build_runner build
-      - name: "Verify files unchanged" # TODO could be done in parallel to testing
+  test-code-gen:
+    name: "Test code gen"
+    runs-on: macos-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - name: "Setup empty .env.local"
+        run: cp .env .env.local
+      - name: "Determine Flutter Version"
+        id: flutter-version
+        run: echo "FLUTTER_VERSION=$(jq -r ".flutterSdkVersion" .fvm/fvm_config.json)" >> $GITHUB_OUTPUT
+      - name: "Install Flutter"
+        uses: subosito/flutter-action@v2.10.0
+        with:
+          flutter-version: ${{ steps.flutter-version.outputs.FLUTTER_VERSION }}
+          cache: true
+      - name: "Check code generation"
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+      - name: "Verify files unchanged"
         uses: tj-actions/verify-changed-files@v16
         with:
           fail-if-changed: true
+  test-flutter:
+    name: "Test Flutter"
+    runs-on: macos-latest
+    timeout-minutes: 10
+#    permissions:
+#      id-token: write
+#      contents: read
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - name: "Setup empty .env.local"
+        run: cp .env .env.local
+      - name: "Determine Flutter Version"
+        id: flutter-version
+        run: echo "FLUTTER_VERSION=$(jq -r ".flutterSdkVersion" .fvm/fvm_config.json)" >> $GITHUB_OUTPUT
+      - name: "Install Flutter"
+        uses: subosito/flutter-action@v2.10.0
+        with:
+          flutter-version: ${{ steps.flutter-version.outputs.FLUTTER_VERSION }}
+          cache: true
+# TODO use this to generate `amplifyconfiguration.dart` in pipeline, once possible
+#      - name: "Configure AWS credentials"
+#        uses: aws-actions/configure-aws-credentials@v3
+#        with:
+#          role-to-assume: arn:aws:iam::118776085668:role/github-actions-amplify-deployment
+#          aws-region: eu-central-1
+#      - name: "Install Amplify"
+#        run: npm install -g @aws-amplify/cli
+#      - name: "Init Amplify"
+#        run: amplify pull --restore --envName dev --debug --yes
+      - name: "Check dependencies"
+        run: flutter pub get # so pub get doesn't clutter flutter test output
       - name: "Run Tests"
         id: run-tests
         run: flutter test --coverage --suppress-analytics --machine | tee test-report.json # --suppress-analytics needed to have a valid json
@@ -81,7 +122,7 @@ jobs:
           files: ./coverage/lcov.info
           fail_ci_if_error: true
   test-fastlane:
-    name: "Fastlane"
+    name: "Test Fastlane"
     runs-on: macos-latest
     env:
       APP_STORE_CONNECT_APPLE_ID: ${{ secrets.APP_STORE_CONNECT_APPLE_ID }}

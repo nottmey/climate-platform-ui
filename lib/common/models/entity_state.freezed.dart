@@ -63,22 +63,22 @@ class _$EntityStateCopyWithImpl<T, $Res, $Val extends EntityState<T>>
 }
 
 /// @nodoc
-abstract class _$$_EntityStateCopyWith<T, $Res>
+abstract class _$$EntityStateImplCopyWith<T, $Res>
     implements $EntityStateCopyWith<T, $Res> {
-  factory _$$_EntityStateCopyWith(
-          _$_EntityState<T> value, $Res Function(_$_EntityState<T>) then) =
-      __$$_EntityStateCopyWithImpl<T, $Res>;
+  factory _$$EntityStateImplCopyWith(_$EntityStateImpl<T> value,
+          $Res Function(_$EntityStateImpl<T>) then) =
+      __$$EntityStateImplCopyWithImpl<T, $Res>;
   @override
   @useResult
   $Res call({AsyncValue<T> asyncEntity, EntityPhase phase});
 }
 
 /// @nodoc
-class __$$_EntityStateCopyWithImpl<T, $Res>
-    extends _$EntityStateCopyWithImpl<T, $Res, _$_EntityState<T>>
-    implements _$$_EntityStateCopyWith<T, $Res> {
-  __$$_EntityStateCopyWithImpl(
-      _$_EntityState<T> _value, $Res Function(_$_EntityState<T>) _then)
+class __$$EntityStateImplCopyWithImpl<T, $Res>
+    extends _$EntityStateCopyWithImpl<T, $Res, _$EntityStateImpl<T>>
+    implements _$$EntityStateImplCopyWith<T, $Res> {
+  __$$EntityStateImplCopyWithImpl(
+      _$EntityStateImpl<T> _value, $Res Function(_$EntityStateImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_EntityStateCopyWithImpl<T, $Res>
     Object? asyncEntity = null,
     Object? phase = null,
   }) {
-    return _then(_$_EntityState<T>(
+    return _then(_$EntityStateImpl<T>(
       asyncEntity: null == asyncEntity
           ? _value.asyncEntity
           : asyncEntity // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_EntityStateCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$_EntityState<T> extends _EntityState<T> {
-  const _$_EntityState(
+class _$EntityStateImpl<T> extends _EntityState<T> {
+  const _$EntityStateImpl(
       {required this.asyncEntity, this.phase = EntityPhase.display})
       : super._();
 
@@ -122,7 +122,7 @@ class _$_EntityState<T> extends _EntityState<T> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EntityState<T> &&
+            other is _$EntityStateImpl<T> &&
             (identical(other.asyncEntity, asyncEntity) ||
                 other.asyncEntity == asyncEntity) &&
             (identical(other.phase, phase) || other.phase == phase));
@@ -134,14 +134,15 @@ class _$_EntityState<T> extends _EntityState<T> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EntityStateCopyWith<T, _$_EntityState<T>> get copyWith =>
-      __$$_EntityStateCopyWithImpl<T, _$_EntityState<T>>(this, _$identity);
+  _$$EntityStateImplCopyWith<T, _$EntityStateImpl<T>> get copyWith =>
+      __$$EntityStateImplCopyWithImpl<T, _$EntityStateImpl<T>>(
+          this, _$identity);
 }
 
 abstract class _EntityState<T> extends EntityState<T> {
   const factory _EntityState(
       {required final AsyncValue<T> asyncEntity,
-      final EntityPhase phase}) = _$_EntityState<T>;
+      final EntityPhase phase}) = _$EntityStateImpl<T>;
   const _EntityState._() : super._();
 
   @override
@@ -150,6 +151,6 @@ abstract class _EntityState<T> extends EntityState<T> {
   EntityPhase get phase;
   @override
   @JsonKey(ignore: true)
-  _$$_EntityStateCopyWith<T, _$_EntityState<T>> get copyWith =>
+  _$$EntityStateImplCopyWith<T, _$EntityStateImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
