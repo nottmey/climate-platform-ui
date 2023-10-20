@@ -60,7 +60,7 @@ jobs:
           # installing gems automatically
           bundler-cache: true # requires BUNDLE_GEMFILE
       - name: "Setup Xcode"
-        uses: maxim-lobanov/setup-xcode@v1.5.1
+        uses: maxim-lobanov/setup-xcode@v1.6.0
         with:
           xcode-version: latest-stable
       - name: "Setup API key"
@@ -118,7 +118,7 @@ jobs:
           # installing gems automatically
           bundler-cache: true # requires BUNDLE_GEMFILE
       - name: "Setup Xcode"
-        uses: maxim-lobanov/setup-xcode@v1.5.1
+        uses: maxim-lobanov/setup-xcode@v1.6.0
         with:
           xcode-version: latest-stable
       - name: "Setup API key"
