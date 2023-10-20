@@ -6,6 +6,49 @@ part of 'api.graphql.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+GetBreakdown$Query$Breakdown _$GetBreakdown$Query$BreakdownFromJson(
+        Map<String, dynamic> json) =>
+    GetBreakdown$Query$Breakdown()
+      ..id = json['id'] as String
+      ..components = (json['components'] as List<dynamic>?)
+          ?.map((e) =>
+              BreakdownMixin$DataPoint.fromJson(e as Map<String, dynamic>))
+          .toList()
+      ..parent = json['parent'] == null
+          ? null
+          : BreakdownMixin$DataPoint.fromJson(
+              json['parent'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetBreakdown$Query$BreakdownToJson(
+        GetBreakdown$Query$Breakdown instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'components': instance.components?.map((e) => e.toJson()).toList(),
+      'parent': instance.parent?.toJson(),
+    };
+
+GetBreakdown$Query _$GetBreakdown$QueryFromJson(Map<String, dynamic> json) =>
+    GetBreakdown$Query()
+      ..getBreakdown = json['getBreakdown'] == null
+          ? null
+          : GetBreakdown$Query$Breakdown.fromJson(
+              json['getBreakdown'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetBreakdown$QueryToJson(GetBreakdown$Query instance) =>
+    <String, dynamic>{
+      'getBreakdown': instance.getBreakdown?.toJson(),
+    };
+
+BreakdownMixin$DataPoint _$BreakdownMixin$DataPointFromJson(
+        Map<String, dynamic> json) =>
+    BreakdownMixin$DataPoint()..id = json['id'] as String;
+
+Map<String, dynamic> _$BreakdownMixin$DataPointToJson(
+        BreakdownMixin$DataPoint instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
 CreateBreakdownOnDataPoint$Mutation$Breakdown
     _$CreateBreakdownOnDataPoint$Mutation$BreakdownFromJson(
             Map<String, dynamic> json) =>
@@ -41,14 +84,39 @@ Map<String, dynamic> _$CreateBreakdownOnDataPoint$MutationToJson(
       'createBreakdown': instance.createBreakdown.toJson(),
     };
 
-BreakdownMixin$DataPoint _$BreakdownMixin$DataPointFromJson(
+DeleteBreakdown$Mutation$Breakdown _$DeleteBreakdown$Mutation$BreakdownFromJson(
         Map<String, dynamic> json) =>
-    BreakdownMixin$DataPoint()..id = json['id'] as String;
+    DeleteBreakdown$Mutation$Breakdown()
+      ..id = json['id'] as String
+      ..components = (json['components'] as List<dynamic>?)
+          ?.map((e) =>
+              BreakdownMixin$DataPoint.fromJson(e as Map<String, dynamic>))
+          .toList()
+      ..parent = json['parent'] == null
+          ? null
+          : BreakdownMixin$DataPoint.fromJson(
+              json['parent'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$BreakdownMixin$DataPointToJson(
-        BreakdownMixin$DataPoint instance) =>
+Map<String, dynamic> _$DeleteBreakdown$Mutation$BreakdownToJson(
+        DeleteBreakdown$Mutation$Breakdown instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'components': instance.components?.map((e) => e.toJson()).toList(),
+      'parent': instance.parent?.toJson(),
+    };
+
+DeleteBreakdown$Mutation _$DeleteBreakdown$MutationFromJson(
+        Map<String, dynamic> json) =>
+    DeleteBreakdown$Mutation()
+      ..deleteBreakdown = json['deleteBreakdown'] == null
+          ? null
+          : DeleteBreakdown$Mutation$Breakdown.fromJson(
+              json['deleteBreakdown'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$DeleteBreakdown$MutationToJson(
+        DeleteBreakdown$Mutation instance) =>
+    <String, dynamic>{
+      'deleteBreakdown': instance.deleteBreakdown?.toJson(),
     };
 
 MergeQuantification$Mutation$Quantification
@@ -956,6 +1024,49 @@ Map<String, dynamic> _$CreateDataPointOnQuantification$MutationToJson(
       'createDataPoint': instance.createDataPoint.toJson(),
     };
 
+CreateDataPointOnBreakdown$Mutation$DataPoint
+    _$CreateDataPointOnBreakdown$Mutation$DataPointFromJson(
+            Map<String, dynamic> json) =>
+        CreateDataPointOnBreakdown$Mutation$DataPoint()
+          ..id = json['id'] as String
+          ..value = (json['value'] as num?)?.toDouble()
+          ..breakdowns = (json['breakdowns'] as List<dynamic>?)
+              ?.map((e) =>
+                  DataPointMixin$Breakdown.fromJson(e as Map<String, dynamic>))
+              .toList()
+          ..compositions = (json['compositions'] as List<dynamic>?)
+              ?.map((e) =>
+                  DataPointMixin$Breakdown.fromJson(e as Map<String, dynamic>))
+              .toList()
+          ..quantifications = (json['quantifications'] as List<dynamic>?)
+              ?.map((e) => DataPointMixin$Quantification.fromJson(
+                  e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic> _$CreateDataPointOnBreakdown$Mutation$DataPointToJson(
+        CreateDataPointOnBreakdown$Mutation$DataPoint instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'value': instance.value,
+      'breakdowns': instance.breakdowns?.map((e) => e.toJson()).toList(),
+      'compositions': instance.compositions?.map((e) => e.toJson()).toList(),
+      'quantifications':
+          instance.quantifications?.map((e) => e.toJson()).toList(),
+    };
+
+CreateDataPointOnBreakdown$Mutation
+    _$CreateDataPointOnBreakdown$MutationFromJson(Map<String, dynamic> json) =>
+        CreateDataPointOnBreakdown$Mutation()
+          ..createDataPoint =
+              CreateDataPointOnBreakdown$Mutation$DataPoint.fromJson(
+                  json['createDataPoint'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$CreateDataPointOnBreakdown$MutationToJson(
+        CreateDataPointOnBreakdown$Mutation instance) =>
+    <String, dynamic>{
+      'createDataPoint': instance.createDataPoint.toJson(),
+    };
+
 GetDataPointsOnQuantification$Query$Quantification$DataPoint
     _$GetDataPointsOnQuantification$Query$Quantification$DataPointFromJson(
             Map<String, dynamic> json) =>
@@ -1362,115 +1473,16 @@ Map<String, dynamic> _$GetEntity$QueryToJson(GetEntity$Query instance) =>
       'getEntity': instance.getEntity?.toJson(),
     };
 
-DeleteBreakdown$Mutation$Breakdown _$DeleteBreakdown$Mutation$BreakdownFromJson(
+GetBreakdownArguments _$GetBreakdownArgumentsFromJson(
         Map<String, dynamic> json) =>
-    DeleteBreakdown$Mutation$Breakdown()
-      ..id = json['id'] as String
-      ..components = (json['components'] as List<dynamic>?)
-          ?.map((e) =>
-              BreakdownMixin$DataPoint.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..parent = json['parent'] == null
-          ? null
-          : BreakdownMixin$DataPoint.fromJson(
-              json['parent'] as Map<String, dynamic>);
+    GetBreakdownArguments(
+      id: json['id'] as String,
+    );
 
-Map<String, dynamic> _$DeleteBreakdown$Mutation$BreakdownToJson(
-        DeleteBreakdown$Mutation$Breakdown instance) =>
+Map<String, dynamic> _$GetBreakdownArgumentsToJson(
+        GetBreakdownArguments instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'components': instance.components?.map((e) => e.toJson()).toList(),
-      'parent': instance.parent?.toJson(),
-    };
-
-DeleteBreakdown$Mutation _$DeleteBreakdown$MutationFromJson(
-        Map<String, dynamic> json) =>
-    DeleteBreakdown$Mutation()
-      ..deleteBreakdown = json['deleteBreakdown'] == null
-          ? null
-          : DeleteBreakdown$Mutation$Breakdown.fromJson(
-              json['deleteBreakdown'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$DeleteBreakdown$MutationToJson(
-        DeleteBreakdown$Mutation instance) =>
-    <String, dynamic>{
-      'deleteBreakdown': instance.deleteBreakdown?.toJson(),
-    };
-
-GetBreakdown$Query$Breakdown _$GetBreakdown$Query$BreakdownFromJson(
-        Map<String, dynamic> json) =>
-    GetBreakdown$Query$Breakdown()
-      ..id = json['id'] as String
-      ..components = (json['components'] as List<dynamic>?)
-          ?.map((e) =>
-              BreakdownMixin$DataPoint.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..parent = json['parent'] == null
-          ? null
-          : BreakdownMixin$DataPoint.fromJson(
-              json['parent'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$GetBreakdown$Query$BreakdownToJson(
-        GetBreakdown$Query$Breakdown instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'components': instance.components?.map((e) => e.toJson()).toList(),
-      'parent': instance.parent?.toJson(),
-    };
-
-GetBreakdown$Query _$GetBreakdown$QueryFromJson(Map<String, dynamic> json) =>
-    GetBreakdown$Query()
-      ..getBreakdown = json['getBreakdown'] == null
-          ? null
-          : GetBreakdown$Query$Breakdown.fromJson(
-              json['getBreakdown'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$GetBreakdown$QueryToJson(GetBreakdown$Query instance) =>
-    <String, dynamic>{
-      'getBreakdown': instance.getBreakdown?.toJson(),
-    };
-
-CreateDataPointOnBreakdown$Mutation$DataPoint
-    _$CreateDataPointOnBreakdown$Mutation$DataPointFromJson(
-            Map<String, dynamic> json) =>
-        CreateDataPointOnBreakdown$Mutation$DataPoint()
-          ..id = json['id'] as String
-          ..value = (json['value'] as num?)?.toDouble()
-          ..breakdowns = (json['breakdowns'] as List<dynamic>?)
-              ?.map((e) =>
-                  DataPointMixin$Breakdown.fromJson(e as Map<String, dynamic>))
-              .toList()
-          ..compositions = (json['compositions'] as List<dynamic>?)
-              ?.map((e) =>
-                  DataPointMixin$Breakdown.fromJson(e as Map<String, dynamic>))
-              .toList()
-          ..quantifications = (json['quantifications'] as List<dynamic>?)
-              ?.map((e) => DataPointMixin$Quantification.fromJson(
-                  e as Map<String, dynamic>))
-              .toList();
-
-Map<String, dynamic> _$CreateDataPointOnBreakdown$Mutation$DataPointToJson(
-        CreateDataPointOnBreakdown$Mutation$DataPoint instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'value': instance.value,
-      'breakdowns': instance.breakdowns?.map((e) => e.toJson()).toList(),
-      'compositions': instance.compositions?.map((e) => e.toJson()).toList(),
-      'quantifications':
-          instance.quantifications?.map((e) => e.toJson()).toList(),
-    };
-
-CreateDataPointOnBreakdown$Mutation
-    _$CreateDataPointOnBreakdown$MutationFromJson(Map<String, dynamic> json) =>
-        CreateDataPointOnBreakdown$Mutation()
-          ..createDataPoint =
-              CreateDataPointOnBreakdown$Mutation$DataPoint.fromJson(
-                  json['createDataPoint'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$CreateDataPointOnBreakdown$MutationToJson(
-        CreateDataPointOnBreakdown$Mutation instance) =>
-    <String, dynamic>{
-      'createDataPoint': instance.createDataPoint.toJson(),
     };
 
 CreateBreakdownOnDataPointArguments
@@ -1485,6 +1497,18 @@ Map<String, dynamic> _$CreateBreakdownOnDataPointArgumentsToJson(
     <String, dynamic>{
       'id': instance.id,
       'parentDataPointId': instance.parentDataPointId,
+    };
+
+DeleteBreakdownArguments _$DeleteBreakdownArgumentsFromJson(
+        Map<String, dynamic> json) =>
+    DeleteBreakdownArguments(
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$DeleteBreakdownArgumentsToJson(
+        DeleteBreakdownArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
     };
 
 MergeQuantificationArguments _$MergeQuantificationArgumentsFromJson(
@@ -1690,6 +1714,22 @@ Map<String, dynamic> _$CreateDataPointOnQuantificationArgumentsToJson(
       'parentQuantificationId': instance.parentQuantificationId,
     };
 
+CreateDataPointOnBreakdownArguments
+    _$CreateDataPointOnBreakdownArgumentsFromJson(Map<String, dynamic> json) =>
+        CreateDataPointOnBreakdownArguments(
+          id: json['id'] as String,
+          value: (json['value'] as num).toDouble(),
+          parentBreakdownId: json['parentBreakdownId'] as String,
+        );
+
+Map<String, dynamic> _$CreateDataPointOnBreakdownArgumentsToJson(
+        CreateDataPointOnBreakdownArguments instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'value': instance.value,
+      'parentBreakdownId': instance.parentBreakdownId,
+    };
+
 GetDataPointsOnQuantificationArguments
     _$GetDataPointsOnQuantificationArgumentsFromJson(
             Map<String, dynamic> json) =>
@@ -1741,44 +1781,4 @@ GetEntityArguments _$GetEntityArgumentsFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$GetEntityArgumentsToJson(GetEntityArguments instance) =>
     <String, dynamic>{
       'id': instance.id,
-    };
-
-DeleteBreakdownArguments _$DeleteBreakdownArgumentsFromJson(
-        Map<String, dynamic> json) =>
-    DeleteBreakdownArguments(
-      id: json['id'] as String,
-    );
-
-Map<String, dynamic> _$DeleteBreakdownArgumentsToJson(
-        DeleteBreakdownArguments instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-    };
-
-GetBreakdownArguments _$GetBreakdownArgumentsFromJson(
-        Map<String, dynamic> json) =>
-    GetBreakdownArguments(
-      id: json['id'] as String,
-    );
-
-Map<String, dynamic> _$GetBreakdownArgumentsToJson(
-        GetBreakdownArguments instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-    };
-
-CreateDataPointOnBreakdownArguments
-    _$CreateDataPointOnBreakdownArgumentsFromJson(Map<String, dynamic> json) =>
-        CreateDataPointOnBreakdownArguments(
-          id: json['id'] as String,
-          value: (json['value'] as num).toDouble(),
-          parentBreakdownId: json['parentBreakdownId'] as String,
-        );
-
-Map<String, dynamic> _$CreateDataPointOnBreakdownArgumentsToJson(
-        CreateDataPointOnBreakdownArguments instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'value': instance.value,
-      'parentBreakdownId': instance.parentBreakdownId,
     };

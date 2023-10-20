@@ -40,6 +40,50 @@ mixin EntityMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
+class GetBreakdown$Query$Breakdown extends JsonSerializable
+    with EquatableMixin, BreakdownMixin {
+  GetBreakdown$Query$Breakdown();
+
+  factory GetBreakdown$Query$Breakdown.fromJson(Map<String, dynamic> json) =>
+      _$GetBreakdown$Query$BreakdownFromJson(json);
+
+  @override
+  List<Object?> get props => [id, components, parent];
+  @override
+  Map<String, dynamic> toJson() => _$GetBreakdown$Query$BreakdownToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetBreakdown$Query extends JsonSerializable with EquatableMixin {
+  GetBreakdown$Query();
+
+  factory GetBreakdown$Query.fromJson(Map<String, dynamic> json) =>
+      _$GetBreakdown$QueryFromJson(json);
+
+  GetBreakdown$Query$Breakdown? getBreakdown;
+
+  @override
+  List<Object?> get props => [getBreakdown];
+  @override
+  Map<String, dynamic> toJson() => _$GetBreakdown$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class BreakdownMixin$DataPoint extends JsonSerializable with EquatableMixin {
+  BreakdownMixin$DataPoint();
+
+  factory BreakdownMixin$DataPoint.fromJson(Map<String, dynamic> json) =>
+      _$BreakdownMixin$DataPointFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$BreakdownMixin$DataPointToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class CreateBreakdownOnDataPoint$Mutation$Breakdown extends JsonSerializable
     with EquatableMixin, BreakdownMixin {
   CreateBreakdownOnDataPoint$Mutation$Breakdown();
@@ -74,18 +118,34 @@ class CreateBreakdownOnDataPoint$Mutation extends JsonSerializable
 }
 
 @JsonSerializable(explicitToJson: true)
-class BreakdownMixin$DataPoint extends JsonSerializable with EquatableMixin {
-  BreakdownMixin$DataPoint();
+class DeleteBreakdown$Mutation$Breakdown extends JsonSerializable
+    with EquatableMixin, BreakdownMixin {
+  DeleteBreakdown$Mutation$Breakdown();
 
-  factory BreakdownMixin$DataPoint.fromJson(Map<String, dynamic> json) =>
-      _$BreakdownMixin$DataPointFromJson(json);
-
-  late String id;
+  factory DeleteBreakdown$Mutation$Breakdown.fromJson(
+          Map<String, dynamic> json) =>
+      _$DeleteBreakdown$Mutation$BreakdownFromJson(json);
 
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [id, components, parent];
   @override
-  Map<String, dynamic> toJson() => _$BreakdownMixin$DataPointToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$DeleteBreakdown$Mutation$BreakdownToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class DeleteBreakdown$Mutation extends JsonSerializable with EquatableMixin {
+  DeleteBreakdown$Mutation();
+
+  factory DeleteBreakdown$Mutation.fromJson(Map<String, dynamic> json) =>
+      _$DeleteBreakdown$MutationFromJson(json);
+
+  DeleteBreakdown$Mutation$Breakdown? deleteBreakdown;
+
+  @override
+  List<Object?> get props => [deleteBreakdown];
+  @override
+  Map<String, dynamic> toJson() => _$DeleteBreakdown$MutationToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -936,6 +996,41 @@ class CreateDataPointOnQuantification$Mutation extends JsonSerializable
 }
 
 @JsonSerializable(explicitToJson: true)
+class CreateDataPointOnBreakdown$Mutation$DataPoint extends JsonSerializable
+    with EquatableMixin, DataPointMixin {
+  CreateDataPointOnBreakdown$Mutation$DataPoint();
+
+  factory CreateDataPointOnBreakdown$Mutation$DataPoint.fromJson(
+          Map<String, dynamic> json) =>
+      _$CreateDataPointOnBreakdown$Mutation$DataPointFromJson(json);
+
+  @override
+  List<Object?> get props =>
+      [id, value, breakdowns, compositions, quantifications];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$CreateDataPointOnBreakdown$Mutation$DataPointToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class CreateDataPointOnBreakdown$Mutation extends JsonSerializable
+    with EquatableMixin {
+  CreateDataPointOnBreakdown$Mutation();
+
+  factory CreateDataPointOnBreakdown$Mutation.fromJson(
+          Map<String, dynamic> json) =>
+      _$CreateDataPointOnBreakdown$MutationFromJson(json);
+
+  late CreateDataPointOnBreakdown$Mutation$DataPoint createDataPoint;
+
+  @override
+  List<Object?> get props => [createDataPoint];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$CreateDataPointOnBreakdown$MutationToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class GetDataPointsOnQuantification$Query$Quantification$DataPoint
     extends JsonSerializable with EquatableMixin, DataPointMixin {
   GetDataPointsOnQuantification$Query$Quantification$DataPoint();
@@ -1384,98 +1479,126 @@ class GetEntity$Query extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
-class DeleteBreakdown$Mutation$Breakdown extends JsonSerializable
-    with EquatableMixin, BreakdownMixin {
-  DeleteBreakdown$Mutation$Breakdown();
-
-  factory DeleteBreakdown$Mutation$Breakdown.fromJson(
-          Map<String, dynamic> json) =>
-      _$DeleteBreakdown$Mutation$BreakdownFromJson(json);
+class GetBreakdownArguments extends JsonSerializable with EquatableMixin {
+  GetBreakdownArguments({required this.id});
 
   @override
-  List<Object?> get props => [id, components, parent];
+  factory GetBreakdownArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetBreakdownArgumentsFromJson(json);
+
+  late String id;
+
   @override
-  Map<String, dynamic> toJson() =>
-      _$DeleteBreakdown$Mutation$BreakdownToJson(this);
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$GetBreakdownArgumentsToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true)
-class DeleteBreakdown$Mutation extends JsonSerializable with EquatableMixin {
-  DeleteBreakdown$Mutation();
+final GET_BREAKDOWN_QUERY_DOCUMENT_OPERATION_NAME = 'GetBreakdown';
+final GET_BREAKDOWN_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.query,
+    name: NameNode(value: 'GetBreakdown'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'getBreakdown'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'Breakdown'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'Breakdown'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'Breakdown'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'components'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'parent'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+    ]),
+  ),
+]);
 
-  factory DeleteBreakdown$Mutation.fromJson(Map<String, dynamic> json) =>
-      _$DeleteBreakdown$MutationFromJson(json);
-
-  DeleteBreakdown$Mutation$Breakdown? deleteBreakdown;
+class GetBreakdownQuery
+    extends GraphQLQuery<GetBreakdown$Query, GetBreakdownArguments> {
+  GetBreakdownQuery({required this.variables});
 
   @override
-  List<Object?> get props => [deleteBreakdown];
-  @override
-  Map<String, dynamic> toJson() => _$DeleteBreakdown$MutationToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetBreakdown$Query$Breakdown extends JsonSerializable
-    with EquatableMixin, BreakdownMixin {
-  GetBreakdown$Query$Breakdown();
-
-  factory GetBreakdown$Query$Breakdown.fromJson(Map<String, dynamic> json) =>
-      _$GetBreakdown$Query$BreakdownFromJson(json);
+  final DocumentNode document = GET_BREAKDOWN_QUERY_DOCUMENT;
 
   @override
-  List<Object?> get props => [id, components, parent];
-  @override
-  Map<String, dynamic> toJson() => _$GetBreakdown$Query$BreakdownToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetBreakdown$Query extends JsonSerializable with EquatableMixin {
-  GetBreakdown$Query();
-
-  factory GetBreakdown$Query.fromJson(Map<String, dynamic> json) =>
-      _$GetBreakdown$QueryFromJson(json);
-
-  GetBreakdown$Query$Breakdown? getBreakdown;
+  final String operationName = GET_BREAKDOWN_QUERY_DOCUMENT_OPERATION_NAME;
 
   @override
-  List<Object?> get props => [getBreakdown];
-  @override
-  Map<String, dynamic> toJson() => _$GetBreakdown$QueryToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class CreateDataPointOnBreakdown$Mutation$DataPoint extends JsonSerializable
-    with EquatableMixin, DataPointMixin {
-  CreateDataPointOnBreakdown$Mutation$DataPoint();
-
-  factory CreateDataPointOnBreakdown$Mutation$DataPoint.fromJson(
-          Map<String, dynamic> json) =>
-      _$CreateDataPointOnBreakdown$Mutation$DataPointFromJson(json);
+  final GetBreakdownArguments variables;
 
   @override
-  List<Object?> get props =>
-      [id, value, breakdowns, compositions, quantifications];
+  List<Object?> get props => [document, operationName, variables];
   @override
-  Map<String, dynamic> toJson() =>
-      _$CreateDataPointOnBreakdown$Mutation$DataPointToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class CreateDataPointOnBreakdown$Mutation extends JsonSerializable
-    with EquatableMixin {
-  CreateDataPointOnBreakdown$Mutation();
-
-  factory CreateDataPointOnBreakdown$Mutation.fromJson(
-          Map<String, dynamic> json) =>
-      _$CreateDataPointOnBreakdown$MutationFromJson(json);
-
-  late CreateDataPointOnBreakdown$Mutation$DataPoint createDataPoint;
-
-  @override
-  List<Object?> get props => [createDataPoint];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$CreateDataPointOnBreakdown$MutationToJson(this);
+  GetBreakdown$Query parse(Map<String, dynamic> json) =>
+      GetBreakdown$Query.fromJson(json);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -1635,6 +1758,130 @@ class CreateBreakdownOnDataPointMutation extends GraphQLQuery<
   @override
   CreateBreakdownOnDataPoint$Mutation parse(Map<String, dynamic> json) =>
       CreateBreakdownOnDataPoint$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class DeleteBreakdownArguments extends JsonSerializable with EquatableMixin {
+  DeleteBreakdownArguments({required this.id});
+
+  @override
+  factory DeleteBreakdownArguments.fromJson(Map<String, dynamic> json) =>
+      _$DeleteBreakdownArgumentsFromJson(json);
+
+  late String id;
+
+  @override
+  List<Object?> get props => [id];
+  @override
+  Map<String, dynamic> toJson() => _$DeleteBreakdownArgumentsToJson(this);
+}
+
+final DELETE_BREAKDOWN_MUTATION_DOCUMENT_OPERATION_NAME = 'DeleteBreakdown';
+final DELETE_BREAKDOWN_MUTATION_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'DeleteBreakdown'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      )
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'deleteBreakdown'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'id'),
+            value: VariableNode(name: NameNode(value: 'id')),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'Breakdown'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'Breakdown'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'Breakdown'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'components'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'parent'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+    ]),
+  ),
+]);
+
+class DeleteBreakdownMutation
+    extends GraphQLQuery<DeleteBreakdown$Mutation, DeleteBreakdownArguments> {
+  DeleteBreakdownMutation({required this.variables});
+
+  @override
+  final DocumentNode document = DELETE_BREAKDOWN_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName =
+      DELETE_BREAKDOWN_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final DeleteBreakdownArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  DeleteBreakdown$Mutation parse(Map<String, dynamic> json) =>
+      DeleteBreakdown$Mutation.fromJson(json);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -4076,6 +4323,205 @@ class CreateDataPointOnQuantificationMutation extends GraphQLQuery<
 }
 
 @JsonSerializable(explicitToJson: true)
+class CreateDataPointOnBreakdownArguments extends JsonSerializable
+    with EquatableMixin {
+  CreateDataPointOnBreakdownArguments({
+    required this.id,
+    required this.value,
+    required this.parentBreakdownId,
+  });
+
+  @override
+  factory CreateDataPointOnBreakdownArguments.fromJson(
+          Map<String, dynamic> json) =>
+      _$CreateDataPointOnBreakdownArgumentsFromJson(json);
+
+  late String id;
+
+  late double value;
+
+  late String parentBreakdownId;
+
+  @override
+  List<Object?> get props => [id, value, parentBreakdownId];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$CreateDataPointOnBreakdownArgumentsToJson(this);
+}
+
+final CREATE_DATA_POINT_ON_BREAKDOWN_MUTATION_DOCUMENT_OPERATION_NAME =
+    'CreateDataPointOnBreakdown';
+final CREATE_DATA_POINT_ON_BREAKDOWN_MUTATION_DOCUMENT =
+    DocumentNode(definitions: [
+  OperationDefinitionNode(
+    type: OperationType.mutation,
+    name: NameNode(value: 'CreateDataPointOnBreakdown'),
+    variableDefinitions: [
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'id')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'value')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'Float'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+      VariableDefinitionNode(
+        variable: VariableNode(name: NameNode(value: 'parentBreakdownId')),
+        type: NamedTypeNode(
+          name: NameNode(value: 'ID'),
+          isNonNull: true,
+        ),
+        defaultValue: DefaultValueNode(value: null),
+        directives: [],
+      ),
+    ],
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'createDataPoint'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'value'),
+            value: ObjectValueNode(fields: [
+              ObjectFieldNode(
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'id')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'value'),
+                value: VariableNode(name: NameNode(value: 'value')),
+              ),
+              ObjectFieldNode(
+                name: NameNode(value: 'compositions'),
+                value: ListValueNode(values: [
+                  ObjectValueNode(fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'id'),
+                      value: VariableNode(
+                          name: NameNode(value: 'parentBreakdownId')),
+                    )
+                  ])
+                ]),
+              ),
+            ]),
+          )
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FragmentSpreadNode(
+            name: NameNode(value: 'DataPoint'),
+            directives: [],
+          )
+        ]),
+      )
+    ]),
+  ),
+  FragmentDefinitionNode(
+    name: NameNode(value: 'DataPoint'),
+    typeCondition: TypeConditionNode(
+        on: NamedTypeNode(
+      name: NameNode(value: 'DataPoint'),
+      isNonNull: false,
+    )),
+    directives: [],
+    selectionSet: SelectionSetNode(selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'value'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'breakdowns'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'compositions'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'quantifications'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(selections: [
+          FieldNode(
+            name: NameNode(value: 'id'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          )
+        ]),
+      ),
+    ]),
+  ),
+]);
+
+class CreateDataPointOnBreakdownMutation extends GraphQLQuery<
+    CreateDataPointOnBreakdown$Mutation, CreateDataPointOnBreakdownArguments> {
+  CreateDataPointOnBreakdownMutation({required this.variables});
+
+  @override
+  final DocumentNode document =
+      CREATE_DATA_POINT_ON_BREAKDOWN_MUTATION_DOCUMENT;
+
+  @override
+  final String operationName =
+      CREATE_DATA_POINT_ON_BREAKDOWN_MUTATION_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final CreateDataPointOnBreakdownArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  CreateDataPointOnBreakdown$Mutation parse(Map<String, dynamic> json) =>
+      CreateDataPointOnBreakdown$Mutation.fromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
 class GetDataPointsOnQuantificationArguments extends JsonSerializable
     with EquatableMixin {
   GetDataPointsOnQuantificationArguments(
@@ -5049,450 +5495,4 @@ class GetEntityQuery extends GraphQLQuery<GetEntity$Query, GetEntityArguments> {
   @override
   GetEntity$Query parse(Map<String, dynamic> json) =>
       GetEntity$Query.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
-class DeleteBreakdownArguments extends JsonSerializable with EquatableMixin {
-  DeleteBreakdownArguments({required this.id});
-
-  @override
-  factory DeleteBreakdownArguments.fromJson(Map<String, dynamic> json) =>
-      _$DeleteBreakdownArgumentsFromJson(json);
-
-  late String id;
-
-  @override
-  List<Object?> get props => [id];
-  @override
-  Map<String, dynamic> toJson() => _$DeleteBreakdownArgumentsToJson(this);
-}
-
-final DELETE_BREAKDOWN_MUTATION_DOCUMENT_OPERATION_NAME = 'DeleteBreakdown';
-final DELETE_BREAKDOWN_MUTATION_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'DeleteBreakdown'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'id')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'ID'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'deleteBreakdown'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'id'),
-            value: VariableNode(name: NameNode(value: 'id')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Breakdown'),
-            directives: [],
-          )
-        ]),
-      )
-    ]),
-  ),
-  FragmentDefinitionNode(
-    name: NameNode(value: 'Breakdown'),
-    typeCondition: TypeConditionNode(
-        on: NamedTypeNode(
-      name: NameNode(value: 'Breakdown'),
-      isNonNull: false,
-    )),
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'components'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          )
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'parent'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          )
-        ]),
-      ),
-    ]),
-  ),
-]);
-
-class DeleteBreakdownMutation
-    extends GraphQLQuery<DeleteBreakdown$Mutation, DeleteBreakdownArguments> {
-  DeleteBreakdownMutation({required this.variables});
-
-  @override
-  final DocumentNode document = DELETE_BREAKDOWN_MUTATION_DOCUMENT;
-
-  @override
-  final String operationName =
-      DELETE_BREAKDOWN_MUTATION_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final DeleteBreakdownArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  DeleteBreakdown$Mutation parse(Map<String, dynamic> json) =>
-      DeleteBreakdown$Mutation.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetBreakdownArguments extends JsonSerializable with EquatableMixin {
-  GetBreakdownArguments({required this.id});
-
-  @override
-  factory GetBreakdownArguments.fromJson(Map<String, dynamic> json) =>
-      _$GetBreakdownArgumentsFromJson(json);
-
-  late String id;
-
-  @override
-  List<Object?> get props => [id];
-  @override
-  Map<String, dynamic> toJson() => _$GetBreakdownArgumentsToJson(this);
-}
-
-final GET_BREAKDOWN_QUERY_DOCUMENT_OPERATION_NAME = 'GetBreakdown';
-final GET_BREAKDOWN_QUERY_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.query,
-    name: NameNode(value: 'GetBreakdown'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'id')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'ID'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'getBreakdown'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'id'),
-            value: VariableNode(name: NameNode(value: 'id')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Breakdown'),
-            directives: [],
-          )
-        ]),
-      )
-    ]),
-  ),
-  FragmentDefinitionNode(
-    name: NameNode(value: 'Breakdown'),
-    typeCondition: TypeConditionNode(
-        on: NamedTypeNode(
-      name: NameNode(value: 'Breakdown'),
-      isNonNull: false,
-    )),
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'components'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          )
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'parent'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          )
-        ]),
-      ),
-    ]),
-  ),
-]);
-
-class GetBreakdownQuery
-    extends GraphQLQuery<GetBreakdown$Query, GetBreakdownArguments> {
-  GetBreakdownQuery({required this.variables});
-
-  @override
-  final DocumentNode document = GET_BREAKDOWN_QUERY_DOCUMENT;
-
-  @override
-  final String operationName = GET_BREAKDOWN_QUERY_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final GetBreakdownArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  GetBreakdown$Query parse(Map<String, dynamic> json) =>
-      GetBreakdown$Query.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
-class CreateDataPointOnBreakdownArguments extends JsonSerializable
-    with EquatableMixin {
-  CreateDataPointOnBreakdownArguments({
-    required this.id,
-    required this.value,
-    required this.parentBreakdownId,
-  });
-
-  @override
-  factory CreateDataPointOnBreakdownArguments.fromJson(
-          Map<String, dynamic> json) =>
-      _$CreateDataPointOnBreakdownArgumentsFromJson(json);
-
-  late String id;
-
-  late double value;
-
-  late String parentBreakdownId;
-
-  @override
-  List<Object?> get props => [id, value, parentBreakdownId];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$CreateDataPointOnBreakdownArgumentsToJson(this);
-}
-
-final CREATE_DATA_POINT_ON_BREAKDOWN_MUTATION_DOCUMENT_OPERATION_NAME =
-    'CreateDataPointOnBreakdown';
-final CREATE_DATA_POINT_ON_BREAKDOWN_MUTATION_DOCUMENT =
-    DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'CreateDataPointOnBreakdown'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'id')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'ID'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'value')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Float'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'parentBreakdownId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'ID'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'createDataPoint'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'value'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'id'),
-                value: VariableNode(name: NameNode(value: 'id')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'value'),
-                value: VariableNode(name: NameNode(value: 'value')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'compositions'),
-                value: ListValueNode(values: [
-                  ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: 'id'),
-                      value: VariableNode(
-                          name: NameNode(value: 'parentBreakdownId')),
-                    )
-                  ])
-                ]),
-              ),
-            ]),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'DataPoint'),
-            directives: [],
-          )
-        ]),
-      )
-    ]),
-  ),
-  FragmentDefinitionNode(
-    name: NameNode(value: 'DataPoint'),
-    typeCondition: TypeConditionNode(
-        on: NamedTypeNode(
-      name: NameNode(value: 'DataPoint'),
-      isNonNull: false,
-    )),
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'id'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'value'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-      FieldNode(
-        name: NameNode(value: 'breakdowns'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          )
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'compositions'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          )
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'quantifications'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          )
-        ]),
-      ),
-    ]),
-  ),
-]);
-
-class CreateDataPointOnBreakdownMutation extends GraphQLQuery<
-    CreateDataPointOnBreakdown$Mutation, CreateDataPointOnBreakdownArguments> {
-  CreateDataPointOnBreakdownMutation({required this.variables});
-
-  @override
-  final DocumentNode document =
-      CREATE_DATA_POINT_ON_BREAKDOWN_MUTATION_DOCUMENT;
-
-  @override
-  final String operationName =
-      CREATE_DATA_POINT_ON_BREAKDOWN_MUTATION_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final CreateDataPointOnBreakdownArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  CreateDataPointOnBreakdown$Mutation parse(Map<String, dynamic> json) =>
-      CreateDataPointOnBreakdown$Mutation.fromJson(json);
 }
