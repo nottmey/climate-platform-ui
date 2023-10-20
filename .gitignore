@@ -76,3 +76,6 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+
+# TODO generate this in pipeline, once possible
+!lib/amplifyconfiguration.dart
