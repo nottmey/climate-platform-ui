@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout"
-        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4.1.0
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       - name: "Setup empty .env.local"
         run: sed 's/APP_SYNC_API_KEY.*/APP_SYNC_API_KEY="${{ secrets.APP_SYNC_API_KEY }}"/' .env > .env.local
       - name: "Setup keystore properties"
@@ -75,7 +75,7 @@ jobs:
       BUNDLE_GEMFILE: ${{ github.workspace }}/Gemfile
     steps:
       - name: "Checkout"
-        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4.1.0
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       - name: "Setup Ruby"
         uses: ruby/setup-ruby@52b8784594ec115fd17094752708121dc5dabb47 # v1.154.0
         with:
