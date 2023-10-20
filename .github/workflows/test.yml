@@ -61,7 +61,7 @@ jobs:
       - name: "Install Amplify"
         run: npm install -g @aws-amplify/cli
       - name: "Init Amplify"
-        run: amplify pull --envName dev
+        run: amplify pull --envName dev --yes
       - name: "Check dependencies"
         run: flutter pub get # so pub get doesn't clutter flutter test output
       - name: "Analyze code" # TODO could be done in parallel to testing
