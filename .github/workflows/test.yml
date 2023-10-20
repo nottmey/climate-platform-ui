@@ -53,7 +53,7 @@ jobs:
         run: flutter analyze
   test-code-gen:
     name: "Test code gen"
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: "Checkout"
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
