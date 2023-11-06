@@ -45,18 +45,18 @@ packages:
     dependency: "direct main"
     description:
       name: amplify_authenticator
-      sha256: "73d40c02b53f4b46a86c6ff59d0c53cd33a70ef8ff9d9b839751470d9ace61df"
+      sha256: "44693cc1646bb3e75bf3efe7a8e4f3d3040206772aa63e56983520b35935139f"
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "1.5.1"
   amplify_core:
     dependency: transitive
     description:
       name: amplify_core
-      sha256: "1effc1c9576dc58d087a7b8397fa6634a83ead877bc44c82f30fa80aab5ac03c"
+      sha256: "123a6452f432a4df525ccdb129138d20dad9dc4115f22d02786ce9527deec53f"
       url: "https://pub.dev"
     source: hosted
-    version: "1.6.0"
+    version: "1.6.1"
   amplify_db_common:
     dependency: transitive
     description:
