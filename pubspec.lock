@@ -13,74 +13,74 @@ packages:
     dependency: transitive
     description:
       name: amplify_analytics_pinpoint
-      sha256: eaa7b7c787eb814854715a7b4c032e71f44331ad2b4fe9b083cf6d220c8a6c41
+      sha256: ff7c77d62b12d358cf118d204bb5493adc01a4be24948303d1069204881ce6a9
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "1.6.0"
   amplify_analytics_pinpoint_dart:
     dependency: transitive
     description:
       name: amplify_analytics_pinpoint_dart
-      sha256: "2e99375bcc178a305811dcb9c27187c389183a602e175e1c647485e1dd5109c0"
+      sha256: "5ff68483a469d0af8873c01f01f8ba93d7c44869a9cf2f2aefa73875ba6df807"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.2"
+    version: "0.3.3"
   amplify_auth_cognito:
     dependency: "direct main"
     description:
       name: amplify_auth_cognito
-      sha256: "2599ae60915a23fdeec6ec35eaa4575c5a3a95b7c82fd48fab1480e517be09b5"
+      sha256: b064526f2b45981d3f5d8a390093722d59f046ad27cf180e7e795cd81a68e7f3
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "1.6.0"
   amplify_auth_cognito_dart:
     dependency: transitive
     description:
       name: amplify_auth_cognito_dart
-      sha256: "7e8bfe5caa97f69a5465aeaad2d29865bc67f09f59045c8ca66a02307eb6ace6"
+      sha256: df60a606be3be28f2360a8a1c2a79775115b6ac1cbe64d60a560746a4b4aa1ea
       url: "https://pub.dev"
     source: hosted
-    version: "0.10.5"
+    version: "0.10.6"
   amplify_authenticator:
     dependency: "direct main"
     description:
       name: amplify_authenticator
-      sha256: a1125a4c28397fa25ce138ef4abd394c98bbfd44ffc162dcd31ee73d14f7048b
+      sha256: "73d40c02b53f4b46a86c6ff59d0c53cd33a70ef8ff9d9b839751470d9ace61df"
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.3"
+    version: "1.5.0"
   amplify_core:
     dependency: transitive
     description:
       name: amplify_core
-      sha256: "97ed1322aeb689880a8633cd2bd1f0245fe439bea5c1e0282cfc3123f162a73a"
+      sha256: "1effc1c9576dc58d087a7b8397fa6634a83ead877bc44c82f30fa80aab5ac03c"
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.1"
+    version: "1.6.0"
   amplify_db_common:
     dependency: transitive
     description:
       name: amplify_db_common
-      sha256: ea39cf5bf0071d9f612e6790b56c37b739a30ef29bb64e832e8b8e25e9b35671
+      sha256: "7fc63e2717c9de05e3984870de20dc1bc30d0390e0daa3b5bab79b1f43dc4ead"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.1+1"
+    version: "0.3.3"
   amplify_db_common_dart:
     dependency: transitive
     description:
       name: amplify_db_common_dart
-      sha256: "72dd5a46472ac5ac4409ac8c0e8b3b4e08594ba306086c521ec96ce83697ec7d"
+      sha256: "69afa354d72a0be732e2b243946026fecdd32e2a823b4bbd68b19c6c2976c4c8"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.2"
+    version: "0.3.3"
   amplify_flutter:
     dependency: "direct main"
     description:
       name: amplify_flutter
-      sha256: "4f9a7b55adb451581490de28cf1d0c2a322f6eb26dcb733d4661acb4c547d4ee"
+      sha256: "1210b57e81fd20ee06ee3feb62bcfb5a67225d1b76c91c2326156e8e8f8462a8"
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.0"
+    version: "1.6.0"
   amplify_secure_storage:
     dependency: transitive
     description:
@@ -998,18 +998,18 @@ packages:
     dependency: transitive
     description:
       name: smithy
-      sha256: ba53b534a63fc4f370ba50109306375ce982a56bd46b2d10d4c8a5204b6e7513
+      sha256: f6af02e9a18e5c955c6ffefab27b15dd9823f8ed3f66e591b95d2a9a8782f469
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.2"
+    version: "0.6.0"
   smithy_aws:
     dependency: transitive
     description:
       name: smithy_aws
-      sha256: "73d988f03b6e08af400e0b70d18f6b03888bdc0120fd1893f7d38f99d1997ac0"
+      sha256: bce88fd57c54143e07f4bebfb6c107a351b4654950a93c1d9443018c9c93335f
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.1"
+    version: "0.6.0"
   source_gen:
     dependency: transitive
     description:
