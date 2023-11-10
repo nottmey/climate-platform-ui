@@ -497,10 +497,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: d3f19eaec5dbb786364843b61b3458640959a9a930ac6fcce37f65683088b137
+      sha256: "5098760d7478aabfe682a462bf121d61bc5dbe5df5aac8dad733564a0aee33bc"
       url: "https://pub.dev"
     source: hosted
-    version: "12.0.3"
+    version: "12.1.0"
   golden_toolkit:
     dependency: "direct dev"
     description:
